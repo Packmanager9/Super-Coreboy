@@ -1,21 +1,22 @@
 
+    let boys = []
 window.addEventListener('DOMContentLoaded', (event) => {
-    const gamepadAPI = {
+    const gamepadAPI = [{
         controller: {},
         turbo: true,
         connect: function (evt) {
             if (navigator.getGamepads()[0] != null) {
-                gamepadAPI.controller = navigator.getGamepads()[0]
-                gamepadAPI.turbo = true;
+                gamepadAPI[0].controller = navigator.getGamepads()[0]
+                gamepadAPI[0].turbo = true;
             } else if (navigator.getGamepads()[1] != null) {
-                gamepadAPI.controller = navigator.getGamepads()[0]
-                gamepadAPI.turbo = true;
+                gamepadAPI[0].controller = navigator.getGamepads()[0]
+                gamepadAPI[0].turbo = true;
             } else if (navigator.getGamepads()[2] != null) {
-                gamepadAPI.controller = navigator.getGamepads()[0]
-                gamepadAPI.turbo = true;
+                gamepadAPI[0].controller = navigator.getGamepads()[0]
+                gamepadAPI[0].turbo = true;
             } else if (navigator.getGamepads()[3] != null) {
-                gamepadAPI.controller = navigator.getGamepads()[0]
-                gamepadAPI.turbo = true;
+                gamepadAPI[0].controller = navigator.getGamepads()[0]
+                gamepadAPI[0].turbo = true;
             }
             for (let i = 0; i < gamepads.length; i++) {
                 if (gamepads[i] === null) {
@@ -25,24 +26,26 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     continue;
                 }
             }
+            let coreboy = new Boy(0)
+            boys.push(coreboy)
         },
         disconnect: function (evt) {
-            gamepadAPI.turbo = false;
-            delete gamepadAPI.controller;
+            gamepadAPI[0].turbo = false;
+            delete gamepadAPI[0].controller;
         },
         update: function () {
-            gamepadAPI.controller = navigator.getGamepads()[0]
-            gamepadAPI.buttonsCache = [];// clear the buttons cache
-            for (var k = 0; k < gamepadAPI.buttonsStatus.length; k++) {// move the buttons status from the previous frame to the cache
-                gamepadAPI.buttonsCache[k] = gamepadAPI.buttonsStatus[k];
+            gamepadAPI[0].controller = navigator.getGamepads()[0]
+            gamepadAPI[0].buttonsCache = [];// clear the buttons cache
+            for (var k = 0; k < gamepadAPI[0].buttonsStatus.length; k++) {// move the buttons status from the previous frame to the cache
+                gamepadAPI[0].buttonsCache[k] = gamepadAPI[0].buttonsStatus[k];
             }
-            gamepadAPI.buttonsStatus = [];// clear the buttons status
-            var c = gamepadAPI.controller || {}; // get the gamepad object
+            gamepadAPI[0].buttonsStatus = [];// clear the buttons status
+            var c = gamepadAPI[0].controller || {}; // get the gamepad object
             var pressed = [];
             if (c.buttons) {
                 for (var b = 0, t = c.buttons.length; b < t; b++) {// loop through buttons and push the pressed ones to the array
                     if (c.buttons[b].pressed) {
-                        pressed.push(gamepadAPI.buttons[b]);
+                        pressed.push(gamepadAPI[0].buttons[b]);
                     }
                 }
             }
@@ -52,19 +55,19 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     axes.push(c.axes[a].toFixed(2));
                 }
             }
-            gamepadAPI.axesStatus = axes;// assign received values
-            gamepadAPI.buttonsStatus = pressed;
+            gamepadAPI[0].axesStatus = axes;// assign received values
+            gamepadAPI[0].buttonsStatus = pressed;
             // console.log(pressed); // return buttons for debugging purposes
             return pressed;
         },
         buttonPressed: function (button, hold) {
             var newPress = false;
-            for (var i = 0, s = gamepadAPI.buttonsStatus.length; i < s; i++) {// loop through pressed buttons
-                if (gamepadAPI.buttonsStatus[i] == button) {// if we found the button we're looking for...
+            for (var i = 0, s = gamepadAPI[0].buttonsStatus.length; i < s; i++) {// loop through pressed buttons
+                if (gamepadAPI[0].buttonsStatus[i] == button) {// if we found the button we're looking for...
                     newPress = true;// set the boolean variable to true
                     if (!hold) {// if we want to check the single press
-                        for (var j = 0, p = gamepadAPI.buttonsCache.length; j < p; j++) {// loop through the cached states from the previous frame
-                            if (gamepadAPI.buttonsCache[j] == button) { // if the button was already pressed, ignore new press
+                        for (var j = 0, p = gamepadAPI[0].buttonsCache.length; j < p; j++) {// loop through the cached states from the previous frame
+                            if (gamepadAPI[0].buttonsCache[j] == button) { // if the button was already pressed, ignore new press
                                 newPress = false;
                             }
                         }
@@ -79,7 +82,253 @@ window.addEventListener('DOMContentLoaded', (event) => {
         buttonsCache: [],
         buttonsStatus: [],
         axesStatus: []
-    };
+    },{
+        controller: {},
+        turbo: true,
+        connect: function (evt) {
+            if (navigator.getGamepads()[1] != null) {
+                gamepadAPI[1].controller = navigator.getGamepads()[1]
+                gamepadAPI[1].turbo = true;
+            } else if (navigator.getGamepads()[1] != null) {
+                gamepadAPI[1].controller = navigator.getGamepads()[1]
+                gamepadAPI[1].turbo = true;
+            } else if (navigator.getGamepads()[2] != null) {
+                gamepadAPI[1].controller = navigator.getGamepads()[1]
+                gamepadAPI[1].turbo = true;
+            } else if (navigator.getGamepads()[3] != null) {
+                gamepadAPI[1].controller = navigator.getGamepads()[1]
+                gamepadAPI[1].turbo = true;
+            }
+            for (let i = 0; i < gamepads.length; i++) {
+                if (gamepads[i] === null) {
+                    continue;
+                }
+                if (!gamepads[i].connected) {
+                    continue;
+                }
+            }
+
+            let coreboy = new Boy(1)
+            boys.push(coreboy)
+        },
+        disconnect: function (evt) {
+            gamepadAPI[1].turbo = false;
+            delete gamepadAPI[1].controller;
+        },
+        update: function () {
+            gamepadAPI[1].controller = navigator.getGamepads()[1]
+            gamepadAPI[1].buttonsCache = [];// clear the buttons cache
+            for (var k = 0; k < gamepadAPI[1].buttonsStatus.length; k++) {// move the buttons status from the previous frame to the cache
+                gamepadAPI[1].buttonsCache[k] = gamepadAPI[1].buttonsStatus[k];
+            }
+            gamepadAPI[1].buttonsStatus = [];// clear the buttons status
+            var c = gamepadAPI[1].controller || {}; // get the gamepad object
+            var pressed = [];
+            if (c.buttons) {
+                for (var b = 0, t = c.buttons.length; b < t; b++) {// loop through buttons and push the pressed ones to the array
+                    if (c.buttons[b].pressed) {
+                        pressed.push(gamepadAPI[1].buttons[b]);
+                    }
+                }
+            }
+            var axes = [];
+            if (c.axes) {
+                for (var a = 0, x = c.axes.length; a < x; a++) {// loop through axes and push their values to the array
+                    axes.push(c.axes[a].toFixed(2));
+                }
+            }
+            gamepadAPI[1].axesStatus = axes;// assign received values
+            gamepadAPI[1].buttonsStatus = pressed;
+            // console.log(pressed); // return buttons for debugging purposes
+            return pressed;
+        },
+        buttonPressed: function (button, hold) {
+            var newPress = false;
+            for (var i = 0, s = gamepadAPI[1].buttonsStatus.length; i < s; i++) {// loop through pressed buttons
+                if (gamepadAPI[1].buttonsStatus[i] == button) {// if we found the button we're looking for...
+                    newPress = true;// set the boolean variable to true
+                    if (!hold) {// if we want to check the single press
+                        for (var j = 0, p = gamepadAPI[1].buttonsCache.length; j < p; j++) {// loop through the cached states from the previous frame
+                            if (gamepadAPI[1].buttonsCache[j] == button) { // if the button was already pressed, ignore new press
+                                newPress = false;
+                            }
+                        }
+                    }
+                }
+            }
+            return newPress;
+        },
+        buttons: [
+            'A', 'B', 'X', 'Y', 'LB', 'RB', 'Left-Trigger', 'Right-Trigger', 'Back', 'Start', 'Axis-Left', 'Axis-Right', 'DPad-Up', 'DPad-Down', 'DPad-Left', 'DPad-Right', "Power"
+        ],
+        buttonsCache: [],
+        buttonsStatus: [],
+        axesStatus: []
+    },{
+        controller: {},
+        turbo: true,
+        connect: function (evt) {
+            if (navigator.getGamepads()[2] != null) {
+                gamepadAPI[2].controller = navigator.getGamepads()[2]
+                gamepadAPI[2].turbo = true;
+            } else if (navigator.getGamepads()[2] != null) {
+                gamepadAPI[2].controller = navigator.getGamepads()[2]
+                gamepadAPI[2].turbo = true;
+            } else if (navigator.getGamepads()[2] != null) {
+                gamepadAPI[2].controller = navigator.getGamepads()[2]
+                gamepadAPI[2].turbo = true;
+            } else if (navigator.getGamepads()[2] != null) {
+                gamepadAPI[2].controller = navigator.getGamepads()[2]
+                gamepadAPI[2].turbo = true;
+            }
+            for (let i = 0; i < gamepads.length; i++) {
+                if (gamepads[i] === null) {
+                    continue;
+                }
+                if (!gamepads[i].connected) {
+                    continue;
+                }
+            }
+
+            let coreboy = new Boy(1)
+            boys.push(coreboy)
+        },
+        disconnect: function (evt) {
+            gamepadAPI[2].turbo = false;
+            delete gamepadAPI[2].controller;
+        },
+        update: function () {
+            gamepadAPI[2].controller = navigator.getGamepads()[2]
+            gamepadAPI[2].buttonsCache = [];// clear the buttons cache
+            for (var k = 0; k < gamepadAPI[2].buttonsStatus.length; k++) {// move the buttons status from the previous frame to the cache
+                gamepadAPI[2].buttonsCache[k] = gamepadAPI[2].buttonsStatus[k];
+            }
+            gamepadAPI[2].buttonsStatus = [];// clear the buttons status
+            var c = gamepadAPI[2].controller || {}; // get the gamepad object
+            var pressed = [];
+            if (c.buttons) {
+                for (var b = 0, t = c.buttons.length; b < t; b++) {// loop through buttons and push the pressed ones to the array
+                    if (c.buttons[b].pressed) {
+                        pressed.push(gamepadAPI[2].buttons[b]);
+                    }
+                }
+            }
+            var axes = [];
+            if (c.axes) {
+                for (var a = 0, x = c.axes.length; a < x; a++) {// loop through axes and push their values to the array
+                    axes.push(c.axes[a].toFixed(2));
+                }
+            }
+            gamepadAPI[2].axesStatus = axes;// assign received values
+            gamepadAPI[2].buttonsStatus = pressed;
+            // console.log(pressed); // return buttons for debugging purposes
+            return pressed;
+        },
+        buttonPressed: function (button, hold) {
+            var newPress = false;
+            for (var i = 0, s = gamepadAPI[2].buttonsStatus.length; i < s; i++) {// loop through pressed buttons
+                if (gamepadAPI[2].buttonsStatus[i] == button) {// if we found the button we're looking for...
+                    newPress = true;// set the boolean variable to true
+                    if (!hold) {// if we want to check the single press
+                        for (var j = 0, p = gamepadAPI[2].buttonsCache.length; j < p; j++) {// loop through the cached states from the previous frame
+                            if (gamepadAPI[2].buttonsCache[j] == button) { // if the button was already pressed, ignore new press
+                                newPress = false;
+                            }
+                        }
+                    }
+                }
+            }
+            return newPress;
+        },
+        buttons: [
+            'A', 'B', 'X', 'Y', 'LB', 'RB', 'Left-Trigger', 'Right-Trigger', 'Back', 'Start', 'Axis-Left', 'Axis-Right', 'DPad-Up', 'DPad-Down', 'DPad-Left', 'DPad-Right', "Power"
+        ],
+        buttonsCache: [],
+        buttonsStatus: [],
+        axesStatus: []
+    },{
+        controller: {},
+        turbo: true,
+        connect: function (evt) {
+            if (navigator.getGamepads()[3] != null) {
+                gamepadAPI[3].controller = navigator.getGamepads()[3]
+                gamepadAPI[3].turbo = true;
+            } else if (navigator.getGamepads()[3] != null) {
+                gamepadAPI[3].controller = navigator.getGamepads()[3]
+                gamepadAPI[3].turbo = true;
+            } else if (navigator.getGamepads()[3] != null) {
+                gamepadAPI[3].controller = navigator.getGamepads()[3]
+                gamepadAPI[3].turbo = true;
+            } else if (navigator.getGamepads()[3] != null) {
+                gamepadAPI[3].controller = navigator.getGamepads()[3]
+                gamepadAPI[3].turbo = true;
+            }
+            for (let i = 0; i < gamepads.length; i++) {
+                if (gamepads[i] === null) {
+                    continue;
+                }
+                if (!gamepads[i].connected) {
+                    continue;
+                }
+            }
+
+            let coreboy = new Boy(1)
+            boys.push(coreboy)
+        },
+        disconnect: function (evt) {
+            gamepadAPI[3].turbo = false;
+            delete gamepadAPI[3].controller;
+        },
+        update: function () {
+            gamepadAPI[3].controller = navigator.getGamepads()[3]
+            gamepadAPI[3].buttonsCache = [];// clear the buttons cache
+            for (var k = 0; k < gamepadAPI[3].buttonsStatus.length; k++) {// move the buttons status from the previous frame to the cache
+                gamepadAPI[3].buttonsCache[k] = gamepadAPI[3].buttonsStatus[k];
+            }
+            gamepadAPI[3].buttonsStatus = [];// clear the buttons status
+            var c = gamepadAPI[3].controller || {}; // get the gamepad object
+            var pressed = [];
+            if (c.buttons) {
+                for (var b = 0, t = c.buttons.length; b < t; b++) {// loop through buttons and push the pressed ones to the array
+                    if (c.buttons[b].pressed) {
+                        pressed.push(gamepadAPI[3].buttons[b]);
+                    }
+                }
+            }
+            var axes = [];
+            if (c.axes) {
+                for (var a = 0, x = c.axes.length; a < x; a++) {// loop through axes and push their values to the array
+                    axes.push(c.axes[a].toFixed(2));
+                }
+            }
+            gamepadAPI[3].axesStatus = axes;// assign received values
+            gamepadAPI[3].buttonsStatus = pressed;
+            // console.log(pressed); // return buttons for debugging purposes
+            return pressed;
+        },
+        buttonPressed: function (button, hold) {
+            var newPress = false;
+            for (var i = 0, s = gamepadAPI[3].buttonsStatus.length; i < s; i++) {// loop through pressed buttons
+                if (gamepadAPI[3].buttonsStatus[i] == button) {// if we found the button we're looking for...
+                    newPress = true;// set the boolean variable to true
+                    if (!hold) {// if we want to check the single press
+                        for (var j = 0, p = gamepadAPI[3].buttonsCache.length; j < p; j++) {// loop through the cached states from the previous frame
+                            if (gamepadAPI[3].buttonsCache[j] == button) { // if the button was already pressed, ignore new press
+                                newPress = false;
+                            }
+                        }
+                    }
+                }
+            }
+            return newPress;
+        },
+        buttons: [
+            'A', 'B', 'X', 'Y', 'LB', 'RB', 'Left-Trigger', 'Right-Trigger', 'Back', 'Start', 'Axis-Left', 'Axis-Right', 'DPad-Up', 'DPad-Down', 'DPad-Left', 'DPad-Right', "Power"
+        ],
+        buttonsCache: [],
+        buttonsStatus: [],
+        axesStatus: []
+    }];
     let canvas
     let canvas_context
     let keysPressed = {}
@@ -306,7 +555,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (this.anchored != 1) {
                 this.x += this.xmom
                 this.y += this.ymom
-            }else{
+            } else {
+                this.x = this.anchor.x
+                this.y = this.anchor.y
                 this.xmom = 0
                 this.ymom = 0
             }
@@ -591,10 +842,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 this.anchor.xmom -= ((this.body.x - this.anchor.x) / this.length) * 2
                 this.anchor.ymom -= ((this.body.y - this.anchor.y) / this.length) * 2
             } else if (this.str > this.length + 1) {
-                this.body.xmom -= ((this.body.x - this.anchor.x) / (this.length)) *4.4
-                this.body.ymom -= ((this.body.y - this.anchor.y) / (this.length)) *4.4
-                this.anchor.xmom += ((this.body.x - this.anchor.x) / (this.length)) *4.4
-                this.anchor.ymom += ((this.body.y - this.anchor.y) / (this.length)) *4.4
+                this.body.xmom -= ((this.body.x - this.anchor.x) / (this.length)) * 4.4
+                this.body.ymom -= ((this.body.y - this.anchor.y) / (this.length)) * 4.4
+                this.anchor.xmom += ((this.body.x - this.anchor.x) / (this.length)) * 4.4
+                this.anchor.ymom += ((this.body.y - this.anchor.y) / (this.length)) * 4.4
             }
 
             let xmomentumaverage = (this.body.xmom + this.anchor.xmom) / 2
@@ -852,20 +1103,24 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 
     function gamepad_control_controller_proto(object, speed = 1, controller) { // basic control for objects using the controler
-        //         console.log(gamepadAPI.axesStatus[1]*gamepadAPI.axesStatus[0]) //debugging
+        //         console.log(gamepadAPI[0].axesStatus[1]*gamepadAPI[0].axesStatus[0]) //debugging
 
 
         if (keysPressed['w']) {
-            if (object.self.grounded != 0) {
-                object.ymom -= speed
-            }else{
-                object.self.degripl()
-                object.self.degripr()
+            if (object.self.grounded == 1) {
+                object.ymom -= speed 
+            } else {
+                if (object.self.righthand.anchored == 1 || object.self.lefthand.anchored == 1) {
+                    object.self.degripl()
+                    object.self.degripr()
+                }
             }
         }
         if (keysPressed['d']) {
             object.x += speed
-            object.self.degripr()
+            if (object.self.righthand.anchored == 1 || object.self.lefthand.anchored == 1) {
+                object.self.degripr()
+            }
         }
         // if (keysPressed['s']) {
         //     object.y += speed
@@ -873,32 +1128,52 @@ window.addEventListener('DOMContentLoaded', (event) => {
         // }
         if (keysPressed['a']) {
             object.x -= speed
-            object.self.degripl()
+            if (object.self.righthand.anchored == 1 || object.self.lefthand.anchored == 1) {
+                object.self.degripl()
+            }
         }
 
         if (typeof object != 'undefined') {
-            if (typeof (gamepadAPI.axesStatus[1]) != 'undefined') {
-                if (typeof (gamepadAPI.axesStatus[0]) != 'undefined') {
-                    object.x += (gamepadAPI.axesStatus[0] * speed)
-                    object.y += (gamepadAPI.axesStatus[1] * speed)
+            if (typeof (gamepadAPI[controller].axesStatus[1]) != 'undefined') {
+                if (typeof (gamepadAPI[controller].axesStatus[0]) != 'undefined') {
+                    object.x += (gamepadAPI[controller].axesStatus[0] * speed)
+                    object.y += (gamepadAPI[controller].axesStatus[1] * speed)
+                    if((gamepadAPI[controller].axesStatus[1] * speed)  < speed*-.5){             
+                            if (object.self.grounded == 1) {
+                                object.ymom -= speed 
+                            } else {
+                                if (object.self.righthand.anchored == 1 || object.self.lefthand.anchored == 1) {
+                                    object.self.degripl()
+                                    object.self.degripr()
+                                }
+                            }
+                    }
                 }
             }
         }
     }
     function gamepad_control(object, speed = 1) { // basic control for objects using the controler
-        //         console.log(gamepadAPI.axesStatus[1]*gamepadAPI.axesStatus[0]) //debugging
+        //         console.log(gamepadAPI[0].axesStatus[1]*gamepadAPI[0].axesStatus[0]) //debugging
         if (typeof object.body != 'undefined') {
-            if (typeof (gamepadAPI.axesStatus[1]) != 'undefined') {
-                if (typeof (gamepadAPI.axesStatus[0]) != 'undefined') {
-                    object.body.x += (gamepadAPI.axesStatus[0] * speed)
-                    object.body.y += (gamepadAPI.axesStatus[1] * speed)
+            if (typeof (gamepadAPI[controller].axesStatus[1]) != 'undefined') {
+                if (typeof (gamepadAPI[controller].axesStatus[0]) != 'undefined') {
+                    object.body.x += (gamepadAPI[controller].axesStatus[0] * speed)
+                    object.body.y += (gamepadAPI[controller].axesStatus[1] * speed)
+                    if(Math.abs(gamepadAPI[controller].axesStatus[1] * speed) + Math.abs(gamepadAPI[controller].axesStatus[0] * speed) > speed*.5){
+                        object.self.degripl()
+                        object.self.degripr()
+                    }
                 }
             }
         } else if (typeof object != 'undefined') {
-            if (typeof (gamepadAPI.axesStatus[1]) != 'undefined') {
-                if (typeof (gamepadAPI.axesStatus[0]) != 'undefined') {
-                    object.x += (gamepadAPI.axesStatus[0] * speed)
-                    object.y += (gamepadAPI.axesStatus[1] * speed)
+            if (typeof (gamepadAPI[controller].axesStatus[1]) != 'undefined') {
+                if (typeof (gamepadAPI[controller].axesStatus[0]) != 'undefined') {
+                    object.x += (gamepadAPI[controller].axesStatus[0] * speed)
+                    object.y += (gamepadAPI[controller].axesStatus[1] * speed)
+                    if(Math.abs(gamepadAPI[controller].axesStatus[1] * speed) + Math.abs(gamepadAPI[controller].axesStatus[0] * speed) > speed*.5){
+                        object.self.degripl()
+                        object.self.degripr()
+                    }
                 }
             }
         }
@@ -973,38 +1248,41 @@ window.addEventListener('DOMContentLoaded', (event) => {
     class Stage {
 
         constructor() {
-            this.bricks = [new Brick(600, 600)]
+            this.bricks = [new Brick(600, 600), new Brick(1000, 400), new Brick(200, 400)]
         }
         draw() {
-            this.bricks[0].draw()
+            for (let t = 0; t < this.bricks.length; t++) {
+                this.bricks[t].draw()
+            }
         }
     }
+
     class Brick {
-        constructor(x, y, width = 700, height = 100) {
+        constructor(x, y, width = 500, height = 20) {
             this.center = new Point(x, y)
             this.edgeleft = new Circle(x - (width * .5), y, 4, "cyan")
             this.edgeright = new Circle(x + (width * .5), y, 4, "blue")
             this.link = new Line(this.edgeleft.x, this.edgeleft.y, this.edgeright.x, this.edgeright.y, "white", height * 2)
-            this.shape = castBetween(this.edgeleft, this.edgeright, 60, height)
-            this.edgeleft = new Circle(x - (width * .5), y - (height * 1), 4, "cyan")
-            this.edgeright = new Circle(x + (width * .5), y - (height * 1), 4, "blue")
+            this.shape =  castBetween(this.edgeleft, this.edgeright, 60, height)
+            this.edgeleft = new Circle(x - (width * .5), y - (height * 1), 8, "cyan")
+            this.edgeright = new Circle(x + (width * .5), y - (height * 1), 8, "blue")
         }
         doesPerimeterTouch(circle) {
             if (circle.doesPerimeterTouch(this.edgeleft)) {
                 if (circle == circle.self.righthand) {
                     circle.anchored = 1
+                    circle.anchor = this.edgeleft
                 }
-
             }
             if (circle.doesPerimeterTouch(this.edgeright)) {
                 if (circle == circle.self.lefthand) {
                     circle.anchored = 1
+                    circle.anchor = this.edgeright
                 }
             }
-            if (circle.x  <= this.edgeright.x+ circle.radius) {
+            if (circle.x <= this.edgeright.x + circle.radius) {
                 if (circle.x + circle.radius >= this.edgeleft.x) {
                     if (this.shape.doesPerimeterTouch(circle)) {
-                        // circle.radius+=(Math.random()-.5)
                         if (circle == circle.self.body) {
                             circle.self.grounded = 1
                         }
@@ -1015,42 +1293,39 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             circle.y -= .1
                         }
                         circle.y += .1
-
                     }
                 }
             }
-
         }
         draw() {
-            // this.shape.draw()
             this.link.draw()
-            this.edgeright.draw()
-            this.edgeleft.draw()
+            // this.edgeright.draw()
+            // this.edgeleft.draw()
         }
     }
 
     let stage = new Stage()
 
-    class Explosion{
-        constructor(x){
+    class Explosion {
+        constructor(x) {
             this.count = -90
             this.center = x
             this.links = []
-            for(let t = 0;t<12;t++){
-                let curve = ((Math.random()-.5)*150)
-                let link = new Line(this.center+curve, 720+(Math.abs(curve)*2), this.center+curve, 10000+((Math.random()-.5)*1000), getRandomLightColor(), 10)
+            for (let t = 0; t < 12; t++) {
+                let curve = ((Math.random() - .5) * 150)
+                let link = new Line(this.center + curve, 720 + (Math.abs(curve) * 2), this.center + curve, 10000 + ((Math.random() - .5) * 1000), getRandomLightColor(), 10)
                 this.links.push(link)
             }
         }
-        draw(){
-            this.count+=5.5
-            for(let t =0;t<this.links.length;t++){
+        draw() {
+            this.count += 5.5
+            for (let t = 0; t < this.links.length; t++) {
                 this.links[t].draw()
-                this.links[t].width-=.5
-                if(this.links[t].width<1){
+                this.links[t].width -= .5
+                if (this.links[t].width < 1) {
                     this.links[t].width = 1
                 }
-                this.links[t].y1+=this.count
+                this.links[t].y1 += this.count
             }
         }
     }
@@ -1058,22 +1333,22 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     class Boy {
         constructor(controller) {
-
-            this.armlength = 20
+            this.controller = controller
+            this.armlength = 10
             this.shoulderwidth = 20
 
             this.nodes = []
             this.springs = []
             this.hitboxes = []
             this.links = []
-            this.speed = 6.5
+            this.speed = 11.5
             this.grounded = 0
             this.body = new Circle(350, 350, 35, "pink")
             this.nodes.push(this.body)
             this.leftshoulder = new Circle(this.body.x - (this.body.radius + this.shoulderwidth), 350, 10, "magenta")
             this.rightshoulder = new Circle(this.body.x + (this.body.radius + this.shoulderwidth), 350, 10, "red")
-            this.lefthand = new Circle(this.leftshoulder.x, (this.leftshoulder.y + this.armlength), 10, "magenta")
-            this.righthand = new Circle(this.rightshoulder.x, (this.rightshoulder.y + this.armlength), 10, "red")
+            this.lefthand = new Circle(this.leftshoulder.x, (this.leftshoulder.y + this.armlength), 10, "magenta", 0, 0, .95)
+            this.righthand = new Circle(this.rightshoulder.x, (this.rightshoulder.y + this.armlength), 10, "red", 0, 0, .95)
             this.nodes.push(this.leftshoulder)
             this.nodes.push(this.rightshoulder)
             this.nodes.push(this.righthand)
@@ -1091,6 +1366,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.springs.push(this.leftarm)
             this.springs.push(this.rightarm)
             this.gravity = 1
+            this.righthand.fired = 10
+            this.lefthand.fired = 10
             for (let t = 0; t < this.nodes.length; t++) {
                 this.nodes[t].self = this
             }
@@ -1099,38 +1376,94 @@ window.addEventListener('DOMContentLoaded', (event) => {
         //     //gamepad_control_controller(this.center, this.speed+(this.speed*this.grounded), this.controller)
         // }
         control() {
-            gamepad_control_controller_proto(this.center, this.speed + (this.speed * (this.grounded*.5)), this.controller)
+            gamepad_control_controller_proto(this.center, this.speed + (this.speed * (this.grounded * .5)), this.controller)
         }
-        degripl(){
-
-            if(this.lefthand.anchored == 1){
-                
-            if (this.body.ymom > 0) {
-                this.body.ymom = 0
+        fightcontrol() {
+            this.righthand.fired--
+            this.lefthand.fired--
+            if (this.righthand.fired <= 0) {
+            if (gamepadAPI[0].buttonsStatus.includes('A') || keysPressed['l']) {
+                    if (this.righthand.anchored == 0) {
+                        this.righthand.ymom = 0
+                        this.righthand.xmom += this.speed * 10
+                        this.righthand.fired = 10
+                    }
+                }
             }
-                this.body.ymom-=this.speed
-                this.lefthand.anchored = -1
-            this.righthand.anchored = -1
+            if (this.lefthand.fired <= 0) {
+            if (gamepadAPI[0].buttonsStatus.includes('B') || keysPressed['j']) {
+                    if (this.lefthand.anchored == 0) {
+                        this.lefthand.ymom = 0
+                        this.lefthand.xmom -= this.speed * 10
+                        this.lefthand.fired = 10
+                    }
+                }
+            }
+
+            if (gamepadAPI[0].buttonsStatus.includes('Y') || keysPressed['i']) {
+                if (this.righthand.fired <= 0) {
+                    if (this.righthand.anchored == 0) {
+                        this.righthand.ymom -= this.speed * 10
+                        this.righthand.xmom -= this.speed * 5
+                        this.righthand.fired = 12
+                    }
+                }
+                if (this.lefthand.fired <= 0) {
+                    if (this.lefthand.anchored == 0) {
+                        this.lefthand.ymom -= this.speed * 10
+                        this.lefthand.xmom += this.speed * 5
+                        this.lefthand.fired = 12
+                    }
+                }
+            }
+            if (gamepadAPI[0].buttonsStatus.includes('X') || keysPressed['k']) {
+                if (this.righthand.fired <= 0) {
+                    if (this.righthand.anchored == 0) {
+                        this.righthand.ymom += this.speed * 10
+                        this.righthand.xmom += this.speed * 5
+                        this.righthand.fired = 12
+                    }
+                }
+                if (this.lefthand.fired <= 0) {
+                    if (this.lefthand.anchored == 0) {
+                        this.lefthand.ymom += this.speed * 10
+                        this.lefthand.xmom -= this.speed * 5
+                        this.lefthand.fired = 12
+                    }
+                }
+            }
+
+        }
+        degripl() {
+
+            if (this.lefthand.anchored == 1) {
+
+                if (this.body.ymom > 0) {
+                    this.body.ymom = 0
+                }
+                this.body.ymom -= this.speed
+                this.lefthand.anchored = -10
+                this.righthand.anchored = -10
             }
 
             for (let t = 0; t < this.springs.length; t++) {
                 this.springs[t].balance()
             }
             for (let t = 0; t < this.nodes.length; t++) {
-                this.nodes[t].move()
+                this.nodes[t].frictiveMove()
             }
 
         }
-        degripr(){
+        degripr() {
 
-            if(this.righthand.anchored == 1){
+            if (this.righthand.anchored == 1) {
 
-            if (this.body.ymom > 0) {
-                this.body.ymom = 0
-            }
-                this.body.ymom-=this.speed
-                this.lefthand.anchored = -1
-            this.righthand.anchored = -1
+                if (this.body.ymom > 0) {
+                    this.body.ymom = 0
+                }
+                this.body.ymom -= this.speed
+                this.lefthand.anchored = -10
+                this.righthand.anchored = -10
             }
 
             for (let t = 0; t < this.springs.length; t++) {
@@ -1149,35 +1482,35 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
         }
         draw() {
-            gamepad_control_controller_proto(this.body, this.speed)
+            gamepad_control_controller_proto(this.body, this.speed, this.controller)
             if (this.grounded == 0) {
-                if(this.lefthand.anchored == 1){
-                    this.body.ymom=this.leftshoulder.ymom*.99
-                    this.body.xmom=this.leftshoulder.xmom*.99
-                }else if(this.righthand.anchored == 1){
-                    this.body.ymom=this.rightshoulder.ymom*.99
-                    this.body.xmom=this.rightshoulder.xmom*.99
-                }else{
-                    this.body.xmom=0
+                if (this.lefthand.anchored == 1) {
+                    this.body.ymom = this.leftshoulder.ymom * .99
+                    this.body.xmom = this.leftshoulder.xmom * .99
+                } else if (this.righthand.anchored == 1) {
+                    this.body.ymom = this.rightshoulder.ymom * .99
+                    this.body.xmom = this.rightshoulder.xmom * .99
+                } else {
+                    this.body.xmom = 0
                 }
                 this.body.ymom += this.gravity
             } else {
 
-    
-    
+
+
                 if (this.body.ymom > 0) {
                     this.body.ymom = 0
                 }
             }
             this.grounded = 0
-            if(this.lefthand.anchored == -1){
-                this.lefthand.anchored = 0
-                if(this.righthand.anchored == -1){
-                    this.righthand.anchored = 0
-                }else{
+            if (this.lefthand.anchored <= -1) {
+                this.lefthand.anchored++
+                if (this.righthand.anchored <= -1) {
+                    this.righthand.anchored++
+                } else {
                     this.collideStage()
                 }
-            }else{
+            } else {
                 this.collideStage()
             }
             this.righthand.ymom += this.gravity
@@ -1194,11 +1527,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.rightshoulder.x = this.body.x + (this.body.radius + this.shoulderwidth)
             this.rightshoulder.y = this.body.y
 
-            this.leftshoulder.xmom = 0
-            this.leftshoulder.ymom = 0
+            this.leftshoulder.xmom *= 0
+            this.leftshoulder.ymom *= 0
 
-            this.rightshoulder.xmom = 0
-            this.rightshoulder.ymom = 0
+            this.rightshoulder.xmom *= 0
+            this.rightshoulder.ymom *= 0
 
 
 
@@ -1215,30 +1548,42 @@ window.addEventListener('DOMContentLoaded', (event) => {
             for (let t = 0; t < this.hitboxes.length; t++) {
 
             }
+            this.fightcontrol()
         }
     }
 
 
-    let coreboy = new Boy()
+
+
+    for(let t = 0;t<4;t++){
+        let coreboy = new Boy(t)
+        coreboy.body.color = `rgb(${t*64}, ${255-(t*64)}, ${Math.random()*255})`
+        boys.push(coreboy)
+    }
 
     // object instantiation and creation happens here 
 
 
     let go = 0
-    let boom = new Circle(0,0,0,"transparent")
+    let boom = new Circle(0, 0, 0, "transparent")
 
     function main() {
         canvas_context.clearRect(0, 0, canvas.width, canvas.height)  // refreshes the image
-        gamepadAPI.update() //checks for button presses/stick movement on the connected controller)
+        gamepadAPI[0].update()
+        gamepadAPI[1].update()
+        gamepadAPI[2].update()
+        gamepadAPI[3].update() //checks for button presses/stick movement on the connected controller)
         // game code goes here
         stage.draw()
-        coreboy.draw()
-        if(coreboy.body.y > 720){
-            if(go == 0){
-                go = 1
-                boom = new Explosion(coreboy.body.x)
-            }
+        for(let t = 0;t<boys.length;t++){
+            boys[t].draw()
         }
-        boom.draw()
+        // if (coreboy.body.y > 720) {
+        //     if (go == 0) {
+        //         go = 1
+        //         boom = new Explosion(coreboy.body.x)
+        //     }
+        // }
+        // boom.draw()
     }
 })
