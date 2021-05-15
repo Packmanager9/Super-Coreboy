@@ -68,7 +68,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         buttonPressed: function (button, hold) {
             var newPress = false;
             for (var i = 0, s = gamepadAPI[0].buttonsStatus.length; i < s; i++) {// loop through pressed buttons
-                if (gamepadAPI[0].buttonsStatus[i] == button) {// if we found the button we're looking for...
+                if (gamepadAPI[0].buttonsStatus[i] == button) {// if we found the button we're looking for..
                     newPress = true;// set the boolean variable to true
                     if (!hold) {// if we want to check the single press
                         for (var j = 0, p = gamepadAPI[0].buttonsCache.length; j < p; j++) {// loop through the cached states from the previous frame
@@ -155,7 +155,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         buttonPressed: function (button, hold) {
             var newPress = false;
             for (var i = 0, s = gamepadAPI[1].buttonsStatus.length; i < s; i++) {// loop through pressed buttons
-                if (gamepadAPI[1].buttonsStatus[i] == button) {// if we found the button we're looking for...
+                if (gamepadAPI[1].buttonsStatus[i] == button) {// if we found the button we're looking for..
                     newPress = true;// set the boolean variable to true
                     if (!hold) {// if we want to check the single press
                         for (var j = 0, p = gamepadAPI[1].buttonsCache.length; j < p; j++) {// loop through the cached states from the previous frame
@@ -242,7 +242,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         buttonPressed: function (button, hold) {
             var newPress = false;
             for (var i = 0, s = gamepadAPI[2].buttonsStatus.length; i < s; i++) {// loop through pressed buttons
-                if (gamepadAPI[2].buttonsStatus[i] == button) {// if we found the button we're looking for...
+                if (gamepadAPI[2].buttonsStatus[i] == button) {// if we found the button we're looking for..
                     newPress = true;// set the boolean variable to true
                     if (!hold) {// if we want to check the single press
                         for (var j = 0, p = gamepadAPI[2].buttonsCache.length; j < p; j++) {// loop through the cached states from the previous frame
@@ -329,7 +329,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         buttonPressed: function (button, hold) {
             var newPress = false;
             for (var i = 0, s = gamepadAPI[3].buttonsStatus.length; i < s; i++) {// loop through pressed buttons
-                if (gamepadAPI[3].buttonsStatus[i] == button) {// if we found the button we're looking for...
+                if (gamepadAPI[3].buttonsStatus[i] == button) {// if we found the button we're looking for..
                     newPress = true;// set the boolean variable to true
                     if (!hold) {// if we want to check the single press
                         for (var j = 0, p = gamepadAPI[3].buttonsCache.length; j < p; j++) {// loop through the cached states from the previous frame
@@ -536,6 +536,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.strokeColor = strokeColor
             this.anchored = 0
             this.anchor = this
+            this.sxmom = 0
+            this.symom = 0
+        }
+        smove() {
+            this.x += this.sxmom
+            this.y += this.symom
         }
         reversePointinside(point) {
 
@@ -1458,6 +1464,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             object.self.jumping = 1
                         }
                     } else {
+                        
 
                         if (gamepadAPI[controller].axesStatus[0] < -.5) {
                             if (object.self.lefthand.anchored == 1) {
@@ -1476,6 +1483,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             } else {
                                 object.x += (gamepadAPI[controller].axesStatus[0] * speed)
                             }
+                        }
+
+
+                        if (gamepadAPI[controller].axesStatus[1] < -.5) {
+                            if (object.self.righthand.anchored == 1 || object.self.lefthand.anchored == 1)   {
+                            object.self.degripr()
+                            object.self.degripl()
+                            object.self.jumping = 1
+                            object.ymom -= speed
+                            }
+
                         }
                     }
                     // }
@@ -1651,6 +1669,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     if (circle.x + circle.radius >= this.edgeleft.x) {
                         if (this.shape.doesPerimeterTouch(circle)) {
                             if (circle == circle.self.body) {
+                                // circle.sxmom = 0
+                                // circle.symom = 0
                                 if (circle.y < this.center.y + (this.height)) {
                                     circle.self.grounded = 1
                                 }
@@ -1762,6 +1782,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.gravity = 1
             this.righthand.fired = 0
             this.lefthand.fired = 0
+            this.shield = 0
+            this.shieldpower = 100
+            this.breaktimer = 0
             for (let t = 0; t < this.nodes.length; t++) {
                 this.nodes[t].self = this // lmao
             }
@@ -1834,26 +1857,26 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
 
 
-                    while (boys[t].rightshoulder.reversePointinside(this.leftshoulder) || boys[t].rightshoulder.reversePointinside(this.body)) {
-                        this.body.x += .5
-                        boys[t].body.x -= .5
-                        this.fixupshoulder()
-                        boys[t].fixupshoulder()
-                        this.righthand.x += .5
-                        this.lefthand.x += .5
-                        boys[t].lefthand.x -= .5
-                        boys[t].righthand.x -= .5
-                    }
-                    while (boys[t].leftshoulder.reversePointinside(this.rightshoulder) || boys[t].leftshoulder.reversePointinside(this.body)) {
-                        this.body.x -= .5
-                        boys[t].body.x += .5
-                        this.fixupshoulder()
-                        boys[t].fixupshoulder()
-                        this.righthand.x -= .5
-                        this.lefthand.x -= .5
-                        boys[t].lefthand.x += .5
-                        boys[t].righthand.x += .5
-                    }
+                    // while (boys[t].rightshoulder.reversePointinside(this.leftshoulder) || boys[t].rightshoulder.reversePointinside(this.body)) {
+                    //     this.body.x += .5
+                    //     boys[t].body.x -= .5
+                    //     this.fixupshoulder()
+                    //     boys[t].fixupshoulder()
+                    //     this.righthand.x += .5
+                    //     this.lefthand.x += .5
+                    //     boys[t].lefthand.x -= .5
+                    //     boys[t].righthand.x -= .5
+                    // }
+                    // while (boys[t].leftshoulder.reversePointinside(this.rightshoulder) || boys[t].leftshoulder.reversePointinside(this.body)) {
+                    //     this.body.x -= .5
+                    //     boys[t].body.x += .5
+                    //     this.fixupshoulder()
+                    //     boys[t].fixupshoulder()
+                    //     this.righthand.x -= .5
+                    //     this.lefthand.x -= .5
+                    //     boys[t].lefthand.x += .5
+                    //     boys[t].righthand.x += .5
+                    // }
                 }
             }
 
@@ -1862,9 +1885,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
                     for(let k = 0;k<boys[t].shots.length;k++){
                         if(boys[t].shots[k].doesPerimeterTouch(this.body)){
-                            this.body.xmom = ((boys[t].shots[k].xmom * (this.damage / 200)) + (boys[t].shots[k].xmom * .3) )*2
-                            this.body.ymom = (((boys[t].shots[k].ymom * (this.damage / 200)) + (boys[t].shots[k].ymom * .3)) * 2)-(10* (this.damage / 200))
-                            this.damage += (Math.abs(boys[t].shots[k].xmom) + Math.abs(boys[t].shots[k].ymom)) / 7
+                            if(this.shield == 1){
+                                this.shieldpower -= (Math.abs(boys[t].shots[k].xmom) + Math.abs(boys[t].shots[k].ymom)) / 7
+                            }else{
+                                this.body.xmom = ((boys[t].shots[k].xmom * (this.damage / 200)) + (boys[t].shots[k].xmom * .3) )*2
+                                this.body.ymom = (((boys[t].shots[k].ymom * (this.damage / 200)) + (boys[t].shots[k].ymom * .3)) * 2)-(10* (this.damage / 200))
+                                this.damage += (Math.abs(boys[t].shots[k].xmom) + Math.abs(boys[t].shots[k].ymom)) / 7
+                            }
                             boys[t].shots[k].marked = 1
                         }
                     }
@@ -1872,9 +1899,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     boys[t].lefthands = castBetween(boys[t].leftshoulder, boys[t].lefthand, 20, boys[t].leftshoulder.radius)
                      if (boys[t].righthands.doesPerimeterTouch(this.body) || boys[t].righthand.doesPerimeterTouch(this.body)) {
                         if (boys[t].righthand.fired > 6) {
-                            this.body.xmom = (boys[t].righthand.xmom * (this.damage / 200)) + (boys[t].righthand.xmom * .3)
-                            this.body.ymom = (((boys[t].righthand.ymom * (this.damage / 200)) + (boys[t].righthand.ymom * .3)) * 1)
-                            this.damage += (Math.abs(boys[t].righthand.xmom) + Math.abs(boys[t].righthand.ymom)) / 7
+                            if(this.shield == 1){
+                                this.shieldpower -= (Math.abs(boys[t].righthand.xmom) + Math.abs(boys[t].righthand.ymom)) / 7
+                            }else{
+                                this.body.xmom = (boys[t].righthand.xmom * (this.damage / 200)) + (boys[t].righthand.xmom * .3)
+                                this.body.ymom = (((boys[t].righthand.ymom * (this.damage / 200)) + (boys[t].righthand.ymom * .3)) * 1)
+                                this.damage += (Math.abs(boys[t].righthand.xmom) + Math.abs(boys[t].righthand.ymom)) / 7
+                            }
                             boys[t].righthand.fired = 6
 
                             if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
@@ -1887,9 +1918,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         }
                     }else if (boys[t].lefthands.doesPerimeterTouch(this.body) || boys[t].lefthand.doesPerimeterTouch(this.body)) {
                         if (boys[t].lefthand.fired > 6) {
-                            this.body.xmom = (boys[t].lefthand.xmom * (this.damage / 200)) + (boys[t].lefthand.xmom * .3)
-                            this.body.ymom = (((boys[t].lefthand.ymom * (this.damage / 200)) + (boys[t].lefthand.ymom * .3)) * 1)
-                            this.damage += (Math.abs(boys[t].lefthand.xmom) + Math.abs(boys[t].lefthand.ymom)) / 7
+                          
+                            if(this.shield == 1){
+                                this.shieldpower -= (Math.abs(boys[t].lefthand.xmom) + Math.abs(boys[t].lefthand.ymom)) / 7
+                            }else{
+                                this.body.xmom = (boys[t].lefthand.xmom * (this.damage / 200)) + (boys[t].lefthand.xmom * .3)
+                                this.body.ymom = (((boys[t].lefthand.ymom * (this.damage / 200)) + (boys[t].lefthand.ymom * .3)) * 1)
+                                this.damage += (Math.abs(boys[t].lefthand.xmom) + Math.abs(boys[t].lefthand.ymom)) / 7
+                            }
                             boys[t].lefthand.fired = 6
                             if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                                 this.lefthand.anchored = -40
@@ -1899,10 +1935,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.fixupshoulder()
                         }
                     }else if (boys[t].screwangle != 0 && boys[t].body.doesPerimeterTouch(this.body)) {
-                        if (boys[t].body.fired > 6) {
-                            this.body.xmom = (boys[t].body.xmom * (this.damage / 200)) + (boys[t].body.xmom * .3)
-                            this.body.ymom = (((boys[t].body.ymom * (this.damage / 200)) + (boys[t].body.ymom * .3)) * 1)
-                            this.damage += (Math.abs(boys[t].body.xmom) + Math.abs(boys[t].body.ymom)) / 7
+                        if (boys[t].body.fired > 6) {   
+                            if(this.shield == 1){
+                                this.shieldpower -= (Math.abs(boys[t].body.xmom) + Math.abs(boys[t].body.ymom)) / 2
+                            }else{
+                                this.body.xmom = (boys[t].body.xmom * (this.damage / 200)) + (boys[t].body.xmom * .3)*2
+                                this.body.ymom = (((boys[t].body.ymom * (this.damage / 200)) + (boys[t].body.ymom * .3)) * 2)    
+                                this.damage += (Math.abs(boys[t].body.xmom) + Math.abs(boys[t].body.ymom)) / 2
+                            }
                             boys[t].body.fired = 6
                             if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                                 this.lefthand.anchored = -40
@@ -1921,67 +1961,99 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 gamepad_control_controller_proto_dj(this.body, this.speed, this.controller)
             }
         }
+        breaks(){
+            if(this.shield == 1){
+                if(this.shieldpower <= 0){
+                    this.breaktimer = 40
+                    this.shieldpower = 1
+                    this.shield = 0
+                }
+            }
+        }
         fightcontrol() {
+            this.breaks()
             this.righthand.fired--
             this.lefthand.fired--
-            if (this.righthand.fired <= 0) {
-                if (gamepadAPI[this.controller].buttonsStatus.includes('B') || keysPressed['l']) {
-                    if (this.righthand.anchored == 0) {
-                        this.righthand.ymom = 0
-                        this.righthand.xmom = this.punchspeed * 14
-                        this.righthand.fired = 13
-                    }
+            this.breaktimer--
+            if (gamepadAPI[this.controller].buttonsStatus.includes('RB') || keysPressed['o']) {
+                if(this.breaktimer < 0){
+                this.shieldpower-=.33
+                this.shield = 1
+                let shild = new Circle(this.body.x, this.body.y, (Math.max((new LineOP(this.body, this.lefthand)).hypotenuse(), (new LineOP(this.body, this.righthand)).hypotenuse()))+this.lefthand.radius, this.body.color + Math.min(Math.round(this.shieldpower+10), 99))
+                shild.draw()
+                }
+            }else{
+                this.shield = 0
+                this.shieldpower++
+                if(this.shieldpower > 100){
+                    this.shieldpower = 100
                 }
             }
-            if (this.lefthand.fired <= 0) {
-                if (gamepadAPI[this.controller].buttonsStatus.includes('X') || keysPressed['j']) {
-                    if (this.lefthand.anchored == 0) {
-                        this.lefthand.ymom = 0
-                        this.lefthand.xmom = -this.punchspeed * 14
-                        this.lefthand.fired = 13
-                    }
-                }
-            }
+            if(this.breaktimer < 0){
 
-            if (gamepadAPI[this.controller].buttonsStatus.includes('Y') || keysPressed['i']) {
                 if (this.righthand.fired <= 0) {
-                    if (this.righthand.anchored == 0) {
-                        this.righthand.ymom = -this.punchspeed * 14
-                        this.righthand.xmom = this.punchspeed * 1
-                        this.righthand.fired = 15
+                    if (gamepadAPI[this.controller].buttonsStatus.includes('B') || keysPressed['l']) {
+                        if (this.righthand.anchored == 0) {
+                            this.righthand.ymom = 0
+                            this.righthand.xmom = this.punchspeed * 14
+                            this.righthand.fired = 13
+                        }
                     }
                 }
                 if (this.lefthand.fired <= 0) {
-                    if (this.lefthand.anchored == 0) {
-                        this.lefthand.ymom = -this.punchspeed * 14
-                        this.lefthand.xmom = -this.punchspeed * 1
-                        this.lefthand.fired = 15
+                    if (gamepadAPI[this.controller].buttonsStatus.includes('X') || keysPressed['j']) {
+                        if (this.lefthand.anchored == 0) {
+                            this.lefthand.ymom = 0
+                            this.lefthand.xmom = -this.punchspeed * 14
+                            this.lefthand.fired = 13
+                        }
                     }
                 }
-            }
-            if (gamepadAPI[this.controller].buttonsStatus.includes('A') || keysPressed['k']) {
-                if (this.righthand.fired <= 0) {
-                    if (this.righthand.anchored == 0) {
-                        this.rightshoulder.xmom = 0
-                        this.rightshoulder.ymom = 0
-                        this.righthand.ymom = this.punchspeed * 14
-                        this.righthand.xmom = this.punchspeed * 9
-                        this.righthand.fired = 13
+    
+                if (gamepadAPI[this.controller].buttonsStatus.includes('Y') || keysPressed['i']) {
+                    if (this.righthand.fired <= 0) {
+                        if (this.righthand.anchored == 0) {
+                            this.righthand.ymom = -this.punchspeed * 14
+                            this.righthand.xmom = this.punchspeed * 1
+                            this.righthand.fired = 15
+                        }
+                    }
+                    if (this.lefthand.fired <= 0) {
+                        if (this.lefthand.anchored == 0) {
+                            this.lefthand.ymom = -this.punchspeed * 14
+                            this.lefthand.xmom = -this.punchspeed * 1
+                            this.lefthand.fired = 15
+                        }
                     }
                 }
-                if (this.lefthand.fired <= 0) {
-                    if (this.lefthand.anchored == 0) {
-                        this.leftshoulder.xmom = 0
-                        this.leftshoulder.ymom = 0
-                        this.lefthand.ymom = this.punchspeed * 14
-                        this.lefthand.xmom = -this.punchspeed * 9
-                        this.lefthand.fired = 13
+    
+                if (gamepadAPI[this.controller].buttonsStatus.includes('A') || keysPressed['k']) {
+                    if (this.righthand.fired <= 0) {
+                        if (this.righthand.anchored == 0) {
+                            this.rightshoulder.xmom = 0
+                            this.rightshoulder.ymom = 0
+                            this.righthand.ymom = this.punchspeed * 14
+                            this.righthand.xmom = this.punchspeed * 9
+                            this.righthand.fired = 13
+                        }
+                    }
+                    if (this.lefthand.fired <= 0) {
+                        if (this.lefthand.anchored == 0) {
+                            this.leftshoulder.xmom = 0
+                            this.leftshoulder.ymom = 0
+                            this.lefthand.ymom = this.punchspeed * 14
+                            this.lefthand.xmom = -this.punchspeed * 9
+                            this.lefthand.fired = 13
+                        }
                     }
                 }
-            }
+    
 
+            }
         }
         degripl() {
+            this.body.sxmom = 0
+this.body.symom = 0
 
             if (this.lefthand.anchored == 1) {
 
@@ -2002,6 +2074,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
         }
         degripr() {
+            this.body.sxmom = 0
+this.body.symom = 0
 
             if (this.righthand.anchored == 1) {
 
@@ -2030,6 +2104,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.enemycollide()
         }
         draw() {
+            if(this.lefthand.anchored != 1 && this.righthand.anchored != 1){
+            this.body.sxmom = 0
+            this.body.symom = 0
+            }
             // if (this.controller == 0) {
             gamepad_control_controller_proto(this.body, this.speed, this.controller)
 
@@ -2044,15 +2122,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (this.grounded == 0) {
 
                 if (this.lefthand.anchored == 1) {
-                    this.body.ymom = this.leftshoulder.ymom * .99
-                    this.body.xmom = this.leftshoulder.xmom * .99
+                    this.body.ymom *= .7
+                    this.body.symom = this.leftshoulder.ymom * .99
+                    this.body.sxmom = this.leftshoulder.xmom * .99
                 } else if (this.righthand.anchored == 1) {
-                    this.body.ymom = this.rightshoulder.ymom * .99
-                    this.body.xmom = this.rightshoulder.xmom * .99
+                    this.body.ymom *= .7
+                    this.body.symom = this.rightshoulder.ymom * .99
+                    this.body.sxmom = this.rightshoulder.xmom * .99
                 } else {
-                    if (Math.abs(this.body.xmom) < 5) {
-                        this.body.xmom *= .5
-                    }
+                    // if (Math.abs(this.body.sxmom) < 5) {
+                    //     this.body.sxmom *= .5
+                    // }
                 }
                 this.body.ymom += this.gravity
             } else {
@@ -2085,6 +2165,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             for (let t = 0; t < this.nodes.length; t++) {
                 this.nodes[t].frictiveMove()
+            }
+            for (let t = 0; t < this.nodes.length; t++) {
+                this.nodes[t].smove()
             }
 
             this.lefthand.xmom += (this.lefthand.x - this.body.x) / 80
@@ -2139,6 +2222,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
             for (let t = 0; t < 100; t++) {
                 this.wasfalse.push(1)
             }
+            this.shield = 0
+            this.shieldpower = 100
+            this.breaktimer = 0
             this.screwangle = 0
             this.charge = 0
             this.shots = []
@@ -2301,26 +2387,26 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
 
 
-                    while (boys[t].rightshoulder.reversePointinside(this.leftshoulder) || boys[t].rightshoulder.reversePointinside(this.body)) {
-                        this.body.x += .5
-                        boys[t].body.x -= .5
-                        this.fixupshoulder()
-                        boys[t].fixupshoulder()
-                        this.righthand.x += .5
-                        this.lefthand.x += .5
-                        boys[t].lefthand.x -= .5
-                        boys[t].righthand.x -= .5
-                    }
-                    while (boys[t].leftshoulder.reversePointinside(this.rightshoulder) || boys[t].leftshoulder.reversePointinside(this.body)) {
-                        this.body.x -= .5
-                        boys[t].body.x += .5
-                        this.fixupshoulder()
-                        boys[t].fixupshoulder()
-                        this.righthand.x -= .5
-                        this.lefthand.x -= .5
-                        boys[t].lefthand.x += .5
-                        boys[t].righthand.x += .5
-                    }
+                    // while (boys[t].rightshoulder.reversePointinside(this.leftshoulder) || boys[t].rightshoulder.reversePointinside(this.body)) {
+                    //     this.body.x += .5
+                    //     boys[t].body.x -= .5
+                    //     this.fixupshoulder()
+                    //     boys[t].fixupshoulder()
+                    //     this.righthand.x += .5
+                    //     this.lefthand.x += .5
+                    //     boys[t].lefthand.x -= .5
+                    //     boys[t].righthand.x -= .5
+                    // }
+                    // while (boys[t].leftshoulder.reversePointinside(this.rightshoulder) || boys[t].leftshoulder.reversePointinside(this.body)) {
+                    //     this.body.x -= .5
+                    //     boys[t].body.x += .5
+                    //     this.fixupshoulder()
+                    //     boys[t].fixupshoulder()
+                    //     this.righthand.x -= .5
+                    //     this.lefthand.x -= .5
+                    //     boys[t].lefthand.x += .5
+                    //     boys[t].righthand.x += .5
+                    // }
                 }
             }
 
@@ -2328,9 +2414,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 if (this != boys[t]) {
                     for(let k = 0;k<boys[t].shots.length;k++){
                         if(boys[t].shots[k].doesPerimeterTouch(this.body)){
-                            this.body.xmom = ((boys[t].shots[k].xmom * (this.damage / 200)) + (boys[t].shots[k].xmom * .3) )*2
-                            this.body.ymom = (((boys[t].shots[k].ymom * (this.damage / 200)) + (boys[t].shots[k].ymom * .3)) * 2)-(10* (this.damage / 200))
-                            this.damage += (Math.abs(boys[t].shots[k].xmom) + Math.abs(boys[t].shots[k].ymom)) / 7
+                            if(this.shield == 1){
+                                this.shieldpower -= (Math.abs(boys[t].shots[k].xmom) + Math.abs(boys[t].shots[k].ymom)) / 7
+                            }else{
+                                this.body.xmom = ((boys[t].shots[k].xmom * (this.damage / 200)) + (boys[t].shots[k].xmom * .3) )*2
+                                this.body.ymom = (((boys[t].shots[k].ymom * (this.damage / 200)) + (boys[t].shots[k].ymom * .3)) * 2)-(10* (this.damage / 200))
+                                this.damage += (Math.abs(boys[t].shots[k].xmom) + Math.abs(boys[t].shots[k].ymom)) / 7
+                            }
                             boys[t].shots[k].marked = 1
                         }
                     }
@@ -2338,9 +2428,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     boys[t].righthands = castBetween(boys[t].rightshoulder, boys[t].righthand, 20, boys[t].rightshoulder.radius)
                     if (boys[t].righthands.doesPerimeterTouch(this.body) || boys[t].righthand.doesPerimeterTouch(this.body)) {
                         if (boys[t].righthand.fired > 6) {
-                            this.body.xmom = (boys[t].righthand.xmom * (this.damage / 200)) + (boys[t].righthand.xmom * .3)
-                            this.body.ymom = (((boys[t].righthand.ymom * (this.damage / 200)) + (boys[t].righthand.ymom * .3)) * 1)
-                            this.damage += (Math.abs(boys[t].righthand.xmom) + Math.abs(boys[t].righthand.ymom)) / 7
+                            if(this.shield == 1){
+                                this.shieldpower -= (Math.abs(boys[t].righthand.xmom) + Math.abs(boys[t].righthand.ymom)) / 7
+                            }else{
+                                this.body.xmom = (boys[t].righthand.xmom * (this.damage / 200)) + (boys[t].righthand.xmom * .3)
+                                this.body.ymom = (((boys[t].righthand.ymom * (this.damage / 200)) + (boys[t].righthand.ymom * .3)) * 1) 
+                                this.damage += (Math.abs(boys[t].righthand.xmom) + Math.abs(boys[t].righthand.ymom)) / 7
+                            }
                             boys[t].righthand.fired = 6
 
                             if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
@@ -2353,9 +2447,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         }
                     }else if (boys[t].lefthands.doesPerimeterTouch(this.body) || boys[t].lefthand.doesPerimeterTouch(this.body)) {
                         if (boys[t].lefthand.fired > 6) {
-                            this.body.xmom = (boys[t].lefthand.xmom * (this.damage / 200)) + (boys[t].lefthand.xmom * .3)
-                            this.body.ymom = (((boys[t].lefthand.ymom * (this.damage / 200)) + (boys[t].lefthand.ymom * .3)) * 1)
-                            this.damage += (Math.abs(boys[t].lefthand.xmom) + Math.abs(boys[t].lefthand.ymom)) / 7
+                         
+                            if(this.shield == 1){
+                                this.shieldpower -= (Math.abs(boys[t].lefthand.xmom) + Math.abs(boys[t].lefthand.ymom)) / 7
+                            }else{
+                                this.body.xmom = (boys[t].lefthand.xmom * (this.damage / 200)) + (boys[t].lefthand.xmom * .3)
+                                this.body.ymom = (((boys[t].lefthand.ymom * (this.damage / 200)) + (boys[t].lefthand.ymom * .3)) * 1)
+                                this.damage += (Math.abs(boys[t].lefthand.xmom) + Math.abs(boys[t].lefthand.ymom)) / 7
+                            }
                             boys[t].lefthand.fired = 6
                             if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                                 this.lefthand.anchored = -40
@@ -2366,9 +2465,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         }
                     }else if (boys[t].screwangle != 0 && boys[t].body.doesPerimeterTouch(this.body)) {
                         if (boys[t].body.fired > 6) {
-                            this.body.xmom = (boys[t].body.xmom * (this.damage / 200)) + (boys[t].body.xmom * .3)
-                            this.body.ymom = (((boys[t].body.ymom * (this.damage / 200)) + (boys[t].body.ymom * .3)) * 1)
-                            this.damage += (Math.abs(boys[t].body.xmom) + Math.abs(boys[t].body.ymom)) / 7
+                            if(this.shield == 1){
+                                this.shieldpower -= (Math.abs(boys[t].body.xmom) + Math.abs(boys[t].body.ymom)) / 2
+                            }else{
+                                this.body.xmom = (boys[t].body.xmom * (this.damage / 200)) + (boys[t].body.xmom * .3)*2
+                                this.body.ymom = (((boys[t].body.ymom * (this.damage / 200)) + (boys[t].body.ymom * .3)) * 2)
+                                this.damage += (Math.abs(boys[t].body.xmom) + Math.abs(boys[t].body.ymom)) / 2
+                            }
                             boys[t].body.fired = 6
                             if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                                 this.lefthand.anchored = -40
@@ -2387,7 +2490,20 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 gamepad_control_controller_proto_dj(this.body, this.speed, this.controller)
             }
         }
+        breaks(){
+            if(this.shield == 1){
+                if(this.shieldpower <= 0){
+                    this.breaktimer = 40
+                    this.shieldpower = 1
+                    this.shield = 0
+                }
+            }
+        }
         fightcontrol() {
+            this.breaks()
+
+
+
             for(let t = 0;t<this.shots.length;t++){
                 this.shots[t].move()
                 this.shots[t].draw()
@@ -2410,108 +2526,133 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.righthand.fired--
             this.body.fired--
             this.lefthand.fired--
-            if (this.righthand.fired <= 0) {
-                if (gamepadAPI[this.controller].buttonsStatus.includes('B') || keysPressed['l']) {
-                    if (this.righthand.anchored == 0) {
-                        let shot = new Shot(this.righthand.x, this.righthand.y, this.charge*.66, "#00FFFF", this.speed+1, 0)
-                        if(this.charge>90){
-                            shot.color = "#88FFFF"
-                        }
-                        // if(this.wasfalse[1] == 0){
-                            if (this.charge == 100) {
-                                this.charge = 0
-                                this.righthand.xmom = 10
-                                this.righthand.ymom = 0
-                                this.shots.push(shot)
-                                if(this.grounded != 1){
-                                    this.body.xmom -= 5
+
+            this.breaktimer--
+            if (gamepadAPI[this.controller].buttonsStatus.includes('RB') || keysPressed['o']) {
+                if(this.breaktimer < 0){
+                this.shieldpower-=.33
+                this.shield = 1
+                let shild = new Circle(this.body.x, this.body.y, (Math.max((new LineOP(this.body, this.lefthand)).hypotenuse(), (new LineOP(this.body, this.righthand)).hypotenuse()))+this.lefthand.radius, this.body.color + Math.min(Math.round(this.shieldpower+10), 99))
+                shild.draw()
+                }
+            }else{
+                this.shield = 0
+                this.shieldpower++
+                if(this.shieldpower > 100){
+                    this.shieldpower = 100
+                }
+            }
+
+
+
+            if(this.breaktimer <= 0){
+
+                if (this.righthand.fired <= 0) {
+                    if (gamepadAPI[this.controller].buttonsStatus.includes('B') || keysPressed['l']) {
+                        if (this.righthand.anchored == 0) {
+                            let shot = new Shot(this.righthand.x, this.righthand.y, this.charge*.66, "#00FFFF", this.speed+1, 0)
+                            if(this.charge>90){
+                                shot.color = "#88FFFF"
+                            }
+                            // if(this.wasfalse[1] == 0){
+                                if (this.charge == 100) {
+                                    this.charge = 0
+                                    this.righthand.xmom = 10
+                                    this.righthand.ymom = 0
+                                    this.shots.push(shot)
+                                    if(this.grounded != 1){
+                                        this.body.xmom -= 5
+                                    }
                                 }
-                            }
-                            if (this.righthand.anchored == 0) {
-                                this.righthand.xmom += 1
-                                this.righthand.ymom -= 1
-                                this.charge++
-                            }
-                            shot.draw()
-                        // }else{
-
-                        //     this.charge = 0
-                        //     this.righthand.xmom = 10
-                        //     this.righthand.ymom = 0
-                        //     this.shots.push(shot)
-                        // }
+                                if (this.righthand.anchored == 0) {
+                                    this.righthand.xmom += 1
+                                    this.righthand.ymom -= 1
+                                    this.charge++
+                                }
+                                shot.draw()
+                            // }else{
+    
+                            //     this.charge = 0
+                            //     this.righthand.xmom = 10
+                            //     this.righthand.ymom = 0
+                            //     this.shots.push(shot)
+                            // }
+                    }
+                
+                    }
                 }
-            
-                }
-            }
-
-if (this.lefthand.fired <= 0) {
-    if (gamepadAPI[this.controller].buttonsStatus.includes('X') || keysPressed['j']) {
-        if (this.lefthand.anchored == 0) {
-            
-            let shot = new Shot(this.lefthand.x, this.lefthand.y, this.charge*.66, "#00FFFF", -this.speed-1, 0)
-            if(this.charge>90){
-                shot.color = "#88FFFF"
-            }
-
-            if (this.charge == 100) {
-                this.charge = 0
-                this.lefthand.xmom = -10
-                this.lefthand.ymom = 0
-                this.shots.push(shot)
-                if(this.grounded != 1){
-                    this.body.xmom += 5
-                }
-            }
-            if (this.lefthand.anchored == 0) {
-                this.lefthand.xmom -= 1
-                this.lefthand.ymom -= 1
-                this.charge++
-            }
-            shot.draw()
-        }
-    }
-}
-
-if (gamepadAPI[this.controller].buttonsStatus.includes('Y') || keysPressed['i']) {
-    if (this.righthand.fired <= 0) {
-        if (this.lefthand.fired <= 0) {
-            this.screwmomentum = Math.PI/5
-            this.screwtimer = 30
-            this.lefthand.fired = 30
-            this.righthand.fired = 30
-            // this.degripr()
-            // this.degripl()
-            this.body.fired = 30
-        this.lefthand.anchored = -10
-        this.righthand.anchored = -10
-        this.body.ymom = -this.speed*3
-        }
-    }
-}
-if (gamepadAPI[this.controller].buttonsStatus.includes('A') || keysPressed['k']) {
-    if (this.righthand.fired <= 0) {
-        if (this.righthand.anchored == 0) {
-            this.rightshoulder.xmom = 0
-            this.rightshoulder.ymom = 0
-            this.righthand.ymom = this.punchspeed * 12
-            this.righthand.xmom = -this.punchspeed * 2.1
-            this.righthand.fired = 13
-        }
-    }
+    
     if (this.lefthand.fired <= 0) {
-        if (this.lefthand.anchored == 0) {
-            this.leftshoulder.xmom = 0
-            this.leftshoulder.ymom = 0
-            this.lefthand.ymom = this.punchspeed * 12
-            this.lefthand.xmom = this.punchspeed * 2.1
-            this.lefthand.fired = 13
+        if (gamepadAPI[this.controller].buttonsStatus.includes('X') || keysPressed['j']) {
+            if (this.lefthand.anchored == 0) {
+                
+                let shot = new Shot(this.lefthand.x, this.lefthand.y, this.charge*.66, "#00FFFF", -this.speed-1, 0)
+                if(this.charge>90){
+                    shot.color = "#88FFFF"
+                }
+    
+                if (this.charge == 100) {
+                    this.charge = 0
+                    this.lefthand.xmom = -10
+                    this.lefthand.ymom = 0
+                    this.shots.push(shot)
+                    if(this.grounded != 1){
+                        this.body.xmom += 5
+                    }
+                }
+                if (this.lefthand.anchored == 0) {
+                    this.lefthand.xmom -= 1
+                    this.lefthand.ymom -= 1
+                    this.charge++
+                }
+                shot.draw()
+            }
         }
     }
-}
+    
+    if (gamepadAPI[this.controller].buttonsStatus.includes('Y') || keysPressed['i']) {
+        if (this.righthand.fired <= 0) {
+            if (this.lefthand.fired <= 0) {
+                this.screwmomentum = Math.PI/5
+                this.screwtimer = 30
+                this.jumping = 1
+                this.lefthand.fired = 30
+                this.righthand.fired = 30
+                // this.degripr()
+                // this.degripl()
+                this.body.fired = 30
+            this.lefthand.anchored = -10
+            this.righthand.anchored = -10
+            this.body.ymom = -this.speed*3
+            }
+        }
+    }
+    if (gamepadAPI[this.controller].buttonsStatus.includes('A') || keysPressed['k']) {
+        if (this.righthand.fired <= 0) {
+            if (this.righthand.anchored == 0) {
+                this.rightshoulder.xmom = 0
+                this.rightshoulder.ymom = 0
+                this.righthand.ymom = this.punchspeed * 12
+                this.righthand.xmom = -this.punchspeed * 2.1
+                this.righthand.fired = 13
+            }
+        }
+        if (this.lefthand.fired <= 0) {
+            if (this.lefthand.anchored == 0) {
+                this.leftshoulder.xmom = 0
+                this.leftshoulder.ymom = 0
+                this.lefthand.ymom = this.punchspeed * 12
+                this.lefthand.xmom = this.punchspeed * 2.1
+                this.lefthand.fired = 13
+            }
+        }
+    }
+            }
 
         }
 degripl() {
+    this.body.sxmom = 0
+this.body.symom = 0
 
     if (this.lefthand.anchored == 1) {
 
@@ -2532,6 +2673,8 @@ degripl() {
 
 }
 degripr() {
+    this.body.sxmom = 0
+this.body.symom = 0
 
     if (this.righthand.anchored == 1) {
 
@@ -2560,6 +2703,11 @@ collideStage() {
     this.enemycollide()
 }
 draw() {
+
+    if(this.lefthand.anchored != 1 && this.righthand.anchored != 1){
+        this.body.sxmom = 0
+        this.body.symom = 0
+        }
     // if (this.controller == 0) {
     gamepad_control_controller_proto(this.body, this.speed, this.controller)
 
@@ -2574,15 +2722,18 @@ draw() {
     if (this.grounded == 0) {
 
         if (this.lefthand.anchored == 1) {
-            this.body.ymom = this.leftshoulder.ymom * .99
-            this.body.xmom = this.leftshoulder.xmom * .99
+            this.body.ymom *= .1
+            this.body.symom = this.leftshoulder.ymom * .99
+            this.body.sxmom = this.leftshoulder.xmom * .99
         } else if (this.righthand.anchored == 1) {
-            this.body.ymom = this.rightshoulder.ymom * .99
-            this.body.xmom = this.rightshoulder.xmom * .99
+            this.body.ymom *= .1
+            this.body.symom = this.rightshoulder.ymom * .99
+            this.body.sxmom = this.rightshoulder.xmom * .99
         } else {
-            if (Math.abs(this.body.xmom) < 5) {
-                this.body.xmom *= .5
-            }
+            // if (Math.abs(this.body.sxmom) < 5) {
+            //     // this.body.sxmom *= 0
+            //     this.body.xmom *= .5
+            // }
         }
         this.body.ymom += this.gravity
     } else {
@@ -2615,6 +2766,9 @@ draw() {
 
     for (let t = 0; t < this.nodes.length; t++) {
         this.nodes[t].frictiveMove()
+    }
+    for (let t = 0; t < this.nodes.length; t++) {
+        this.nodes[t].smove()
     }
 
     this.lefthand.xmom += (this.lefthand.x - this.body.x) / 80
@@ -2674,10 +2828,10 @@ for (let t = 0; t < 2; t++) {
     }
     coreboy.body.color = `rgb(${t * 64}, ${255 - (t * 264)}, ${Math.random() * 255})`
     if (t == 0) {
-        coreboy.body.color = "orange"
+        coreboy.body.color = "#ffAA00"
     }
     if (t == 1) {
-        coreboy.body.color = "red"
+        coreboy.body.color = "#ff0000"
     }
     boys.push(coreboy)
 }
