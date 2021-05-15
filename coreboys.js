@@ -1588,6 +1588,32 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
         }
     }
+
+    function invertColor(hex) {
+        if (hex.indexOf('#') === 0) {
+            hex = hex.slice(1);
+        }
+        // convert 3-digit hex to 6-digits.
+        if (hex.length === 3) {
+            hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
+        }
+        if (hex.length !== 6) {
+            throw new Error('Invalid HEX color.');
+        }
+        // invert color components
+        var r = (255 - parseInt(hex.slice(0, 2), 16)).toString(16),
+            g = (255 - parseInt(hex.slice(2, 4), 16)).toString(16),
+            b = (255 - parseInt(hex.slice(4, 6), 16)).toString(16);
+        // pad each with zeros and return
+        return '#' + padZero(r) + padZero(g) + padZero(b);
+    }
+    function padZero(str, len) {
+        len = len || 2;
+        var zeros = new Array(len).join('0');
+        return (zeros + str).slice(-len);
+    }
+
+
     function getRandomLightColor() { // random color that will be visible on  black background
         var letters = '0123456789ABCDEF';
         var color = '#';
@@ -1849,52 +1875,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
         }
         enemycollide() {
 
-
-            for (let t = 0; t < boys.length; t++) {
-                if (this != boys[t]) {
-
-
-                    while (boys[t].body.doesPerimeterTouch(this.body)) {
-                        if (this.body.x > boys[t].body.x) {
-                            this.body.x += .5
-                            boys[t].body.x -= .5
-                            this.fixupshoulder()
-                            boys[t].fixupshoulder()
-                            this.body.ymom *= .99
-                        } else {
-                            this.body.x -= .5
-                            boys[t].body.x += .5
-                            this.fixupshoulder()
-                            boys[t].fixupshoulder()
-                            this.body.ymom *= .99
-                        }
-
-                    }
-
-
-                    // while (boys[t].rightshoulder.reversePointinside(this.leftshoulder) || boys[t].rightshoulder.reversePointinside(this.body)) {
-                    //     this.body.x += .5
-                    //     boys[t].body.x -= .5
-                    //     this.fixupshoulder()
-                    //     boys[t].fixupshoulder()
-                    //     this.righthand.x += .5
-                    //     this.lefthand.x += .5
-                    //     boys[t].lefthand.x -= .5
-                    //     boys[t].righthand.x -= .5
-                    // }
-                    // while (boys[t].leftshoulder.reversePointinside(this.rightshoulder) || boys[t].leftshoulder.reversePointinside(this.body)) {
-                    //     this.body.x -= .5
-                    //     boys[t].body.x += .5
-                    //     this.fixupshoulder()
-                    //     boys[t].fixupshoulder()
-                    //     this.righthand.x -= .5
-                    //     this.lefthand.x -= .5
-                    //     boys[t].lefthand.x += .5
-                    //     boys[t].righthand.x += .5
-                    // }
-                }
-            }
-
             for (let t = 0; t < boys.length; t++) {
                 if (this != boys[t]) {
 
@@ -1972,6 +1952,53 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
                 }
             }
+
+
+            for (let t = 0; t < boys.length; t++) {
+                if (this != boys[t]) {
+
+
+                    while (boys[t].body.doesPerimeterTouch(this.body)) {
+                        if (this.body.x > boys[t].body.x) {
+                            this.body.x += .5
+                            boys[t].body.x -= .5
+                            this.fixupshoulder()
+                            boys[t].fixupshoulder()
+                            this.body.ymom *= .99
+                        } else {
+                            this.body.x -= .5
+                            boys[t].body.x += .5
+                            this.fixupshoulder()
+                            boys[t].fixupshoulder()
+                            this.body.ymom *= .99
+                        }
+
+                    }
+
+
+                    // while (boys[t].rightshoulder.reversePointinside(this.leftshoulder) || boys[t].rightshoulder.reversePointinside(this.body)) {
+                    //     this.body.x += .5
+                    //     boys[t].body.x -= .5
+                    //     this.fixupshoulder()
+                    //     boys[t].fixupshoulder()
+                    //     this.righthand.x += .5
+                    //     this.lefthand.x += .5
+                    //     boys[t].lefthand.x -= .5
+                    //     boys[t].righthand.x -= .5
+                    // }
+                    // while (boys[t].leftshoulder.reversePointinside(this.rightshoulder) || boys[t].leftshoulder.reversePointinside(this.body)) {
+                    //     this.body.x -= .5
+                    //     boys[t].body.x += .5
+                    //     this.fixupshoulder()
+                    //     boys[t].fixupshoulder()
+                    //     this.righthand.x -= .5
+                    //     this.lefthand.x -= .5
+                    //     boys[t].lefthand.x += .5
+                    //     boys[t].righthand.x += .5
+                    // }
+                }
+            }
+
         }
         doubleJump() {
             this.jumpcount--
@@ -2434,48 +2461,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
             for (let t = 0; t < boys.length; t++) {
                 if (this != boys[t]) {
 
-
-                    while (boys[t].body.doesPerimeterTouch(this.body)) {
-                        if (this.body.x > boys[t].body.x) {
-                            this.body.x += .5
-                            boys[t].body.x -= .5
-                            this.fixupshoulder()
-                            boys[t].fixupshoulder()
-                            this.body.ymom *= .99
-                        } else {
-                            this.body.x -= .5
-                            boys[t].body.x += .5
-                            this.fixupshoulder()
-                            boys[t].fixupshoulder()
-                            this.body.ymom *= .99
-                        }
-
-                    }
-
-
-                    // while (boys[t].rightshoulder.reversePointinside(this.leftshoulder) || boys[t].rightshoulder.reversePointinside(this.body)) {
-                    //     this.body.x += .5
-                    //     boys[t].body.x -= .5
-                    //     this.fixupshoulder()
-                    //     boys[t].fixupshoulder()
-                    //     this.righthand.x += .5
-                    //     this.lefthand.x += .5
-                    //     boys[t].lefthand.x -= .5
-                    //     boys[t].righthand.x -= .5
-                    // }
-                    // while (boys[t].leftshoulder.reversePointinside(this.rightshoulder) || boys[t].leftshoulder.reversePointinside(this.body)) {
-                    //     this.body.x -= .5
-                    //     boys[t].body.x += .5
-                    //     this.fixupshoulder()
-                    //     boys[t].fixupshoulder()
-                    //     this.righthand.x -= .5
-                    //     this.lefthand.x -= .5
-                    //     boys[t].lefthand.x += .5
-                    //     boys[t].righthand.x += .5
-                    // }
-                }
-            }
-
             for (let t = 0; t < boys.length; t++) {
                 if (this != boys[t]) {
                     for (let k = 0; k < boys[t].shots.length; k++) {
@@ -2553,6 +2538,49 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
                 }
             }
+
+
+            while (boys[t].body.doesPerimeterTouch(this.body)) {
+                if (this.body.x > boys[t].body.x) {
+                    this.body.x += .5
+                    boys[t].body.x -= .5
+                    this.fixupshoulder()
+                    boys[t].fixupshoulder()
+                    this.body.ymom *= .99
+                } else {
+                    this.body.x -= .5
+                    boys[t].body.x += .5
+                    this.fixupshoulder()
+                    boys[t].fixupshoulder()
+                    this.body.ymom *= .99
+                }
+
+            }
+
+
+            // while (boys[t].rightshoulder.reversePointinside(this.leftshoulder) || boys[t].rightshoulder.reversePointinside(this.body)) {
+            //     this.body.x += .5
+            //     boys[t].body.x -= .5
+            //     this.fixupshoulder()
+            //     boys[t].fixupshoulder()
+            //     this.righthand.x += .5
+            //     this.lefthand.x += .5
+            //     boys[t].lefthand.x -= .5
+            //     boys[t].righthand.x -= .5
+            // }
+            // while (boys[t].leftshoulder.reversePointinside(this.rightshoulder) || boys[t].leftshoulder.reversePointinside(this.body)) {
+            //     this.body.x -= .5
+            //     boys[t].body.x += .5
+            //     this.fixupshoulder()
+            //     boys[t].fixupshoulder()
+            //     this.righthand.x -= .5
+            //     this.lefthand.x -= .5
+            //     boys[t].lefthand.x += .5
+            //     boys[t].righthand.x += .5
+            // }
+        }
+    }
+
         }
         doubleJump() {
             this.jumpcount--
@@ -2647,7 +2675,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             shot.draw()
                         }
                     }
-                }else if (this.lefthand.fired <= 0) {
+                }
+                 if (this.lefthand.fired <= 0) {
                     if (gamepadAPI[this.controller].buttonsStatus.includes('X') || keysPressed['j']) {
                         if (this.lefthand.anchored == 0) {
                             let shot = new Shot(this.lefthand.x, this.lefthand.y, this.charge * .66, "#00FFFF", -this.speed - 1, 0)
@@ -2908,7 +2937,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
             if (this.screwangle != 0) {
                 for (let t = 0; t < 25; t++) {
-                    let spot = new Circle(this.body.x + ((Math.random() - .5) * this.body.radius * 2), this.body.y - ((Math.random() - .5) * this.body.radius * 2), 2, "yellow")
+                    let spot = new Circle(this.body.x + ((Math.random() - .5) * this.body.radius * 2), this.body.y - ((Math.random() - .5) * this.body.radius * 2), 3, invertColor(this.body.color))
                     if(spot.doesPerimeterTouch(this.body)){
                         spot.draw()
                     }
