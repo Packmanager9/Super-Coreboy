@@ -1415,7 +1415,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
     function gamepad_control_controller_proto(object, speed = 1, controller) { // basic control for objects using the controler
         //         console.log(gamepadAPI[0].axesStatus[1]*gamepadAPI[0].axesStatus[0]) //debugging
 
-
         if (object.self.shield == 0) {
 
             if (keysPressed['w']) {
@@ -1436,6 +1435,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }
             }
             if (keysPressed['d']) {
+                object.self.face = 1
                 object.x += speed
                 if (object.self.righthand.anchored == 1) {
                     object.self.degripr()
@@ -1447,10 +1447,22 @@ window.addEventListener('DOMContentLoaded', (event) => {
             //     object.self.degrip()
             // }
             if (keysPressed['a']) {
+                object.self.face = -1
                 object.x -= speed
                 if (object.self.righthand.anchored == 1 || object.self.lefthand.anchored == 1) {
                     object.self.degripl()
                     object.self.jumping = 1
+                }
+            }
+
+
+            if (typeof (gamepadAPI[controller].axesStatus[1]) != 'undefined') {
+                if (gamepadAPI[controller].axesStatus[0] > .1) {
+                    object.self.face = 1
+                }
+
+                if (gamepadAPI[controller].axesStatus[1] < -.1) {
+                    object.self.face = -1
                 }
             }
 
@@ -1478,6 +1490,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 }
                             }
                             if (gamepadAPI[controller].axesStatus[0] > .5) {
+                                object.self.face = 1
                                 if (object.self.righthand.anchored == 1) {
                                     object.self.degripr()
                                     object.self.jumping = 1
@@ -1489,6 +1502,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 
                             if (gamepadAPI[controller].axesStatus[1] < -.5) {
+                                object.self.face = -1
                                 if (object.self.righthand.anchored == 1 || object.self.lefthand.anchored == 1) {
                                     object.self.degripr()
                                     object.self.degripl()
@@ -1714,9 +1728,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     if (circle.x + circle.radius >= this.edgeleft.x) {
                         if (this.shape.doesPerimeterTouch(circle)) {
                             if (circle == circle.self.body) {
-                                // circle.sxmom = 0
-                                // circle.symom = 0
-                                if (circle.y < this.center.y ) {
+                                if (circle.y < this.center.y) {
                                     circle.self.grounded = 1
                                 }
                             }
@@ -1732,14 +1744,22 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     circle.ymom = 0
                                 }
                             }
-                            if (circle.y > this.center.y ) {
-                                if (circle.ymom < 0) {
-                                    circle.ymom *= -1
-                                    circle.frictiveMove()
-                                }
-                                while (this.shape.doesPerimeterTouch(circle)) {
-                                    circle.y += .1
-
+                            if (circle.y > this.center.y) {
+                                if (circle == circle.self.body) {
+                                    if (circle.ymom < 0) {
+                                        circle.ymom *= -1
+                                        circle.frictiveMove()
+                                    }
+                                    while (this.shape.doesPerimeterTouch(circle)) {
+                                        circle.y += .1
+                                    }
+                                } else {
+                                    if (circle.self.body.y > circle.y) {
+                                        if (circle.ymom < 0) {
+                                            circle.ymom *= -1
+                                            circle.frictiveMove()
+                                        }
+                                    }
                                 }
                                 // circle.y -= .1
                             } else {
@@ -1749,19 +1769,19 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     if (this.shape.doesPerimeterTouch(circle)) {
                                         if (circle == circle.self.righthand) {
                                             if (circle.self.body.y > circle.y) {
-                                                if(circle.x > circle.self.body.x){
+                                                if (circle.x > circle.self.body.x) {
                                                     circle.x -= .15
                                                 }
                                             }
                                         }
 
-                                    if (circle == circle.self.lefthand) {
-                                        if (circle.self.body.y > circle.y) {
-                                            if(circle.x < circle.self.body.x){
-                                                circle.x += .15
+                                        if (circle == circle.self.lefthand) {
+                                            if (circle.self.body.y > circle.y) {
+                                                if (circle.x < circle.self.body.x) {
+                                                    circle.x += .15
+                                                }
                                             }
                                         }
-                                    }
                                     }
                                 }
                                 circle.y += .1
@@ -1807,6 +1827,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     class Boy {
         constructor(controller) {
+            this.face = 0
             this.shots = []
             this.wasfalse = []
             this.controller = controller
@@ -1849,6 +1870,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.shield = 0
             this.shieldpower = 100
             this.breaktimer = 0
+            this.bodyx = this.body.x
             for (let t = 0; t < this.nodes.length; t++) {
                 this.nodes[t].self = this // lmao
             }
@@ -1885,6 +1907,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             if (this.body.ymom < -20) {
                 this.body.ymom = -20
+            }
+            if (this.body.ymom > 20) {
+                this.body.ymom = 20
             }
 
 
@@ -2063,24 +2088,27 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             if (this.breaktimer <= 0 && this.shield == 0) {
 
-                if (this.righthand.fired <= 0) {
-                    if (gamepadAPI[this.controller].buttonsStatus.includes('B') || keysPressed['l']) {
-                        if (this.righthand.anchored == 0) {
-                            this.righthand.ymom = 0
-                            this.righthand.xmom = this.punchspeed * 14
-                            this.righthand.fired = 13
+                if (gamepadAPI[this.controller].buttonsStatus.includes('B') || keysPressed['l']) {
+                    if (this.face == 1) {
+                        if (this.righthand.fired <= 0) {
+                            if (this.righthand.anchored == 0) {
+                                this.righthand.ymom = 0
+                                this.righthand.xmom = this.punchspeed * 14
+                                this.righthand.fired = 13
+                            }
+                        }
+                    }
+                    if (this.face == -1) {
+                        if (this.lefthand.fired <= 0) {
+                            if (this.lefthand.anchored == 0) {
+                                this.lefthand.ymom = 0
+                                this.lefthand.xmom = -this.punchspeed * 14
+                                this.lefthand.fired = 13
+                            }
                         }
                     }
                 }
-                if (this.lefthand.fired <= 0) {
-                    if (gamepadAPI[this.controller].buttonsStatus.includes('X') || keysPressed['j']) {
-                        if (this.lefthand.anchored == 0) {
-                            this.lefthand.ymom = 0
-                            this.lefthand.xmom = -this.punchspeed * 14
-                            this.lefthand.fired = 13
-                        }
-                    }
-                }
+
 
                 if (gamepadAPI[this.controller].buttonsStatus.includes('Y') || keysPressed['i']) {
                     if (this.righthand.fired <= 0) {
@@ -2121,7 +2149,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }
 
 
-                if (gamepadAPI[this.controller].buttonsStatus.includes('LB') || keysPressed['u']) {
+                if (gamepadAPI[this.controller].buttonsStatus.includes('X') || keysPressed['j']) {
                     if (this.lefthand.fired <= 0) {
                         if (this.righthand.fired <= 0) {
                             let shot = new Shot(this.body.x, this.body.y, 20, "#FFFFFF", 0, (this.speed * 1.9))
@@ -2327,13 +2355,25 @@ window.addEventListener('DOMContentLoaded', (event) => {
             canvas_context.fillStyle = `rgb(${255 - (this.damage / 10)},${255 - this.damage},${255 - this.damage})`
             canvas_context.fillText(`${Math.round(this.damage)}%`, this.body.x - 20, this.body.y - 50)
 
+            let link = new Line(this.body.x, this.body.y, this.body.x + (((this.body.radius * .8) * this.face)), this.body.y, invertColor(this.body.color), this.body.radius * .2)
+    
+            canvas_context.lineWidth = this.strokeWidth
+            canvas_context.strokeStyle =  invertColor(this.body.color)
+            canvas_context.beginPath();
+                canvas_context.arc((link.x1+link.x2)*.5, link.y1-this.body.radius * .1, this.body.radius*.4, 0, (Math.PI * 1), true)
+                canvas_context.fillStyle = invertColor(this.body.color)
+                canvas_context.fill()
+                canvas_context.stroke();
+            link.draw()
 
+            // this.bodyx = this.body.x
         }
     }
 
 
     class Mass {
         constructor(controller) {
+            this.face = 0
             this.wasfalse = []
             for (let t = 0; t < 100; t++) {
                 this.wasfalse.push(1)
@@ -2426,6 +2466,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
                 if (this.body.ymom < -20) {
                     this.body.ymom = -20
+                }
+                if (this.body.ymom > 20) {
+                    this.body.ymom = 20
                 }
 
 
@@ -2675,53 +2718,54 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
                 if (this.righthand.fired <= 0) {
                     if (gamepadAPI[this.controller].buttonsStatus.includes('B') || keysPressed['l']) {
-                        if (this.righthand.anchored == 0) {
-                            let shot = new Shot(this.righthand.x, this.righthand.y, this.charge * .66, "#00FFFF", this.speed + 1, 0)
-                            if (this.charge > 90) {
-                                shot.color = "#88FFFF"
-                            }
-                            // if(this.wasfalse[1] == 0){
-                            if (this.charge == 100) {
-                                this.charge = 0
-                                this.righthand.xmom = 10
-                                this.righthand.ymom = 0
-                                this.shots.push(shot)
-                                if (this.grounded != 1) {
-                                    this.body.xmom -= 5
-                                }
-                            }
-                            if (this.righthand.anchored == 0) {
-                                this.righthand.xmom += 1
-                                this.righthand.ymom -= 1
-                                this.charge++
-                            }
-                            shot.draw()
-                        }
-                    }
-                }
-                if (this.lefthand.fired <= 0) {
-                    if (gamepadAPI[this.controller].buttonsStatus.includes('X') || keysPressed['j']) {
-                        if (this.lefthand.anchored == 0) {
-                            let shot = new Shot(this.lefthand.x, this.lefthand.y, this.charge * .66, "#00FFFF", -this.speed - 1, 0)
-                            if (this.charge > 90) {
-                                shot.color = "#88FFFF"
-                            }
-                            if (this.charge == 100) {
-                                this.charge = 0
-                                this.lefthand.xmom = -10
-                                this.lefthand.ymom = 0
-                                this.shots.push(shot)
-                                if (this.grounded != 1) {
-                                    this.body.xmom += 5
-                                }
-                            }
-                            if (this.lefthand.anchored == 0) {
-                                this.lefthand.xmom -= 1
-                                this.lefthand.ymom -= 1
-                                this.charge++
-                            }
-                            shot.draw()
 
+                        if (this.face == 1) {
+                            if (this.righthand.anchored == 0) {
+                                let shot = new Shot(this.righthand.x, this.righthand.y, this.charge * .66, "#00FFFF", this.speed + 1, 0)
+                                if (this.charge > 90) {
+                                    shot.color = "#88FFFF"
+                                }
+                                // if(this.wasfalse[1] == 0){
+                                if (this.charge == 100) {
+                                    this.charge = 0
+                                    this.righthand.xmom = 10
+                                    this.righthand.ymom = 0
+                                    this.shots.push(shot)
+                                    if (this.grounded != 1) {
+                                        this.body.xmom -= 5
+                                    }
+                                }
+                                if (this.righthand.anchored == 0) {
+                                    this.righthand.xmom += 1
+                                    this.righthand.ymom -= 1
+                                    this.charge++
+                                }
+                                shot.draw()
+                            }
+                        }
+                        if (this.face == -1) {
+                            if (this.lefthand.anchored == 0) {
+                                let shot = new Shot(this.lefthand.x, this.lefthand.y, this.charge * .66, "#00FFFF", -this.speed - 1, 0)
+                                if (this.charge > 90) {
+                                    shot.color = "#88FFFF"
+                                }
+                                if (this.charge == 100) {
+                                    this.charge = 0
+                                    this.lefthand.xmom = -10
+                                    this.lefthand.ymom = 0
+                                    this.shots.push(shot)
+                                    if (this.grounded != 1) {
+                                        this.body.xmom += 5
+                                    }
+                                }
+                                if (this.lefthand.anchored == 0) {
+                                    this.lefthand.xmom -= 1
+                                    this.lefthand.ymom -= 1
+                                    this.charge++
+                                }
+                                shot.draw()
+
+                            }
                         }
                     }
                 }
@@ -2764,7 +2808,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
                 }
             }
-            if (gamepadAPI[this.controller].buttonsStatus.includes('LB') || keysPressed['u']) {
+            if (gamepadAPI[this.controller].buttonsStatus.includes('X') || keysPressed['j']) {
                 if (this.righthand.fired <= 0) {
                     if (this.righthand.anchored == 0) {
                         this.rightshoulder.xmom = 0
@@ -2962,7 +3006,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 for (let t = 0; t < 25; t++) {
                     let spot = new Circle(this.body.x + ((Math.random() - .5) * this.body.radius * 2), this.body.y - ((Math.random() - .5) * this.body.radius * 2), 3, invertColor(this.body.color))
                     if (spot.doesPerimeterTouch(this.body)) {
-                        spot.draw()
+                        // spot.draw()
                     }
                 }
             }
@@ -2970,6 +3014,19 @@ window.addEventListener('DOMContentLoaded', (event) => {
             canvas_context.font = "30px arial"
             canvas_context.fillStyle = `rgb(${255 - (this.damage / 10)},${255 - this.damage},${255 - this.damage})`
             canvas_context.fillText(`${Math.round(this.damage)}%`, this.body.x - 20, this.body.y - 50)
+
+            let link = new Line(this.body.x, this.body.y, this.body.x + (((this.body.radius * .8) * this.face)), this.body.y+Math.sin(this.screwangle), invertColor(this.body.color), this.body.radius * .2)
+    
+            canvas_context.lineWidth = this.strokeWidth
+            canvas_context.strokeStyle =  invertColor(this.body.color)
+            canvas_context.beginPath();
+                canvas_context.arc(((link.x1+link.x2)*.5)+Math.cos(this.screwangle), link.y1-this.body.radius * .1, this.body.radius*.4, this.screwangle, (Math.PI * 1)+this.screwangle, false)
+                canvas_context.fillStyle = invertColor(this.body.color)
+                canvas_context.fill()
+                canvas_context.stroke();
+                if(this.screwangle == 0){
+                    link.draw()
+                }
 
         }
     }
