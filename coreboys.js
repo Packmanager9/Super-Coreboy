@@ -1680,7 +1680,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     }
 
     class Brick {
-        constructor(x, y, width = 900, height = 72) {
+        constructor(x, y, width = 900, height = 41) {
             this.center = new Point(x, y)
             this.height = height
             this.edgeleft = new Circle(x - (width * .5), y, 4, "cyan")
@@ -2342,6 +2342,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             }
             // if (this.controller == 0) {
+            let link = new Line(this.body.x, this.body.y, this.body.x + (((this.body.radius * .8) * this.face)), this.body.y, invertColor(this.body.color), this.body.radius * .2)
+    
+            canvas_context.lineWidth = this.strokeWidth
+            canvas_context.strokeStyle =  invertColor(this.body.color)
+            canvas_context.beginPath();
+                canvas_context.arc((link.x1+link.x2)*.5, link.y1-this.body.radius * .1, this.body.radius*.4, 0, (Math.PI * 1), true)
+                canvas_context.fillStyle = invertColor(this.body.color)
+                canvas_context.fill()
+                canvas_context.stroke();
+            link.draw()
             this.fightcontrol()
             // }
             if (this.breaktimer > 0) {
@@ -2355,16 +2365,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
             canvas_context.fillStyle = `rgb(${255 - (this.damage / 10)},${255 - this.damage},${255 - this.damage})`
             canvas_context.fillText(`${Math.round(this.damage)}%`, this.body.x - 20, this.body.y - 50)
 
-            let link = new Line(this.body.x, this.body.y, this.body.x + (((this.body.radius * .8) * this.face)), this.body.y, invertColor(this.body.color), this.body.radius * .2)
-    
-            canvas_context.lineWidth = this.strokeWidth
-            canvas_context.strokeStyle =  invertColor(this.body.color)
-            canvas_context.beginPath();
-                canvas_context.arc((link.x1+link.x2)*.5, link.y1-this.body.radius * .1, this.body.radius*.4, 0, (Math.PI * 1), true)
-                canvas_context.fillStyle = invertColor(this.body.color)
-                canvas_context.fill()
-                canvas_context.stroke();
-            link.draw()
 
             // this.bodyx = this.body.x
         }
@@ -2994,26 +2994,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             }
             // if (this.controller == 0) {
-            this.fightcontrol()
-            // }
-            if (this.breaktimer > 0) {
-                for (let t = 0; t < 5; t++) {
-                    let spot = new Circle(this.body.x + ((Math.random() - .5) * this.body.radius * 2), this.body.y - (this.body.radius + 4), 3, "yellow")
-                    spot.draw()
-                }
-            }
-            if (this.screwangle != 0) {
-                for (let t = 0; t < 25; t++) {
-                    let spot = new Circle(this.body.x + ((Math.random() - .5) * this.body.radius * 2), this.body.y - ((Math.random() - .5) * this.body.radius * 2), 3, invertColor(this.body.color))
-                    if (spot.doesPerimeterTouch(this.body)) {
-                        // spot.draw()
-                    }
-                }
-            }
-
-            canvas_context.font = "30px arial"
-            canvas_context.fillStyle = `rgb(${255 - (this.damage / 10)},${255 - this.damage},${255 - this.damage})`
-            canvas_context.fillText(`${Math.round(this.damage)}%`, this.body.x - 20, this.body.y - 50)
 
             let link = new Line(this.body.x, this.body.y, this.body.x + (((this.body.radius * .8) * this.face)), this.body.y+Math.sin(this.screwangle), invertColor(this.body.color), this.body.radius * .2)
     
@@ -3027,6 +3007,27 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 if(this.screwangle == 0){
                     link.draw()
                 }
+
+            this.fightcontrol()
+            // }
+            if (this.breaktimer > 0) {
+                for (let t = 0; t < 5; t++) {
+                    let spot = new Circle(this.body.x + ((Math.random() - .5) * this.body.radius * 2), this.body.y - (this.body.radius + 4), 3, "yellow")
+                    spot.draw()
+                }
+            }
+            if (this.screwangle != 0) {
+                for (let t = 0; t < 25; t++) {
+                    let spot = new Circle(this.body.x + ((Math.random() - .5) * this.body.radius * 2), this.body.y - ((Math.random() - .5) * this.body.radius * 2), 3, invertColor(this.body.color))
+                    if (spot.doesPerimeterTouch(this.body)) {
+                        spot.draw()
+                    }
+                }
+            }
+
+            canvas_context.font = "30px arial"
+            canvas_context.fillStyle = `rgb(${255 - (this.damage / 10)},${255 - this.damage},${255 - this.damage})`
+            canvas_context.fillText(`${Math.round(this.damage)}%`, this.body.x - 20, this.body.y - 50)
 
         }
     }
