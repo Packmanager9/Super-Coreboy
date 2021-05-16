@@ -1680,7 +1680,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     }
 
     class Brick {
-        constructor(x, y, width = 900, height = 41) {
+        constructor(x, y, width = 900, height = 60) {
             this.center = new Point(x, y)
             this.height = height
             this.edgeleft = new Circle(x - (width * .5), y, 4, "cyan")
@@ -1842,7 +1842,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.punchspeed = 5
             this.grounded = 0
             this.jumping = 1
-            this.body = new Circle(900 + boys.length * 550, 500, 35, "pink")
+
+            this.color =  getRandomColor()
+            if (controller == 0) {
+                this.color = "#ffAA00"
+            }
+            if (controller == 1) {
+                this.color = "#ff0000"
+            }
+            this.body = new Circle(900 + boys.length * 550, 500, 35, this.color)
             this.nodes.push(this.body)
             this.leftshoulder = new Circle(this.body.x - (this.body.radius + this.shoulderwidth), 350, 10, "magenta", 0, 0, .999)
             this.rightshoulder = new Circle(this.body.x + (this.body.radius + this.shoulderwidth), 350, 10, "red", 0, 0, .999)
@@ -1852,12 +1860,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.nodes.push(this.rightshoulder)
             this.nodes.push(this.righthand)
             this.nodes.push(this.lefthand)
-            this.leftcollar = new LineOP(this.leftshoulder, this.body, "pink", 8)
-            this.rightcollar = new LineOP(this.rightshoulder, this.body, "pink", 8)
+            this.leftcollar = new LineOP(this.leftshoulder, this.body, this.body.color, 8)
+            this.rightcollar = new LineOP(this.rightshoulder, this.body, this.body.color, 8)
             this.links.push(this.leftcollar)
             this.links.push(this.rightcollar)
-            this.leftarm = new LineOP(this.leftshoulder, this.lefthand, "pink", 8)
-            this.rightarm = new LineOP(this.rightshoulder, this.righthand, "pink", 8)
+            this.leftarm = new LineOP(this.leftshoulder, this.lefthand, invertColor(this.body.color), 8)
+            this.rightarm = new LineOP(this.rightshoulder, this.righthand, invertColor(this.body.color), 8)
             this.links.push(this.leftarm)
             this.links.push(this.rightarm)
             this.leftarm = new SpringOP(this.leftshoulder, this.lefthand, this.armlength, 8)
@@ -1957,6 +1965,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 this.lefthand.anchored = -40
                                 this.righthand.anchored = -40
                             }
+
+
+                            if (this.body.ymom < -20) {
+                                this.body.ymom = -20
+                            }
+                            if (this.body.ymom > 20) {
+                                this.body.ymom = 20
+                            }
                             this.body.move()
                             this.fixupshoulder()
 
@@ -1977,6 +1993,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 this.lefthand.anchored = -40
                                 this.righthand.anchored = -40
                             }
+                            if (this.body.ymom < -20) {
+                                this.body.ymom = -20
+                            }
+                            if (this.body.ymom > 20) {
+                                this.body.ymom = 20
+                            }
                             this.body.move()
                             this.fixupshoulder()
                         }
@@ -1993,6 +2015,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                                 this.lefthand.anchored = -40
                                 this.righthand.anchored = -40
+                            }
+                            if (this.body.ymom < -20) {
+                                this.body.ymom = -20
+                            }
+                            if (this.body.ymom > 20) {
+                                this.body.ymom = 20
                             }
                             this.body.move()
                             this.fixupshoulder()
@@ -2299,6 +2327,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.righthand.ymom += this.gravity
             this.lefthand.ymom += this.gravity
 
+
+
+            if (this.body.ymom < -20) {
+                this.body.ymom = -20
+            }
+            if (this.body.ymom > 20) {
+                this.body.ymom = 20
+            }
+
             for (let t = 0; t < this.nodes.length; t++) {
                 this.nodes[t].frictiveMove()
             }
@@ -2325,6 +2362,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
             // this.rightshoulder.ymom *= 0
 
 
+            this.leftarm = new LineOP(this.leftshoulder, this.lefthand, invertColor(this.body.color), 8)
+            this.rightarm = new LineOP(this.rightshoulder, this.righthand, invertColor(this.body.color), 8)
 
 
             for (let t = 0; t < this.links.length; t++) {
@@ -2343,14 +2382,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
             // if (this.controller == 0) {
             let link = new Line(this.body.x, this.body.y, this.body.x + (((this.body.radius * .8) * this.face)), this.body.y, invertColor(this.body.color), this.body.radius * .2)
-    
+
             canvas_context.lineWidth = this.strokeWidth
-            canvas_context.strokeStyle =  invertColor(this.body.color)
+            canvas_context.strokeStyle = invertColor(this.body.color)
             canvas_context.beginPath();
-                canvas_context.arc((link.x1+link.x2)*.5, link.y1-this.body.radius * .1, this.body.radius*.4, 0, (Math.PI * 1), true)
-                canvas_context.fillStyle = invertColor(this.body.color)
-                canvas_context.fill()
-                canvas_context.stroke();
+            canvas_context.arc((link.x1 + link.x2) * .5, link.y1 - this.body.radius * .1, this.body.radius * .4, 0, (Math.PI * 1), true)
+            canvas_context.fillStyle = invertColor(this.body.color)
+            canvas_context.fill()
+            canvas_context.stroke();
             link.draw()
             this.fightcontrol()
             // }
@@ -2396,7 +2435,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.punchspeed = 5
             this.grounded = 0
             this.jumping = 1
-            this.body = new Circle(900 + boys.length * 550, 500, 35, "pink")
+
+
+            this.color =  getRandomColor()
+            if (controller == 0) {
+                this.color = "#ffAA00"
+            }
+            if (controller == 1) {
+                this.color = "#ff0000"
+            }
+            this.body = new Circle(900 + boys.length * 550, 500, 35, this.color)
             this.nodes.push(this.body)
             this.leftshoulder = new Circle(this.body.x - (this.body.radius + this.shoulderwidth), 350, 10, "magenta", 0, 0, .999)
             this.rightshoulder = new Circle(this.body.x + (this.body.radius + this.shoulderwidth), 350, 10, "red", 0, 0, .999)
@@ -2406,12 +2454,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.nodes.push(this.rightshoulder)
             this.nodes.push(this.righthand)
             this.nodes.push(this.lefthand)
-            this.leftcollar = new LineOP(this.leftshoulder, this.body, "pink", 8)
-            this.rightcollar = new LineOP(this.rightshoulder, this.body, "pink", 8)
+            this.leftcollar = new LineOP(this.leftshoulder, this.body, this.body.color, 8)
+            this.rightcollar = new LineOP(this.rightshoulder, this.body, this.body.color, 8)
             this.links.push(this.leftcollar)
             this.links.push(this.rightcollar)
-            this.leftarm = new LineOP(this.leftshoulder, this.lefthand, "pink", 8)
-            this.rightarm = new LineOP(this.rightshoulder, this.righthand, "pink", 8)
+            this.leftarm = new LineOP(this.leftshoulder, this.lefthand, invertColor(this.body.color), 8)
+            this.rightarm = new LineOP(this.rightshoulder, this.righthand, invertColor(this.body.color), 8)
             this.links.push(this.leftarm)
             this.links.push(this.rightarm)
             this.leftarm = new SpringOP(this.leftshoulder, this.lefthand, this.armlength, 8)
@@ -2560,6 +2608,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         this.lefthand.anchored = -40
                                         this.righthand.anchored = -40
                                     }
+                                    if (this.body.ymom < -20) {
+                                        this.body.ymom = -20
+                                    }
+                                    if (this.body.ymom > 20) {
+                                        this.body.ymom = 20
+                                    }
                                     this.body.move()
                                     this.fixupshoulder()
 
@@ -2580,6 +2634,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         this.lefthand.anchored = -40
                                         this.righthand.anchored = -40
                                     }
+                                    if (this.body.ymom < -20) {
+                                        this.body.ymom = -20
+                                    }
+                                    if (this.body.ymom > 20) {
+                                        this.body.ymom = 20
+                                    }
                                     this.body.move()
                                     this.fixupshoulder()
                                 }
@@ -2597,6 +2657,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                                         this.lefthand.anchored = -40
                                         this.righthand.anchored = -40
+                                    }
+                                    if (this.body.ymom < -20) {
+                                        this.body.ymom = -20
+                                    }
+                                    if (this.body.ymom > 20) {
+                                        this.body.ymom = 20
                                     }
                                     this.body.move()
                                     this.fixupshoulder()
@@ -2951,6 +3017,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.righthand.ymom += this.gravity
             this.lefthand.ymom += this.gravity
 
+
+            if (this.body.ymom < -20) {
+                this.body.ymom = -20
+            }
+            if (this.body.ymom > 20) {
+                this.body.ymom = 20
+            }
+
+
             for (let t = 0; t < this.nodes.length; t++) {
                 this.nodes[t].frictiveMove()
             }
@@ -2977,6 +3052,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
             // this.rightshoulder.ymom *= 0
 
 
+            this.leftarm = new LineOP(this.leftshoulder, this.lefthand, invertColor(this.body.color), 8)
+            this.rightarm = new LineOP(this.rightshoulder, this.righthand, invertColor(this.body.color), 8)
 
 
             for (let t = 0; t < this.links.length; t++) {
@@ -2995,18 +3072,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
             // if (this.controller == 0) {
 
-            let link = new Line(this.body.x, this.body.y, this.body.x + (((this.body.radius * .8) * this.face)), this.body.y+Math.sin(this.screwangle), invertColor(this.body.color), this.body.radius * .2)
-    
+            let link = new Line(this.body.x, this.body.y, this.body.x + (((this.body.radius * .8) * this.face)), this.body.y + Math.sin(this.screwangle), invertColor(this.body.color), this.body.radius * .2)
+
             canvas_context.lineWidth = this.strokeWidth
-            canvas_context.strokeStyle =  invertColor(this.body.color)
+            canvas_context.strokeStyle = invertColor(this.body.color)
             canvas_context.beginPath();
-                canvas_context.arc(((link.x1+link.x2)*.5)+Math.cos(this.screwangle), link.y1-this.body.radius * .1, this.body.radius*.4, this.screwangle, (Math.PI * 1)+this.screwangle, false)
-                canvas_context.fillStyle = invertColor(this.body.color)
-                canvas_context.fill()
-                canvas_context.stroke();
-                if(this.screwangle == 0){
-                    link.draw()
-                }
+            canvas_context.arc(((link.x1 + link.x2) * .5) + Math.cos(this.screwangle), link.y1 - this.body.radius * .1, this.body.radius * .4, this.screwangle, (Math.PI * 1) + this.screwangle, false)
+            canvas_context.fillStyle = invertColor(this.body.color)
+            canvas_context.fill()
+            canvas_context.stroke();
+            if (this.screwangle == 0) {
+                link.draw()
+            }
 
             this.fightcontrol()
             // }
