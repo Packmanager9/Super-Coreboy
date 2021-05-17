@@ -1865,7 +1865,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (controller == 1) {
                 this.color = "#ff0000"
             }
-            this.body = new Circle(800 + boys.length * 350, 500, 35, this.color)
+            this.body = new Circle(800 + ((boys.length * 350)%800), 500, 35, this.color)
             this.nodes.push(this.body)
             this.leftshoulder = new Circle(this.body.x - (this.body.radius + this.shoulderwidth), 350, 10, "magenta", 0, 0, .999)
             this.rightshoulder = new Circle(this.body.x + (this.body.radius + this.shoulderwidth), 350, 10, "red", 0, 0, .999)
@@ -2614,7 +2614,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (controller == 1) {
                 this.color = "#ff0000"
             }
-            this.body = new Circle(800 + boys.length * 350, 500, 35, this.color)
+            this.body = new Circle(800 + ((boys.length * 350)%800), 500, 35, this.color)
             this.nodes.push(this.body)
             this.leftshoulder = new Circle(this.body.x - (this.body.radius + this.shoulderwidth), 350, 10, "magenta", 0, 0, .999)
             this.rightshoulder = new Circle(this.body.x + (this.body.radius + this.shoulderwidth), 350, 10, "red", 0, 0, .999)
@@ -2887,10 +2887,23 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
 
         }
+        AIarmControl(){
+            if (this.wmove == 1) {
+                this.jumping = 1
+                this.lefthand.ymom = -this.speed  * 2
+                this.righthand.ymom = -this.speed * 2
+                this.jumpcount = 100
+    
+            }
+        }
         doubleJump() {
             this.jumpcount--
             if (this.jumpcount <= -20) {
+                if(this == boys[0]){
                 gamepad_control_controller_proto_dj(this.body, this.speed, this.controller)
+                }else{
+                    this.AIarmControl()
+                }
             }
         }
         breaks() {
@@ -2908,7 +2921,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.wmove = 0
             this.amove = 0
             this.dmove = 0
-            if (Math.random() < .01) {
+            if (Math.random() < .015) {
                 this.fleeing = 1
             }
             if (Math.random() < .05) {
@@ -2949,25 +2962,24 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             for (let t = 0; t < boys.length; t++) {
                 if (this != boys[t]) {
-                    if (Math.abs(this.body.x - boys[t].body.x) > 1 && this.body.y > (boys[t].body.y + 5)) {
+                    if (Math.abs(this.body.x - boys[t].body.x) > 1 && this.body.y > (boys[t].body.y + 15)) {
                         this.wmove = 1
                     }
 
                     if (this.fleeing == 0) {
                         if (Math.abs(this.body.x - boys[t].body.x) > 140 && this.body.x > (boys[t].body.x + 5)) {
                             this.amove = 1
-                        }
-                    } else {
-                        this.dmove = 1
-                    }
-
-                    if (this.fleeing == 0) {
-                        if (Math.abs(this.body.x - boys[t].body.x) > 140 && this.body.x < (boys[t].body.x + 5)) {
+                        }else if (Math.abs(this.body.x - boys[t].body.x) > 140 && this.body.x < (boys[t].body.x + 5)) {
                             this.dmove = 1
                         }
                     } else {
-                        this.amove = 1
+                        if (Math.abs(this.body.x - boys[t].body.x) > 140 && this.body.x > (boys[t].body.x + 5)) {
+                            this.dmove = 1
+                        }else if (Math.abs(this.body.x - boys[t].body.x) > 140 && this.body.x < (boys[t].body.x + 5)) {
+                            this.amove = 1
+                        }
                     }
+
 
                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                         if (Math.random() < .1) {
@@ -3049,15 +3061,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }
 
 
-                if (typeof (gamepadAPI[controller].axesStatus[1]) != 'undefined') {
-                    if (gamepadAPI[controller].axesStatus[0] > .1) {
-                        this.face = 1
-                    }
+                // if (typeof (gamepadAPI[controller].axesStatus[1]) != 'undefined') {
+                    // if (gamepadAPI[controller].axesStatus[0] > .1) {
+                    //     this.face = 1
+                    // }
 
-                    if (gamepadAPI[controller].axesStatus[1] < -.1) {
-                        this.face = -1
-                    }
-                }
+                    // if (gamepadAPI[controller].axesStatus[1] < -.1) {
+                    //     this.face = -1
+                    // }
+                // }
 
             }
 
@@ -3110,7 +3122,19 @@ window.addEventListener('DOMContentLoaded', (event) => {
             for (let t = 0; t < boys.length; t++) {
                 if (this != boys[t]) {
 
-                    if (Math.abs(this.body.x - boys[t].body.x) < 150) {
+                    if (Math.abs(this.body.x - boys[t].body.x) < 50 && this.body.y < boys[t].body.y) {
+                        this.downspike = 1
+                    }else if(Math.abs(this.body.x - boys[t].body.x) < 150 && this.body.y <= boys[t].body.y && (boys[t].righthand.anchored == 1 || boys[t].lefthand.anchored == 1)) {
+                        this.hortsmash = 1
+                    }
+                    if (Math.abs(this.body.x - boys[t].body.x) < 70 && this.body.y > boys[t].body.y) {
+                        this.screwshot = 1
+                    }
+
+
+
+
+                    if (Math.abs(this.body.x - boys[t].body.x) < 240) {
                         if (this.body.x > boys[t].body.x) {
                             if (this.face == 1) {
                                 this.hortsmash = 1
@@ -3123,38 +3147,38 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         }
                     }
 
-                    if (Math.abs(this.body.x - boys[t].body.x) < 50 && this.body.y < boys[t].body.y) {
-                        this.downspike = 1
-                    }else if(Math.abs(this.body.x - boys[t].body.x) < 150 && this.body.y < boys[t].body.y && (boys[t].righthand.anchored == 1 || boys[t].lefthand.anchored == 1)) {
-                        this.hortsmash = 1
-                    }
-                    if (Math.abs(this.body.x - boys[t].body.x) < 70 && this.body.y > boys[t].body.y) {
-                        this.screwshot = 1
-                    }
-
-
-
-                    if (this.screwshot + this.hortsmash + this.downspike == 0) {
-                        if (Math.abs(this.body.y - boys[t].body.y) < 50 && this.body.x > boys[t].body.x) {
-                            if (this.face == -1) {
-                                this.leftshot = 1
-                            }
-                        }
-                        if (Math.abs(this.body.y - boys[t].body.y) < 50 && this.body.x < boys[t].body.x) {
-                            if (this.face == 1) {
-                                this.rightshot = 1
-                            }
-                        }
-                    }
-
-
                     if (boys[t].righthand.fired > 7) {
                         if (this.body.x > boys[t].body.x) {
                             if (Math.random() < .09) {
                                 this.storeshield = 1
                             }
                         }
+                    } 
+                    if (this.screwshot + this.hortsmash + this.downspike + this.storeshield == 0 ) {
+                        if (Math.abs(this.body.y - boys[t].body.y) < 35 && this.body.x > boys[t].body.x) {
+                            if (this.face == -1) {
+                                this.leftshot = 1
+                                if(Math.abs(this.body.x - boys[t].body.x) < 170){
+                                    if(Math.random()<.02){
+                                        this.hortsmash = 1
+                                        this.leftshot = 0
+                                    }
+                                }
+                            }
+                        }
+                        if (Math.abs(this.body.y - boys[t].body.y) < 35 && this.body.x < boys[t].body.x) {
+                            if (this.face == 1) {
+                                this.rightshot = 1
+                                if(Math.abs(this.body.x - boys[t].body.x) < 170){
+                                    if(Math.random()<.02){
+                                        this.hortsmash = 1
+                                        this.rightshot = 0
+                                    }
+                                }
+                            }
+                        }
                     }
+
 
                     if (Math.abs(this.body.y - boys[t].body.y) < 50 && Math.abs(this.body.x - boys[t].body.x) < 50) {
                         if (boys[t].lefthand.fired > 7) {
@@ -3199,6 +3223,65 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
 
             if (this.breaktimer <= 0 && this.shield == 0) {
+
+                if (this.screwshot == 1) {
+                    if(this.body.fired <= 0){
+                            this.screwmomentum = Math.PI / 5
+                            this.screwtimer = 30
+                            this.jumping = 1
+                            this.lefthand.fired = 30
+                            this.righthand.fired = 30
+                            // this.degripr()
+                            // this.degripl()
+                            this.body.fired = 40
+                            this.lefthand.anchored = -10
+                            this.righthand.anchored = -10
+                            this.body.ymom = -this.speed * 3
+                        }
+                }
+                if (this.downspike == 1) {
+                    if (this.righthand.fired <= 0) {
+                        if (this.righthand.anchored == 0) {
+                            this.rightshoulder.xmom = 0
+                            this.rightshoulder.ymom = 0
+                            this.righthand.ymom = this.punchspeed * 12
+                            this.righthand.xmom = -this.punchspeed * 2.1
+                            this.righthand.fired = 13
+                        }
+                    }
+                    if (this.lefthand.fired <= 0) {
+                        if (this.lefthand.anchored == 0) {
+                            this.leftshoulder.xmom = 0
+                            this.leftshoulder.ymom = 0
+                            this.lefthand.ymom = this.punchspeed * 12
+                            this.lefthand.xmom = this.punchspeed * 2.1
+                            this.lefthand.fired = 13
+                        }
+                    }
+                }
+                if (this.hortsmash == 1) {
+                    if (this.righthand.fired <= 0) {
+                        if (this.righthand.anchored == 0) {
+                            this.fleeing = 0
+                            this.rightshoulder.xmom = 0
+                            this.rightshoulder.ymom = 0
+                            this.righthand.ymom = this.punchspeed * 5
+                            this.righthand.xmom = this.punchspeed * 9.1
+                            this.righthand.fired = 16
+                        }
+                    }
+                    if (this.lefthand.fired <= 0) {
+                        if (this.lefthand.anchored == 0) {
+                            this.fleeing = 0
+                            this.leftshoulder.xmom = 0
+                            this.leftshoulder.ymom = 0
+                            this.lefthand.ymom = this.punchspeed * 5
+                            this.lefthand.xmom = -this.punchspeed * 9.1
+                            this.lefthand.fired = 16
+                        }
+                    }
+                }
+    
                 if (this.righthand.fired <= 0) {
                     if (this.righthand.anchored == 0) {
                         if (this.rightshot == 1) {
@@ -3254,62 +3337,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
                 }
 
-                if (this.screwshot == 1) {
-                    if(this.body.fired <= 0){
-                            this.screwmomentum = Math.PI / 5
-                            this.screwtimer = 30
-                            this.jumping = 1
-                            this.lefthand.fired = 30
-                            this.righthand.fired = 30
-                            // this.degripr()
-                            // this.degripl()
-                            this.body.fired = 40
-                            this.lefthand.anchored = -10
-                            this.righthand.anchored = -10
-                            this.body.ymom = -this.speed * 3
-                        }
-                }
-                if (this.downspike == 1) {
-                    if (this.righthand.fired <= 0) {
-                        if (this.righthand.anchored == 0) {
-                            this.rightshoulder.xmom = 0
-                            this.rightshoulder.ymom = 0
-                            this.righthand.ymom = this.punchspeed * 12
-                            this.righthand.xmom = -this.punchspeed * 2.1
-                            this.righthand.fired = 13
-                        }
-                    }
-                    if (this.lefthand.fired <= 0) {
-                        if (this.lefthand.anchored == 0) {
-                            this.leftshoulder.xmom = 0
-                            this.leftshoulder.ymom = 0
-                            this.lefthand.ymom = this.punchspeed * 12
-                            this.lefthand.xmom = this.punchspeed * 2.1
-                            this.lefthand.fired = 13
-                        }
-                    }
-                }
-                if (this.hortsmash == 1) {
-                    if (this.righthand.fired <= 0) {
-                        if (this.righthand.anchored == 0) {
-                            this.rightshoulder.xmom = 0
-                            this.rightshoulder.ymom = 0
-                            this.righthand.ymom = this.punchspeed * 5
-                            this.righthand.xmom = this.punchspeed * 9.1
-                            this.righthand.fired = 16
-                        }
-                    }
-                    if (this.lefthand.fired <= 0) {
-                        if (this.lefthand.anchored == 0) {
-                            this.leftshoulder.xmom = 0
-                            this.leftshoulder.ymom = 0
-                            this.lefthand.ymom = this.punchspeed * 5
-                            this.lefthand.xmom = -this.punchspeed * 9.1
-                            this.lefthand.fired = 16
-                        }
-                    }
-                }
-    
             }
 
         }
@@ -3755,10 +3782,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     function main() {
         canvas_context.clearRect(0, 0, canvas.width * 4, canvas.height * 4)  // refreshes the image
-        gamepadAPI[0].update()
-        gamepadAPI[1].update()
-        gamepadAPI[2].update()
-        gamepadAPI[3].update() //checks for button presses/stick movement on the connected controller)
+        // gamepadAPI[0].update()
+        // gamepadAPI[1].update()
+        // gamepadAPI[2].update()
+        // gamepadAPI[3].update() //checks for button presses/stick movement on the connected controller)
         // game code goes here
         stage.draw()
         for (let t = 0; t < boys.length; t++) {
