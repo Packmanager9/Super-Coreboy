@@ -3022,8 +3022,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         if(this.body.x-(this.body.radius*1.2) <= stage.bricks[t].edgeright.x){
                                             if(this.grounded == 1 || this.jumping == 1){
                                                 this.under = 2
-                                                let circ = new Circle(this.body.x, boys[k].body.y, 5, "purple")
-                                                circ.draw()
                                             }
                                         }
                                     }
@@ -3034,8 +3032,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         if(this.body.x+(this.body.radius*1.2) >= stage.bricks[t].edgeleft.x){
                                             if(this.grounded == 1 || this.jumping == 1){
                                             this.under = 3
-                                            let circ = new Circle(this.body.x, boys[k].body.y, 5, "yellow")
-                                            circ.draw()
                                             }
                                         }
                                     }
