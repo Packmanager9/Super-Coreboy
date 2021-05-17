@@ -3287,28 +3287,28 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         }
                     }
                 }
-            }
-            if (this.hortsmash == 1) {
-                if (this.righthand.fired <= 0) {
-                    if (this.righthand.anchored == 0) {
-                        this.rightshoulder.xmom = 0
-                        this.rightshoulder.ymom = 0
-                        this.righthand.ymom = this.punchspeed * 5
-                        this.righthand.xmom = this.punchspeed * 9.1
-                        this.righthand.fired = 16
+                if (this.hortsmash == 1) {
+                    if (this.righthand.fired <= 0) {
+                        if (this.righthand.anchored == 0) {
+                            this.rightshoulder.xmom = 0
+                            this.rightshoulder.ymom = 0
+                            this.righthand.ymom = this.punchspeed * 5
+                            this.righthand.xmom = this.punchspeed * 9.1
+                            this.righthand.fired = 16
+                        }
+                    }
+                    if (this.lefthand.fired <= 0) {
+                        if (this.lefthand.anchored == 0) {
+                            this.leftshoulder.xmom = 0
+                            this.leftshoulder.ymom = 0
+                            this.lefthand.ymom = this.punchspeed * 5
+                            this.lefthand.xmom = -this.punchspeed * 9.1
+                            this.lefthand.fired = 16
+                        }
                     }
                 }
-                if (this.lefthand.fired <= 0) {
-                    if (this.lefthand.anchored == 0) {
-                        this.leftshoulder.xmom = 0
-                        this.leftshoulder.ymom = 0
-                        this.lefthand.ymom = this.punchspeed * 5
-                        this.lefthand.xmom = -this.punchspeed * 9.1
-                        this.lefthand.fired = 16
-                    }
-                }
+    
             }
-
 
         }
         fightcontrol() {
@@ -3453,7 +3453,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         }
                     }
                 }
-            }
+
             if (gamepadAPI[this.controller].buttonsStatus.includes('X') || keysPressed['j']) {
                 if (this.righthand.fired <= 0) {
                     if (this.righthand.anchored == 0) {
@@ -3473,6 +3473,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         this.lefthand.fired = 16
                     }
                 }
+            }
             }
 
         }
