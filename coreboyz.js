@@ -2223,16 +2223,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
             for (let t = 0; t < boys.length; t++) {
                 if (this != boys[t]) {
-                    if (boys[t].righthand.fired > 6) {
+                    if (boys[t].righthand.fired > 7) {
                         if (this.body.x > boys[t].body.x) {
-                            if (Math.random() < .4) {
+                            if (Math.random() < .94) {
                                 this.storeshield = 1
                             }
                         }
                     }
-                    if (boys[t].lefthand.fired > 6) {
+                    if (boys[t].lefthand.fired > 7) {
                         if (this.body.x < boys[t].body.x) {
-                            if (Math.random() < .4) {
+                            if (Math.random() < .94) {
                                 this.storeshield = 1
                             }
                         }
@@ -2972,15 +2972,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
 
                     if (this.fleeing == 0) {
-                        if (Math.abs(this.body.x - boys[t].body.x) > 140 && this.body.x > (boys[t].body.x + 5)) {
+                        if (Math.abs(this.body.x - boys[t].body.x) > (this.body.radius*2.9) && this.body.x > (boys[t].body.x + 5)) {
                             this.amove = 1
-                        } else if (Math.abs(this.body.x - boys[t].body.x) > 140 && this.body.x < (boys[t].body.x + 5)) {
+                        } else if (Math.abs(this.body.x - boys[t].body.x) > (this.body.radius*2.9) && this.body.x < (boys[t].body.x + 5)) {
                             this.dmove = 1
                         }
                     } else {
-                        if (Math.abs(this.body.x - boys[t].body.x) > 140 && this.body.x > (boys[t].body.x + 5)) {
+                        if (Math.abs(this.body.x - boys[t].body.x) > (this.body.radius*2.9) && this.body.x > (boys[t].body.x + 5)) {
                             this.dmove = 1
-                        } else if (Math.abs(this.body.x - boys[t].body.x) > 140 && this.body.x < (boys[t].body.x + 5)) {
+                        } else if (Math.abs(this.body.x - boys[t].body.x) > (this.body.radius*2.9) && this.body.x < (boys[t].body.x + 5)) {
                             this.amove = 1
                         }
                     }
@@ -3018,7 +3018,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.under = 1
                             if (Math.abs(this.body.x - Math.max(stage.bricks[t].edgeright.x)) < Math.abs(this.body.x - Math.max(stage.bricks[t].edgeleft.x))) {
                                 if (boys[k].body.x < this.body.x) {
-                                    if(boys[k].body.y < Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y)){
+                                    if((boys[k].body.y-(boys[k].body.radius*1.5)) < Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y)){
                                         if(this.body.x-(this.body.radius*1.2) <= stage.bricks[t].edgeright.x){
                                             if(this.grounded == 1 || this.jumping == 1){
                                                 this.under = 2
@@ -3028,7 +3028,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 }
                             } else if (Math.abs(this.body.x - Math.max(stage.bricks[t].edgeright.x)) > Math.abs(this.body.x - Math.max(stage.bricks[t].edgeleft.x))) {
                                 if (boys[k].body.x > this.body.x) {
-                                    if(boys[k].body.y < Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y)){
+                                    if((boys[k].body.y-(boys[k].body.radius*1.5)) < Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y)){
                                         if(this.body.x+(this.body.radius*1.2) >= stage.bricks[t].edgeleft.x){
                                             if(this.grounded == 1 || this.jumping == 1){
                                             this.under = 3
@@ -3089,6 +3089,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             if (this.shield == 0) {
 
+                if(this.dmove == 0 && this.amove == 0){
+                    if(Math.random()<.5){
+                        this.dmove = 1
+                    }else{
+                        this.amove = 1
+                    }
+                }
                 if (this.wmove == 1) {
                     if (this.grounded == 1) {
                         this.jumping = 1
@@ -3261,7 +3268,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             this.safe = 0
             for (let t = 0; t < stage.bricks.length; t++) {
-                if (stage.bricks[t].edgeleft.x < this.body.x && stage.bricks[t].edgeright.x > this.body.x) {
+                if (stage.bricks[t].edgeleft.x < (this.body.x+this.body.radius) && stage.bricks[t].edgeright.x > (this.body.x-this.body.radius)) {
                     if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) > this.body.y) {
                         this.safe = 1
                         break
