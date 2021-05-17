@@ -3782,10 +3782,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     function main() {
         canvas_context.clearRect(0, 0, canvas.width * 4, canvas.height * 4)  // refreshes the image
-        // gamepadAPI[0].update()
-        // gamepadAPI[1].update()
-        // gamepadAPI[2].update()
-        // gamepadAPI[3].update() //checks for button presses/stick movement on the connected controller)
+        gamepadAPI[0].update()
+        gamepadAPI[1].update()
+        gamepadAPI[2].update()
+        gamepadAPI[3].update() //checks for button presses/stick movement on the connected controller)
         // game code goes here
         stage.draw()
         for (let t = 0; t < boys.length; t++) {
