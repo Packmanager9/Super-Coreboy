@@ -1671,7 +1671,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     class Stage {
 
         constructor() {
-            this.bricks = [new Brick(1200, 1400), new Brick(2000, 1100, 700), new Brick(800, 1400, 300), new Brick(1230, 900, 150)]
+            this.bricks = [new Brick(1200, 1400, 1110), new Brick(2000, 1100, 700), new Brick(1230, 900, 150)]
         }
         draw() {
             for (let t = 0; t < this.bricks.length; t++) {
@@ -2949,7 +2949,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             for (let t = 0; t < boys.length; t++) {
                 if (this != boys[t]) {
-                    if (Math.abs(this.body.x - boys[t].body.x) > 50 && this.body.y > (boys[t].body.y + 5)) {
+                    if (Math.abs(this.body.x - boys[t].body.x) > 1 && this.body.y > (boys[t].body.y + 5)) {
                         this.wmove = 1
                     }
 
@@ -3126,7 +3126,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     if (Math.abs(this.body.x - boys[t].body.x) < 50 && this.body.y < boys[t].body.y) {
                         this.downspike = 1
                     }
-                    if (Math.abs(this.body.x - boys[t].body.x) < 50 && this.body.y > boys[t].body.y) {
+                    if (Math.abs(this.body.x - boys[t].body.x) < 70 && this.body.y > boys[t].body.y) {
                         this.screwshot = 1
                     }
 
@@ -3146,18 +3146,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
 
 
-                    if (boys[t].righthand.fired > 6) {
+                    if (boys[t].righthand.fired > 7) {
                         if (this.body.x > boys[t].body.x) {
-                            if (Math.random() < .04) {
+                            if (Math.random() < .09) {
                                 this.storeshield = 1
                             }
                         }
                     }
 
                     if (Math.abs(this.body.y - boys[t].body.y) < 50 && Math.abs(this.body.x - boys[t].body.x) < 50) {
-                        if (boys[t].lefthand.fired > 6) {
+                        if (boys[t].lefthand.fired > 7) {
                             if (this.body.x < boys[t].body.x) {
-                                if (Math.random() < .04) {
+                                if (Math.random() < .09) {
                                     this.storeshield = 1
                                 }
                             }
