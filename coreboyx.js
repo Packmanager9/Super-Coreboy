@@ -3231,6 +3231,22 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 this.amomu = 0
                 this.dmomu = 0
             }
+
+            if (this.dmomu > 0) {
+                this.dmove = 1
+                this.amove = 0
+                this.amomu = 0
+                this.screwshot = 0
+                this.wmove = 0
+            }
+            if (this.amomu > 0) {
+                this.amove = 1
+                this.dmove = 0
+                this.dmomu = 0
+                this.screwshot = 0
+                this.wmove = 0
+            }
+
             if (this.safe == 0) {
                 this.screwshot = 1
                 if (this.body.x > 1280) {
@@ -3248,22 +3264,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
             } else {
 
             }
-
-            if (this.dmomu > 0) {
-                this.dmove = 1
-                this.amove = 0
-                this.amomu = 0
-                this.screwshot = 0
-                this.wmove = 0
-            }
-            if (this.amomu > 0) {
-                this.amove = 1
-                this.dmove = 0
-                this.dmomu = 0
-                this.screwshot = 0
-                this.wmove = 0
-            }
-
 
             if (this.shield == 0) {
 
