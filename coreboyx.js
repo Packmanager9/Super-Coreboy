@@ -1,6 +1,7 @@
 
 let boys = []
 let scores = []
+let baselaunch = .3
 window.addEventListener('DOMContentLoaded', (event) => {
     const gamepadAPI = [{
         controller: {},
@@ -730,7 +731,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             return false
         }
         draw() {
-            canvas_context.lineWidth = this.strokeWidth
+            canvas_context.lineWidth = 5
             canvas_context.strokeStyle = this.color
             canvas_context.beginPath();
             if (this.radius > 0) {
@@ -1096,7 +1097,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     this.body.ymom -= ((this.body.y - this.anchor.y) / (this.length)) * 5.66
                     this.body.ymom += this.body.self.gravity
                 }
-                if (this.anchor.fired < 8 && this.anchor.fired > 0) {
+                if (this.anchor.fired < 10 && this.anchor.fired > 0) {
                     this.anchor.xmom += ((this.body.x - this.anchor.x) / (this.length)) * 7.66
                     this.anchor.ymom += ((this.body.y - this.anchor.y) / (this.length)) * 7.66
                     if (this.anchor.fired < 6) {
@@ -1116,7 +1117,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     this.body.ymom -= ((this.body.y - this.anchor.y) / (this.length)) * 5.66
                     this.body.ymom += this.body.self.gravity
                 }
-                if (this.anchor.fired < 8 && this.anchor.fired > 0) {
+                if (this.anchor.fired < 10 && this.anchor.fired > 0) {
                     this.anchor.xmom += ((this.body.x - this.anchor.x) / (this.length)) * 5.66
                     this.anchor.ymom += ((this.body.y - this.anchor.y) / (this.length)) * 5.66
                     if (this.anchor.fired < 6) {
@@ -1747,26 +1748,47 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     circle.self.brick = this
                                 }
                             }
-                            if (circle.ymom > 10) {
+                            if (circle.ymom > 4) {
                                 if (circle.ymom > 1) {
-                                    if (circle.self.jumping == 0) {
+                                    // if (circle.self.jumping == 0) {
                                         if (circle == circle.self.righthand) {
-                                            if (circle.self.rightarm.hypotenuse() < this.height * 2) {
+                                            if (circle.self.rightarm.hypotenuse() < this.height*4.5) {
                                                 circle.ymom *= -.6
                                             }
                                         } else if (circle == circle.self.lefthand) {
-                                            if (circle.self.leftarm.hypotenuse() < this.height * 2) {
+                                            if (circle.self.leftarm.hypotenuse() < this.height*4.5) {
+                                                circle.ymom *= -.6
+                                            }
+                                        } else { 
+                                            if (circle.self.jumping == 0) {
+                                            circle.ymom *= -.6
+                                            }
+                                        }
+                                    // } else {
+
+                                    //     circle.ymom = 0
+                                    // }
+                                } else {
+                                    circle.ymom = 0
+                                }
+                            }else{
+                                if (circle.ymom > 0) {
+                                    // if (circle.self.jumping == 0) {
+                                        if (circle == circle.self.righthand) {
+                                            if (circle.self.rightarm.hypotenuse() < this.height*4.5) {
+                                                circle.ymom *= -.6
+                                            }
+                                        } else if (circle == circle.self.lefthand) {
+                                            if (circle.self.leftarm.hypotenuse() < this.height*4.5) {
                                                 circle.ymom *= -.6
                                             }
                                         } else {
                                             circle.ymom *= -.6
                                         }
-                                    } else {
-
-                                        circle.ymom = 0
-                                    }
-                                } else {
-                                    circle.ymom = 0
+                                        
+                                    // } else {
+                                    //     circle.ymom = 0
+                                    // }
                                 }
                             }
                             if (circle.y > this.center.y) {
@@ -1780,14 +1802,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             circle.y += .1
                                         } else {
                                             if (circle == circle.self.lefthand) {
-                                                if (circle.self.leftarm.hypotenuse() < this.height) {
+                                                if (circle.self.leftarm.hypotenuse() < this.height*2.5) {
                                                     circle.y += .1
                                                 } else {
                                                     break
                                                 }
                                             }
                                             if (circle == circle.self.righthand) {
-                                                if (circle.self.rightarm.hypotenuse() < this.height) {
+                                                if (circle.self.rightarm.hypotenuse() < this.height*2.5) {
                                                     circle.y += .1
                                                 } else {
                                                     break
@@ -1810,7 +1832,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         circle.y -= .1
                                     } else {
                                         if (circle == circle.self.lefthand) {
-                                            if (circle.self.leftarm.hypotenuse() < this.height) {
+                                            if (circle.self.leftarm.hypotenuse() < this.height*2.5) {
                                                 circle.y -= .1
 
                                                 if (this.shape.doesPerimeterTouch(circle)) {
@@ -1835,7 +1857,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             }
                                         }
                                         if (circle == circle.self.righthand) {
-                                            if (circle.self.rightarm.hypotenuse() < this.height) {
+                                            if (circle.self.rightarm.hypotenuse() < this.height*2.5) {
                                                 circle.y -= .1
                                                 if (this.shape.doesPerimeterTouch(circle)) {
                                                     if (circle == circle.self.righthand) {
@@ -1883,7 +1905,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         } else {
                             if (circle == circle.self.body) {
                                 if (circle.y + circle.radius >= this.edgeleft.y - 1) {
-                                    if (circle.y + circle.radius <= this.edgeleft.y + this.height) {
+                                    if (circle.y + circle.radius <= this.edgeleft.y + this.height*2.5) {
                                         if (circle.x > this.edgeleft.x) {
                                             // this.edgeleft.draw()
                                             if (circle.x < this.edgeright.x) {
@@ -1935,12 +1957,24 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     class Boy {
         constructor(controller) {
+            this.dmomu = 0
+            this.amomu = 0
+            this.amom = 0
+            this.dmom = 0
+            this.fleeing = 0
+            this.face = 0
+            this.screwshot = 0
+            this.rightshot = 0
+            this.hortsmash = 0
+            this.leftshot = 0
+            this.downspike = 0
+            this.brick = new Brick(1, 1, 1, 1)
             this.storeshield = 0
             this.face = 0
             this.shots = []
             this.wasfalse = []
             this.controller = controller
-            this.armlength = 35
+            this.armlength = 33
             this.shoulderwidth = 8
             this.damage = 0
             this.nodes = []
@@ -1959,7 +1993,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (controller == 1) {
                 this.color = "#ff0000"
             }
-            this.body = new Circle(800 + ((boys.length * 350) % 800), 500, 35, this.color)
+            this.body = new Circle(800 + ((boys.length * 350) % 800), 500, 40, this.color)
             this.nodes.push(this.body)
             this.leftshoulder = new Circle(this.body.x - (this.body.radius + this.shoulderwidth), 350, 10, "magenta", 0, 0, .999)
             this.rightshoulder = new Circle(this.body.x + (this.body.radius + this.shoulderwidth), 350, 10, "red", 0, 0, .999)
@@ -2038,6 +2072,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
             // this.rightshoulder.y = this.body.y
 
         }
+        AIarmControl() {
+            if (this.wmove == 1) {
+                this.jumping = 1
+                this.body.ymom = -this.speed * 2
+                this.lefthand.ymom = -this.speed * 2
+                this.righthand.ymom = -this.speed * 2
+                this.jumpcount = 100
+
+            }
+        }
         enemycollide() {
 
             for (let t = 0; t < boys.length; t++) {
@@ -2049,8 +2093,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 if (this.shield == 1) {
                                     this.shieldpower -= (Math.abs(boys[t].shots[k].xmom) + Math.abs(boys[t].shots[k].ymom)) / 3
                                 } else {
-                                    this.body.xmom = ((boys[t].shots[k].xmom * (this.damage / 200)) + (boys[t].shots[k].xmom * .3)) * 2
-                                    this.body.ymom = (((boys[t].shots[k].ymom * (this.damage / 200)) + (boys[t].shots[k].ymom * .3)) * 2) - (10 * (this.damage / 200))
+                                    this.body.xmom = ((boys[t].shots[k].xmom * (this.damage / 200)) + (boys[t].shots[k].xmom * baselaunch)) * 2
+                                    this.body.ymom = (((boys[t].shots[k].ymom * (this.damage / 200)) + (boys[t].shots[k].ymom * baselaunch)) * 2) - (10 * (this.damage / 200))
                                     this.damage += (Math.abs(boys[t].shots[k].xmom) + Math.abs(boys[t].shots[k].ymom)) / 2
                                     this.breaktimer = 0
                                 }
@@ -2061,16 +2105,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     boys[t].righthands = castBetween(boys[t].rightshoulder, boys[t].righthand, 20, boys[t].rightshoulder.radius)
                     boys[t].lefthands = castBetween(boys[t].leftshoulder, boys[t].lefthand, 20, boys[t].leftshoulder.radius)
                     if (boys[t].righthands.doesPerimeterTouch(this.body) || boys[t].righthand.doesPerimeterTouch(this.body)) {
-                        if (boys[t].righthand.fired > 10) {
+                        if (boys[t].righthand.fired > 13) {
                             if (this.shield == 1) {
                                 this.shieldpower -= (Math.abs(boys[t].righthand.xmom) + Math.abs(boys[t].righthand.ymom)) / 11
                             } else {
-                                this.body.xmom = (boys[t].righthand.xmom * (this.damage / 200)) + (boys[t].righthand.xmom * .3)
-                                this.body.ymom = (((boys[t].righthand.ymom * (this.damage / 200)) + (boys[t].righthand.ymom * .3)) * 1)
+                                this.body.xmom = (boys[t].righthand.xmom * (this.damage / 200)) + (boys[t].righthand.xmom * baselaunch)
+                                this.body.ymom = (((boys[t].righthand.ymom * (this.damage / 200)) + (boys[t].righthand.ymom * baselaunch)) * 1)
                                 this.damage += (Math.abs(boys[t].righthand.xmom) + Math.abs(boys[t].righthand.ymom)) / 7
                                 this.breaktimer = 0
                             }
-                            boys[t].righthand.fired = 10
+                            boys[t].righthand.fired = 13
 
                             if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                                 this.lefthand.anchored = -40
@@ -2089,17 +2133,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
                         }
                     } else if (boys[t].lefthands.doesPerimeterTouch(this.body) || boys[t].lefthand.doesPerimeterTouch(this.body)) {
-                        if (boys[t].lefthand.fired > 10) {
+                        if (boys[t].lefthand.fired > 13) {
 
                             if (this.shield == 1) {
                                 this.shieldpower -= (Math.abs(boys[t].lefthand.xmom) + Math.abs(boys[t].lefthand.ymom)) / 11
                             } else {
-                                this.body.xmom = (boys[t].lefthand.xmom * (this.damage / 200)) + (boys[t].lefthand.xmom * .3)
-                                this.body.ymom = (((boys[t].lefthand.ymom * (this.damage / 200)) + (boys[t].lefthand.ymom * .3)) * 1)
+                                this.body.xmom = (boys[t].lefthand.xmom * (this.damage / 200)) + (boys[t].lefthand.xmom * baselaunch)
+                                this.body.ymom = (((boys[t].lefthand.ymom * (this.damage / 200)) + (boys[t].lefthand.ymom * baselaunch)) * 1)
                                 this.damage += (Math.abs(boys[t].lefthand.xmom) + Math.abs(boys[t].lefthand.ymom)) / 7
                                 this.breaktimer = 0
                             }
-                            boys[t].lefthand.fired = 10
+                            boys[t].lefthand.fired = 13
                             if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                                 this.lefthand.anchored = -40
                                 this.righthand.anchored = -40
@@ -2115,15 +2159,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         }
                     }
                     if (boys[t].screwangle != 0 && boys[t].body.doesPerimeterTouch(this.body)) {
-                        if (boys[t].body.fired > 10) {
+                        if (boys[t].body.fired > 13) {
                             if (this.shield == 1) {
                                 this.shieldpower -= (Math.abs(boys[t].body.xmom) + Math.max(20, Math.abs(boys[t].body.ymom))) / 3
                             } else {
-                                this.body.xmom = (boys[t].body.xmom * (this.damage / 200)) + (boys[t].body.xmom * .3) * 2
-                                this.body.ymom = (((boys[t].body.ymom * (this.damage / 200)) + (boys[t].body.ymom * .3)) * 2)
+                                this.body.xmom = (boys[t].body.xmom * (this.damage / 200)) + (boys[t].body.xmom * baselaunch) * 2
+                                this.body.ymom = (((boys[t].body.ymom * (this.damage / 200)) + (boys[t].body.ymom * baselaunch)) * 2)
                                 this.damage += (Math.abs(boys[t].body.xmom) + Math.max(20, Math.abs(boys[t].body.ymom))) / 2
                             }
-                            boys[t].body.fired = 10
+                            boys[t].body.fired = 13
                             if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                                 this.lefthand.anchored = -40
                                 this.righthand.anchored = -40
@@ -2188,10 +2232,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
 
         }
+   
         doubleJump() {
             this.jumpcount--
             if (this.jumpcount <= -20) {
-                gamepad_control_controller_proto_dj(this.body, this.speed, this.controller)
+                if (this == boys[0]) {
+                    gamepad_control_controller_proto_dj(this.body, this.speed, this.controller)
+                } else {
+                    this.AIarmControl()
+                }
             }
         }
         breaks() {
@@ -2234,7 +2283,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             if (this.righthand.anchored == 0) {
                                 this.righthand.ymom = 0
                                 this.righthand.xmom = this.punchspeed * 14
-                                this.righthand.fired = 15
+                                this.righthand.fired = 19
                             }
                         }
                     }
@@ -2243,7 +2292,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             if (this.lefthand.anchored == 0) {
                                 this.lefthand.ymom = 0
                                 this.lefthand.xmom = -this.punchspeed * 14
-                                this.lefthand.fired = 15
+                                this.lefthand.fired = 19
                             }
                         }
                     }
@@ -2255,14 +2304,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (this.righthand.anchored == 0) {
                             this.righthand.ymom = -this.punchspeed * 14
                             this.righthand.xmom = this.punchspeed * 1
-                            this.righthand.fired = 15
+                            this.righthand.fired = 19
                         }
                     }
                     if (this.lefthand.fired <= 0) {
                         if (this.lefthand.anchored == 0) {
                             this.lefthand.ymom = -this.punchspeed * 14
                             this.lefthand.xmom = -this.punchspeed * 1
-                            this.lefthand.fired = 15
+                            this.lefthand.fired = 19
                         }
                     }
                 }
@@ -2274,7 +2323,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.rightshoulder.ymom = 0
                             this.righthand.ymom = this.punchspeed * 14
                             this.righthand.xmom = this.punchspeed * 9
-                            this.righthand.fired = 15
+                            this.righthand.fired = 19
                         }
                     }
                     if (this.lefthand.fired <= 0) {
@@ -2283,7 +2332,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.leftshoulder.ymom = 0
                             this.lefthand.ymom = this.punchspeed * 14
                             this.lefthand.xmom = -this.punchspeed * 9
-                            this.lefthand.fired = 15
+                            this.lefthand.fired = 19
                         }
                     }
                 }
@@ -2295,17 +2344,422 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             let shot = new Shot(this.body.x, this.body.y, 20, "#FFFFFF", 0, (this.speed * 1.9))
                             this.shots.push(shot)
                             this.body.ymom -= 8
-                            this.lefthand.fired = 18
-                            this.righthand.fired = 18
+                            this.lefthand.fired = 19
+                            this.righthand.fired = 19
                         }
                     }
                 }
             }
         }
-        AImove() {
 
+        AImove(object, speed, controller) {
+            if (object == this.body) {
+                this.amom--
+                this.dmom--
+                this.dmomu--
+                this.amomu--
+            }
+            this.wmove = 0
+            this.amove = 0
+            this.dmove = 0
+            if (Math.random() < .0015) {
+                this.fleeing = 1
+            }
+            if (this.charge > 90) {
+                this.fleeing = 0
+            }
+            if (Math.random() < .05) {
+                this.fleeing = 0
+            }
+
+            this.safe = 0
+            for (let t = 0; t < stage.bricks.length; t++) {
+                if (stage.bricks[t].edgeleft.x < this.body.x && stage.bricks[t].edgeright.x > this.body.x) {
+                    if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) > this.body.y) {
+                        this.safe = 1
+                        break
+                    }
+                }
+            }
+            if (this.safe == 0) {
+                if (Math.random() < .5) {
+                    if (this.dmove == 1) {
+                        this.amove = 1
+                        this.dmove = 0
+                    } else if (this.amove == 1) {
+                        this.amove = 0
+                        this.dmove = 1
+                    }
+                } else {
+                    if (this.amove == 1) {
+                        this.amove = 0
+                        this.dmove = 1
+                    } else if (this.dmove == 1) {
+                        this.amove = 1
+                        this.dmove = 0
+                    }
+                }
+                this.fleeing = 0
+            } else {
+
+            }
+
+            for (let t = 0; t < boys.length; t++) {
+                if (this != boys[t]) {
+                    if (Math.abs(this.body.x - boys[t].body.x) > 1 && this.body.y > (boys[t].body.y + 15)) {
+                        this.wmove = 1
+                    }
+
+                    if (this.fleeing == 0) {
+                        if (Math.abs(this.body.x - boys[t].body.x) > (this.body.radius * 4) && this.body.x > (boys[t].body.x + 5)) {
+                            this.amove = 1
+                        } else if (Math.abs(this.body.x - boys[t].body.x) > (this.body.radius * 4) && this.body.x < (boys[t].body.x + 5)) {
+                            this.dmove = 1
+                        }
+                    } else {
+                        if (Math.abs(this.body.x - boys[t].body.x) > (this.body.radius * 4) && this.body.x > (boys[t].body.x + 5)) {
+                            this.dmove = 1
+                        } else if (Math.abs(this.body.x - boys[t].body.x) > (this.body.radius * 4) && this.body.x < (boys[t].body.x + 5)) {
+                            this.amove = 1
+                        }
+                    }
+
+
+                    if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
+                        if (Math.random() < .2) {
+                            this.wmove = 1
+                        }
+                        if (Math.random() < .1) {
+                            this.dmove = 1
+                        }
+                        if (Math.random() < .1) {
+                            this.amove = 1
+                        }
+                    }
+                }
+            }
+
+            this.safe = 0
+            for (let t = 0; t < stage.bricks.length; t++) {
+                if (stage.bricks[t].edgeleft.x < (this.body.x + this.body.radius) && stage.bricks[t].edgeright.x > (this.body.x - this.body.radius)) {
+                    if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) > this.body.y) {
+                        this.safe = 1
+                        break
+                    }
+                }
+            }
+
+            this.under = 0
+            for (let k = 0; k < boys.length; k++) {
+                if (this != boys[k]) {
+                    for (let t = 0; t < stage.bricks.length; t++) {
+                        if (stage.bricks[t].edgeleft.x < (this.body.x + (this.body.radius * 1.2)) && stage.bricks[t].edgeright.x > (this.body.x - (this.body.radius * 1.2))) {
+                            if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) < this.body.y) {
+                                if (boys[k].brick == stage.bricks[t]) {
+                                    this.under = 1
+                                }
+                                if (Math.abs(this.body.x - Math.max(stage.bricks[t].edgeright.x)) < Math.abs(this.body.x - Math.max(stage.bricks[t].edgeleft.x))) {
+                                    if (boys[k].body.x < this.body.x) {
+                                        if ((boys[k].body.y - (boys[k].body.radius * 1.5)) < Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y)) {
+                                            if (this.body.x - (this.body.radius * 1.2) <= stage.bricks[t].edgeright.x) {
+                                                if (this.grounded == 1 || this.jumping == 1) {
+                                                    if (boys[k].brick == stage.bricks[t]) {
+                                                        this.under = 2
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                } else if (Math.abs(this.body.x - Math.max(stage.bricks[t].edgeright.x)) > Math.abs(this.body.x - Math.max(stage.bricks[t].edgeleft.x))) {
+                                    if (boys[k].body.x > this.body.x) {
+                                        if ((boys[k].body.y - (boys[k].body.radius * 1.5)) < Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y)) {
+                                            if (this.body.x + (this.body.radius * 1.2) >= stage.bricks[t].edgeleft.x) {
+                                                if (this.grounded == 1 || this.jumping == 1) {
+                                                    if (boys[k].brick == stage.bricks[t]) {
+                                                        this.under = 3
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                if (this.under !== 0) {
+                                    if (this.under == 2) {
+                                        // this.screwshot = 1
+                                        this.amove = 0
+                                        this.dmom = 100
+                                        this.amom = 0
+                                        this.dmove = 1
+                                        this.wmove = 1
+                                    }
+                                    if (this.under == 3) {
+                                        // this.screwshot = 1
+                                        this.amove = 1
+                                        this.amom = 100
+                                        this.dmom = 0
+                                        this.dmove = 0
+                                        this.wmove = 1
+                                    }
+                                }
+
+                                break
+                            }
+                        }
+                    }
+                }
+            }
+
+            for (let t = 0; t < boys.length; t++) {
+                if (this != boys[t]) {
+                    if (Math.max(boys[t].brick.edgeleft.y, boys[t].brick.edgeright.y) > Math.max(this.brick.edgeleft.y, this.brick.edgeright.y)) {
+                        if (this.safe == 1) {
+                            if (this.dmomu <= 0 && this.amomu <= 0) {
+                                if (this.righthand.anchored != 1 && this.lefthand.anchored != 1) {
+                                    if (boys[t].body.x < this.body.x) {
+                                        if ((this.brick.edgeright.x > this.body.x - this.body.radius)) {
+                                            this.amomu = (Math.abs(this.brick.edgeright.x - this.body.x)) / this.speed
+                                            this.amomu += 20
+                                        }
+                                    } else {
+                                        if ((this.brick.edgeleft.x < this.body.x + this.body.radius)) {
+                                            this.dmomu = (Math.abs(this.brick.edgeleft.x - this.body.x)) / this.speed
+                                            this.dmomu += 20
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+
+            if (this.dmom > 0) {
+                if (Math.random() < .1) {
+                    this.downspike = 1
+                }
+                this.dmove = 1
+                this.wmove = 1
+                this.amomu = 0
+                this.dmomu = 0
+            }
+            if (this.amom > 0) {
+                if (Math.random() < .1) {
+                    this.downspike = 1
+                }
+                this.amove = 1
+                this.wmove = 1
+                this.amomu = 0
+                this.dmomu = 0
+            }
+
+            if (this.dmomu > 0) {
+                this.dmove = 1
+                this.amove = 0
+                this.amomu = 0
+                this.screwshot = 0
+                this.wmove = 0
+            }
+            if (this.amomu > 0) {
+                this.amove = 1
+                this.dmove = 0
+                this.dmomu = 0
+                this.screwshot = 0
+                this.wmove = 0
+            }
+
+            if (this.safe == 0) {
+                this.downspike = 1
+                if (this.body.x > 1280) {
+                    this.amove = 1
+                    this.dmove = 0
+                    this.wmove = 1
+                    this.amomu = 0
+                    this.dmomu = 0
+                } else {
+                    this.amove = 0
+                    this.dmove = 1
+                    this.wmove = 1
+                }
+                this.fleeing = 0
+            } else {
+
+            }
+
+            if (this.shield == 0) {
+
+                if (this.dmove == 0 && this.amove == 0) {
+                    if (Math.random() < .5) {
+                        this.dmove = 1
+                    } else {
+                        this.amove = 1
+                    }
+                }
+                if (this.wmove == 1) {
+                    if (this.grounded == 1) {
+                        this.jumping = 1
+                        object.ymom -= speed
+                    } else {
+                        if (this.lefthand.anchored == 1) {
+                            this.degripl()
+                            this.jumping = 1
+                            object.ymom -= speed
+                        }
+                        if (this.righthand.anchored == 1) {
+                            this.degripr()
+                            this.jumping = 1
+                            object.ymom -= speed
+                        }
+                    }
+                }
+                if (this.dmove == 1) {
+                    this.face = 1
+                    object.x += speed
+                    if (this.righthand.anchored == 1) {
+                        this.degripr()
+                        this.jumping = 1
+                    }
+                }
+                if (this.amove == 1) {
+                    this.face = -1
+                    object.x -= speed
+                    if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
+                        this.degripl()
+                        this.jumping = 1
+                    }
+                }
+            }
         }
         AI() {
+
+            this.breaks()
+            for (let t = 0; t < this.shots.length; t++) {
+                this.shots[t].move()
+                this.shots[t].draw()
+            }
+            for (let t = 0; t < this.shots.length; t++) {
+                if (this.shots[t].marked == 1) {
+                    this.shots.splice(t, 1)
+                }
+            }
+
+            if (this.screwtimer > 0) {
+                this.screwtimer--
+                this.screwangle += this.screwmomentum
+            } else {
+                this.screwtimer = 0
+                this.screwangle = 0
+            }
+
+
+            // if (gamepadAPI[this.controller].buttonsStatus.includes('RB') || keysPressed['o']) {
+
+            if (Math.random() < .1) {
+                this.storeshield = 0
+            }
+            if (Math.random() < .5) {
+                this.screwshot = 0
+            }
+            if (Math.random() < .01 || this.charge == 0) {
+                this.rightshot = 0
+            }
+            if (Math.random() < .01 || this.charge == 0) {
+                this.leftshot = 0
+            }
+            if (Math.random() < .1) {
+                this.downspike = 0
+            }
+            if (Math.random() < .1) {
+                this.hortsmash = 0
+            }
+            for (let t = 0; t < boys.length; t++) {
+                if (this != boys[t]) {
+
+                    if (Math.abs(this.body.x - boys[t].body.x) < 50 && this.body.y < boys[t].body.y) {
+                        this.downspike = 1
+                    } else if (Math.abs(this.body.x - boys[t].body.x) < 150 && this.body.y <= boys[t].body.y && (boys[t].righthand.anchored == 1 || boys[t].lefthand.anchored == 1)) {
+                        this.downspike = 1
+                    }
+                    if (Math.abs(this.body.x - boys[t].body.x) < 70 && this.body.y > boys[t].body.y) {
+                        this.screwshot = 1
+                    }
+
+
+
+
+                    if (Math.abs(this.body.x - boys[t].body.x) < 240) {
+                        if (this.body.x > boys[t].body.x) {
+                            if (this.face == 1) {
+                                this.hortsmash = 1
+                            }
+                        }
+                        if (this.body.x < boys[t].body.x) {
+                            if (this.face == -1) {
+                                this.hortsmash = 1
+                            }
+                        }
+                    }
+
+                    if (boys[t].righthand.fired > 13) {
+                        if (this.body.x > boys[t].body.x) {
+                            if (Math.random() < .09) {
+                                this.storeshield = 1
+                            }
+                        }
+                    }
+                    if (this.screwshot + this.hortsmash + this.downspike + this.storeshield == 0) {
+                        if (Math.abs(this.body.y - boys[t].body.y) < 35 && this.body.x > boys[t].body.x) {
+                            if (this.face == -1) {
+                                if (Math.abs(this.body.x - boys[t].body.x) < 170) {
+                                    this.leftshot = 1
+                                    if (Math.random() < .009) {
+                                        this.hortsmash = 1
+                                        this.leftshot = 0
+                                    }
+                                }
+                            }
+                        }
+                        if (Math.abs(this.body.y - boys[t].body.y) < 35 && this.body.x < boys[t].body.x) {
+                            if (this.face == 1) {
+                                if (Math.abs(this.body.x - boys[t].body.x) < 170) {
+                                    this.rightshot = 1
+                                    if (Math.random() < .009) {
+                                        this.hortsmash = 1
+                                        this.rightshot = 0
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+
+                    if (Math.abs(this.body.y - boys[t].body.y) < 50 && Math.abs(this.body.x - boys[t].body.x) < 200) {
+                        if (boys[t].lefthand.fired > 13 || boys[t].righthand.fired > 13) {
+                            if (this.body.x < boys[t].body.x) {
+                                if (Math.random() < .4) {
+                                    this.storeshield = 1
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            this.safe = 0
+            for (let t = 0; t < stage.bricks.length; t++) {
+                if (stage.bricks[t].edgeleft.x < (this.body.x + (this.body.radius * 1.5)) && stage.bricks[t].edgeright.x > (this.body.x - (this.body.radius * 1.5))) {
+                    if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) > this.body.y) {
+                        this.safe = 1
+                        break
+                    }
+                }
+            }
+
+            if (this.safe == 0) {
+                this.downspike = 1
+            }
+
+
             this.breaks()
             this.righthand.fired--
             this.lefthand.fired--
@@ -2317,20 +2771,26 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
             for (let t = 0; t < boys.length; t++) {
                 if (this != boys[t]) {
-                    if (boys[t].righthand.fired > 10) {
+                    if (boys[t].righthand.fired > 13) {
                         if (this.body.x > boys[t].body.x) {
                             if (Math.random() < .94) {
                                 this.storeshield = 1
                             }
                         }
                     }
-                    if (boys[t].lefthand.fired > 10) {
+                    if (boys[t].lefthand.fired > 13) {
                         if (this.body.x < boys[t].body.x) {
                             if (Math.random() < .94) {
                                 this.storeshield = 1
                             }
                         }
                     }
+                }
+            }
+
+            if(this.shieldpower < 10){
+                if(Math.random()<.95){
+                    this.storeshield = 0
                 }
             }
             if (this.storeshield == 1) {
@@ -2353,13 +2813,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             if (this.breaktimer <= 0 && this.shield == 0) {
 
-                if (gamepadAPI[this.controller].buttonsStatus.includes('B') || keysPressed['l']) {
+                if (this.leftshot == 1 || this.rightshot == 1) {
                     if (this.face == 1) {
                         if (this.righthand.fired <= 0) {
                             if (this.righthand.anchored == 0) {
                                 this.righthand.ymom = 0
                                 this.righthand.xmom = this.punchspeed * 14
-                                this.righthand.fired = 15
+                                this.righthand.fired = 19
                             }
                         }
                     }
@@ -2368,38 +2828,38 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             if (this.lefthand.anchored == 0) {
                                 this.lefthand.ymom = 0
                                 this.lefthand.xmom = -this.punchspeed * 14
-                                this.lefthand.fired = 15
+                                this.lefthand.fired = 19
                             }
                         }
                     }
                 }
 
 
-                if (gamepadAPI[this.controller].buttonsStatus.includes('Y') || keysPressed['i']) {
+                if (this.screwshot == 1) {
                     if (this.righthand.fired <= 0) {
                         if (this.righthand.anchored == 0) {
                             this.righthand.ymom = -this.punchspeed * 14
                             this.righthand.xmom = this.punchspeed * 1
-                            this.righthand.fired = 15
+                            this.righthand.fired = 19
                         }
                     }
                     if (this.lefthand.fired <= 0) {
                         if (this.lefthand.anchored == 0) {
                             this.lefthand.ymom = -this.punchspeed * 14
                             this.lefthand.xmom = -this.punchspeed * 1
-                            this.lefthand.fired = 15
+                            this.lefthand.fired = 19
                         }
                     }
                 }
 
-                if (gamepadAPI[this.controller].buttonsStatus.includes('A') || keysPressed['k']) {
+                if (this.hortsmash == 1) {
                     if (this.righthand.fired <= 0) {
                         if (this.righthand.anchored == 0) {
                             this.rightshoulder.xmom = 0
                             this.rightshoulder.ymom = 0
                             this.righthand.ymom = this.punchspeed * 14
                             this.righthand.xmom = this.punchspeed * 9
-                            this.righthand.fired = 15
+                            this.righthand.fired = 19
                         }
                     }
                     if (this.lefthand.fired <= 0) {
@@ -2408,20 +2868,20 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.leftshoulder.ymom = 0
                             this.lefthand.ymom = this.punchspeed * 14
                             this.lefthand.xmom = -this.punchspeed * 9
-                            this.lefthand.fired = 15
+                            this.lefthand.fired = 19
                         }
                     }
                 }
 
 
-                if (gamepadAPI[this.controller].buttonsStatus.includes('X') || keysPressed['j']) {
+                if (this.downspike == 1) {
                     if (this.lefthand.fired <= 0) {
                         if (this.righthand.fired <= 0) {
                             let shot = new Shot(this.body.x, this.body.y, 20, "#FFFFFF", 0, (this.speed * 1.9))
                             this.shots.push(shot)
                             this.body.ymom -= 8
-                            this.lefthand.fired = 18
-                            this.righthand.fired = 18
+                            this.lefthand.fired = 19
+                            this.righthand.fired = 19
                         }
                     }
                 }
@@ -2532,7 +2992,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 this.body.xmom *= .2
             }
             if (this.jumping == 1) {
-                this.body.xmom *= .2
+                this.body.xmom *= .95
             }
 
             if (this.grounded == 0) {
@@ -2620,6 +3080,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             for (let t = 0; t < this.links.length; t++) {
                 this.collideStage()
+                this.links[t].color = invertColor(this.body.color)
                 this.links[t].draw()
             }
             for (let t = 0; t < this.nodes.length; t++) {
@@ -2627,6 +3088,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 this.nodes[t].draw()
             }
             for (let t = 0; t < this.springs.length; t++) {
+                this.springs[t].beam.color = invertColor(this.body.color)
                 this.springs[t].balance()
             }
             for (let t = 0; t < this.hitboxes.length; t++) {
@@ -2635,13 +3097,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
             // if (this.controller == 0) {
             let link = new Line(this.body.x, this.body.y, this.body.x + (((this.body.radius * .8) * this.face)), this.body.y, invertColor(this.body.color), this.body.radius * .2)
 
-            canvas_context.lineWidth = this.strokeWidth
+            canvas_context.lineWidth = 0
             canvas_context.strokeStyle = invertColor(this.body.color)
             canvas_context.beginPath();
-            canvas_context.arc((link.x1 + link.x2) * .5, link.y1 - this.body.radius * .1, this.body.radius * .4, 0, (Math.PI * 1), true)
+            canvas_context.arc((link.x1 + link.x2) * .5, link.y1 - this.body.radius * .09, this.body.radius * .4, 0, (Math.PI * 1), true)
             canvas_context.fillStyle = invertColor(this.body.color)
             canvas_context.fill()
-            canvas_context.stroke();
+            // canvas_context.stroke();
             link.draw()
             if (this == boys[0]) {
 
@@ -2866,8 +3328,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         if (this.shield == 1) {
                                             this.shieldpower -= (Math.abs(boys[t].shots[k].xmom) + Math.abs(boys[t].shots[k].ymom)) / 3
                                         } else {
-                                            this.body.xmom = ((boys[t].shots[k].xmom * (this.damage / 200)) + (boys[t].shots[k].xmom * .3)) * 2
-                                            this.body.ymom = (((boys[t].shots[k].ymom * (this.damage / 200)) + (boys[t].shots[k].ymom * .3)) * 2) - (10 * (this.damage / 200))
+                                            this.body.xmom = ((boys[t].shots[k].xmom * (this.damage / 200)) + (boys[t].shots[k].xmom * baselaunch)) * 2
+                                            this.body.ymom = (((boys[t].shots[k].ymom * (this.damage / 200)) + (boys[t].shots[k].ymom * baselaunch)) * 2) - (10 * (this.damage / 200))
                                             this.damage += (Math.abs(boys[t].shots[k].xmom) + Math.abs(boys[t].shots[k].ymom)) / 2
                                             this.breaktimer = 0
                                         }
@@ -2878,16 +3340,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             boys[t].lefthands = castBetween(boys[t].leftshoulder, boys[t].lefthand, 20, boys[t].leftshoulder.radius)
                             boys[t].righthands = castBetween(boys[t].rightshoulder, boys[t].righthand, 20, boys[t].rightshoulder.radius)
                             if (boys[t].righthands.doesPerimeterTouch(this.body) || boys[t].righthand.doesPerimeterTouch(this.body)) {
-                                if (boys[t].righthand.fired > 10) {
+                                if (boys[t].righthand.fired > 13) {
                                     if (this.shield == 1) {
                                         this.shieldpower -= (Math.abs(boys[t].righthand.xmom) + Math.abs(boys[t].righthand.ymom)) / 11
                                     } else {
-                                        this.body.xmom = (boys[t].righthand.xmom * (this.damage / 200)) + (boys[t].righthand.xmom * .3)
-                                        this.body.ymom = (((boys[t].righthand.ymom * (this.damage / 200)) + (boys[t].righthand.ymom * .3)) * 1)
+                                        this.body.xmom = (boys[t].righthand.xmom * (this.damage / 200)) + (boys[t].righthand.xmom * baselaunch)
+                                        this.body.ymom = (((boys[t].righthand.ymom * (this.damage / 200)) + (boys[t].righthand.ymom * baselaunch)) * 1)
                                         this.damage += (Math.abs(boys[t].righthand.xmom) + Math.abs(boys[t].righthand.ymom)) / 7
                                         this.breaktimer = 0
                                     }
-                                    boys[t].righthand.fired = 10
+                                    boys[t].righthand.fired = 13
 
                                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                                         this.lefthand.anchored = -40
@@ -2904,17 +3366,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
                                 }
                             } else if (boys[t].lefthands.doesPerimeterTouch(this.body) || boys[t].lefthand.doesPerimeterTouch(this.body)) {
-                                if (boys[t].lefthand.fired > 10) {
+                                if (boys[t].lefthand.fired > 13) {
 
                                     if (this.shield == 1) {
                                         this.shieldpower -= (Math.abs(boys[t].lefthand.xmom) + Math.abs(boys[t].lefthand.ymom)) / 11
                                     } else {
-                                        this.body.xmom = (boys[t].lefthand.xmom * (this.damage / 200)) + (boys[t].lefthand.xmom * .3)
-                                        this.body.ymom = (((boys[t].lefthand.ymom * (this.damage / 200)) + (boys[t].lefthand.ymom * .3)) * 1)
+                                        this.body.xmom = (boys[t].lefthand.xmom * (this.damage / 200)) + (boys[t].lefthand.xmom * baselaunch)
+                                        this.body.ymom = (((boys[t].lefthand.ymom * (this.damage / 200)) + (boys[t].lefthand.ymom * baselaunch)) * 1)
                                         this.damage += (Math.abs(boys[t].lefthand.xmom) + Math.abs(boys[t].lefthand.ymom)) / 11
                                         this.breaktimer = 0
                                     }
-                                    boys[t].lefthand.fired = 10
+                                    boys[t].lefthand.fired = 13
                                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                                         this.lefthand.anchored = -40
                                         this.righthand.anchored = -40
@@ -2930,16 +3392,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 }
                             }
                             if (boys[t].screwangle != 0 && boys[t].body.doesPerimeterTouch(this.body)) {
-                                if (boys[t].body.fired > 10) {
+                                if (boys[t].body.fired > 13) {
                                     if (this.shield == 1) {
                                         this.shieldpower -= (Math.abs(boys[t].body.xmom) + Math.max(20, Math.abs(boys[t].body.ymom))) / 3
                                     } else {
-                                        this.body.xmom = (boys[t].body.xmom * (this.damage / 200)) + (boys[t].body.xmom * .3) * 2
-                                        this.body.ymom = (((boys[t].body.ymom * (this.damage / 200)) + (boys[t].body.ymom * .3)) * 2)
+                                        this.body.xmom = (boys[t].body.xmom * (this.damage / 200)) + (boys[t].body.xmom * baselaunch) * 2
+                                        this.body.ymom = (((boys[t].body.ymom * (this.damage / 200)) + (boys[t].body.ymom * baselaunch)) * 2)
                                         this.damage += (Math.abs(boys[t].body.xmom) + Math.max(20, Math.abs(boys[t].body.ymom))) / 2
                                         this.breaktimer = 0
                                     }
-                                    boys[t].body.fired = 10
+                                    boys[t].body.fired = 13
                                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                                         this.lefthand.anchored = -40
                                         this.righthand.anchored = -40
@@ -3032,7 +3494,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         }
 
         AImove(object, speed, controller) {
-            if(object == this.body){
+            if (object == this.body) {
                 this.amom--
                 this.dmom--
                 this.dmomu--
@@ -3044,7 +3506,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (Math.random() < .0015) {
                 this.fleeing = 1
             }
-            if(this.charge > 90){
+            if (this.charge > 90) {
                 this.fleeing = 0
             }
             if (Math.random() < .05) {
@@ -3105,7 +3567,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 
                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                        if (Math.random() < .1) {
+                        if (Math.random() < .2) {
                             this.wmove = 1
                         }
                         if (Math.random() < .1) {
@@ -3214,8 +3676,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 
             if (this.dmom > 0) {
-                if(Math.random()<.003){
-                this.screwshot = 1
+                if (Math.random() < .003) {
+                    this.screwshot = 1
                 }
                 this.dmove = 1
                 this.wmove = 1
@@ -3223,8 +3685,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 this.dmomu = 0
             }
             if (this.amom > 0) {
-                if(Math.random()<.003){
-                this.screwshot = 1
+                if (Math.random() < .003) {
+                    this.screwshot = 1
                 }
                 this.amove = 1
                 this.wmove = 1
@@ -3331,6 +3793,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
         }
         AI() {
+            this.breaks()
             for (let t = 0; t < this.shots.length; t++) {
                 this.shots[t].move()
                 this.shots[t].draw()
@@ -3403,7 +3866,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         }
                     }
 
-                    if (boys[t].righthand.fired > 10) {
+                    if (boys[t].righthand.fired > 13) {
                         if (this.body.x > boys[t].body.x) {
                             if (Math.random() < .09) {
                                 this.storeshield = 1
@@ -3437,7 +3900,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 
                     if (Math.abs(this.body.y - boys[t].body.y) < 50 && Math.abs(this.body.x - boys[t].body.x) < 200) {
-                        if (boys[t].lefthand.fired > 10 || boys[t].righthand.fired > 10) {
+                        if (boys[t].lefthand.fired > 13 || boys[t].righthand.fired > 13) {
                             if (this.body.x < boys[t].body.x) {
                                 if (Math.random() < .4) {
                                     this.storeshield = 1
@@ -3460,6 +3923,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             if (this.safe == 0) {
                 this.screwshot = 1
+            }
+
+            if(this.shieldpower < 10){
+                if(Math.random()<.95){
+                    this.storeshield = 0
+                }
             }
             if (this.storeshield == 1) {
                 if (this.breaktimer < 0) {
@@ -3502,7 +3971,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.rightshoulder.ymom = 0
                             this.righthand.ymom = this.punchspeed * 12
                             this.righthand.xmom = -this.punchspeed * 2.1
-                            this.righthand.fired = 15
+                            this.righthand.fired = 19
                         }
                     }
                     if (this.lefthand.fired <= 0) {
@@ -3511,7 +3980,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.leftshoulder.ymom = 0
                             this.lefthand.ymom = this.punchspeed * 12
                             this.lefthand.xmom = this.punchspeed * 2.1
-                            this.lefthand.fired = 15
+                            this.lefthand.fired = 19
                         }
                     }
                 }
@@ -3522,8 +3991,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.rightshoulder.xmom = 0
                             this.rightshoulder.ymom = 0
                             this.righthand.ymom = this.punchspeed * 5
-                            this.righthand.xmom = this.punchspeed * 9.1
-                            this.righthand.fired = 16
+                            this.righthand.xmom = this.punchspeed * 11.1
+                            this.righthand.fired = 19
                         }
                     }
                     if (this.lefthand.fired <= 0) {
@@ -3532,8 +4001,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.leftshoulder.xmom = 0
                             this.leftshoulder.ymom = 0
                             this.lefthand.ymom = this.punchspeed * 5
-                            this.lefthand.xmom = -this.punchspeed * 9.1
-                            this.lefthand.fired = 16
+                            this.lefthand.xmom = -this.punchspeed * 11.1
+                            this.lefthand.fired = 19
                         }
                     }
                 }
@@ -3543,7 +4012,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (this.rightshot == 1) {
                             if (this.face == 1) {
                                 let shot = new Shot(this.righthand.x, this.righthand.y, this.charge * .66, "#00FFFF", this.speed * 2, 0)
-                                if (this.charge > 90) {
+                                if (this.charge > 80) {
                                     shot.color = "#88FFFF"
                                 }
                                 // if(this.wasfalse[1] == 0){
@@ -3559,7 +4028,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 if (this.righthand.anchored == 0) {
                                     this.righthand.xmom += 1
                                     this.righthand.ymom -= 1
-                                    this.charge += 1.5
+                                    this.charge += 3.5
                                 }
                                 shot.draw()
                             }
@@ -3568,7 +4037,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             if (this.face == -1) {
                                 if (this.lefthand.anchored == 0) {
                                     let shot = new Shot(this.lefthand.x, this.lefthand.y, this.charge * .66, "#00FFFF", -this.speed * 2, 0)
-                                    if (this.charge > 90) {
+                                    if (this.charge > 80) {
                                         shot.color = "#88FFFF"
                                     }
                                     if (this.charge >= 100) {
@@ -3583,7 +4052,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     if (this.lefthand.anchored == 0) {
                                         this.lefthand.xmom -= 1
                                         this.lefthand.ymom -= 1
-                                        this.charge += 1.5
+                                        this.charge += 3.5
                                     }
                                     shot.draw()
 
@@ -3655,7 +4124,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (this.face == 1) {
                             if (this.righthand.anchored == 0) {
                                 let shot = new Shot(this.righthand.x, this.righthand.y, this.charge * .66, "#00FFFF", this.speed * 2, 0)
-                                if (this.charge > 90) {
+                                if (this.charge > 80) {
                                     shot.color = "#88FFFF"
                                 }
                                 // if(this.wasfalse[1] == 0){
@@ -3671,7 +4140,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 if (this.righthand.anchored == 0) {
                                     this.righthand.xmom += 1
                                     this.righthand.ymom -= 1
-                                    this.charge += 1.5
+                                    this.charge += 3.5
                                 }
                                 shot.draw()
                             }
@@ -3679,7 +4148,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (this.face == -1) {
                             if (this.lefthand.anchored == 0) {
                                 let shot = new Shot(this.lefthand.x, this.lefthand.y, this.charge * .66, "#00FFFF", -this.speed * 2, 0)
-                                if (this.charge > 90) {
+                                if (this.charge > 80) {
                                     shot.color = "#88FFFF"
                                 }
                                 if (this.charge >= 100) {
@@ -3694,7 +4163,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 if (this.lefthand.anchored == 0) {
                                     this.lefthand.xmom -= 1
                                     this.lefthand.ymom -= 1
-                                    this.charge += 1.5
+                                    this.charge += 3.5
                                 }
                                 shot.draw()
 
@@ -3725,7 +4194,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.rightshoulder.ymom = 0
                             this.righthand.ymom = this.punchspeed * 12
                             this.righthand.xmom = -this.punchspeed * 2.1
-                            this.righthand.fired = 15
+                            this.righthand.fired = 19
                         }
                     }
                     if (this.lefthand.fired <= 0) {
@@ -3734,7 +4203,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.leftshoulder.ymom = 0
                             this.lefthand.ymom = this.punchspeed * 12
                             this.lefthand.xmom = this.punchspeed * 2.1
-                            this.lefthand.fired = 15
+                            this.lefthand.fired = 19
                         }
                     }
                 }
@@ -3745,8 +4214,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.rightshoulder.xmom = 0
                             this.rightshoulder.ymom = 0
                             this.righthand.ymom = this.punchspeed * 5
-                            this.righthand.xmom = this.punchspeed * 9.1
-                            this.righthand.fired = 16
+                            this.righthand.xmom = this.punchspeed * 11.1
+                            this.righthand.fired = 19
                         }
                     }
                     if (this.lefthand.fired <= 0) {
@@ -3754,8 +4223,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.leftshoulder.xmom = 0
                             this.leftshoulder.ymom = 0
                             this.lefthand.ymom = this.punchspeed * 5
-                            this.lefthand.xmom = -this.punchspeed * 9.1
-                            this.lefthand.fired = 16
+                            this.lefthand.xmom = -this.punchspeed * 11.1
+                            this.lefthand.fired = 19
                         }
                     }
                 }
@@ -3861,7 +4330,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (this.lefthand.anchored == 1 || this.righthand.anchored == 1) {
                 this.body.xmom *= .2
             }
-
+            if (this.jumping == 1) {
+                this.body.xmom *= .95
+            }
 
             if (this.grounded == 0) {
 
@@ -3949,8 +4420,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.rightarm = new LineOP(this.rightshoulder, this.righthand, invertColor(this.body.color), 8)
 
 
+
             for (let t = 0; t < this.links.length; t++) {
                 this.collideStage()
+                this.links[t].color = invertColor(this.body.color)
                 this.links[t].draw()
             }
             for (let t = 0; t < this.nodes.length; t++) {
@@ -3958,6 +4431,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 this.nodes[t].draw()
             }
             for (let t = 0; t < this.springs.length; t++) {
+                this.springs[t].beam.color = invertColor(this.body.color)
                 this.springs[t].balance()
             }
             for (let t = 0; t < this.hitboxes.length; t++) {
@@ -4023,35 +4497,45 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     for (let t = 0; t < 2; t++) {
         let coreboy
-        if (Math.random() < .5) {
-            coreboy = new Mass(t)
+
+        if (t == 0) {
+            if (Math.random() < .5) {
+                coreboy = new Boy(t)
+            } else {
+                coreboy = new Mass(t)
+            }
+
         } else {
-            coreboy = new Mass(t)
+            if (Math.random() < .5) {
+                coreboy = new Boy(t)
+            } else {
+                coreboy = new Mass(t)
+            }
         }
         coreboy.body.color = getRandomColor()//`rgb(${t * 64}, ${255 - (t * 264)}, ${Math.random() * 255})`
         if (t == 0) {
             coreboy.body.color = "#FF0000"
         }
         if (t == 1) {
-            coreboy.body.color =  "#00FF00"
+            coreboy.body.color = "#00FF00"
         }
         if (t == 2) {
-            coreboy.body.color =  "#0000FF"
+            coreboy.body.color = "#0000FF"
         }
         if (t == 3) {
-            coreboy.body.color =  "#FFFF00"
+            coreboy.body.color = "#FFFF00"
         }
         if (t == 4) {
-            coreboy.body.color =  "#888888"
+            coreboy.body.color = "#f23AFB"
         }
         if (t == 5) {
-            coreboy.body.color =  "#00FFFF"
+            coreboy.body.color = "#00FFFF"
         }
         if (t == 6) {
-            coreboy.body.color =  "#FF00FF"
+            coreboy.body.color = "#FF00FF"
         }
         if (t == 7) {
-            coreboy.body.color =  "#FFFFFF"
+            coreboy.body.color = "#FFFFFF"
         }
         boys.push(coreboy)
         boom.push(new Circle(0, 0, 1, "transparent"))
@@ -4063,109 +4547,64 @@ window.addEventListener('DOMContentLoaded', (event) => {
     //, new Circle(0, 0, 1, "transparent"), new Circle(0, 0, 1, "transparent")]
     let counter = 0
 
-        // if (keysPressed['v']) {
-        //     if (keysPressed['q']) {
-        //         if (Math.random() < .01) {
+    // if (keysPressed['v']) {
+    //     if (keysPressed['q']) {
+    //         if (Math.random() < .01) {
 
-        //             canvas_context.clearRect(0, 0, canvas.width * 4, canvas.height * 4)  // refreshes the image
-        //             gamepadAPI[0].update()
-        //             gamepadAPI[1].update()
-        //             gamepadAPI[2].update()
-        //             gamepadAPI[3].update() //checks for button presses/stick movement on the connected controller)
-        //             // game code goes here
-        //             stage.draw()
-        //             for (let t = 0; t < boys.length; t++) {
-        //                 boys[t].draw()
-        //             }
-        //             for (let t = 0; t < boom.length; t++) {
-        //                 if (boys[t].body.y > 1440 || boys[t].body.x < 0 || boys[t].body.x > 2560) {
-        //                     scores[t]++
-        //                     if (boys[t].go !== 1) {
-        //                         boys[t].go = 1
-        //                         boom[t] = new Explosion(boys[t].body.x)
-        //                         // if (Math.random() < .5) {
-        //                         //     boys[t] = new Mass(t)
-        //                         //     boys[t].body.color = getRandomColor()
-        //                         // } else {
-        //                         boys[t] = new Mass(t)
-        //                         boys[t].body.color = getRandomColor()
-        //                         if (t == 0) {
-        //                             boys[t].body.color = "#ffAA00"
-        //                         }
-        //                         if (t == 1) {
-        //                             boys[t].body.color = "#ff0000"
-        //                         }
-        //                         // }
-        //                     }
-        //                 }
-        //                 boom[t].draw()
-        //             }
-        //             canvas_context.font = "50px arial"
-        //             canvas_context.fillStyle = "white"
-        //             canvas_context.fillText(`Score: Human ${scores[1]}, Robot ${scores[0]}`, 1000, 100)
+    //             canvas_context.clearRect(0, 0, canvas.width * 4, canvas.height * 4)  // refreshes the image
+    //             gamepadAPI[0].update()
+    //             gamepadAPI[1].update()
+    //             gamepadAPI[2].update()
+    //             gamepadAPI[3].update() //checks for button presses/stick movement on the connected controller)
+    //             // game code goes here
+    //             stage.draw()
+    //             for (let t = 0; t < boys.length; t++) {
+    //                 boys[t].draw()
+    //             }
+    //             for (let t = 0; t < boom.length; t++) {
+    //                 if (boys[t].body.y > 1440 || boys[t].body.x < 0 || boys[t].body.x > 2560) {
+    //                     scores[t]++
+    //                     if (boys[t].go !== 1) {
+    //                         boys[t].go = 1
+    //                         boom[t] = new Explosion(boys[t].body.x)
+    //                         // if (Math.random() < .5) {
+    //                         //     boys[t] = new Mass(t)
+    //                         //     boys[t].body.color = getRandomColor()
+    //                         // } else {
+    //                         boys[t] = new Mass(t)
+    //                         boys[t].body.color = getRandomColor()
+    //                         if (t == 0) {
+    //                             boys[t].body.color = "#ffAA00"
+    //                         }
+    //                         if (t == 1) {
+    //                             boys[t].body.color = "#ff0000"
+    //                         }
+    //                         // }
+    //                     }
+    //                 }
+    //                 boom[t].draw()
+    //             }
+    //             canvas_context.font = "50px arial"
+    //             canvas_context.fillStyle = "white"
+    //             canvas_context.fillText(`Score: Human ${scores[1]}, Robot ${scores[0]}`, 1000, 100)
 
-        //         }
-        //     }
+    //         }
+    //     }
 
-        // } else {
+    // } else {
 
-            canvas_context.clearRect(0, 0, canvas.width * 4, canvas.height * 4)  // refreshes the image
-            gamepadAPI[0].update()
-            gamepadAPI[1].update()
-            gamepadAPI[2].update()
-            gamepadAPI[3].update() //checks for button presses/stick movement on the connected controller)
-            // game code goes here
-            stage.draw()
-            for (let t = 0; t < boys.length; t++) {
-                boys[t].draw()
-            }
-            for (let t = 0; t < boom.length; t++) {
-                if (boys[t].body.y > 1440 || boys[t].body.x < 0 || boys[t].body.x > 2560) {
-                    scores[t]++
-                    if (boys[t].go !== 1) {
-                        boys[t].go = 1
-                        boom[t] = new Explosion(boys[t].body.x)
-                        // if (Math.random() < .5) {
-                        //     boys[t] = new Mass(t)
-                        //     boys[t].body.color = getRandomColor()
-                        // } else {
-                        boys[t] = new Mass(t)
-                        boys[t].body.color = getRandomColor()
-                        if (t == 0) {
-                            boys[t].body.color = "#FF0000"
-                        }
-                        if (t == 1) {
-                            boys[t].body.color =  "#00FF00"
-                        }
-                        if (t == 2) {
-                            boys[t].body.color =  "#0000FF"
-                        }
-                        if (t == 3) {
-                            boys[t].body.color =  "#FFFF00"
-                        }
-                        if (t == 4) {
-                            boys[t].body.color =  "#888888"
-                        }
-                        if (t == 5) {
-                            boys[t].body.color =  "#00FFFF"
-                        }
-                        if (t == 6) {
-                            boys[t].body.color =  "#FF00FF"
-                        }
-                        if (t == 7) {
-                            boys[t].body.color =  "#FFFFFF"
-                        }
-                        // }
-                    }
-                }
-                boom[t].draw()
-            }
-            canvas_context.font = "50px arial"
-            canvas_context.fillStyle = "white"
-            // canvas_context.fillText(`Score: Human ${scores[1]}, Robot ${scores[0]}`, 1000, 100)
-        // }
+    canvas_context.clearRect(0, 0, canvas.width * 4, canvas.height * 4)  // refreshes the image
+
+    stage.draw()
+    for (let t = 0; t < boys.length; t++) {
+        boys[t].draw()
+    }
+    canvas_context.font = "50px arial"
+    canvas_context.fillStyle = "white"
+    // canvas_context.fillText(`Score: Human ${scores[1]}, Robot ${scores[0]}`, 1000, 100)
+    // }
     function main() {
-        if(counter == 1){
+        if (counter == 1) {
 
             canvas_context.clearRect(0, 0, canvas.width * 4, canvas.height * 4)  // refreshes the image
             gamepadAPI[0].update()
@@ -4187,31 +4626,45 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         //     boys[t] = new Mass(t)
                         //     boys[t].body.color = getRandomColor()
                         // } else {
-                        boys[t] = new Mass(t)
+
+                        if (t == 0) {
+                            if (Math.random() < .5) {
+                                boys[t] = new Boy(t)
+                            } else {
+                                boys[t] = new Mass(t)
+                            }
+
+                        } else {
+                            if (Math.random() < .5) {
+                                boys[t] = new Boy(t)
+                            } else {
+                                boys[t] = new Mass(t)
+                            }
+                        }
                         boys[t].body.color = getRandomColor()
                         if (t == 0) {
                             boys[t].body.color = "#FF0000"
                         }
                         if (t == 1) {
-                            boys[t].body.color =  "#00FF00"
+                            boys[t].body.color = "#00FF00"
                         }
                         if (t == 2) {
-                            boys[t].body.color =  "#0000FF"
+                            boys[t].body.color = "#0000FF"
                         }
                         if (t == 3) {
-                            boys[t].body.color =  "#FFFF00"
+                            boys[t].body.color = "#FFFF00"
                         }
                         if (t == 4) {
-                            boys[t].body.color =  "#888888"
+                            boys[t].body.color = "#f23AFB"
                         }
                         if (t == 5) {
-                            boys[t].body.color =  "#00FFFF"
+                            boys[t].body.color = "#00FFFF"
                         }
                         if (t == 6) {
-                            boys[t].body.color =  "#FF00FF"
+                            boys[t].body.color = "#FF00FF"
                         }
                         if (t == 7) {
-                            boys[t].body.color =  "#FFFFFF"
+                            boys[t].body.color = "#FFFFFF"
                         }
                         // }
                     }
@@ -4220,21 +4673,21 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
             canvas_context.font = "50px arial"
             canvas_context.fillStyle = "white"
-            canvas_context.fillText(`Score: Human ${scores[1]}, Robot ${scores[0]}`, 1000, 100)
+            canvas_context.fillText(`Score: Red ${scores[1]}, Green ${scores[0]}`, 1000, 100)
             // canvas_context.fillText(`Falls: `, 200, 100)
             // canvas_context.fillText(`Red ${scores[0]}`, 200, 150)
             // canvas_context.fillText(`Green ${scores[1]}`, 200, 200)
             // canvas_context.fillText(`Blue ${scores[2]} `, 200, 250)
             // canvas_context.fillText(`Yellow ${scores[3]} `, 200, 300)
-        // }
-    }else{
+            // }
+        } else {
 
-        canvas_context.font = "60px arial"
-        canvas_context.fillStyle = "white"
-        canvas_context.fillText(`Press Space to Start`, 1000, 300)
-        if(keysPressed[' ']){
-            counter = 1
+            canvas_context.font = "60px arial"
+            canvas_context.fillStyle = "white"
+            canvas_context.fillText(`Press Space to Start`, 1000, 300)
+            if (keysPressed[' ']) {
+                counter = 1
+            }
         }
-    }
     }
 })
