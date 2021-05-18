@@ -2213,7 +2213,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     if (this.grounded == 1) {
                         this.shieldpower -= .63
                         this.shield = 1
-                        let shild = new Circle(this.body.x, this.body.y, (Math.max((new LineOP(this.body, this.lefthand)).hypotenuse(), (new LineOP(this.body, this.righthand)).hypotenuse())) + this.lefthand.radius, this.body.color + Math.min(Math.round(this.shieldpower + 10), 99))
+                        let shild = new Circle(this.body.x, this.body.y, (Math.max((new LineOP(this.body, this.lefthand)).hypotenuse(), (new LineOP(this.body, this.righthand)).hypotenuse())) + this.lefthand.radius, this.body.color + Math.min(Math.round(this.shieldpower + 11), 99))
                         shild.draw()
                     }
                 }
@@ -2338,7 +2338,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     if (this.grounded == 1) {
                         this.shieldpower -= .63
                         this.shield = 1
-                        let shild = new Circle(this.body.x, this.body.y, (Math.max((new LineOP(this.body, this.lefthand)).hypotenuse(), (new LineOP(this.body, this.righthand)).hypotenuse())) + this.lefthand.radius, this.body.color + Math.min(Math.round(this.shieldpower + 10), 99))
+                        let shild = new Circle(this.body.x, this.body.y, (Math.max((new LineOP(this.body, this.lefthand)).hypotenuse(), (new LineOP(this.body, this.righthand)).hypotenuse())) + this.lefthand.radius, this.body.color + Math.min(Math.round(this.shieldpower + 11), 99))
                         shild.draw()
                     }
                 }
@@ -2501,7 +2501,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
             // if (this.controller == 0) {
 
-            if (this == boys[100]) {
+            if (this == boys[0]) {
                 if (this.breaktimer < 0) {
                     gamepad_control_controller_proto(this.body, this.speed, this.controller)
 
@@ -2643,7 +2643,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             canvas_context.fill()
             canvas_context.stroke();
             link.draw()
-            if (this == boys[100]) {
+            if (this == boys[0]) {
 
                 this.fightcontrol()
             } else {
@@ -2713,7 +2713,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (controller == 1) {
                 this.color = "#ff0000"
             }
-            this.body = new Circle(800 + ((boys.length * 350) % 800), 500, 35, this.color)
+            this.body = new Circle(700 + ((boys.length * 1200) % 2260), 500, 35, this.color)
             this.nodes.push(this.body)
             this.leftshoulder = new Circle(this.body.x - (this.body.radius + this.shoulderwidth), 350, 10, "magenta", 0, 0, .999)
             this.rightshoulder = new Circle(this.body.x + (this.body.radius + this.shoulderwidth), 350, 10, "red", 0, 0, .999)
@@ -3013,7 +3013,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         doubleJump() {
             this.jumpcount--
             if (this.jumpcount <= -20) {
-                if (this == boys[100]) {
+                if (this == boys[0]) {
                     gamepad_control_controller_proto_dj(this.body, this.speed, this.controller)
                 } else {
                     this.AIarmControl()
@@ -3821,7 +3821,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 this.body.symom = 0
             }
             // if (this.controller == 0) {
-            if (this == boys[100]) {
+            if (this == boys[0]) {
                 // if (this.breaktimer < 0) {
                 //     this.AImove(this.body, this.speed, this.controller)
 
@@ -3978,7 +3978,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 link.draw()
             }
 
-            if (this == boys[100]) {
+            if (this == boys[0]) {
 
                 // this.AI()
                 this.fightcontrol()
@@ -4004,7 +4004,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             canvas_context.font = "30px arial"
             canvas_context.fillStyle = `rgb(${255 - (this.damage / 10)},${255 - this.damage},${255 - this.damage})`
             canvas_context.fillText(`${Math.round(this.damage)}%`, this.body.x - 20, this.body.y - 50)
-            // if (this != boys[100]) {
+            // if (this != boys[0]) {
             //     canvas_context.fillText(`${Math.round(this.dmomu)},${Math.round(this.amomu)}`, this.body.x - 20, this.body.y - 150)
             //     canvas_context.fillText(`Under:${Math.round(this.under)},Safe:${Math.round(this.safe)}`, this.body.x - 20, this.body.y - 200)
             //     canvas_context.fillText(`Height:${Math.round(this.brick.edgeright.y)}`, this.body.x - 20, this.body.y - 250)
@@ -4021,7 +4021,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     let go = 0
     let boom = []// [new Circle(0, 0, 1, "transparent"), new Circle(0, 0, 1, "transparent")]
 
-    for (let t = 0; t < 4; t++) {
+    for (let t = 0; t < 2; t++) {
         let coreboy
         if (Math.random() < .5) {
             coreboy = new Mass(t)
@@ -4040,6 +4040,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
         }
         if (t == 3) {
             coreboy.body.color =  "#FFFF00"
+        }
+        if (t == 4) {
+            coreboy.body.color =  "#888888"
+        }
+        if (t == 5) {
+            coreboy.body.color =  "#00FFFF"
+        }
+        if (t == 6) {
+            coreboy.body.color =  "#FF00FF"
+        }
+        if (t == 7) {
+            coreboy.body.color =  "#FFFFFF"
         }
         boys.push(coreboy)
         boom.push(new Circle(0, 0, 1, "transparent"))
@@ -4120,16 +4132,28 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         boys[t] = new Mass(t)
                         boys[t].body.color = getRandomColor()
                         if (t == 0) {
-                            boys[t].body.color = "#ff33FF"
+                            boys[t].body.color = "#FF0000"
                         }
                         if (t == 1) {
-                            boys[t].body.color =  "#ffFF00"
+                            boys[t].body.color =  "#00FF00"
                         }
                         if (t == 2) {
-                            boys[t].body.color =  "#AA00FF"
+                            boys[t].body.color =  "#0000FF"
                         }
                         if (t == 3) {
-                            boys[t].body.color =  "#00FFAA"
+                            boys[t].body.color =  "#FFFF00"
+                        }
+                        if (t == 4) {
+                            boys[t].body.color =  "#888888"
+                        }
+                        if (t == 5) {
+                            boys[t].body.color =  "#00FFFF"
+                        }
+                        if (t == 6) {
+                            boys[t].body.color =  "#FF00FF"
+                        }
+                        if (t == 7) {
+                            boys[t].body.color =  "#FFFFFF"
                         }
                         // }
                     }
@@ -4177,6 +4201,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (t == 3) {
                             boys[t].body.color =  "#FFFF00"
                         }
+                        if (t == 4) {
+                            boys[t].body.color =  "#888888"
+                        }
+                        if (t == 5) {
+                            boys[t].body.color =  "#00FFFF"
+                        }
+                        if (t == 6) {
+                            boys[t].body.color =  "#FF00FF"
+                        }
+                        if (t == 7) {
+                            boys[t].body.color =  "#FFFFFF"
+                        }
                         // }
                     }
                 }
@@ -4184,11 +4220,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
             canvas_context.font = "50px arial"
             canvas_context.fillStyle = "white"
-            canvas_context.fillText(`Falls: `, 200, 100)
-            canvas_context.fillText(`Red ${scores[0]}`, 200, 150)
-            canvas_context.fillText(`Green ${scores[1]}`, 200, 200)
-            canvas_context.fillText(`Blue ${scores[2]} `, 200, 250)
-            canvas_context.fillText(`Yellow ${scores[3]} `, 200, 300)
+            canvas_context.fillText(`Score: Human ${scores[1]}, Robot ${scores[0]}`, 1000, 100)
+            // canvas_context.fillText(`Falls: `, 200, 100)
+            // canvas_context.fillText(`Red ${scores[0]}`, 200, 150)
+            // canvas_context.fillText(`Green ${scores[1]}`, 200, 200)
+            // canvas_context.fillText(`Blue ${scores[2]} `, 200, 250)
+            // canvas_context.fillText(`Yellow ${scores[3]} `, 200, 300)
         // }
     }else{
 
