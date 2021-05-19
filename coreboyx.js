@@ -1920,8 +1920,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.height = height
             this.edgeleft = new Circle(x - (width * .5), y, 4, "cyan")
             this.edgeright = new Circle(x + (width * .5), y, 4, "blue")
-            this.link = new Line(this.edgeleft.x - 10, this.edgeleft.y, this.edgeright.x + 10, this.edgeright.y, getRandomColor(), height * 2)
-            this.shape = castBetween(this.edgeleft, this.edgeright, 10, height)
+            this.link = new Line(this.edgeleft.x - 5, this.edgeleft.y, this.edgeright.x + 5, this.edgeright.y, getRandomColor(), height * 2)
+            this.shape = castBetween(this.edgeleft, this.edgeright, 20, height)
             this.edgeleft = new Circle(x - (width * .5), y - (height * 1), 8, "cyan")
             this.edgeright = new Circle(x + (width * .5), y - (height * 1), 8, "blue")
         }
