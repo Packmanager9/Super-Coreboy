@@ -2713,7 +2713,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 }
                                 if (this.under !== 0) {
                                     if (this.under == 2) {
-                                        // this.screwshot = 1
+                                        this.screwshot = 1
                                         this.amove = 0
                                         this.dmom = 100
                                         this.amom = 0
@@ -2721,7 +2721,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         this.wmove = 1
                                     }
                                     if (this.under == 3) {
-                                        // this.screwshot = 1
+                                        this.screwshot = 1
                                         this.amove = 1
                                         this.amom = 100
                                         this.dmom = 0
