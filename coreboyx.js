@@ -1,5 +1,7 @@
 
 let boys = []
+let selectors = []
+let characterbuttons = []
 let scores = []
 let baselaunch = .3
 window.addEventListener('DOMContentLoaded', (event) => {
@@ -567,6 +569,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 // console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
             }
         }
+        track(){
+
+            if (this.anchored !== 2) {
+                this.x += this.xmom
+                this.y += this.ymom
+            } else {
+                this.x = this.anchor.x
+                this.y = this.anchor.y
+            }
+        }
         move() {
             if (this.reflect == 1) {
                 if (this.x + this.radius > canvas.width) {
@@ -720,6 +732,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.strokeColor = strokeColor
             this.anchored = 0
             this.anchor = this
+            this.sxmom = 0
+            this.symom = 0
+        }
+        smove() {
+            this.x += this.sxmom
+            this.y += this.symom
         }
         reversePointinside(point) {
 
@@ -1395,9 +1413,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
             FLEX_engine = canvas.getBoundingClientRect();
             XS_engine = e.clientX - FLEX_engine.left;
             YS_engine = e.clientY - FLEX_engine.top;
-            TIP_engine.x = XS_engine
-            TIP_engine.y = YS_engine
+            TIP_engine.x = XS_engine*2
+            TIP_engine.y = YS_engine*2
             TIP_engine.body = TIP_engine
+
+            for(let t = 0;t<selectors.length;t++){
+                if(selectors[t].body.isPointInside(TIP_engine)){
+                    selectors[t].body.anchored = 2
+                    selectors[t].body.anchor = TIP_engine
+                    break
+                }
+            }
             // boys[0].righthand.anchored = 0
             // boys[0].lefthand.anchored = 0
             // boys[0].righthand.x += (TIP_engine.x * 2) - boys[0].righthand.x
@@ -1411,15 +1437,19 @@ window.addEventListener('DOMContentLoaded', (event) => {
             // example usage: if(object.isPointInside(TIP_engine)){ take action }
             window.addEventListener('pointermove', continued_stimuli);
         });
+        window.addEventListener('pointermove', continued_stimuli);
         window.addEventListener('pointerup', e => {
+            for(let t = 0;t<selectors.length;t++){
+                    selectors[t].body.anchored = 0
+            }
             window.removeEventListener("pointermove", continued_stimuli);
         })
         function continued_stimuli(e) {
             FLEX_engine = canvas.getBoundingClientRect();
             XS_engine = e.clientX - FLEX_engine.left;
             YS_engine = e.clientY - FLEX_engine.top;
-            TIP_engine.x = XS_engine
-            TIP_engine.y = YS_engine
+            TIP_engine.x = XS_engine*2
+            TIP_engine.y = YS_engine*2
             TIP_engine.body = TIP_engine
         }
     }
@@ -1698,13 +1728,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.height = height
             this.edgeleft = new Circle(x - (width * .5), y, 4, "cyan")
             this.edgeright = new Circle(x + (width * .5), y, 4, "blue")
-            this.link = new Line(this.edgeleft.x, this.edgeleft.y, this.edgeright.x, this.edgeright.y, getRandomColor(), height * 2)
-            this.shape = castBetween(this.edgeleft, this.edgeright, 60, height)
+            this.link = new Line(this.edgeleft.x-10, this.edgeleft.y, this.edgeright.x+10, this.edgeright.y, getRandomColor(), height * 2)
+            this.shape = castBetween(this.edgeleft, this.edgeright, 10, height)
             this.edgeleft = new Circle(x - (width * .5), y - (height * 1), 8, "cyan")
             this.edgeright = new Circle(x + (width * .5), y - (height * 1), 8, "blue")
         }
         doesPerimeterTouch(circle) {
-
+            // this.edgeleft.draw()
+            // this.edgeright.draw()
             // let link = new Line(this.edgeleft.x, this.center.y + (this.height*.5), this.edgeright.x, this.center.y + (this.height*.5), "red", 1)
             // link.draw()
 
@@ -1751,19 +1782,19 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             if (circle.ymom > 4) {
                                 if (circle.ymom > 1) {
                                     // if (circle.self.jumping == 0) {
-                                        if (circle == circle.self.righthand) {
-                                            if (circle.self.rightarm.hypotenuse() < this.height*4.5) {
-                                                circle.ymom *= -.6
-                                            }
-                                        } else if (circle == circle.self.lefthand) {
-                                            if (circle.self.leftarm.hypotenuse() < this.height*4.5) {
-                                                circle.ymom *= -.6
-                                            }
-                                        } else { 
-                                            if (circle.self.jumping == 0) {
+                                    if (circle == circle.self.righthand) {
+                                        if (circle.self.rightarm.hypotenuse() < this.height * 4.5) {
                                             circle.ymom *= -.6
-                                            }
                                         }
+                                    } else if (circle == circle.self.lefthand) {
+                                        if (circle.self.leftarm.hypotenuse() < this.height * 4.5) {
+                                            circle.ymom *= -.6
+                                        }
+                                    } else {
+                                        if (circle.self.jumping == 0) {
+                                            circle.ymom *= -.6
+                                        }
+                                    }
                                     // } else {
 
                                     //     circle.ymom = 0
@@ -1771,21 +1802,21 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 } else {
                                     circle.ymom = 0
                                 }
-                            }else{
+                            } else {
                                 if (circle.ymom > 0) {
                                     // if (circle.self.jumping == 0) {
-                                        if (circle == circle.self.righthand) {
-                                            if (circle.self.rightarm.hypotenuse() < this.height*4.5) {
-                                                circle.ymom *= -.6
-                                            }
-                                        } else if (circle == circle.self.lefthand) {
-                                            if (circle.self.leftarm.hypotenuse() < this.height*4.5) {
-                                                circle.ymom *= -.6
-                                            }
-                                        } else {
+                                    if (circle == circle.self.righthand) {
+                                        if (circle.self.rightarm.hypotenuse() < this.height * 4.5) {
                                             circle.ymom *= -.6
                                         }
-                                        
+                                    } else if (circle == circle.self.lefthand) {
+                                        if (circle.self.leftarm.hypotenuse() < this.height * 4.5) {
+                                            circle.ymom *= -.6
+                                        }
+                                    } else {
+                                        circle.ymom *= -.6
+                                    }
+
                                     // } else {
                                     //     circle.ymom = 0
                                     // }
@@ -1802,14 +1833,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             circle.y += .1
                                         } else {
                                             if (circle == circle.self.lefthand) {
-                                                if (circle.self.leftarm.hypotenuse() < this.height*2.5) {
+                                                if (circle.self.leftarm.hypotenuse() < this.height * 2.5) {
                                                     circle.y += .1
                                                 } else {
                                                     break
                                                 }
                                             }
                                             if (circle == circle.self.righthand) {
-                                                if (circle.self.rightarm.hypotenuse() < this.height*2.5) {
+                                                if (circle.self.rightarm.hypotenuse() < this.height * 2.5) {
                                                     circle.y += .1
                                                 } else {
                                                     break
@@ -1832,7 +1863,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         circle.y -= .1
                                     } else {
                                         if (circle == circle.self.lefthand) {
-                                            if (circle.self.leftarm.hypotenuse() < this.height*2.5) {
+                                            if (circle.self.leftarm.hypotenuse() < this.height * 2.5) {
                                                 circle.y -= .1
 
                                                 if (this.shape.doesPerimeterTouch(circle)) {
@@ -1857,7 +1888,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             }
                                         }
                                         if (circle == circle.self.righthand) {
-                                            if (circle.self.rightarm.hypotenuse() < this.height*2.5) {
+                                            if (circle.self.rightarm.hypotenuse() < this.height * 2.5) {
                                                 circle.y -= .1
                                                 if (this.shape.doesPerimeterTouch(circle)) {
                                                     if (circle == circle.self.righthand) {
@@ -1905,7 +1936,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         } else {
                             if (circle == circle.self.body) {
                                 if (circle.y + circle.radius >= this.edgeleft.y - 1) {
-                                    if (circle.y + circle.radius <= this.edgeleft.y + this.height*2.5) {
+                                    if (circle.y + circle.radius <= this.edgeleft.y + this.height * 2.5) {
                                         if (circle.x > this.edgeleft.x) {
                                             // this.edgeleft.draw()
                                             if (circle.x < this.edgeright.x) {
@@ -1974,7 +2005,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.shots = []
             this.wasfalse = []
             this.controller = controller
-            this.armlength = 33
+            this.armlength = 35
             this.shoulderwidth = 8
             this.damage = 0
             this.nodes = []
@@ -1982,7 +2013,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.hitboxes = []
             this.links = []
             this.speed = 11.5
-            this.punchspeed = 5
+            this.punchspeed = 6
             this.grounded = 0
             this.jumping = 1
 
@@ -1993,12 +2024,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (controller == 1) {
                 this.color = "#ff0000"
             }
-            this.body = new Circle(800 + ((boys.length * 350) % 800), 500, 40, this.color)
+            this.body = new Circle(800 + ((boys.length * 350) % 800), 500, 37, this.color)
             this.nodes.push(this.body)
             this.leftshoulder = new Circle(this.body.x - (this.body.radius + this.shoulderwidth), 350, 10, "magenta", 0, 0, .999)
             this.rightshoulder = new Circle(this.body.x + (this.body.radius + this.shoulderwidth), 350, 10, "red", 0, 0, .999)
-            this.lefthand = new Circle(this.leftshoulder.x, (this.leftshoulder.y + this.armlength), 16, "magenta", 0, 0, .85)
-            this.righthand = new Circle(this.rightshoulder.x, (this.rightshoulder.y + this.armlength), 16, "red", 0, 0, .85)
+            this.lefthand = new Circle(this.leftshoulder.x, (this.leftshoulder.y + this.armlength), 26, "magenta", 0, 0, .85)
+            this.righthand = new Circle(this.rightshoulder.x, (this.rightshoulder.y + this.armlength), 26, "red", 0, 0, .85)
             this.nodes.push(this.leftshoulder)
             this.nodes.push(this.rightshoulder)
             this.nodes.push(this.righthand)
@@ -2025,6 +2056,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
             for (let t = 0; t < this.nodes.length; t++) {
                 this.nodes[t].self = this // lmao
             }
+        }
+        copy(){
+            let copy = new Boy(this.controller)
+            copy.body.color = this.body.color
+            return copy
         }
         control() {
             gamepad_control_controller_proto(this.center, this.speed + (this.speed * (this.grounded * .5)), this.controller)
@@ -2232,7 +2268,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
 
         }
-   
+
         doubleJump() {
             this.jumpcount--
             if (this.jumpcount <= -20) {
@@ -2341,11 +2377,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 if (gamepadAPI[this.controller].buttonsStatus.includes('X') || keysPressed['j']) {
                     if (this.lefthand.fired <= 0) {
                         if (this.righthand.fired <= 0) {
-                            let shot = new Shot(this.body.x, this.body.y, 20, "#FFFFFF", 0, (this.speed * 1.9))
+                            let shot = new Shot(this.body.x, this.body.y, 20, "#bbbbbb", 0, (this.speed * 1.9))
                             this.shots.push(shot)
                             this.body.ymom -= 8
-                            this.lefthand.fired = 19
-                            this.righthand.fired = 19
+                            this.lefthand.fired = 12
+                            this.righthand.fired = 12
                         }
                     }
                 }
@@ -2788,8 +2824,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }
             }
 
-            if(this.shieldpower < 10){
-                if(Math.random()<.95){
+            if (this.shieldpower < 10) {
+                if (Math.random() < .95) {
                     this.storeshield = 0
                 }
             }
@@ -2877,11 +2913,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 if (this.downspike == 1) {
                     if (this.lefthand.fired <= 0) {
                         if (this.righthand.fired <= 0) {
-                            let shot = new Shot(this.body.x, this.body.y, 20, "#FFFFFF", 0, (this.speed * 1.9))
+                            let shot = new Shot(this.body.x, this.body.y, 20, "#bbbbbb", 0, (this.speed * 1.9))
                             this.shots.push(shot)
                             this.body.ymom -= 8
-                            this.lefthand.fired = 19
-                            this.righthand.fired = 19
+                            this.lefthand.fired = 12
+                            this.righthand.fired = 12
                         }
                     }
                 }
@@ -2940,6 +2976,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.enemycollide()
         }
         draw() {
+
+
+            if (this.righthand.anchored == 1) {
+                if (this.body.x > this.righthand.x) {
+                    this.righthand.anchored = -10
+                }
+            }
+            if (this.lefthand.anchored == 1) {
+                if (this.body.x < this.lefthand.x) {
+                    this.lefthand.anchored = -10
+                }
+            }
 
             for (let t = 0; t < this.shots.length; t++) {
                 this.shots[t].radius *= 1.02
@@ -3016,7 +3064,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 this.jumpcount = 0
                 this.jumping -= .5
 
-                this.body.xmom *= .2
+                this.body.xmom *= .7
 
                 if (this.body.ymom > 0) {
                     this.body.ymom = 0
@@ -3128,6 +3176,20 @@ window.addEventListener('DOMContentLoaded', (event) => {
         }
     }
 
+    class Selector {
+        constructor() {
+            this.body = new Circle(400 + (selectors.length * 100), 400, 25, getRandomLightColor())
+            this.num = selectors.length + 1
+        }
+        draw() {
+            this.body.track()
+            this.body.draw()
+            canvas_context.font = "30px arial"
+            canvas_context.fillStyle = `Black`
+            canvas_context.fillText(this.num, this.body.x-(this.body.radius*.5), this.body.y+(this.body.radius*.5))
+        }
+    }
+
 
     class Mass {
         constructor(controller) {
@@ -3175,12 +3237,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (controller == 1) {
                 this.color = "#ff0000"
             }
-            this.body = new Circle(700 + ((boys.length * 1200) % 2260), 500, 35, this.color)
+            this.body = new Shot(700 + ((boys.length * 1200) % 2260), 500, 35, this.color)
             this.nodes.push(this.body)
-            this.leftshoulder = new Circle(this.body.x - (this.body.radius + this.shoulderwidth), 350, 10, "magenta", 0, 0, .999)
-            this.rightshoulder = new Circle(this.body.x + (this.body.radius + this.shoulderwidth), 350, 10, "red", 0, 0, .999)
-            this.lefthand = new Circle(this.leftshoulder.x, (this.leftshoulder.y + this.armlength), 19, "magenta", 0, 0, .85)
-            this.righthand = new Circle(this.rightshoulder.x, (this.rightshoulder.y + this.armlength), 19, "red", 0, 0, .85)
+            this.leftshoulder = new Shot(this.body.x - (this.body.radius + this.shoulderwidth), 350, 10, "magenta", 0, 0, .999)
+            this.rightshoulder = new Shot(this.body.x + (this.body.radius + this.shoulderwidth), 350, 10, "red", 0, 0, .999)
+            this.lefthand = new Shot(this.leftshoulder.x, (this.leftshoulder.y + this.armlength), 19, "magenta", 0, 0, .85)
+            this.righthand = new Shot(this.rightshoulder.x, (this.rightshoulder.y + this.armlength), 19, "red", 0, 0, .85)
             this.nodes.push(this.leftshoulder)
             this.nodes.push(this.rightshoulder)
             this.nodes.push(this.righthand)
@@ -3206,6 +3268,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
             for (let t = 0; t < this.nodes.length; t++) {
                 this.nodes[t].self = this // lmao
             }
+        }
+        copy(){
+            let copy = new Mass(this.controller)
+            copy.body.color = this.body.color
+            return copy
         }
         control() {
             gamepad_control_controller_proto(this.center, this.speed + (this.speed * (this.grounded * .5)), this.controller)
@@ -3925,8 +3992,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 this.screwshot = 1
             }
 
-            if(this.shieldpower < 10){
-                if(Math.random()<.95){
+            if (this.shieldpower < 10) {
+                if (Math.random() < .95) {
                     this.storeshield = 0
                 }
             }
@@ -4285,6 +4352,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
         }
         draw() {
 
+            if (this.righthand.anchored == 1) {
+                if (this.body.x > this.righthand.x) {
+                    this.righthand.anchored = -10
+                }
+            }
+            if (this.lefthand.anchored == 1) {
+                if (this.body.x < this.lefthand.x) {
+                    this.lefthand.anchored = -10
+                }
+            }
+
             if (this.lefthand.anchored != 1 && this.righthand.anchored != 1) {
                 this.body.sxmom = 0
                 this.body.symom = 0
@@ -4356,7 +4434,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 this.jumpcount = 0
                 this.jumping -= .5
 
-                this.body.xmom *= .2
+                this.body.xmom *= .7
 
                 if (this.body.ymom > 0) {
                     this.body.ymom = 0
@@ -4495,51 +4573,35 @@ window.addEventListener('DOMContentLoaded', (event) => {
     let go = 0
     let boom = []// [new Circle(0, 0, 1, "transparent"), new Circle(0, 0, 1, "transparent")]
 
-    for (let t = 0; t < 2; t++) {
-        let coreboy
-
+    for (let t = 0; t < 8; t++) {
+       
+        let selector = new Selector()
         if (t == 0) {
-            if (Math.random() < .5) {
-                coreboy = new Boy(t)
-            } else {
-                coreboy = new Mass(t)
-            }
-
-        } else {
-            if (Math.random() < .5) {
-                coreboy = new Boy(t)
-            } else {
-                coreboy = new Mass(t)
-            }
-        }
-        coreboy.body.color = getRandomColor()//`rgb(${t * 64}, ${255 - (t * 264)}, ${Math.random() * 255})`
-        if (t == 0) {
-            coreboy.body.color = "#FF0000"
+            selector.body.color = "#FF0000"
         }
         if (t == 1) {
-            coreboy.body.color = "#00FF00"
+            selector.body.color = "#00FF00"
         }
         if (t == 2) {
-            coreboy.body.color = "#0000FF"
+            selector.body.color = "#0000FF"
         }
         if (t == 3) {
-            coreboy.body.color = "#FFFF00"
+            selector.body.color = "#FFFF00"
         }
         if (t == 4) {
-            coreboy.body.color = "#f23AFB"
+            selector.body.color = "#FFAA00"
         }
         if (t == 5) {
-            coreboy.body.color = "#00FFFF"
+            selector.body.color = "#00FFFF"
         }
         if (t == 6) {
-            coreboy.body.color = "#FF00FF"
+            selector.body.color = "#FF00FF"
         }
         if (t == 7) {
-            coreboy.body.color = "#FFFFFF"
+            selector.body.color = "#bbbbbb"
         }
-        boys.push(coreboy)
-        boom.push(new Circle(0, 0, 1, "transparent"))
-        scores.push(0)
+        selectors.push(selector)
+       
     }
 
     // object instantiation and creation happens here 
@@ -4593,14 +4655,24 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     // } else {
 
-    canvas_context.clearRect(0, 0, canvas.width * 4, canvas.height * 4)  // refreshes the image
+    // canvas_context.clearRect(0, 0, canvas.width * 4, canvas.height * 4)  // refreshes the image
 
-    stage.draw()
-    for (let t = 0; t < boys.length; t++) {
-        boys[t].draw()
-    }
-    canvas_context.font = "50px arial"
-    canvas_context.fillStyle = "white"
+    // stage.draw()
+    // for (let t = 0; t < boys.length; t++) {
+    //     boys[t].draw()
+    // }
+    // canvas_context.font = "50px arial"
+    // canvas_context.fillStyle = "white"
+
+
+
+    let massSelector = new Circle(700,700,200, "White")
+
+    let boySelector = new Circle(1200,700,200, "White")
+    characterbuttons.push(massSelector)
+    characterbuttons.push(boySelector)
+
+
     // canvas_context.fillText(`Score: Human ${scores[1]}, Robot ${scores[0]}`, 1000, 100)
     // }
     function main() {
@@ -4629,16 +4701,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
                         if (t == 0) {
                             if (Math.random() < .5) {
-                                boys[t] = new Boy(t)
+                                boys[t] = boys[t].copy()
                             } else {
-                                boys[t] = new Mass(t)
+                                boys[t] = boys[t].copy()
                             }
 
                         } else {
                             if (Math.random() < .5) {
-                                boys[t] = new Boy(t)
+                                boys[t] = boys[t].copy()
                             } else {
-                                boys[t] = new Mass(t)
+                                boys[t] = boys[t].copy()
                             }
                         }
                         boys[t].body.color = getRandomColor()
@@ -4664,7 +4736,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             boys[t].body.color = "#FF00FF"
                         }
                         if (t == 7) {
-                            boys[t].body.color = "#FFFFFF"
+                            boys[t].body.color = "#bbbbbb"
                         }
                         // }
                     }
@@ -4673,7 +4745,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
             canvas_context.font = "50px arial"
             canvas_context.fillStyle = "white"
-            canvas_context.fillText(`Score: Red ${scores[1]}, Green ${scores[0]}`, 1000, 100)
+            if(boys.length == 2){
+                canvas_context.fillText(`Score: Human ${scores[1]}, Robot ${scores[0]}`, 1000, 100)
+            }
             // canvas_context.fillText(`Falls: `, 200, 100)
             // canvas_context.fillText(`Red ${scores[0]}`, 200, 150)
             // canvas_context.fillText(`Green ${scores[1]}`, 200, 200)
@@ -4681,11 +4755,54 @@ window.addEventListener('DOMContentLoaded', (event) => {
             // canvas_context.fillText(`Yellow ${scores[3]} `, 200, 300)
             // }
         } else {
+            canvas_context.clearRect(0, 0, canvas.width * 4, canvas.height * 4)
+
+
+            massSelector.draw()
+            boySelector.draw()
+
+            canvas_context.font = "60px arial"
+            canvas_context.fillStyle = "black"
+            canvas_context.fillText(`Mass`, massSelector.x-(massSelector.radius*.4), massSelector.y-(massSelector.radius*.5))
+
+            canvas_context.font = "60px arial"
+            canvas_context.fillStyle = "black"
+            canvas_context.fillText(`Coreboy`, boySelector.x-(boySelector.radius*.6), boySelector.y-(boySelector.radius*.5))
+            
+
+            for(let t = 0;t<selectors.length;t++){
+                selectors[t].draw()
+            }
 
             canvas_context.font = "60px arial"
             canvas_context.fillStyle = "white"
             canvas_context.fillText(`Press Space to Start`, 1000, 300)
             if (keysPressed[' ']) {
+                let wet = boys.length
+                    for (let k = 0; k < characterbuttons.length; k++) {
+                        for (let t = 0; t < selectors.length; t++) {
+                        if (characterbuttons[k].doesPerimeterTouch(selectors[t].body)) {
+                            let coreboy
+                            if (k == 0) {
+                                    coreboy = new Mass(k)
+                            } else if (k == 1) {
+                                    coreboy = new Boy(k)
+                            }
+                            coreboy.body.color = getRandomColor()//`rgb(${t * 64}, ${255 - (t * 264)}, ${Math.random() * 255})`
+                      
+                                coreboy.body.color = selectors[t].body.color
+                          
+                            boys.push(coreboy)
+                            boom.push(new Circle(0, 0, 1, "transparent"))
+                            scores.push(0)
+                            wet--
+                        }
+                    }
+                }
+            
+                if (wet == 0) {
+                    counter = 1
+                }
                 counter = 1
             }
         }
