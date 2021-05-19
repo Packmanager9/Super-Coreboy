@@ -1936,6 +1936,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
             //         // circle.self.shots[t].marked = 1
             //     }
             // }
+
+            if (circle == circle.self.rightshoulder) {
+                return
+            }
+            if (circle == circle.self.leftshoulder) {
+                return
+            }
+
             if (circle.doesPerimeterTouch(this.edgeleft)) {
                 if (circle == circle.self.righthand) {
                     if (circle.anchored >= -1) {
