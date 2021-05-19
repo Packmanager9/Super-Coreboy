@@ -4713,31 +4713,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 boys[t] = boys[t].copy()
                             }
                         }
-                        boys[t].body.color = getRandomColor()
-                        if (t == 0) {
-                            boys[t].body.color = "#FF0000"
-                        }
-                        if (t == 1) {
-                            boys[t].body.color = "#00FF00"
-                        }
-                        if (t == 2) {
-                            boys[t].body.color = "#0000FF"
-                        }
-                        if (t == 3) {
-                            boys[t].body.color = "#FFFF00"
-                        }
-                        if (t == 4) {
-                            boys[t].body.color = "#f23AFB"
-                        }
-                        if (t == 5) {
-                            boys[t].body.color = "#00FFFF"
-                        }
-                        if (t == 6) {
-                            boys[t].body.color = "#FF00FF"
-                        }
-                        if (t == 7) {
-                            boys[t].body.color = "#bbbbbb"
-                        }
+                    
                         // }
                     }
                 }
@@ -4779,17 +4755,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
             canvas_context.fillText(`Press Space to Start`, 1000, 300)
             if (keysPressed[' ']) {
                 let wet = boys.length
+                for (let t = 0; t < selectors.length; t++) {
                     for (let k = 0; k < characterbuttons.length; k++) {
-                        for (let t = 0; t < selectors.length; t++) {
-                        if (characterbuttons[k].doesPerimeterTouch(selectors[t].body)) {
+                        if (characterbuttons[k].isPointInside(selectors[t].body)) {
                             let coreboy
                             if (k == 0) {
-                                    coreboy = new Mass(k)
+                                    coreboy = new Mass(boys.length)
                             } else if (k == 1) {
-                                    coreboy = new Boy(k)
+                                    coreboy = new Boy(boys.length)
                             }
-                            coreboy.body.color = getRandomColor()//`rgb(${t * 64}, ${255 - (t * 264)}, ${Math.random() * 255})`
-                      
                                 coreboy.body.color = selectors[t].body.color
                           
                             boys.push(coreboy)
