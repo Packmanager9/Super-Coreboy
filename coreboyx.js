@@ -5190,15 +5190,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
 
                     if (this.fleeing == 0) {
-                        if (Math.abs(this.body.x - boys[t].body.x) > (this.body.radius * 4) && this.body.x > (boys[t].body.x + 5)) {
+                        if (Math.abs(this.body.x - boys[t].body.x) > (this.body.radius * 3) && this.body.x > (boys[t].body.x + 5)) {
                             this.amove = 1
-                        } else if (Math.abs(this.body.x - boys[t].body.x) > (this.body.radius * 4) && this.body.x < (boys[t].body.x + 5)) {
+                        } else if (Math.abs(this.body.x - boys[t].body.x) > (this.body.radius * 3) && this.body.x < (boys[t].body.x + 5)) {
                             this.dmove = 1
                         }
                     } else {
-                        if (Math.abs(this.body.x - boys[t].body.x) > (this.body.radius * 4) && this.body.x > (boys[t].body.x + 5)) {
+                        if (Math.abs(this.body.x - boys[t].body.x) > (this.body.radius * 3) && this.body.x > (boys[t].body.x + 5)) {
                             this.dmove = 1
-                        } else if (Math.abs(this.body.x - boys[t].body.x) > (this.body.radius * 4) && this.body.x < (boys[t].body.x + 5)) {
+                        } else if (Math.abs(this.body.x - boys[t].body.x) > (this.body.radius * 3) && this.body.x < (boys[t].body.x + 5)) {
                             this.amove = 1
                         }
                     }
@@ -5502,7 +5502,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     if (Math.abs(this.body.x - boys[t].body.x) < 50 && this.body.y < boys[t].body.y) {
                         this.downspike = 1
                     } else if (Math.abs(this.body.x - boys[t].body.x) < 150 && this.body.y <= boys[t].body.y && (boys[t].righthand.anchored == 1 || boys[t].lefthand.anchored == 1)) {
-                        this.hortsmash = 1
+                        this.downspike = 1
                     }
                     if (Math.abs(this.body.x - boys[t].body.x) < 70 && this.body.y > boys[t].body.y) {
                         this.screwshot = 1
@@ -5632,8 +5632,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (this.righthand.anchored == 0) {
                             this.rightshoulder.xmom = 0
                             this.rightshoulder.ymom = 0
-                            this.righthand.ymom = this.punchspeed * 12
-                            this.righthand.xmom = -this.punchspeed * 2.1
+                            this.righthand.ymom = this.punchspeed * 18
+                            this.righthand.xmom = -this.punchspeed * -5.1
                             this.righthand.fired = 19
                         }
                     }
@@ -5641,8 +5641,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (this.lefthand.anchored == 0) {
                             this.leftshoulder.xmom = 0
                             this.leftshoulder.ymom = 0
-                            this.lefthand.ymom = this.punchspeed * 12
-                            this.lefthand.xmom = this.punchspeed * 2.1
+                            this.lefthand.ymom = this.punchspeed * 18
+                            this.lefthand.xmom = this.punchspeed * -5.1
                             this.lefthand.fired = 19
                         }
                     }
@@ -5857,8 +5857,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             if (this.righthand.anchored == 0) {
                                 this.rightshoulder.xmom = 0
                                 this.rightshoulder.ymom = 0
-                                this.righthand.ymom = this.punchspeed * 12
-                                this.righthand.xmom = -this.punchspeed * 2.1
+                                this.righthand.ymom = this.punchspeed * 18
+                                this.righthand.xmom = -this.punchspeed * -5.1
                                 this.righthand.fired = 19
                             }
                         }
@@ -5866,8 +5866,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             if (this.lefthand.anchored == 0) {
                                 this.leftshoulder.xmom = 0
                                 this.leftshoulder.ymom = 0
-                                this.lefthand.ymom = this.punchspeed * 12
-                                this.lefthand.xmom = this.punchspeed * 2.1
+                                this.lefthand.ymom = this.punchspeed * 18
+                                this.lefthand.xmom = this.punchspeed * -5.1
                                 this.lefthand.fired = 19
                             }
                         }
