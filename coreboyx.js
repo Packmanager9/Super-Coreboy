@@ -5701,6 +5701,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     if (this.righthand.anchored == 0) {
                         if (this.rightshot == 1) {
                             if (this.face == 1) {
+                                if (this.righthand.anchored == 0) {
                                 let shot = new Shot(this.righthand.x, this.righthand.y, 40, "#FF0000", this.speed * (1.9), 0)
                                 // if(this.wasfalse[1] == 0){
                                 shot.gravity = -.1
@@ -5719,6 +5720,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     //     this.charge = 200
                                     // }
                                 }
+                            }
                             }
                         }
                         if (this.leftshot == 1) {
@@ -5816,6 +5818,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 if (this.righthand.fired <= 0) {
                     if (gamepadAPI[this.controller].buttonsStatus.includes('B') || keysPressed['l']) {
                         if (this.face == 1) {
+                            if (this.righthand.anchored == 0) {
                             let shot = new Shot(this.righthand.x, this.righthand.y, 40, "#FF0000", this.speed * (1.9), 0)
                             // if(this.wasfalse[1] == 0){
                             shot.gravity = -.1
@@ -5829,6 +5832,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 if (this.grounded != 1) {
                                     this.body.xmom -= .5
                                 }
+                            }
                             }
                         }
                                 if (this.face == -1) {
