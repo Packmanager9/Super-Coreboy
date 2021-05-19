@@ -5236,6 +5236,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) < this.body.y) {
                                 if (boys[k].brick == stage.bricks[t]) {
                                     this.under = 1
+                                }else{ 
+                                    if (Math.abs(Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) - this.body.y) < 300) {
+                                        this.under = 4
+                                    }
                                 }
                                 if (Math.abs(this.body.x - Math.max(stage.bricks[t].edgeright.x)) < Math.abs(this.body.x - Math.max(stage.bricks[t].edgeleft.x))) {
                                     if (boys[k].body.x < this.body.x) {
@@ -5264,7 +5268,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 }
                                 if (this.under !== 0) {
                                     if (this.under == 2) {
-                                        // this.screwshot = 1
+                                        this.screwshot = 0
                                         this.amove = 0
                                         this.dmom = 100
                                         this.amom = 0
@@ -5272,7 +5276,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         this.wmove = 1
                                     }
                                     if (this.under == 3) {
-                                        // this.screwshot = 1
+                                        this.screwshot = 0
                                         this.amove = 1
                                         this.amom = 100
                                         this.dmom = 0
@@ -5348,7 +5352,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
 
             if (this.safe == 0) {
-                this.screwshot = 1
+                if(this.under == 0){
+                    this.screwshot = 1
+                }
                 if (this.body.x > 1280) {
                     this.amove = 1
                     this.dmove = 0
@@ -5574,7 +5580,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
 
             if (this.safe == 0) {
-                this.screwshot = 1
+                if(this.under == 0){
+                    this.screwshot = 1
+                }else{
+                    this.wmove = 1
+                }
             }
 
             if (this.shieldpower < 10) {
