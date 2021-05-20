@@ -2490,7 +2490,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     class Boy {
         constructor(controller) {
-            this.striker = 0
+            this.striker = 10000
             this.name = "Coreboy"
             this.blasting = 0
             this.recovering = 0
@@ -3759,7 +3759,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     class Mass {
         constructor(controller) {
-            this.striker = 0
+            this.striker = 10000
             this.name = "Mass"
             this.blasting = 0
             this.brick = new Brick(1, 1, 1, 1)
@@ -5181,7 +5181,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     class Blastgirl {
         constructor(controller) {
-            this.striker = 0
+            this.striker = 10000
             this.name = "Blastgirl"
             this.blasting = 0
             this.brick = new Brick(1, 1, 1, 1)
@@ -6644,7 +6644,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     class Jox {
         constructor(controller) {
-            this.striker = 0
+            this.striker = 10000
             this.name = "Jox"
             this.blasting = 0
             this.reflecting = 0
