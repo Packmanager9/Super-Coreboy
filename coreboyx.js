@@ -2196,21 +2196,21 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             }
                             if (circle.ymom > 4) {
                                 if (circle.ymom > 1) {
-                                   // console.log("hitr")
+                                    // console.log("hitr")
                                     // if (circle.self.jumping == 0) {
                                     if (circle == circle.self.righthand) {
                                         // if (circle.self.rightarm.hypotenuse() < this.height * 5.2) {
-                                            if(circle.self.body.y <= this.edgeleft.y){
-                                                circle.ymom *= -1
-                                            }
+                                        if (circle.self.body.y <= this.edgeleft.y) {
+                                            circle.ymom *= -1
+                                        }
                                         // } else {
                                         //    // console.log("hit7")
                                         // }
                                     } else if (circle == circle.self.lefthand) {
                                         // if (circle.self.leftarm.hypotenuse() < this.height * 5.2) {
-                                            if(circle.self.body.y <= this.edgeleft.y){
-                                                circle.ymom *= -1
-                                            }
+                                        if (circle.self.body.y <= this.edgeleft.y) {
+                                            circle.ymom *= -1
+                                        }
                                         // } else {
                                         //    // console.log("hit8")
                                         // }
@@ -2231,15 +2231,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     // if (circle.self.jumping == 0) {
                                     if (circle == circle.self.righthand) {
                                         // if (circle.self.rightarm.hypotenuse() < this.height * 5.2) {
-                                            if(circle.self.body.y <= this.edgeleft.y){
-                                                circle.ymom *= -.6
-                                            }
+                                        if (circle.self.body.y <= this.edgeleft.y) {
+                                            circle.ymom *= -.6
+                                        }
                                         // }
                                     } else if (circle == circle.self.lefthand) {
                                         // if (circle.self.leftarm.hypotenuse() < this.height * 5.2) {
-                                            if(circle.self.body.y <= this.edgeleft.y){
-                                                circle.ymom *= -.6
-                                            }
+                                        if (circle.self.body.y <= this.edgeleft.y) {
+                                            circle.ymom *= -.6
+                                        }
                                         // }
                                     } else {
                                         circle.ymom *= -.6
@@ -2253,7 +2253,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             if (circle.y > this.center.y) {
                                 if (circle == circle.self.body) {
                                     if (circle.ymom < 0) {
-                                       // console.log("hit14")
+                                        // console.log("hit14")
                                         circle.ymom *= -1
                                         circle.frictiveMove()
                                     }
@@ -2265,7 +2265,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                                 if (circle.self.leftarm.hypotenuse() < this.height * 5.2) {
                                                     circle.y += .1
                                                 } else {
-                                                   // console.log("hit9")
+                                                    // console.log("hit9")
                                                     break
                                                 }
                                             }
@@ -2273,7 +2273,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                                 if (circle.self.rightarm.hypotenuse() < this.height * 5.2) {
                                                     circle.y += .1
                                                 } else {
-                                                   // console.log("hit10")
+                                                    // console.log("hit10")
                                                     break
                                                 }
                                             }
@@ -2282,7 +2282,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 } else {
                                     if (circle.self.body.y > circle.y) {
                                         if (circle.ymom < 0) {
-                                           // console.log("hit11")
+                                            // console.log("hit11")
                                             circle.ymom *= -1
                                             circle.frictiveMove()
                                         }
@@ -2292,14 +2292,22 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             } else {
                                 while (this.shape.doesPerimeterTouch(circle)) {
                                     if (circle != circle.self.lefthand && circle != circle.self.righthand) {
-                                        circle.y -= .1
+                                        if(circle.anchored != 1){
+                                            circle.y -= .1
+                                            }else {
+                                                break
+                                            }
                                     } else {
                                         if (circle == circle.self.lefthand) {
                                             if (circle.self.leftarm.hypotenuse() < this.height * 15.2) {
-                                                if(circle.self.body.y <= this.edgeleft.y){
+                                                if (circle.self.body.y <= this.edgeleft.y) {
                                                     //// console.log("hit15")
-                                                circle.y -= .1
-                                                }else{
+                                                    if(circle.anchored != 1){
+                                                        circle.y -= .1
+                                                        }else {
+                                                            break
+                                                        }
+                                                } else {
                                                     //// console.log("hit2")
                                                     break
                                                 }
@@ -2308,7 +2316,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                                     if (circle == circle.self.righthand) {
                                                         if (circle.self.body.y > circle.y) {
                                                             if (circle.x > circle.self.body.x) {
-                                                                circle.x -= .15
+                                                                if(circle.anchored != 1){
+                                                                    circle.x -= .15
+                                                                }
                                                             }
                                                         }
                                                     }
@@ -2316,29 +2326,37 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                                     if (circle == circle.self.lefthand) {
                                                         if (circle.self.body.y > circle.y) {
                                                             if (circle.x < circle.self.body.x) {
+                                                                if(circle.anchored != 1){
                                                                 circle.x += .15
+                                                                }
                                                             }
                                                         }
                                                     }
                                                 }
                                             } else {
-                                               // console.log("hit1")
+                                                // console.log("hit1")
                                                 break
                                             }
                                         }
                                         if (circle == circle.self.righthand) {
                                             if (circle.self.rightarm.hypotenuse() < this.height * 15.2) {
-                                                if(circle.self.body.y <= this.edgeleft.y){
-                                                    circle.y -= .1
-                                                    }else{
-                                                       // console.log("hit3")
-                                                        break
-                                                    }
+                                                if (circle.self.body.y <= this.edgeleft.y) {
+                                                    if(circle.anchored != 1){
+                                                        circle.y -= .1
+                                                        }else {
+                                                            break
+                                                        }
+                                                } else {
+                                                    // console.log("hit3")
+                                                    break
+                                                }
                                                 if (this.shape.doesPerimeterTouch(circle)) {
                                                     if (circle == circle.self.righthand) {
                                                         if (circle.self.body.y > circle.y) {
                                                             if (circle.x > circle.self.body.x) {
+                                                                if(circle.anchored != 1){
                                                                 circle.x -= .15
+                                                                }
                                                             }
                                                         }
                                                     }
@@ -2346,13 +2364,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                                     if (circle == circle.self.lefthand) {
                                                         if (circle.self.body.y > circle.y) {
                                                             if (circle.x < circle.self.body.x) {
+                                                                if(circle.anchored != 1){
                                                                 circle.x += .15
+                                                                }
                                                             }
                                                         }
                                                     }
                                                 }
                                             } else {
-                                               // console.log("hit4")
+                                                // console.log("hit4")
                                                 break
                                             }
                                         }
@@ -2362,7 +2382,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         if (circle == circle.self.righthand) {
                                             if (circle.self.body.y > circle.y) {
                                                 if (circle.x > circle.self.body.x) {
+                                                    if(circle.anchored != 1){
                                                     circle.x -= .15
+                                                    }
                                                 }
                                             }
                                         }
@@ -2370,7 +2392,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         if (circle == circle.self.lefthand) {
                                             if (circle.self.body.y > circle.y) {
                                                 if (circle.x < circle.self.body.x) {
+                                                    if(circle.anchored != 1){
                                                     circle.x += .15
+                                                    }
                                                 }
                                             }
                                         }
@@ -2400,21 +2424,38 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 
             while (this.shape.doesPerimeterTouch(circle)) {
-                if(circle.self.body.y < this.edgeleft.y){
-                    circle.y-=.1
-                }else if(circle.self.body.y > this.edgeleft.y + (this.height*2)){
-                    circle.y+=.1
-                }else{
+                if (circle.self.body.x < this.edgeright.x + (circle.self.body.radius*1.2)) {
+                    if (circle.self.body.x > this.edgeleft.x - (circle.self.body.radius*1.2)) {
+                        if (circle.self.body.y < this.edgeleft.y) {
+                            if(circle.anchored != 1){
+                            circle.y -= .1
+                            }else {
+                                break
+                            }
+                        } else if (circle.self.body.y > this.edgeleft.y + (this.height * 2)) {
+                            if(circle.anchored != 1){
+                            circle.y += .1
+                            }else {
+                                break
+                            }
+                        } else {
+                            break
+                        }
+                    } else {
+                        break
+                    }
+                } else {
                     break
                 }
             }
         }
-        draw() {
-            this.link.draw()
-            // this.edgeright.draw()
-            // this.edgeleft.draw()
-        }
+    
+    draw() {
+        this.link.draw()
+        // this.edgeright.draw()
+        // this.edgeleft.draw()
     }
+}
 
     let stage = new Stage()
 
@@ -2786,7 +2827,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (this.lefthand.fired <= 0) {
                             if (this.lefthand.anchored == 0) {
                                 this.lefthand.ymom = 0
-                                this.lefthand.xmom = -this.punchspeed * 14 
+                                this.lefthand.xmom = -this.punchspeed * 14
                                 this.lefthand.fired = 18
                             }
                         }
@@ -3198,8 +3239,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
                     if (Math.abs(this.body.x - boys[t].body.x) < 70 && this.body.y > boys[t].body.y) {
                         this.screwshot = 1
-                    }else if (this.body.y - boys[t].body.y > 100) {
-                        if(Math.random()< .01){
+                    } else if (this.body.y - boys[t].body.y > 100) {
+                        if (Math.random() < .01) {
                             this.downspike = 1
                         }
                     }
@@ -5015,11 +5056,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
             for (let t = 0; t < this.nodes.length; t++) {
                 //this.collideStage()
 
-            // if(this.righthand.fired > 14){
-            //     this.righthand.color = "#ffffff"
-            // }else{
-            //     this.righthand.color = "#FF0000"
-            // }
+                // if(this.righthand.fired > 14){
+                //     this.righthand.color = "#ffffff"
+                // }else{
+                //     this.righthand.color = "#FF0000"
+                // }
                 this.nodes[t].draw()
             }
             for (let t = 0; t < this.springs.length; t++) {
@@ -7968,234 +8009,234 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     for (let t = 0; t < 8; t++) {
 
-        let selector = new Selector()
-        if (t == 0) {
-            selector.body.color = "#FF0000"
-        }
-        if (t == 1) {
-            selector.body.color = "#00FF00"
-        }
-        if (t == 2) {
-            selector.body.color = "#0000FF"
-        }
-        if (t == 3) {
-            selector.body.color = "#FFFF00"
-        }
-        if (t == 4) {
-            selector.body.color = "#FFAA00"
-        }
-        if (t == 5) {
-            selector.body.color = "#00FFFF"
-        }
-        if (t == 6) {
-            selector.body.color = "#FF00FF"
-        }
-        if (t == 7) {
-            selector.body.color = "#bbbbbb"
-        }
-        selectors.push(selector)
-
+    let selector = new Selector()
+    if (t == 0) {
+        selector.body.color = "#FF0000"
     }
+    if (t == 1) {
+        selector.body.color = "#00FF00"
+    }
+    if (t == 2) {
+        selector.body.color = "#0000FF"
+    }
+    if (t == 3) {
+        selector.body.color = "#FFFF00"
+    }
+    if (t == 4) {
+        selector.body.color = "#FFAA00"
+    }
+    if (t == 5) {
+        selector.body.color = "#00FFFF"
+    }
+    if (t == 6) {
+        selector.body.color = "#FF00FF"
+    }
+    if (t == 7) {
+        selector.body.color = "#bbbbbb"
+    }
+    selectors.push(selector)
 
-    // object instantiation and creation happens here 
+}
 
-    //, new Circle(0, 0, 1, "transparent"), new Circle(0, 0, 1, "transparent")]
-    let counter = 0
+// object instantiation and creation happens here 
 
-    // if (keysPressed['v']) {
-    //     if (keysPressed['q']) {
-    //         if (Math.random() < .01) {
+//, new Circle(0, 0, 1, "transparent"), new Circle(0, 0, 1, "transparent")]
+let counter = 0
 
-    //             canvas_context.clearRect(0, 0, canvas.width * 4, canvas.height * 4)  // refreshes the image
-    //             gamepadAPI[0].update()
-    //             gamepadAPI[1].update()
-    //             gamepadAPI[2].update()
-    //             gamepadAPI[3].update() //checks for button presses/stick movement on the connected controller)
-    //             // game code goes here
-    //             stage.draw()
-    //             for (let t = 0; t < boys.length; t++) {
-    //                 boys[t].draw()
-    //             }
-    //             for (let t = 0; t < boom.length; t++) {
-    //                 if (boys[t].body.y > 1440 || boys[t].body.x < 0 || boys[t].body.x > 2560) {
-    //                     scores[t]++
-    //                     if (boys[t].go !== 1) {
-    //                         boys[t].go = 1
-    //                         boom[t] = new Explosion(boys[t].body.x)
-    //                         // if (Math.random() < .5) {
-    //                         //     boys[t] = new Mass(t)
-    //                         //     boys[t].body.color = getRandomColor()
-    //                         // } else {
-    //                         boys[t] = new Mass(t)
-    //                         boys[t].body.color = getRandomColor()
-    //                         if (t == 0) {
-    //                             boys[t].body.color = "#ffAA00"
-    //                         }
-    //                         if (t == 1) {
-    //                             boys[t].body.color = "#ff0000"
-    //                         }
-    //                         // }
-    //                     }
-    //                 }
-    //                 boom[t].draw()
-    //             }
-    //             canvas_context.font = "50px arial"
-    //             canvas_context.fillStyle = "white"
-    //             canvas_context.fillText(`Score: Human ${scores[1]}, Robot ${scores[0]}`, 1000, 100)
+// if (keysPressed['v']) {
+//     if (keysPressed['q']) {
+//         if (Math.random() < .01) {
 
-    //         }
-    //     }
+//             canvas_context.clearRect(0, 0, canvas.width * 4, canvas.height * 4)  // refreshes the image
+//             gamepadAPI[0].update()
+//             gamepadAPI[1].update()
+//             gamepadAPI[2].update()
+//             gamepadAPI[3].update() //checks for button presses/stick movement on the connected controller)
+//             // game code goes here
+//             stage.draw()
+//             for (let t = 0; t < boys.length; t++) {
+//                 boys[t].draw()
+//             }
+//             for (let t = 0; t < boom.length; t++) {
+//                 if (boys[t].body.y > 1440 || boys[t].body.x < 0 || boys[t].body.x > 2560) {
+//                     scores[t]++
+//                     if (boys[t].go !== 1) {
+//                         boys[t].go = 1
+//                         boom[t] = new Explosion(boys[t].body.x)
+//                         // if (Math.random() < .5) {
+//                         //     boys[t] = new Mass(t)
+//                         //     boys[t].body.color = getRandomColor()
+//                         // } else {
+//                         boys[t] = new Mass(t)
+//                         boys[t].body.color = getRandomColor()
+//                         if (t == 0) {
+//                             boys[t].body.color = "#ffAA00"
+//                         }
+//                         if (t == 1) {
+//                             boys[t].body.color = "#ff0000"
+//                         }
+//                         // }
+//                     }
+//                 }
+//                 boom[t].draw()
+//             }
+//             canvas_context.font = "50px arial"
+//             canvas_context.fillStyle = "white"
+//             canvas_context.fillText(`Score: Human ${scores[1]}, Robot ${scores[0]}`, 1000, 100)
 
-    // } else {
+//         }
+//     }
 
-    // canvas_context.clearRect(0, 0, canvas.width * 4, canvas.height * 4)  // refreshes the image
+// } else {
 
-    // stage.draw()
-    // for (let t = 0; t < boys.length; t++) {
-    //     boys[t].draw()
-    // }
-    // canvas_context.font = "50px arial"
-    // canvas_context.fillStyle = "white"
+// canvas_context.clearRect(0, 0, canvas.width * 4, canvas.height * 4)  // refreshes the image
 
-
-
-    let massSelector = new Circle(700, 700, 200, "White")
-
-    let boySelector = new Circle(1200, 700, 200, "White")
-    let blastSelector = new Circle(1700, 700, 200, "White")
-    let joxSelector = new Circle(2200, 700, 200, "White")
-    characterbuttons.push(massSelector)
-    characterbuttons.push(boySelector)
-    characterbuttons.push(blastSelector)
-    characterbuttons.push(joxSelector)
+// stage.draw()
+// for (let t = 0; t < boys.length; t++) {
+//     boys[t].draw()
+// }
+// canvas_context.font = "50px arial"
+// canvas_context.fillStyle = "white"
 
 
-    // canvas_context.fillText(`Score: Human ${scores[1]}, Robot ${scores[0]}`, 1000, 100)
-    // }
-    function main() {
-        if (counter == 1) {
 
-            canvas_context.clearRect(0, 0, canvas.width * 4, canvas.height * 4)  // refreshes the image
-            gamepadAPI[0].update()
-            gamepadAPI[1].update()
-            gamepadAPI[2].update()
-            gamepadAPI[3].update() //checks for button presses/stick movement on the connected controller)
-            // game code goes here
-            stage.draw()
-            for (let t = 0; t < boys.length; t++) {
-                boys[t].draw()
-            }
-            for (let t = 0; t < boys.length; t++) {
-                boys[t].enemycollide()
-            }
-            for (let t = 0; t < boom.length; t++) {
-                if (boys[t].body.y > (1440 * (invscale * .5)) || boys[t].body.x < 0 || boys[t].body.x > (2560 * (invscale * .5))) {
-                    scores[t]++
-                    if (boys[t].go !== 1) {
-                        boys[t].go = 1
-                        boom[t] = new Explosion(boys[t].body.x)
-                        // if (Math.random() < .5) {
-                        //     boys[t] = new Mass(t)
-                        //     boys[t].body.color = getRandomColor()
-                        // } else {
+let massSelector = new Circle(700, 700, 200, "White")
 
-                        if (t == 0) {
-                            if (Math.random() < .5) {
-                                boys[t] = boys[t].copy()
-                            } else {
-                                boys[t] = boys[t].copy()
-                            }
+let boySelector = new Circle(1200, 700, 200, "White")
+let blastSelector = new Circle(1700, 700, 200, "White")
+let joxSelector = new Circle(2200, 700, 200, "White")
+characterbuttons.push(massSelector)
+characterbuttons.push(boySelector)
+characterbuttons.push(blastSelector)
+characterbuttons.push(joxSelector)
 
+
+// canvas_context.fillText(`Score: Human ${scores[1]}, Robot ${scores[0]}`, 1000, 100)
+// }
+function main() {
+    if (counter == 1) {
+
+        canvas_context.clearRect(0, 0, canvas.width * 4, canvas.height * 4)  // refreshes the image
+        gamepadAPI[0].update()
+        gamepadAPI[1].update()
+        gamepadAPI[2].update()
+        gamepadAPI[3].update() //checks for button presses/stick movement on the connected controller)
+        // game code goes here
+        stage.draw()
+        for (let t = 0; t < boys.length; t++) {
+            boys[t].draw()
+        }
+        for (let t = 0; t < boys.length; t++) {
+            boys[t].enemycollide()
+        }
+        for (let t = 0; t < boom.length; t++) {
+            if (boys[t].body.y > (1440 * (invscale * .5)) || boys[t].body.x < 0 || boys[t].body.x > (2560 * (invscale * .5))) {
+                scores[t]++
+                if (boys[t].go !== 1) {
+                    boys[t].go = 1
+                    boom[t] = new Explosion(boys[t].body.x)
+                    // if (Math.random() < .5) {
+                    //     boys[t] = new Mass(t)
+                    //     boys[t].body.color = getRandomColor()
+                    // } else {
+
+                    if (t == 0) {
+                        if (Math.random() < .5) {
+                            boys[t] = boys[t].copy()
                         } else {
-                            if (Math.random() < .5) {
-                                boys[t] = boys[t].copy()
-                            } else {
-                                boys[t] = boys[t].copy()
-                            }
+                            boys[t] = boys[t].copy()
                         }
 
-                        // }
+                    } else {
+                        if (Math.random() < .5) {
+                            boys[t] = boys[t].copy()
+                        } else {
+                            boys[t] = boys[t].copy()
+                        }
                     }
+
+                    // }
                 }
-                boom[t].draw()
             }
-            canvas_context.font = "50px arial"
-            canvas_context.fillStyle = "white"
-            if (boys.length == 2) {
-                canvas_context.fillText(`Score: Human ${scores[1]}, Robot ${scores[0]}`, 1000, 100)
-            }
-            // canvas_context.fillText(`Falls: `, 200, 100)
-            // canvas_context.fillText(`Red ${scores[0]}`, 200, 150)
-            // canvas_context.fillText(`Green ${scores[1]}`, 200, 200)
-            // canvas_context.fillText(`Blue ${scores[2]} `, 200, 250)
-            // canvas_context.fillText(`Yellow ${scores[3]} `, 200, 300)
-            // }
-        } else {
-            canvas_context.clearRect(0, 0, canvas.width * 4, canvas.height * 4)
+            boom[t].draw()
+        }
+        canvas_context.font = "50px arial"
+        canvas_context.fillStyle = "white"
+        if (boys.length == 2) {
+            canvas_context.fillText(`Score: Human ${scores[1]}, Robot ${scores[0]}`, 1000, 100)
+        }
+        // canvas_context.fillText(`Falls: `, 200, 100)
+        // canvas_context.fillText(`Red ${scores[0]}`, 200, 150)
+        // canvas_context.fillText(`Green ${scores[1]}`, 200, 200)
+        // canvas_context.fillText(`Blue ${scores[2]} `, 200, 250)
+        // canvas_context.fillText(`Yellow ${scores[3]} `, 200, 300)
+        // }
+    } else {
+        canvas_context.clearRect(0, 0, canvas.width * 4, canvas.height * 4)
 
 
-            massSelector.draw()
-            boySelector.draw()
-            blastSelector.draw()
-            joxSelector.draw()
+        massSelector.draw()
+        boySelector.draw()
+        blastSelector.draw()
+        joxSelector.draw()
 
-            canvas_context.font = "60px arial"
-            canvas_context.fillStyle = "black"
-            canvas_context.fillText(`Mass`, massSelector.x - (massSelector.radius * .4), massSelector.y - (massSelector.radius * .5))
+        canvas_context.font = "60px arial"
+        canvas_context.fillStyle = "black"
+        canvas_context.fillText(`Mass`, massSelector.x - (massSelector.radius * .4), massSelector.y - (massSelector.radius * .5))
 
-            canvas_context.font = "60px arial"
-            canvas_context.fillStyle = "black"
-            canvas_context.fillText(`Coreboy`, boySelector.x - (boySelector.radius * .6), boySelector.y - (boySelector.radius * .5))
+        canvas_context.font = "60px arial"
+        canvas_context.fillStyle = "black"
+        canvas_context.fillText(`Coreboy`, boySelector.x - (boySelector.radius * .6), boySelector.y - (boySelector.radius * .5))
 
-            canvas_context.font = "60px arial"
-            canvas_context.fillStyle = "black"
-            canvas_context.fillText(`Blastgirl`, blastSelector.x - (blastSelector.radius * .6), blastSelector.y - (blastSelector.radius * .5))
+        canvas_context.font = "60px arial"
+        canvas_context.fillStyle = "black"
+        canvas_context.fillText(`Blastgirl`, blastSelector.x - (blastSelector.radius * .6), blastSelector.y - (blastSelector.radius * .5))
 
-            canvas_context.font = "60px arial"
-            canvas_context.fillStyle = "black"
-            canvas_context.fillText(`Jox`, joxSelector.x - (joxSelector.radius * .2), joxSelector.y - (joxSelector.radius * .5))
+        canvas_context.font = "60px arial"
+        canvas_context.fillStyle = "black"
+        canvas_context.fillText(`Jox`, joxSelector.x - (joxSelector.radius * .2), joxSelector.y - (joxSelector.radius * .5))
 
 
+        for (let t = 0; t < selectors.length; t++) {
+            selectors[t].draw()
+        }
+
+        canvas_context.font = "60px arial"
+        canvas_context.fillStyle = "white"
+        canvas_context.fillText(`Press Space to Start`, 1000, 300)
+        if (keysPressed[' ']) {
+            let wet = boys.length
             for (let t = 0; t < selectors.length; t++) {
-                selectors[t].draw()
-            }
-
-            canvas_context.font = "60px arial"
-            canvas_context.fillStyle = "white"
-            canvas_context.fillText(`Press Space to Start`, 1000, 300)
-            if (keysPressed[' ']) {
-                let wet = boys.length
-                for (let t = 0; t < selectors.length; t++) {
-                    for (let k = 0; k < characterbuttons.length; k++) {
-                        if (characterbuttons[k].isPointInside(selectors[t].body)) {
-                            let coreboy
-                            if (k == 0) {
-                                coreboy = new Mass(boys.length)
-                                coreboy.body.color = selectors[t].body.color
-                            } else if (k == 1) {
-                                coreboy = new Boy(boys.length)
-                                coreboy.body.color = selectors[t].body.color
-                            } else if (k == 2) {
-                                coreboy = new Blastgirl(boys.length)
-                                coreboy.body.color = selectors[t].body.color
-                            } else if (k == 3) {
-                                coreboy = new Jox(boys.length)
-                                coreboy.body.color = invertColor(selectors[t].body.color)
-                            }
-
-                            boys.push(coreboy)
-                            boom.push(new Circle(0, 0, 1, "transparent"))
-                            scores.push(0)
-                            wet--
+                for (let k = 0; k < characterbuttons.length; k++) {
+                    if (characterbuttons[k].isPointInside(selectors[t].body)) {
+                        let coreboy
+                        if (k == 0) {
+                            coreboy = new Mass(boys.length)
+                            coreboy.body.color = selectors[t].body.color
+                        } else if (k == 1) {
+                            coreboy = new Boy(boys.length)
+                            coreboy.body.color = selectors[t].body.color
+                        } else if (k == 2) {
+                            coreboy = new Blastgirl(boys.length)
+                            coreboy.body.color = selectors[t].body.color
+                        } else if (k == 3) {
+                            coreboy = new Jox(boys.length)
+                            coreboy.body.color = invertColor(selectors[t].body.color)
                         }
+
+                        boys.push(coreboy)
+                        boom.push(new Circle(0, 0, 1, "transparent"))
+                        scores.push(0)
+                        wet--
                     }
                 }
+            }
 
-                if (wet == 0) {
-                    counter = 1
-                }
+            if (wet == 0) {
                 counter = 1
             }
+            counter = 1
         }
     }
+}
 })
