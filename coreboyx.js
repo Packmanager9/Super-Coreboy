@@ -2956,7 +2956,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             for (let k = 0; k < boys.length; k++) {
                 if (this != boys[k]) {
                     for (let t = 0; t < stage.bricks.length; t++) {
-                        if (stage.bricks[t].edgeleft.x < (this.body.x + (this.body.radius * 1.2)) && stage.bricks[t].edgeright.x > (this.body.x - (this.body.radius * 1.2))) {
+                        if (stage.bricks[t].edgeleft.x < (this.body.x + (this.body.radius * 1.6)) && stage.bricks[t].edgeright.x > (this.body.x - (this.body.radius * 1.6))) {
                             if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) < this.body.y) {
                                 if (this.body.y - Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) > (stage.bricks[t].height * 2) + 10) {
                                     this.recovering = 1
@@ -3086,6 +3086,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     this.amove = 0
                     this.dmove = 1
                     this.wmove = 1
+                    this.amomu = 0
+                    this.dmomu = 0
                 }
                 this.fleeing = 0
             } else {
@@ -3189,13 +3191,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
             for (let t = 0; t < boys.length; t++) {
                 if (this != boys[t]) {
 
-                    if (Math.abs(this.body.x - boys[t].body.x) < 50 && this.body.y < boys[t].body.y) {
+                    if (Math.abs(this.body.x - boys[t].body.x) < 45 && this.body.y < boys[t].body.y) {
                         this.downspike = 1
                     } else if (Math.abs(this.body.x - boys[t].body.x) < 150 && this.body.y <= boys[t].body.y && (boys[t].righthand.anchored == 1 || boys[t].lefthand.anchored == 1)) {
                         this.hortsmash = 1
                     }
                     if (Math.abs(this.body.x - boys[t].body.x) < 70 && this.body.y > boys[t].body.y) {
                         this.screwshot = 1
+                    }else if (this.body.y - boys[t].body.y > 100) {
+                        if(Math.random()< .01){
+                            this.downspike = 1
+                        }
                     }
 
 
@@ -3261,7 +3267,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             this.safe = 0
             for (let t = 0; t < stage.bricks.length; t++) {
-                if (stage.bricks[t].edgeleft.x < (this.body.x + (this.body.radius * 1.5)) && stage.bricks[t].edgeright.x > (this.body.x - (this.body.radius * 1.5))) {
+                if (stage.bricks[t].edgeleft.x < (this.body.x + (this.body.radius * 2.5)) && stage.bricks[t].edgeright.x > (this.body.x - (this.body.radius * 2.5))) {
                     if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) > this.body.y) {
                         this.safe = 1
                         break
@@ -3460,6 +3466,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     stage.bricks[t].doesPerimeterTouch(this.nodes[k])
                 }
             }
+            this.fixupshoulder()
             //this.enemycollide()
         }
         draw() {
@@ -4150,7 +4157,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             for (let k = 0; k < boys.length; k++) {
                 if (this != boys[k]) {
                     for (let t = 0; t < stage.bricks.length; t++) {
-                        if (stage.bricks[t].edgeleft.x < (this.body.x + (this.body.radius * 1.2)) && stage.bricks[t].edgeright.x > (this.body.x - (this.body.radius * 1.2))) {
+                        if (stage.bricks[t].edgeleft.x < (this.body.x + (this.body.radius * 1.6)) && stage.bricks[t].edgeright.x > (this.body.x - (this.body.radius * 1.6))) {
                             if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) < this.body.y) {
                                 if (boys[k].brick == stage.bricks[t]) {
                                     this.under = 1
@@ -4277,6 +4284,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     this.amove = 0
                     this.dmove = 1
                     this.wmove = 1
+                    this.amomu = 0
+                    this.dmomu = 0
                 }
                 this.fleeing = 0
             } else {
@@ -4477,7 +4486,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             this.safe = 0
             for (let t = 0; t < stage.bricks.length; t++) {
-                if (stage.bricks[t].edgeleft.x < (this.body.x + (this.body.radius * 1.5)) && stage.bricks[t].edgeright.x > (this.body.x - (this.body.radius * 1.5))) {
+                if (stage.bricks[t].edgeleft.x < (this.body.x + (this.body.radius * 2.5)) && stage.bricks[t].edgeright.x > (this.body.x - (this.body.radius * 2.5))) {
                     if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) > this.body.y) {
                         this.safe = 1
                         break
@@ -4845,6 +4854,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     stage.bricks[t].doesPerimeterTouch(this.nodes[k])
                 }
             }
+            this.fixupshoulder()
             //this.enemycollide()
         }
         draw() {
@@ -5545,7 +5555,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             for (let k = 0; k < boys.length; k++) {
                 if (this != boys[k]) {
                     for (let t = 0; t < stage.bricks.length; t++) {
-                        if (stage.bricks[t].edgeleft.x < (this.body.x + (this.body.radius * 1.2)) && stage.bricks[t].edgeright.x > (this.body.x - (this.body.radius * 1.2))) {
+                        if (stage.bricks[t].edgeleft.x < (this.body.x + (this.body.radius * 1.6)) && stage.bricks[t].edgeright.x > (this.body.x - (this.body.radius * 1.6))) {
                             if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) < this.body.y) {
                                 if (boys[k].brick == stage.bricks[t]) {
                                     this.under = 1
@@ -5678,6 +5688,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     this.amove = 0
                     this.dmove = 1
                     this.wmove = 1
+                    this.amomu = 0
+                    this.dmomu = 0
                 }
                 this.fleeing = 0
             } else {
@@ -5892,7 +5904,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             this.safe = 0
             for (let t = 0; t < stage.bricks.length; t++) {
-                if (stage.bricks[t].edgeleft.x < (this.body.x + (this.body.radius * 1.5)) && stage.bricks[t].edgeright.x > (this.body.x - (this.body.radius * 1.5))) {
+                if (stage.bricks[t].edgeleft.x < (this.body.x + (this.body.radius * 2.5)) && stage.bricks[t].edgeright.x > (this.body.x - (this.body.radius * 2.5))) {
                     if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) > this.body.y) {
                         this.safe = 1
                         break
@@ -6282,6 +6294,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     stage.bricks[t].doesPerimeterTouch(this.nodes[k])
                 }
             }
+            this.fixupshoulder()
             //this.enemycollide()
         }
         draw() {
@@ -6989,7 +7002,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             for (let k = 0; k < boys.length; k++) {
                 if (this != boys[k]) {
                     for (let t = 0; t < stage.bricks.length; t++) {
-                        if (stage.bricks[t].edgeleft.x < (this.body.x + (this.body.radius * 1.2)) && stage.bricks[t].edgeright.x > (this.body.x - (this.body.radius * 1.2))) {
+                        if (stage.bricks[t].edgeleft.x < (this.body.x + (this.body.radius * 1.6)) && stage.bricks[t].edgeright.x > (this.body.x - (this.body.radius * 1.6))) {
                             if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) < this.body.y) {
                                 if (boys[k].brick == stage.bricks[t]) {
                                     this.under = 1
@@ -7353,7 +7366,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             this.safe = 0
             for (let t = 0; t < stage.bricks.length; t++) {
-                if (stage.bricks[t].edgeleft.x < (this.body.x + (this.body.radius * 1.5)) && stage.bricks[t].edgeright.x > (this.body.x - (this.body.radius * 1.5))) {
+                if (stage.bricks[t].edgeleft.x < (this.body.x + (this.body.radius * 2.5)) && stage.bricks[t].edgeright.x > (this.body.x - (this.body.radius * 2.5))) {
                     if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) > this.body.y) {
                         this.safe = 1
                         break
@@ -7715,6 +7728,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     stage.bricks[t].doesPerimeterTouch(this.nodes[k])
                 }
             }
+            this.fixupshoulder()
             //this.enemycollide()
         }
         draw() {
