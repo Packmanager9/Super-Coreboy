@@ -7023,6 +7023,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 this.amove = 0
                 this.amomu = 0
                 this.screwshot = 0
+                this.righthand.anchored = - 5
+                this.lefthand.anchored = - 5
                 this.wmove = 0
             }
             if (this.amomu > 0) {
@@ -7030,6 +7032,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 this.dmove = 0
                 this.dmomu = 0
                 this.screwshot = 0
+                this.righthand.anchored = - 5
+                this.lefthand.anchored = - 5
                 this.wmove = 0
             }
 
