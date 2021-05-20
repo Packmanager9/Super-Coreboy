@@ -2985,7 +2985,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.safe = 0
             this.recovering = 0
             for (let t = 0; t < stage.bricks.length; t++) {
-                if (stage.bricks[t].edgeleft.x < (this.body.x + this.body.radius) && stage.bricks[t].edgeright.x > (this.body.x - this.body.radius)) {
+                
+                if (stage.bricks[t].edgeleft.x < (this.body.x + (this.body.radius * 2.5)) && stage.bricks[t].edgeright.x > (this.body.x - (this.body.radius * 2.5))) {
                     if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) > this.body.y) {
                         this.safe = 1
                         break
@@ -4186,7 +4187,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             this.safe = 0
             for (let t = 0; t < stage.bricks.length; t++) {
-                if (stage.bricks[t].edgeleft.x < (this.body.x + this.body.radius) && stage.bricks[t].edgeright.x > (this.body.x - this.body.radius)) {
+                
+                if (stage.bricks[t].edgeleft.x < (this.body.x + (this.body.radius * 2.5)) && stage.bricks[t].edgeright.x > (this.body.x - (this.body.radius * 2.5))) {
                     if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) > this.body.y) {
                         this.safe = 1
                         break
@@ -5584,7 +5586,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             this.safe = 0
             for (let t = 0; t < stage.bricks.length; t++) {
-                if (stage.bricks[t].edgeleft.x < (this.body.x + this.body.radius) && stage.bricks[t].edgeright.x > (this.body.x - this.body.radius)) {
+                
+                if (stage.bricks[t].edgeleft.x < (this.body.x + (this.body.radius * 2.5)) && stage.bricks[t].edgeright.x > (this.body.x - (this.body.radius * 2.5))) {
                     if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) > this.body.y) {
                         this.safe = 1
                         break
@@ -7031,7 +7034,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             this.safe = 0
             for (let t = 0; t < stage.bricks.length; t++) {
-                if (stage.bricks[t].edgeleft.x < (this.body.x + this.body.radius) && stage.bricks[t].edgeright.x > (this.body.x - this.body.radius)) {
+                
+                if (stage.bricks[t].edgeleft.x < (this.body.x + (this.body.radius * 2.5)) && stage.bricks[t].edgeright.x > (this.body.x - (this.body.radius * 2.5))) {
                     if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) > this.body.y) {
                         this.safe = 1
                         break
