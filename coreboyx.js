@@ -1814,12 +1814,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
             // boys[0].righthand.anchored = 0
             // boys[0].lefthand.anchored = 0
-            // boys[0].righthand.x += (TIP_engine.x * 2) - boys[0].righthand.x
-            // boys[0].righthand.y += (TIP_engine.y * 2) - boys[0].righthand.y
-            // boys[0].lefthand.x += (TIP_engine.x * 2) - boys[0].lefthand.x
-            // boys[0].lefthand.y += (TIP_engine.y * 2) - boys[0].lefthand.y
-            // boys[0].body.x = TIP_engine.x * 2
-            // boys[0].body.y = TIP_engine.y * 2
+            // boys[0].righthand.x += (TIP_engine.x * 1) - boys[0].righthand.x
+            // boys[0].righthand.y += (TIP_engine.y * 1) - boys[0].righthand.y
+            // boys[0].lefthand.x += (TIP_engine.x * 1) - boys[0].lefthand.x
+            // boys[0].lefthand.y += (TIP_engine.y * 1) - boys[0].lefthand.y
+            // boys[0].body.x = TIP_engine.x * 1
+            // boys[0].body.y = TIP_engine.y * 1
             // boys[0].body.xmom = 0
             // boys[0].body.ymom = 0
             // example usage: if(object.isPointInside(TIP_engine)){ take action }
@@ -7038,15 +7038,21 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     this.screwshot = 1
                 }
                 if (this.body.x > (1280 * (invscale * .5))) {
+                    this.leftshot = 1
+                    this.rightshot = 0
                     this.amove = 1
                     this.dmove = 0
                     this.wmove = 1
                     this.amomu = 0
                     this.dmomu = 0
                 } else {
+                    this.rightshot = 1
+                    this.leftshot = 0
                     this.amove = 0
                     this.dmove = 1
                     this.wmove = 1
+                    this.amomu = 0
+                    this.dmomu = 0
                 }
                 this.fleeing = 0
             } else {
@@ -7174,10 +7180,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (Math.random() < .5) {
                 this.screwshot = 0
             }
-            if (Math.random() < .01 || this.charge == 0) {
+            if (Math.random() < .01 ) {
                 this.rightshot = 0
             }
-            if (Math.random() < .01 || this.charge == 0) {
+            if (Math.random() < .01 ) {
                 this.leftshot = 0
             }
             if (Math.random() < .1) {
@@ -7351,10 +7357,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 
 
-                if (this.righthand.fired <= 0) {
-                    if (this.righthand.anchored == 0) {
+                if (this.blasting <= -15) {
                         if (this.rightshot == 1) {
-
                             if (this.face == 1) {
                                 if (this.righthand.anchored == 0) {
                                     if (this.charge <= 0) {
@@ -7363,6 +7367,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             this.charge += 40.5
                                         }
                                         this.body.xmom = 35
+                                        if(this.body.ymom > 0){
+                                            this.body.ymom = -1
+                                        }
                                         this.grounded = 0
                                         this.jumping = 1
                                         this.body.fired = 20
@@ -7372,7 +7379,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             }
                         }
                         if (this.leftshot == 1) {
-
                             if (this.face == -1) {
                                 if (this.lefthand.anchored == 0) {
                                     if (this.charge <= 0) {
@@ -7381,6 +7387,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             this.charge += 40.5
                                         }
                                         this.body.xmom = -35
+                                          if(this.body.ymom > 0){
+                                            this.body.ymom = -1
+                                        }
                                         this.grounded = 0
                                         this.jumping = 1
                                         this.body.fired = 20
@@ -7389,7 +7398,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 }
                             }
                         }
-                    }
                 }
 
             }
@@ -7470,7 +7478,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (this.breaktimer <= 0 && this.shield == 0) {
 
 
-                if (this.righthand.fired <= 0) {
+                if (this.blasting <= -15) {
                     if (gamepadAPI[this.controller].buttonsStatus.includes('B') || keysPressed['l']) {
                         if (this.face == 1) {
                             if (this.righthand.anchored == 0) {
@@ -7480,6 +7488,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         this.charge += 40.5
                                     }
                                     this.body.xmom = 35
+                                      if(this.body.ymom > 0){
+                                            this.body.ymom = -1
+                                        }
                                     this.grounded = 0
                                     this.jumping = 1
                                     this.body.fired = 20
@@ -7495,6 +7506,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         this.charge += 40.5
                                     }
                                     this.body.xmom = -35
+                                      if(this.body.ymom > 0){
+                                            this.body.ymom = -1
+                                        }
                                     this.grounded = 0
                                     this.jumping = 1
                                     this.body.fired = 20
