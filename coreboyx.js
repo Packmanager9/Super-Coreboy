@@ -3,6 +3,7 @@ let boys = []
 let selectors = []
 let characterbuttons = []
 let scores = []
+let drops = []
 let baselaunch = .3
 let vsmashlimit = 35
 let jumplimit = 20
@@ -2489,6 +2490,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     class Boy {
         constructor(controller) {
+            this.striker = 0
+            this.name = "Coreboy"
             this.blasting = 0
             this.recovering = 0
             this.dmomu = 0
@@ -2629,6 +2632,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     for (let k = 0; k < boys[t].shots.length; k++) {
                         if (boys[t].shots[k].marked != 1) {
                             if (boys[t].shots[k].doesPerimeterTouch(this.body)) {
+                                this.striker = t
                                 if (this.shield == 1) {
                                     this.shieldpower -= (Math.abs(boys[t].shots[k].xmom) + Math.abs(boys[t].shots[k].ymom)) / 3
                                 } else {
@@ -2644,6 +2648,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     boys[t].righthands = castBetween(boys[t].rightshoulder, boys[t].righthand, 20, boys[t].rightshoulder.radius)
                     boys[t].lefthands = castBetween(boys[t].leftshoulder, boys[t].lefthand, 20, boys[t].leftshoulder.radius)
                     if (boys[t].righthands.doesPerimeterTouch(this.body) || boys[t].righthand.doesPerimeterTouch(this.body)) {
+                        this.striker = t
                         if (boys[t].righthand.fired > 14) {
                             if (this.shield == 1) {
                                 this.shieldpower -= (Math.abs(boys[t].righthand.xmom) + Math.abs(boys[t].righthand.ymom)) / 11
@@ -2672,6 +2677,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
                         }
                     } else if (boys[t].lefthands.doesPerimeterTouch(this.body) || boys[t].lefthand.doesPerimeterTouch(this.body)) {
+                        this.striker = t
                         if (boys[t].lefthand.fired > 14) {
 
                             if (this.shield == 1) {
@@ -2698,6 +2704,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         }
                     }
                     if (boys[t].screwangle != 0 && boys[t].body.doesPerimeterTouch(this.body)) {
+                        this.striker = t
                         if (boys[t].body.fired > 0) {
                             if (this.shield == 1) {
                                 this.shieldpower -= (Math.abs(boys[t].body.xmom) + Math.max(20, Math.abs(boys[t].body.ymom))) / 3
@@ -3752,6 +3759,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     class Mass {
         constructor(controller) {
+            this.striker = 0
+            this.name = "Mass"
             this.blasting = 0
             this.brick = new Brick(1, 1, 1, 1)
             this.dmomu = 0
@@ -3952,6 +3961,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             for (let k = 0; k < boys[t].shots.length; k++) {
                                 if (boys[t].shots[k].marked != 1) {
                                     if (boys[t].shots[k].doesPerimeterTouch(this.body)) {
+                                        this.striker = t
                                         if (this.shield == 1) {
                                             this.shieldpower -= (Math.abs(boys[t].shots[k].xmom) + Math.abs(boys[t].shots[k].ymom)) / 3
                                         } else {
@@ -3967,6 +3977,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             boys[t].lefthands = castBetween(boys[t].leftshoulder, boys[t].lefthand, 20, boys[t].leftshoulder.radius)
                             boys[t].righthands = castBetween(boys[t].rightshoulder, boys[t].righthand, 20, boys[t].rightshoulder.radius)
                             if (boys[t].righthands.doesPerimeterTouch(this.body) || boys[t].righthand.doesPerimeterTouch(this.body)) {
+                                this.striker = t
                                 if (boys[t].righthand.fired > 14) {
                                     if (this.shield == 1) {
                                         this.shieldpower -= (Math.abs(boys[t].righthand.xmom) + Math.abs(boys[t].righthand.ymom)) / 11
@@ -3993,6 +4004,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
                                 }
                             } else if (boys[t].lefthands.doesPerimeterTouch(this.body) || boys[t].lefthand.doesPerimeterTouch(this.body)) {
+                                this.striker = t
                                 if (boys[t].lefthand.fired > 14) {
 
                                     if (this.shield == 1) {
@@ -4019,6 +4031,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 }
                             }
                             if (boys[t].screwangle != 0 && boys[t].body.doesPerimeterTouch(this.body)) {
+                                this.striker = t
                                 if (boys[t].body.fired > 0) {
                                     if (this.shield == 1) {
                                         this.shieldpower -= (Math.abs(boys[t].body.xmom) + Math.max(20, Math.abs(boys[t].body.ymom))) / 3
@@ -5168,6 +5181,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     class Blastgirl {
         constructor(controller) {
+            this.striker = 0
+            this.name = "Blastgirl"
             this.blasting = 0
             this.brick = new Brick(1, 1, 1, 1)
             this.dmomu = 0
@@ -5368,6 +5383,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             for (let k = 0; k < boys[t].shots.length; k++) {
                                 if (boys[t].shots[k].marked != 1) {
                                     if (boys[t].shots[k].doesPerimeterTouch(this.body)) {
+                                        this.striker = t
                                         if (this.shield == 1) {
                                             this.shieldpower -= (Math.abs(boys[t].shots[k].xmom) + Math.abs(boys[t].shots[k].ymom)) / 3
                                         } else {
@@ -5383,6 +5399,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             boys[t].lefthands = castBetween(boys[t].leftshoulder, boys[t].lefthand, 20, boys[t].leftshoulder.radius)
                             boys[t].righthands = castBetween(boys[t].rightshoulder, boys[t].righthand, 20, boys[t].rightshoulder.radius)
                             if (boys[t].righthands.doesPerimeterTouch(this.body) || boys[t].righthand.doesPerimeterTouch(this.body)) {
+                                this.striker = t
                                 if (boys[t].righthand.fired > 14) {
                                     if (this.shield == 1) {
                                         this.shieldpower -= (Math.abs(boys[t].righthand.xmom) + Math.abs(boys[t].righthand.ymom)) / 11
@@ -5409,6 +5426,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
                                 }
                             } else if (boys[t].lefthands.doesPerimeterTouch(this.body) || boys[t].lefthand.doesPerimeterTouch(this.body)) {
+                                this.striker = t
                                 if (boys[t].lefthand.fired > 14) {
 
                                     if (this.shield == 1) {
@@ -5435,6 +5453,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 }
                             }
                             if (boys[t].screwangle != 0 && boys[t].body.doesPerimeterTouch(this.body)) {
+                                this.striker = t
                                 if (boys[t].body.fired > 0) {
                                     if (this.shield == 1) {
                                         this.shieldpower -= (Math.abs(boys[t].body.xmom) + Math.max(20, Math.abs(boys[t].body.ymom))) / 3
@@ -6625,6 +6644,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     class Jox {
         constructor(controller) {
+            this.striker = 0
+            this.name = "Jox"
             this.blasting = 0
             this.reflecting = 0
             this.brick = new Brick(1, 1, 1, 1)
@@ -6827,6 +6848,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             for (let k = 0; k < boys[t].shots.length; k++) {
                                 if (boys[t].shots[k].marked != 1) {
                                     if (boys[t].shots[k].doesPerimeterTouch(this.body)) {
+                                        this.striker = t
                                         if (this.reflecting <= 0) {
                                             if (this.shield == 1) {
                                                 this.shieldpower -= (Math.abs(boys[t].shots[k].xmom) + Math.abs(boys[t].shots[k].ymom)) / 3
@@ -6849,6 +6871,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             boys[t].lefthands = castBetween(boys[t].leftshoulder, boys[t].lefthand, 20, boys[t].leftshoulder.radius)
                             boys[t].righthands = castBetween(boys[t].rightshoulder, boys[t].righthand, 20, boys[t].rightshoulder.radius)
                             if (boys[t].righthands.doesPerimeterTouch(this.body) || boys[t].righthand.doesPerimeterTouch(this.body)) {
+                                this.striker = t
                                 if (boys[t].righthand.fired > 14) {
                                     if (this.shield == 1) {
                                         this.shieldpower -= (Math.abs(boys[t].righthand.xmom) + Math.abs(boys[t].righthand.ymom)) / 11
@@ -6875,6 +6898,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
                                 }
                             } else if (boys[t].lefthands.doesPerimeterTouch(this.body) || boys[t].lefthand.doesPerimeterTouch(this.body)) {
+                                this.striker = t
                                 if (boys[t].lefthand.fired > 14) {
 
                                     if (this.shield == 1) {
@@ -6901,6 +6925,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 }
                             }
                             if (boys[t].screwangle != 0 && boys[t].body.doesPerimeterTouch(this.body)) {
+                                this.striker = t
                                 if (boys[t].body.fired > 0) {
                                     if (this.shield == 1) {
                                         this.shieldpower -= (Math.abs(boys[t].body.xmom) + Math.max(20, Math.abs(boys[t].body.ymom))) / 3
@@ -8199,7 +8224,10 @@ function main() {
         }
         for (let t = 0; t < boom.length; t++) {
             if (boys[t].body.y > (1440 * (invscale * .5)) || boys[t].body.x < 0 || boys[t].body.x > (2560 * (invscale * .5))) {
-                scores[t]++
+                if(t!=boys[t].striker){
+                    scores[boys[t].striker]++
+                }
+                drops[t]++
                 if (boys[t].go !== 1) {
                     boys[t].go = 1
                     boom[t] = new Explosion(boys[t].body.x)
@@ -8228,11 +8256,17 @@ function main() {
             }
             boom[t].draw()
         }
-        canvas_context.font = "50px arial"
+        canvas_context.font = "60px arial"
         canvas_context.fillStyle = "white"
-        if (boys.length == 2) {
-            canvas_context.fillText(`Score: Human ${scores[1]}, Robot ${scores[0]}`, 1000, 100)
-        }
+        // if (boys.length == 2) {
+            // canvas_context.fillText(`Score: ${boys[0].name+" "} ${scores[0]}/${drops[0]}, ${boys[1].name+" "} ${scores[1]}/${drops[1]}`, 800, 100)
+        // }else{
+            for(let t = 0;t<boys.length;t++){
+                canvas_context.font = "60px arial"
+                canvas_context.fillStyle = boys[t].body.color
+                canvas_context.fillText(`${boys[t].name+" "} ${scores[t]}/${drops[t]}`, 800, (t*61)+100)
+            }
+        // }
         // canvas_context.fillText(`Falls: `, 200, 100)
         // canvas_context.fillText(`Red ${scores[0]}`, 200, 150)
         // canvas_context.fillText(`Green ${scores[1]}`, 200, 200)
@@ -8295,6 +8329,7 @@ function main() {
                         boys.push(coreboy)
                         boom.push(new Circle(0, 0, 1, "transparent"))
                         scores.push(0)
+                        drops.push(0)
                         wet--
                     }
                 }
