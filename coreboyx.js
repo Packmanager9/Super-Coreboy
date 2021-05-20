@@ -3,7 +3,7 @@ let boys = []
 let selectors = []
 let characterbuttons = []
 let scores = []
-let baselaunch = .3
+let baselaunch = .5
 let vsmashlimit = 35
 let jumplimit = 20
 let scale = .4
@@ -1486,11 +1486,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 if (this.anchor.fired < 8 && this.anchor.fired > 0) {
                     this.anchor.xmom -= ((this.body.x - this.anchor.x) / (this.length)) * 7.66
                     this.anchor.ymom -= ((this.body.y - this.anchor.y) / (this.length)) * 7.66
-                    if (this.anchor.fired < 6) {
-                        this.anchor.xmom *= .1
-                        this.anchor.ymom *= .1
-                        this.body.xmom *= .1
-                        this.body.ymom *= .1
+                    if (this.anchor.fired < 6 && this.anchor.fired > 3) {
+                        this.anchor.xmom *= .4
+                        this.anchor.ymom *= .4
+                        this.body.xmom *= .4
+                        this.body.ymom *= .4
                     }
                 }
             } else if (this.str > this.length * 2) {
@@ -1506,11 +1506,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 if (this.anchor.fired < 10 && this.anchor.fired > 0) {
                     this.anchor.xmom += ((this.body.x - this.anchor.x) / (this.length)) * 7.66
                     this.anchor.ymom += ((this.body.y - this.anchor.y) / (this.length)) * 7.66
-                    if (this.anchor.fired < 6) {
-                        this.anchor.xmom *= .1
-                        this.anchor.ymom *= .1
-                        this.body.xmom *= .1
-                        this.body.ymom *= .1
+                    if (this.anchor.fired < 6 && this.anchor.fired > 3) {
+                        this.anchor.xmom *= .4
+                        this.anchor.ymom *= .4
+                        this.body.xmom *= .4
+                        this.body.ymom *= .4
                     }
                 }
             } else if (this.str > this.length + 2) {
@@ -1526,11 +1526,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 if (this.anchor.fired < 10 && this.anchor.fired > 0) {
                     this.anchor.xmom += ((this.body.x - this.anchor.x) / (this.length)) * 5.66
                     this.anchor.ymom += ((this.body.y - this.anchor.y) / (this.length)) * 5.66
-                    if (this.anchor.fired < 6) {
-                        this.anchor.xmom *= .1
-                        this.anchor.ymom *= .1
-                        this.body.xmom *= .1
-                        this.body.ymom *= .1
+                    if (this.anchor.fired < 6 && this.anchor.fired > 3) {
+                        this.anchor.xmom *= .4
+                        this.anchor.ymom *= .4
+                        this.body.xmom *= .4
+                        this.body.ymom *= .4
                     }
                 }
             } else {
@@ -2196,15 +2196,24 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             }
                             if (circle.ymom > 4) {
                                 if (circle.ymom > 1) {
+                                   // console.log("hitr")
                                     // if (circle.self.jumping == 0) {
                                     if (circle == circle.self.righthand) {
-                                        if (circle.self.rightarm.hypotenuse() < this.height * 5.2) {
-                                            circle.ymom *= -.6
-                                        }
+                                        // if (circle.self.rightarm.hypotenuse() < this.height * 5.2) {
+                                            if(circle.self.body.y <= this.edgeleft.y){
+                                                circle.ymom *= -1
+                                            }
+                                        // } else {
+                                        //    // console.log("hit7")
+                                        // }
                                     } else if (circle == circle.self.lefthand) {
-                                        if (circle.self.leftarm.hypotenuse() < this.height * 5.2) {
-                                            circle.ymom *= -.6
-                                        }
+                                        // if (circle.self.leftarm.hypotenuse() < this.height * 5.2) {
+                                            if(circle.self.body.y <= this.edgeleft.y){
+                                                circle.ymom *= -1
+                                            }
+                                        // } else {
+                                        //    // console.log("hit8")
+                                        // }
                                     } else {
                                         if (circle.self.jumping == 0) {
                                             circle.ymom *= -.6
@@ -2221,13 +2230,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 if (circle.ymom > 0) {
                                     // if (circle.self.jumping == 0) {
                                     if (circle == circle.self.righthand) {
-                                        if (circle.self.rightarm.hypotenuse() < this.height * 5.2) {
-                                            circle.ymom *= -.6
-                                        }
+                                        // if (circle.self.rightarm.hypotenuse() < this.height * 5.2) {
+                                            if(circle.self.body.y <= this.edgeleft.y){
+                                                circle.ymom *= -.6
+                                            }
+                                        // }
                                     } else if (circle == circle.self.lefthand) {
-                                        if (circle.self.leftarm.hypotenuse() < this.height * 5.2) {
-                                            circle.ymom *= -.6
-                                        }
+                                        // if (circle.self.leftarm.hypotenuse() < this.height * 5.2) {
+                                            if(circle.self.body.y <= this.edgeleft.y){
+                                                circle.ymom *= -.6
+                                            }
+                                        // }
                                     } else {
                                         circle.ymom *= -.6
                                     }
@@ -2240,6 +2253,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             if (circle.y > this.center.y) {
                                 if (circle == circle.self.body) {
                                     if (circle.ymom < 0) {
+                                       // console.log("hit14")
                                         circle.ymom *= -1
                                         circle.frictiveMove()
                                     }
@@ -2251,6 +2265,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                                 if (circle.self.leftarm.hypotenuse() < this.height * 5.2) {
                                                     circle.y += .1
                                                 } else {
+                                                   // console.log("hit9")
                                                     break
                                                 }
                                             }
@@ -2258,6 +2273,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                                 if (circle.self.rightarm.hypotenuse() < this.height * 5.2) {
                                                     circle.y += .1
                                                 } else {
+                                                   // console.log("hit10")
                                                     break
                                                 }
                                             }
@@ -2266,6 +2282,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 } else {
                                     if (circle.self.body.y > circle.y) {
                                         if (circle.ymom < 0) {
+                                           // console.log("hit11")
                                             circle.ymom *= -1
                                             circle.frictiveMove()
                                         }
@@ -2278,8 +2295,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         circle.y -= .1
                                     } else {
                                         if (circle == circle.self.lefthand) {
-                                            if (circle.self.leftarm.hypotenuse() < this.height * 5.2) {
+                                            if (circle.self.leftarm.hypotenuse() < this.height * 15.2) {
+                                                if(circle.self.body.y <= this.edgeleft.y){
+                                                    //// console.log("hit15")
                                                 circle.y -= .1
+                                                }else{
+                                                    //// console.log("hit2")
+                                                    break
+                                                }
 
                                                 if (this.shape.doesPerimeterTouch(circle)) {
                                                     if (circle == circle.self.righthand) {
@@ -2299,12 +2322,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                                     }
                                                 }
                                             } else {
+                                               // console.log("hit1")
                                                 break
                                             }
                                         }
                                         if (circle == circle.self.righthand) {
-                                            if (circle.self.rightarm.hypotenuse() < this.height * 5.2) {
-                                                circle.y -= .1
+                                            if (circle.self.rightarm.hypotenuse() < this.height * 15.2) {
+                                                if(circle.self.body.y <= this.edgeleft.y){
+                                                    circle.y -= .1
+                                                    }else{
+                                                       // console.log("hit3")
+                                                        break
+                                                    }
                                                 if (this.shape.doesPerimeterTouch(circle)) {
                                                     if (circle == circle.self.righthand) {
                                                         if (circle.self.body.y > circle.y) {
@@ -2323,6 +2352,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                                     }
                                                 }
                                             } else {
+                                               // console.log("hit4")
                                                 break
                                             }
                                         }
@@ -2346,6 +2376,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         }
                                     }
                                 }
+                                //// console.log("hit13")
                                 circle.y += .1
                             }
                         } else {
@@ -2364,6 +2395,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             }
                         }
                     }
+                }
+            }
+
+
+            while (this.shape.doesPerimeterTouch(circle)) {
+                if(circle.self.body.y < this.edgeleft.y){
+                    circle.y-=.1
+                }else if(circle.self.body.y > this.edgeleft.y + (this.height*2)){
+                    circle.y+=.1
+                }else{
+                    break
                 }
             }
         }
@@ -2736,7 +2778,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             if (this.righthand.anchored == 0) {
                                 this.righthand.ymom = 0
                                 this.righthand.xmom = this.punchspeed * 14
-                                this.righthand.fired = 19
+                                this.righthand.fired = 18
                             }
                         }
                     }
@@ -2744,8 +2786,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (this.lefthand.fired <= 0) {
                             if (this.lefthand.anchored == 0) {
                                 this.lefthand.ymom = 0
-                                this.lefthand.xmom = -this.punchspeed * 14
-                                this.lefthand.fired = 19
+                                this.lefthand.xmom = -this.punchspeed * 14 
+                                this.lefthand.fired = 18
                             }
                         }
                     }
@@ -2757,14 +2799,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (this.righthand.anchored == 0) {
                             this.righthand.ymom = -this.punchspeed * 14
                             this.righthand.xmom = this.punchspeed * 1
-                            this.righthand.fired = 19
+                            this.righthand.fired = 18
                         }
                     }
                     if (this.lefthand.fired <= 0) {
                         if (this.lefthand.anchored == 0) {
                             this.lefthand.ymom = -this.punchspeed * 14
                             this.lefthand.xmom = -this.punchspeed * 1
-                            this.lefthand.fired = 19
+                            this.lefthand.fired = 18
                         }
                     }
                 }
@@ -2776,7 +2818,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.rightshoulder.ymom = 0
                             this.righthand.ymom = this.punchspeed * 14
                             this.righthand.xmom = this.punchspeed * 9
-                            this.righthand.fired = 19
+                            this.righthand.fired = 18
                         }
                     }
                     if (this.lefthand.fired <= 0) {
@@ -2785,7 +2827,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.leftshoulder.ymom = 0
                             this.lefthand.ymom = this.punchspeed * 14
                             this.lefthand.xmom = -this.punchspeed * 9
-                            this.lefthand.fired = 19
+                            this.lefthand.fired = 18
                         }
                     }
                 }
@@ -3312,7 +3354,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             if (this.righthand.anchored == 0) {
                                 this.righthand.ymom = 0
                                 this.righthand.xmom = this.punchspeed * 14
-                                this.righthand.fired = 19
+                                this.righthand.fired = 18
                             }
                         }
                     }
@@ -3321,7 +3363,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             if (this.lefthand.anchored == 0) {
                                 this.lefthand.ymom = 0
                                 this.lefthand.xmom = -this.punchspeed * 14
-                                this.lefthand.fired = 19
+                                this.lefthand.fired = 18
                             }
                         }
                     }
@@ -3333,14 +3375,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (this.righthand.anchored == 0) {
                             this.righthand.ymom = -this.punchspeed * 14
                             this.righthand.xmom = this.punchspeed * 1
-                            this.righthand.fired = 19
+                            this.righthand.fired = 18
                         }
                     }
                     if (this.lefthand.fired <= 0) {
                         if (this.lefthand.anchored == 0) {
                             this.lefthand.ymom = -this.punchspeed * 14
                             this.lefthand.xmom = -this.punchspeed * 1
-                            this.lefthand.fired = 19
+                            this.lefthand.fired = 18
                         }
                     }
                 }
@@ -3352,7 +3394,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.rightshoulder.ymom = 0
                             this.righthand.ymom = this.punchspeed * 14
                             this.righthand.xmom = this.punchspeed * 9
-                            this.righthand.fired = 19
+                            this.righthand.fired = 18
                         }
                     }
                     if (this.lefthand.fired <= 0) {
@@ -3361,7 +3403,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.leftshoulder.ymom = 0
                             this.lefthand.ymom = this.punchspeed * 14
                             this.lefthand.xmom = -this.punchspeed * 9
-                            this.lefthand.fired = 19
+                            this.lefthand.fired = 18
                         }
                     }
                 }
@@ -3522,12 +3564,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (this.lefthand.anchored <= -1) {
                 this.lefthand.anchored++
             } else {
-                this.collideStage()
+                //this.collideStage()
             }
             if (this.righthand.anchored <= -1) {
                 this.righthand.anchored++
             } else {
-                this.collideStage()
+                //this.collideStage()
             }
             this.righthand.ymom += this.gravity
             this.lefthand.ymom += this.gravity
@@ -3570,14 +3612,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.leftarm = new LineOP(this.leftshoulder, this.lefthand, invertColor(this.body.color), 8)
             this.rightarm = new LineOP(this.rightshoulder, this.righthand, invertColor(this.body.color), 8)
 
+            this.collideStage()
 
             for (let t = 0; t < this.links.length; t++) {
-                this.collideStage()
+                //this.collideStage()
                 this.links[t].color = invertColor(this.body.color)
                 this.links[t].draw()
             }
             for (let t = 0; t < this.nodes.length; t++) {
-                this.collideStage()
+                //this.collideStage()
                 this.nodes[t].draw()
             }
             for (let t = 0; t < this.springs.length; t++) {
@@ -4490,18 +4533,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (this.righthand.anchored == 0) {
                             this.rightshoulder.xmom = 0
                             this.rightshoulder.ymom = 0
-                            this.righthand.ymom = this.punchspeed * 12
-                            this.righthand.xmom = -this.punchspeed * 2.1
-                            this.righthand.fired = 19
+                            this.lefthand.ymom = (this.punchspeed * 12) //+ this.body.ymom
+                            this.lefthand.xmom = -(this.punchspeed * 2.1) //+ this.body.xmom
+                            this.righthand.fired = 18
                         }
                     }
                     if (this.lefthand.fired <= 0) {
                         if (this.lefthand.anchored == 0) {
                             this.leftshoulder.xmom = 0
                             this.leftshoulder.ymom = 0
-                            this.lefthand.ymom = this.punchspeed * 12
-                            this.lefthand.xmom = this.punchspeed * 2.1
-                            this.lefthand.fired = 19
+                            this.lefthand.ymom = (this.punchspeed * 12) //+ this.body.ymom
+                            this.lefthand.xmom = (this.punchspeed * 2.1) //+ this.body.xmom
+                            this.lefthand.fired = 18
                         }
                     }
                 }
@@ -4511,9 +4554,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.fleeing = 0
                             this.rightshoulder.xmom = 0
                             this.rightshoulder.ymom = 0
-                            this.righthand.ymom = this.punchspeed * 5
-                            this.righthand.xmom = this.punchspeed * 11.1
-                            this.righthand.fired = 19
+                            this.righthand.ymom = (this.punchspeed * 5) //+ this.body.ymom
+                            this.righthand.xmom = (this.punchspeed * 11.1) //+ this.body.xmom
+                            this.righthand.fired = 18
                         }
                     }
                     if (this.lefthand.fired <= 0) {
@@ -4521,9 +4564,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.fleeing = 0
                             this.leftshoulder.xmom = 0
                             this.leftshoulder.ymom = 0
-                            this.lefthand.ymom = this.punchspeed * 5
-                            this.lefthand.xmom = -this.punchspeed * 11.1
-                            this.lefthand.fired = 19
+                            this.righthand.ymom = (this.punchspeed * 5) //+ this.body.ymom
+                            this.righthand.xmom = -(this.punchspeed * 11.1) //+ this.body.xmom
+                            this.lefthand.fired = 18
                         }
                     }
                 }
@@ -4713,18 +4756,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (this.righthand.anchored == 0) {
                             this.rightshoulder.xmom = 0
                             this.rightshoulder.ymom = 0
-                            this.righthand.ymom = this.punchspeed * 12
-                            this.righthand.xmom = -this.punchspeed * 2.1
-                            this.righthand.fired = 19
+                            this.righthand.ymom = (this.punchspeed * 12) //+ this.body.ymom
+                            this.righthand.xmom = -(this.punchspeed * 2.1) //+ this.body.xmom
+                            this.righthand.fired = 18
                         }
                     }
                     if (this.lefthand.fired <= 0) {
                         if (this.lefthand.anchored == 0) {
                             this.leftshoulder.xmom = 0
                             this.leftshoulder.ymom = 0
-                            this.lefthand.ymom = this.punchspeed * 12
-                            this.lefthand.xmom = this.punchspeed * 2.1
-                            this.lefthand.fired = 19
+                            this.lefthand.ymom = (this.punchspeed * 12) //+ this.body.ymom
+                            this.lefthand.xmom = (this.punchspeed * 2.1) //+ this.body.xmom
+                            this.lefthand.fired = 18
                         }
                     }
                 }
@@ -4734,18 +4777,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (this.righthand.anchored == 0) {
                             this.rightshoulder.xmom = 0
                             this.rightshoulder.ymom = 0
-                            this.righthand.ymom = this.punchspeed * 5
-                            this.righthand.xmom = this.punchspeed * 11.1
-                            this.righthand.fired = 19
+                            this.righthand.ymom = (this.punchspeed * 5) //+ this.body.ymom
+                            this.righthand.xmom = (this.punchspeed * 11.1) //+ this.body.xmom
+                            this.righthand.fired = 18
                         }
                     }
                     if (this.lefthand.fired <= 0) {
                         if (this.lefthand.anchored == 0) {
                             this.leftshoulder.xmom = 0
                             this.leftshoulder.ymom = 0
-                            this.lefthand.ymom = this.punchspeed * 5
-                            this.lefthand.xmom = -this.punchspeed * 11.1
-                            this.lefthand.fired = 19
+                            this.lefthand.ymom = (this.punchspeed * 5) //+ this.body.ymom
+                            this.lefthand.xmom = -(this.punchspeed * 11.1) //+ this.body.xmom
+                            this.lefthand.fired = 18
                         }
                     }
                 }
@@ -4901,12 +4944,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (this.lefthand.anchored <= -1) {
                 this.lefthand.anchored++
             } else {
-                this.collideStage()
+                //this.collideStage()
             }
             if (this.righthand.anchored <= -1) {
                 this.righthand.anchored++
             } else {
-                this.collideStage()
+                //this.collideStage()
             }
             this.righthand.ymom += this.gravity
             this.lefthand.ymom += this.gravity
@@ -4952,14 +4995,21 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.rightarm = new LineOP(this.rightshoulder, this.righthand, invertColor(this.body.color), 8)
 
 
+            this.collideStage()
 
             for (let t = 0; t < this.links.length; t++) {
-                this.collideStage()
+                //this.collideStage()
                 this.links[t].color = invertColor(this.body.color)
                 this.links[t].draw()
             }
             for (let t = 0; t < this.nodes.length; t++) {
-                this.collideStage()
+                //this.collideStage()
+
+            // if(this.righthand.fired > 14){
+            //     this.righthand.color = "#ffffff"
+            // }else{
+            //     this.righthand.color = "#FF0000"
+            // }
                 this.nodes[t].draw()
             }
             for (let t = 0; t < this.springs.length; t++) {
@@ -5909,7 +5959,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.rightshoulder.ymom = 0
                             this.righthand.ymom = this.punchspeed * 18
                             this.righthand.xmom = -this.punchspeed * -5.1
-                            this.righthand.fired = 19
+                            this.righthand.fired = 18
                         }
                     }
                     if (this.lefthand.fired <= 0) {
@@ -5918,7 +5968,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.leftshoulder.ymom = 0
                             this.lefthand.ymom = this.punchspeed * 18
                             this.lefthand.xmom = this.punchspeed * -5.1
-                            this.lefthand.fired = 19
+                            this.lefthand.fired = 18
                         }
                     }
                 }
@@ -6137,7 +6187,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.rightshoulder.ymom = 0
                             this.righthand.ymom = this.punchspeed * 18
                             this.righthand.xmom = -this.punchspeed * -5.1
-                            this.righthand.fired = 19
+                            this.righthand.fired = 18
                         }
                     }
                     if (this.lefthand.fired <= 0) {
@@ -6146,7 +6196,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.leftshoulder.ymom = 0
                             this.lefthand.ymom = this.punchspeed * 18
                             this.lefthand.xmom = this.punchspeed * -5.1
-                            this.lefthand.fired = 19
+                            this.lefthand.fired = 18
                         }
                     }
                 }
@@ -6331,12 +6381,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (this.lefthand.anchored <= -1) {
                 this.lefthand.anchored++
             } else {
-                this.collideStage()
+                //this.collideStage()
             }
             if (this.righthand.anchored <= -1) {
                 this.righthand.anchored++
             } else {
-                this.collideStage()
+                //this.collideStage()
             }
             this.righthand.ymom += this.gravity
             this.lefthand.ymom += this.gravity
@@ -6383,13 +6433,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 
 
+            this.collideStage()
             for (let t = 0; t < this.links.length; t++) {
-                this.collideStage()
+                //this.collideStage()
                 this.links[t].color = invertColor(this.body.color)
                 this.links[t].draw()
             }
             for (let t = 0; t < this.nodes.length; t++) {
-                this.collideStage()
+                //this.collideStage()
                 this.nodes[t].draw()
             }
             for (let t = 0; t < this.springs.length; t++) {
@@ -7366,7 +7417,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.rightshoulder.ymom = 0
                             this.righthand.ymom = this.punchspeed * 12
                             this.righthand.xmom = -this.punchspeed * - 10.1
-                            this.righthand.fired = 19
+                            this.righthand.fired = 18
                         }
                     }
                     if (this.lefthand.fired <= 0) {
@@ -7375,7 +7426,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.leftshoulder.ymom = 0
                             this.lefthand.ymom = this.punchspeed * 12
                             this.lefthand.xmom = this.punchspeed * - 10.1
-                            this.lefthand.fired = 19
+                            this.lefthand.fired = 18
                         }
                     }
                 }
@@ -7586,7 +7637,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.rightshoulder.ymom = 0
                             this.righthand.ymom = this.punchspeed * 12
                             this.righthand.xmom = -this.punchspeed * - 10.1
-                            this.righthand.fired = 19
+                            this.righthand.fired = 18
                         }
                     }
                     if (this.lefthand.fired <= 0) {
@@ -7595,7 +7646,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.leftshoulder.ymom = 0
                             this.lefthand.ymom = this.punchspeed * 12
                             this.lefthand.xmom = this.punchspeed * - 10.1
-                            this.lefthand.fired = 19
+                            this.lefthand.fired = 18
                         }
                     }
                 }
@@ -7767,12 +7818,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (this.lefthand.anchored <= -1) {
                 this.lefthand.anchored++
             } else {
-                this.collideStage()
+                // //this.collideStage()
             }
             if (this.righthand.anchored <= -1) {
                 this.righthand.anchored++
             } else {
-                this.collideStage()
+                // //this.collideStage()
             }
             this.righthand.ymom += this.gravity
             this.lefthand.ymom += this.gravity
@@ -7819,13 +7870,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 
 
+            //this.collideStage()
+            this.collideStage()
             for (let t = 0; t < this.links.length; t++) {
-                this.collideStage()
+                // //this.collideStage()
                 this.links[t].color = invertColor(this.body.color)
                 this.links[t].draw()
             }
             for (let t = 0; t < this.nodes.length; t++) {
-                this.collideStage()
                 this.nodes[t].draw()
             }
             for (let t = 0; t < this.springs.length; t++) {
