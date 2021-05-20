@@ -7329,7 +7329,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.rightshoulder.xmom = 0
                             this.rightshoulder.ymom = 0
                             this.righthand.ymom = this.punchspeed * 12
-                            this.righthand.xmom = -this.punchspeed * 10.1
+                            this.righthand.xmom = -this.punchspeed *- 10.1
                             this.righthand.fired = 19
                         }
                     }
@@ -7338,7 +7338,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.leftshoulder.xmom = 0
                             this.leftshoulder.ymom = 0
                             this.lefthand.ymom = this.punchspeed * 12
-                            this.lefthand.xmom = this.punchspeed * 10.1
+                            this.lefthand.xmom = this.punchspeed *- 10.1
                             this.lefthand.fired = 19
                         }
                     }
@@ -7346,16 +7346,23 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 if (this.hortsmash == 1) {
                     if (this.reflecting <= -10) {
                         this.reflecting = 20
-                        this.lefthand.xmom = this.punchspeed * 20.1
-                        this.lefthand.fired = 19
-                        this.righthand.xmom = -this.punchspeed * 20.1
-                        this.righthand.fired = 19
-                        this.righthand.ymom = this.punchspeed * -1
-                        this.lefthand.ymom = this.punchspeed * -1
+                        this.lefthand.xmom = this.punchspeed * 23.5
+                        this.lefthand.fired = 21
+                        this.righthand.xmom = -this.punchspeed * 23.5
+                        this.righthand.fired = 21
+                        this.righthand.ymom = this.punchspeed*3
+                        this.lefthand.ymom = this.punchspeed*3
                     }
                 }
 
 
+
+                if(this.body.x < 35*20){
+                    this.leftshot = 0
+                }
+                if(this.body.x > (canvas.width*invscale)-35*20){
+                    this.rightshot = 0
+                }
 
                 if (this.blasting <= -15) {
                         if (this.rightshot == 1) {
@@ -7474,7 +7481,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
 
 
-
             if (this.breaktimer <= 0 && this.shield == 0) {
 
 
@@ -7543,7 +7549,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.rightshoulder.xmom = 0
                             this.rightshoulder.ymom = 0
                             this.righthand.ymom = this.punchspeed * 12
-                            this.righthand.xmom = -this.punchspeed * 10.1
+                            this.righthand.xmom = -this.punchspeed *- 10.1
                             this.righthand.fired = 19
                         }
                     }
@@ -7552,7 +7558,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.leftshoulder.xmom = 0
                             this.leftshoulder.ymom = 0
                             this.lefthand.ymom = this.punchspeed * 12
-                            this.lefthand.xmom = this.punchspeed * 10.1
+                            this.lefthand.xmom = this.punchspeed *- 10.1
                             this.lefthand.fired = 19
                         }
                     }
@@ -7561,12 +7567,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 if (gamepadAPI[this.controller].buttonsStatus.includes('X') || keysPressed['j']) {
                     if (this.reflecting <= -10) {
                         this.reflecting = 20
-                        this.lefthand.xmom = this.punchspeed * 20.1
-                        this.lefthand.fired = 19
-                        this.righthand.xmom = -this.punchspeed * 20.1
-                        this.righthand.fired = 19
-                        this.righthand.ymom = this.punchspeed * -1
-                        this.lefthand.ymom = this.punchspeed * -1
+                        this.lefthand.xmom = this.punchspeed * 23.5
+                        this.lefthand.fired = 21
+                        this.righthand.xmom = -this.punchspeed * 23.5
+                        this.righthand.ymom = this.punchspeed*3
+                        this.lefthand.ymom = this.punchspeed *3
+                        this.righthand.fired = 21
                     }
                 }
             }
