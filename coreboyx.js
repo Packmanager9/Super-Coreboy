@@ -2198,11 +2198,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 if (circle.ymom > 1) {
                                     // if (circle.self.jumping == 0) {
                                     if (circle == circle.self.righthand) {
-                                        if (circle.self.rightarm.hypotenuse() < this.height * 2.5) {
+                                        if (circle.self.rightarm.hypotenuse() < this.height * 5.2) {
                                             circle.ymom *= -.6
                                         }
                                     } else if (circle == circle.self.lefthand) {
-                                        if (circle.self.leftarm.hypotenuse() < this.height * 2.5) {
+                                        if (circle.self.leftarm.hypotenuse() < this.height * 5.2) {
                                             circle.ymom *= -.6
                                         }
                                     } else {
@@ -2221,11 +2221,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 if (circle.ymom > 0) {
                                     // if (circle.self.jumping == 0) {
                                     if (circle == circle.self.righthand) {
-                                        if (circle.self.rightarm.hypotenuse() < this.height * 2.5) {
+                                        if (circle.self.rightarm.hypotenuse() < this.height * 5.2) {
                                             circle.ymom *= -.6
                                         }
                                     } else if (circle == circle.self.lefthand) {
-                                        if (circle.self.leftarm.hypotenuse() < this.height * 2.5) {
+                                        if (circle.self.leftarm.hypotenuse() < this.height * 5.2) {
                                             circle.ymom *= -.6
                                         }
                                     } else {
@@ -2248,14 +2248,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             circle.y += .1
                                         } else {
                                             if (circle == circle.self.lefthand) {
-                                                if (circle.self.leftarm.hypotenuse() < this.height * 2.5) {
+                                                if (circle.self.leftarm.hypotenuse() < this.height * 5.2) {
                                                     circle.y += .1
                                                 } else {
                                                     break
                                                 }
                                             }
                                             if (circle == circle.self.righthand) {
-                                                if (circle.self.rightarm.hypotenuse() < this.height * 2.5) {
+                                                if (circle.self.rightarm.hypotenuse() < this.height * 5.2) {
                                                     circle.y += .1
                                                 } else {
                                                     break
@@ -2278,7 +2278,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         circle.y -= .1
                                     } else {
                                         if (circle == circle.self.lefthand) {
-                                            if (circle.self.leftarm.hypotenuse() < this.height * 2.5) {
+                                            if (circle.self.leftarm.hypotenuse() < this.height * 5.2) {
                                                 circle.y -= .1
 
                                                 if (this.shape.doesPerimeterTouch(circle)) {
@@ -2303,7 +2303,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             }
                                         }
                                         if (circle == circle.self.righthand) {
-                                            if (circle.self.rightarm.hypotenuse() < this.height * 2.5) {
+                                            if (circle.self.rightarm.hypotenuse() < this.height * 5.2) {
                                                 circle.y -= .1
                                                 if (this.shape.doesPerimeterTouch(circle)) {
                                                     if (circle == circle.self.righthand) {
@@ -2422,7 +2422,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.shots = []
             this.wasfalse = []
             this.controller = controller
-            this.armlength = 35
+            this.armlength = 30
             this.shoulderwidth = 8
             this.damage = 0
             this.nodes = []
@@ -2430,7 +2430,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.hitboxes = []
             this.links = []
             this.speed = 11.5
-            this.punchspeed = 6
+            this.punchspeed = 6.5
             this.grounded = 0
             this.jumping = 1
 
@@ -2562,9 +2562,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             if (this.shield == 1) {
                                 this.shieldpower -= (Math.abs(boys[t].righthand.xmom) + Math.abs(boys[t].righthand.ymom)) / 11
                             } else {
-                                this.body.xmom = ((boys[t].righthand.xmom * (this.damage / 200)) + (boys[t].righthand.xmom * baselaunch))*Math.max((1+(boys[t].blasting/20)), 1)
-                                this.body.ymom = (((boys[t].righthand.ymom * (this.damage / 200)) + (boys[t].righthand.ymom * baselaunch)) * 1)*Math.max((1+(boys[t].blasting/20)), 1)
-                                this.damage += ((Math.abs(boys[t].righthand.xmom) + Math.abs(boys[t].righthand.ymom)) / 7)*Math.max((1+(boys[t].blasting/20)), 1)
+                                this.body.xmom = ((boys[t].righthand.xmom * (this.damage / 200)) + (boys[t].righthand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 40)), 1)
+                                this.body.ymom = (((boys[t].righthand.ymom * (this.damage / 200)) + (boys[t].righthand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 40)), 1)
+                                this.damage += ((Math.abs(boys[t].righthand.xmom) + Math.abs(boys[t].righthand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 40)), 1)
                                 this.breaktimer = 0
                             }
                             boys[t].righthand.fired = 13
@@ -2696,7 +2696,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }
             }
         }
-        breaks() { 
+        breaks() {
             if (this.shield == 1) {
                 if (this.shieldpower <= 0) {
                     this.breaktimer = 200
@@ -3078,7 +3078,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }
                 if (this.dmove == 1) {
                     this.face = 1
-                    object.x += speed
+                    if (object == this.body) {
+                        object.x += speed
+                        this.righthand.x += speed
+                        this.lefthand.x += speed
+                    }
                     if (this.righthand.anchored == 1) {
                         this.degripr()
                         this.jumping = 1
@@ -3086,7 +3090,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }
                 if (this.amove == 1) {
                     this.face = -1
-                    object.x -= speed
+                    if (object == this.body) {
+                        object.x -= speed
+                        this.righthand.x -= speed
+                        this.lefthand.x -= speed
+                    }
                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                         this.degripl()
                         this.jumping = 1
@@ -3655,7 +3663,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.charge = 0
             this.shots = []
             this.controller = controller
-            this.armlength = 40
+            this.armlength = 34  // 40
             this.shoulderwidth = 18
             this.damage = 0
             this.nodes = []
@@ -3663,7 +3671,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.hitboxes = []
             this.links = []
             this.speed = 11.5
-            this.punchspeed = 5
+            this.punchspeed = 5.7 // 5
             this.grounded = 0
             this.jumping = 1
 
@@ -3849,9 +3857,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     if (this.shield == 1) {
                                         this.shieldpower -= (Math.abs(boys[t].righthand.xmom) + Math.abs(boys[t].righthand.ymom)) / 11
                                     } else {
-                                        this.body.xmom = ((boys[t].righthand.xmom * (this.damage / 200)) + (boys[t].righthand.xmom * baselaunch))*Math.max((1+(boys[t].blasting/20)), 1)
-                                        this.body.ymom = (((boys[t].righthand.ymom * (this.damage / 200)) + (boys[t].righthand.ymom * baselaunch)) * 1)*Math.max((1+(boys[t].blasting/20)), 1)
-                                        this.damage += ((Math.abs(boys[t].righthand.xmom) + Math.abs(boys[t].righthand.ymom)) / 7)*Math.max((1+(boys[t].blasting/20)), 1)
+                                        this.body.xmom = ((boys[t].righthand.xmom * (this.damage / 200)) + (boys[t].righthand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 40)), 1)
+                                        this.body.ymom = (((boys[t].righthand.ymom * (this.damage / 200)) + (boys[t].righthand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 40)), 1)
+                                        this.damage += ((Math.abs(boys[t].righthand.xmom) + Math.abs(boys[t].righthand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 40)), 1)
                                         this.breaktimer = 0
                                     }
                                     boys[t].righthand.fired = 13
@@ -4260,7 +4268,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }
                 if (this.dmove == 1) {
                     this.face = 1
-                    object.x += speed
+                    if (object == this.body) {
+                        object.x += speed
+                        this.righthand.x += speed
+                        this.lefthand.x += speed
+                    }
                     if (this.righthand.anchored == 1) {
                         this.degripr()
                         this.jumping = 1
@@ -4272,7 +4284,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 // }
                 if (this.amove == 1) {
                     this.face = -1
-                    object.x -= speed
+                    if (object == this.body) {
+                        object.x -= speed
+                        this.righthand.x -= speed
+                        this.lefthand.x -= speed
+                    }
                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                         this.degripl()
                         this.jumping = 1
@@ -5229,9 +5245,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     if (this.shield == 1) {
                                         this.shieldpower -= (Math.abs(boys[t].righthand.xmom) + Math.abs(boys[t].righthand.ymom)) / 11
                                     } else {
-                                        this.body.xmom = ((boys[t].righthand.xmom * (this.damage / 200)) + (boys[t].righthand.xmom * baselaunch))*Math.max((1+(boys[t].blasting/20)), 1)
-                                        this.body.ymom = (((boys[t].righthand.ymom * (this.damage / 200)) + (boys[t].righthand.ymom * baselaunch)) * 1)*Math.max((1+(boys[t].blasting/20)), 1)
-                                        this.damage += ((Math.abs(boys[t].righthand.xmom) + Math.abs(boys[t].righthand.ymom)) / 7)*Math.max((1+(boys[t].blasting/20)), 1)
+                                        this.body.xmom = ((boys[t].righthand.xmom * (this.damage / 200)) + (boys[t].righthand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 40)), 1)
+                                        this.body.ymom = (((boys[t].righthand.ymom * (this.damage / 200)) + (boys[t].righthand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 40)), 1)
+                                        this.damage += ((Math.abs(boys[t].righthand.xmom) + Math.abs(boys[t].righthand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 40)), 1)
                                         this.breaktimer = 0
                                     }
                                     boys[t].righthand.fired = 13
@@ -5646,7 +5662,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }
                 if (this.dmove == 1) {
                     this.face = 1
-                    object.x += speed
+                    if (object == this.body) {
+                        object.x += speed
+                        this.righthand.x += speed
+                        this.lefthand.x += speed
+                    }
                     if (this.righthand.anchored == 1) {
                         this.degripr()
                         this.jumping = 1
@@ -5658,7 +5678,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 // }
                 if (this.amove == 1) {
                     this.face = -1
-                    object.x -= speed
+                    if (object == this.body) {
+                        object.x -= speed
+                        this.righthand.x -= speed
+                        this.lefthand.x -= speed
+                    }
                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                         this.degripl()
                         this.jumping = 1
@@ -6482,7 +6506,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (controller == 1) {
                 this.color = "#ff0000"
             }
-            this.body = new ShotC(700 + ((boys.length * 1200) % 2260), 500, 32, this.color)
+            this.body = new ShotC(700 + ((boys.length * 1200) % 2260), 500, 37, this.color)
             this.nodes.push(this.body)
             this.leftshoulder = new ShotC(this.body.x - (this.body.radius + this.shoulderwidth), 350, 12, "magenta", 0, 0, .999)
             this.rightshoulder = new ShotC(this.body.x + (this.body.radius + this.shoulderwidth), 350, 12, "red", 0, 0, .999)
@@ -6664,9 +6688,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     if (this.shield == 1) {
                                         this.shieldpower -= (Math.abs(boys[t].righthand.xmom) + Math.abs(boys[t].righthand.ymom)) / 11
                                     } else {
-                                        this.body.xmom = ((boys[t].righthand.xmom * (this.damage / 200)) + (boys[t].righthand.xmom * baselaunch))*Math.max((1+(boys[t].blasting/20)), 1)
-                                        this.body.ymom = (((boys[t].righthand.ymom * (this.damage / 200)) + (boys[t].righthand.ymom * baselaunch)) * 1)*Math.max((1+(boys[t].blasting/20)), 1)
-                                        this.damage += ((Math.abs(boys[t].righthand.xmom) + Math.abs(boys[t].righthand.ymom)) / 7)*Math.max((1+(boys[t].blasting/20)), 1)
+                                        this.body.xmom = ((boys[t].righthand.xmom * (this.damage / 200)) + (boys[t].righthand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 40)), 1)
+                                        this.body.ymom = (((boys[t].righthand.ymom * (this.damage / 200)) + (boys[t].righthand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 40)), 1)
+                                        this.damage += ((Math.abs(boys[t].righthand.xmom) + Math.abs(boys[t].righthand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 40)), 1)
                                         this.breaktimer = 0
                                     }
                                     boys[t].righthand.fired = 13
@@ -7091,7 +7115,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }
                 if (this.dmove == 1) {
                     this.face = 1
-                    object.x += speed
+                    if (object == this.body) {
+                        object.x += speed
+                        this.righthand.x -= speed
+                        this.lefthand.x -= speed
+                    }
                     if (this.righthand.anchored == 1) {
                         this.degripr()
                         this.jumping = 1
@@ -7103,7 +7131,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 // }
                 if (this.amove == 1) {
                     this.face = -1
-                    object.x -= speed
+                    if (object == this.body) {
+                        object.x -= speed
+                        this.righthand.x -= speed
+                        this.lefthand.x -= speed
+                    }
                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                         this.degripl()
                         this.jumping = 1
@@ -7152,7 +7184,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             if (this.screwtimer > 0) {
                 this.screwtimer--
-                if(this.screwtimer <= 15){
+                if (this.screwtimer <= 15) {
                     this.body.ymom = -jumplimit
                 }
                 this.screwangle += this.screwmomentum
@@ -7184,10 +7216,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (Math.random() < .5) {
                 this.screwshot = 0
             }
-            if (Math.random() < .01 ) {
+            if (Math.random() < .01) {
                 this.rightshot = 0
             }
-            if (Math.random() < .01 ) {
+            if (Math.random() < .01) {
                 this.leftshot = 0
             }
             if (Math.random() < .1) {
@@ -7242,14 +7274,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (Math.abs(this.body.y - boys[t].body.y) < 30 && this.body.x > boys[t].body.x) {
                             if (this.face == -1) {
                                 if (Math.abs(this.body.x - boys[t].body.x) > 100) {
-                                this.leftshot = 1
+                                    this.leftshot = 1
                                 }
                             }
                         }
                         if (Math.abs(this.body.y - boys[t].body.y) < 30 && this.body.x < boys[t].body.x) {
                             if (this.face == 1) {
                                 if (Math.abs(this.body.x - boys[t].body.x) > 100) {
-                                this.rightshot = 1
+                                    this.rightshot = 1
                                 }
                             }
                         }
@@ -7333,7 +7365,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.rightshoulder.xmom = 0
                             this.rightshoulder.ymom = 0
                             this.righthand.ymom = this.punchspeed * 12
-                            this.righthand.xmom = -this.punchspeed *- 10.1
+                            this.righthand.xmom = -this.punchspeed * - 10.1
                             this.righthand.fired = 19
                         }
                     }
@@ -7342,7 +7374,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.leftshoulder.xmom = 0
                             this.leftshoulder.ymom = 0
                             this.lefthand.ymom = this.punchspeed * 12
-                            this.lefthand.xmom = this.punchspeed *- 10.1
+                            this.lefthand.xmom = this.punchspeed * - 10.1
                             this.lefthand.fired = 19
                         }
                     }
@@ -7354,61 +7386,61 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         this.lefthand.fired = 21
                         this.righthand.xmom = -this.punchspeed * 23.5
                         this.righthand.fired = 21
-                        this.righthand.ymom = this.punchspeed*3
-                        this.lefthand.ymom = this.punchspeed*3
+                        this.righthand.ymom = this.punchspeed * 3
+                        this.lefthand.ymom = this.punchspeed * 3
                     }
                 }
 
 
 
-                if(this.body.x < 35*20){
+                if (this.body.x < 35 * 20) {
                     this.leftshot = 0
                 }
-                if(this.body.x > (canvas.width*invscale)-35*20){
+                if (this.body.x > (canvas.width * invscale) - 35 * 20) {
                     this.rightshot = 0
                 }
 
                 if (this.blasting <= -15) {
-                        if (this.rightshot == 1) {
-                            if (this.face == 1) {
-                                if (this.righthand.anchored == 0) {
-                                    if (this.charge <= 0) {
-                                        this.righthand.fired = 20
-                                        if (this.righthand.anchored == 0) {
-                                            this.charge += 40.5
-                                        }
-                                        this.body.xmom = 35
-                                        if(this.body.ymom > 0){
-                                            this.body.ymom = -1
-                                        }
-                                        this.grounded = 0
-                                        this.jumping = 1
-                                        this.body.fired = 20
-                                        this.blasting = 20
+                    if (this.rightshot == 1) {
+                        if (this.face == 1) {
+                            if (this.righthand.anchored == 0) {
+                                if (this.charge <= 0) {
+                                    this.righthand.fired = 20
+                                    if (this.righthand.anchored == 0) {
+                                        this.charge += 40.5
                                     }
+                                    this.body.xmom = 35
+                                    if (this.body.ymom > 0) {
+                                        this.body.ymom = -1
+                                    }
+                                    this.grounded = 0
+                                    this.jumping = 1
+                                    this.body.fired = 20
+                                    this.blasting = 20
                                 }
                             }
                         }
-                        if (this.leftshot == 1) {
-                            if (this.face == -1) {
-                                if (this.lefthand.anchored == 0) {
-                                    if (this.charge <= 0) {
-                                        this.lefthand.fired = 20
-                                        if (this.lefthand.anchored == 0) {
-                                            this.charge += 40.5
-                                        }
-                                        this.body.xmom = -35
-                                          if(this.body.ymom > 0){
-                                            this.body.ymom = -1
-                                        }
-                                        this.grounded = 0
-                                        this.jumping = 1
-                                        this.body.fired = 20
-                                        this.blasting = 20
+                    }
+                    if (this.leftshot == 1) {
+                        if (this.face == -1) {
+                            if (this.lefthand.anchored == 0) {
+                                if (this.charge <= 0) {
+                                    this.lefthand.fired = 20
+                                    if (this.lefthand.anchored == 0) {
+                                        this.charge += 40.5
                                     }
+                                    this.body.xmom = -35
+                                    if (this.body.ymom > 0) {
+                                        this.body.ymom = -1
+                                    }
+                                    this.grounded = 0
+                                    this.jumping = 1
+                                    this.body.fired = 20
+                                    this.blasting = 20
                                 }
                             }
                         }
+                    }
                 }
 
             }
@@ -7440,7 +7472,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             if (this.screwtimer > 0) {
                 this.screwtimer--
-                if(this.screwtimer <= 15){
+                if (this.screwtimer <= 15) {
                     this.body.ymom = -jumplimit
                 }
                 this.screwangle += this.screwmomentum
@@ -7498,9 +7530,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         this.charge += 40.5
                                     }
                                     this.body.xmom = 35
-                                      if(this.body.ymom > 0){
-                                            this.body.ymom = -1
-                                        }
+                                    if (this.body.ymom > 0) {
+                                        this.body.ymom = -1
+                                    }
                                     this.grounded = 0
                                     this.jumping = 1
                                     this.body.fired = 20
@@ -7516,9 +7548,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         this.charge += 40.5
                                     }
                                     this.body.xmom = -35
-                                      if(this.body.ymom > 0){
-                                            this.body.ymom = -1
-                                        }
+                                    if (this.body.ymom > 0) {
+                                        this.body.ymom = -1
+                                    }
                                     this.grounded = 0
                                     this.jumping = 1
                                     this.body.fired = 20
@@ -7553,7 +7585,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.rightshoulder.xmom = 0
                             this.rightshoulder.ymom = 0
                             this.righthand.ymom = this.punchspeed * 12
-                            this.righthand.xmom = -this.punchspeed *- 10.1
+                            this.righthand.xmom = -this.punchspeed * - 10.1
                             this.righthand.fired = 19
                         }
                     }
@@ -7562,7 +7594,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.leftshoulder.xmom = 0
                             this.leftshoulder.ymom = 0
                             this.lefthand.ymom = this.punchspeed * 12
-                            this.lefthand.xmom = this.punchspeed *- 10.1
+                            this.lefthand.xmom = this.punchspeed * - 10.1
                             this.lefthand.fired = 19
                         }
                     }
@@ -7574,8 +7606,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         this.lefthand.xmom = this.punchspeed * 23.5
                         this.lefthand.fired = 21
                         this.righthand.xmom = -this.punchspeed * 23.5
-                        this.righthand.ymom = this.punchspeed*3
-                        this.lefthand.ymom = this.punchspeed *3
+                        this.righthand.ymom = this.punchspeed * 3
+                        this.lefthand.ymom = this.punchspeed * 3
                         this.righthand.fired = 21
                     }
                 }
@@ -7811,12 +7843,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
             canvas_context.strokeStyle = invertColorx(this.body.color)
             canvas_context.fillStyle = invertColorx(this.body.color)
             canvas_context.beginPath();
-            canvas_context.fillRect(((this.body.x-(this.body.radius*.4*(-this.face)))) - ((this.body.radius*.4)), this.body.y - (this.body.radius*.4), (this.body.radius*.8),   (this.body.radius*.8) )
+            canvas_context.fillRect(((this.body.x - (this.body.radius * .4 * (-this.face)))) - ((this.body.radius * .4)), this.body.y - (this.body.radius * .4), (this.body.radius * .8), (this.body.radius * .8))
             canvas_context.fill()
             canvas_context.strokeStyle = invertColorx(this.body.color)
             canvas_context.fillStyle = invertColor(this.body.color)
             canvas_context.beginPath();
-            canvas_context.fillRect(((this.body.x-(this.body.radius*.2*(-this.face)))) - ((this.body.radius*.1)), this.body.y - (this.body.radius*.2), (this.body.radius*.4),   (this.body.radius*.4) )
+            canvas_context.fillRect(((this.body.x - (this.body.radius * .2 * (-this.face)))) - ((this.body.radius * .2)), this.body.y - (this.body.radius * .2), (this.body.radius * .4), (this.body.radius * .4))
             canvas_context.fill()
             canvas_context.stroke();
             // if (this.screwangle == 0) {
