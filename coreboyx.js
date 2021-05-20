@@ -2982,12 +2982,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     if (boys[t].body.x < this.body.x) {
                                         if ((this.brick.edgeright.x > this.body.x - this.body.radius)) {
                                             this.amomu = (Math.abs(this.brick.edgeright.x - this.body.x)) / this.speed
-                                            this.amomu += 20
+                                            this.amomu += 25
                                         }
                                     } else {
                                         if ((this.brick.edgeleft.x < this.body.x + this.body.radius)) {
                                             this.dmomu = (Math.abs(this.brick.edgeleft.x - this.body.x)) / this.speed
-                                            this.dmomu += 20
+                                            this.dmomu += 25
                                         }
                                     }
                                 }
@@ -4164,12 +4164,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     if (boys[t].body.x < this.body.x) {
                                         if ((this.brick.edgeright.x > this.body.x - this.body.radius)) {
                                             this.amomu = (Math.abs(this.brick.edgeright.x - this.body.x)) / this.speed
-                                            this.amomu += 20
+                                            this.amomu += 25
                                         }
                                     } else {
                                         if ((this.brick.edgeleft.x < this.body.x + this.body.radius)) {
                                             this.dmomu = (Math.abs(this.brick.edgeleft.x - this.body.x)) / this.speed
-                                            this.dmomu += 20
+                                            this.dmomu += 25
                                         }
                                     }
                                 }
@@ -5548,12 +5548,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     if (boys[t].body.x < this.body.x) {
                                         if ((this.brick.edgeright.x > this.body.x - this.body.radius)) {
                                             this.amomu = (Math.abs(this.brick.edgeright.x - this.body.x)) / this.speed
-                                            this.amomu += 20
+                                            this.amomu += 25
                                         }
                                     } else {
                                         if ((this.brick.edgeleft.x < this.body.x + this.body.radius)) {
                                             this.dmomu = (Math.abs(this.brick.edgeleft.x - this.body.x)) / this.speed
-                                            this.dmomu += 20
+                                            this.dmomu += 25
                                         }
                                     }
                                 }
@@ -6983,12 +6983,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     if (boys[t].body.x < this.body.x) {
                                         if ((this.brick.edgeright.x > this.body.x - this.body.radius)) {
                                             this.amomu = (Math.abs(this.brick.edgeright.x - this.body.x)) / this.speed
-                                            this.amomu += 20
+                                            this.amomu += 25
                                         }
                                     } else {
                                         if ((this.brick.edgeleft.x < this.body.x + this.body.radius)) {
                                             this.dmomu = (Math.abs(this.brick.edgeleft.x - this.body.x)) / this.speed
-                                            this.dmomu += 20
+                                            this.dmomu += 25
                                         }
                                     }
                                 }
