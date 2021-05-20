@@ -2121,6 +2121,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
         constructor() {
             this.bricks = [new Brick(1440, 1760, 1410), new Brick(2400, 1460, 1000), new Brick(1430, 1200, 400), new Brick(500, 1420, 750)]
+            // for(let t = 0;t<5;t++){
+            //     this.bricks.push(new Brick(Math.random()*invscale*canvas.width, Math.random()*invscale*canvas.height, 300))
+            // }
         }
         draw() {
             for (let t = 0; t < this.bricks.length; t++) {
@@ -2695,7 +2698,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         }
                     }
                     if (boys[t].screwangle != 0 && boys[t].body.doesPerimeterTouch(this.body)) {
-                        if (boys[t].body.fired > 14) {
+                        if (boys[t].body.fired > 0) {
                             if (this.shield == 1) {
                                 this.shieldpower -= (Math.abs(boys[t].body.xmom) + Math.max(20, Math.abs(boys[t].body.ymom))) / 3
                             } else {
@@ -2703,7 +2706,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 this.body.ymom = (((boys[t].body.ymom * (this.damage / 200)) + (boys[t].body.ymom * baselaunch)) * 2)
                                 this.damage += (Math.abs(boys[t].body.xmom) + Math.max(20, Math.abs(boys[t].body.ymom))) / 2
                             }
-                            boys[t].body.fired = 14
+                            boys[t].body.fired = 0
                             if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                                 this.lefthand.anchored = -40
                                 this.righthand.anchored = -40
@@ -3233,6 +3236,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
             for (let t = 0; t < boys.length; t++) {
                 if (this != boys[t]) {
 
+
+                    for (let g = 0; g < boys[t].shots.length; g++) {
+                        let link = new LineOP(this.body, boys[t].shots[g])
+                        if (link.hypotenuse()+(this.body.radius+boys[t].shots[g].radius) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 40) {
+                            this.storeshield = 1
+                        }
+                    }
+
                     if (Math.abs(this.body.x - boys[t].body.x) < 45 && this.body.y < boys[t].body.y) {
                         this.downspike = 1
                     } else if (Math.abs(this.body.x - boys[t].body.x) < 150 && this.body.y <= boys[t].body.y && (boys[t].righthand.anchored == 1 || boys[t].lefthand.anchored == 1)) {
@@ -3346,6 +3357,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             if (Math.random() < .94) {
                                 this.storeshield = 1
                             }
+                        }
+                    }
+                }
+            }
+
+            for (let t = 0; t < boys.length; t++) {
+                if (this != boys[t]) {
+                    for (let g = 0; g < boys[t].shots.length; g++) {
+                        let link = new LineOP(this.body, boys[t].shots[g])
+                        if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 10) {
+                            this.storeshield = 1
                         }
                     }
                 }
@@ -3997,7 +4019,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 }
                             }
                             if (boys[t].screwangle != 0 && boys[t].body.doesPerimeterTouch(this.body)) {
-                                if (boys[t].body.fired > 14) {
+                                if (boys[t].body.fired > 0) {
                                     if (this.shield == 1) {
                                         this.shieldpower -= (Math.abs(boys[t].body.xmom) + Math.max(20, Math.abs(boys[t].body.ymom))) / 3
                                     } else {
@@ -4006,7 +4028,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         this.damage += (Math.abs(boys[t].body.xmom) + Math.max(20, Math.abs(boys[t].body.ymom))) / 2
                                         this.breaktimer = 0
                                     }
-                                    boys[t].body.fired = 14
+                                    boys[t].body.fired = 0
                                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                                         this.lefthand.anchored = -40
                                         this.righthand.anchored = -40
@@ -4115,7 +4137,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 this.fleeing = 0
             }
             if (Math.random() < .05) {
-                this.fleeing = 0
+                // this.fleeing = 0
             }
 
             this.safe = 0
@@ -4457,6 +4479,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
             for (let t = 0; t < boys.length; t++) {
                 if (this != boys[t]) {
 
+                    for (let g = 0; g < boys[t].shots.length; g++) {
+                        let link = new LineOP(this.body, boys[t].shots[g])
+                        if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 4) {
+                            this.storeshield = 1
+                        }
+                    }
+
                     if (Math.abs(this.body.x - boys[t].body.x) < 50 && this.body.y < boys[t].body.y) {
                         this.downspike = 1
                     } else if (Math.abs(this.body.x - boys[t].body.x) < 150 && this.body.y <= boys[t].body.y && (boys[t].righthand.anchored == 1 || boys[t].lefthand.anchored == 1)) {
@@ -4541,6 +4570,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 this.screwshot = 1
             }
 
+            for (let t = 0; t < boys.length; t++) {
+                if (this != boys[t]) {
+                    for (let g = 0; g < boys[t].shots.length; g++) {
+                        let link = new LineOP(this.body, boys[t].shots[g])
+                        if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 10) {
+                            this.storeshield = 1
+                        }
+                    }
+                }
+            }
             if (this.shieldpower < 10) {
                 if (Math.random() < .95) {
                     this.storeshield = 0
@@ -5396,7 +5435,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 }
                             }
                             if (boys[t].screwangle != 0 && boys[t].body.doesPerimeterTouch(this.body)) {
-                                if (boys[t].body.fired > 14) {
+                                if (boys[t].body.fired > 0) {
                                     if (this.shield == 1) {
                                         this.shieldpower -= (Math.abs(boys[t].body.xmom) + Math.max(20, Math.abs(boys[t].body.ymom))) / 3
                                     } else {
@@ -5405,7 +5444,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         this.damage += (Math.abs(boys[t].body.xmom) + Math.max(20, Math.abs(boys[t].body.ymom))) / 2
                                         this.breaktimer = 0
                                     }
-                                    boys[t].body.fired = 14
+                                    boys[t].body.fired = 0
                                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                                         this.lefthand.anchored = -40
                                         this.righthand.anchored = -40
@@ -5876,6 +5915,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
             for (let t = 0; t < boys.length; t++) {
                 if (this != boys[t]) {
 
+
+                    for (let g = 0; g < boys[t].shots.length; g++) {
+                        let link = new LineOP(this.body, boys[t].shots[g])
+                        if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 4) {
+                            this.storeshield = 1
+                        }
+                    }
+
                     if (Math.abs(this.body.x - boys[t].body.x) < 50 && this.body.y < boys[t].body.y) {
                         this.downspike = 1
                     } else if (Math.abs(this.body.x - boys[t].body.x) < 150 && this.body.y <= boys[t].body.y && (boys[t].righthand.anchored == 1 || boys[t].lefthand.anchored == 1)) {
@@ -5964,6 +6011,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }
             }
 
+            for (let t = 0; t < boys.length; t++) {
+                if (this != boys[t]) {
+                    for (let g = 0; g < boys[t].shots.length; g++) {
+                        let link = new LineOP(this.body, boys[t].shots[g])
+                        if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 10) {
+                            this.storeshield = 1
+                        }
+                    }
+                }
+            }
             if (this.shieldpower < 10) {
                 if (Math.random() < .95) {
                     this.storeshield = 0
@@ -6844,7 +6901,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 }
                             }
                             if (boys[t].screwangle != 0 && boys[t].body.doesPerimeterTouch(this.body)) {
-                                if (boys[t].body.fired > 14) {
+                                if (boys[t].body.fired > 0) {
                                     if (this.shield == 1) {
                                         this.shieldpower -= (Math.abs(boys[t].body.xmom) + Math.max(20, Math.abs(boys[t].body.ymom))) / 3
                                     } else {
@@ -6853,7 +6910,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         this.damage += (Math.abs(boys[t].body.xmom) + Math.max(20, Math.abs(boys[t].body.ymom))) / 2
                                         this.breaktimer = 0
                                     }
-                                    boys[t].body.fired = 14
+                                    boys[t].body.fired = 0
                                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                                         this.lefthand.anchored = -40
                                         this.righthand.anchored = -40
@@ -8117,9 +8174,10 @@ characterbuttons.push(joxSelector)
 
 // canvas_context.fillText(`Score: Human ${scores[1]}, Robot ${scores[0]}`, 1000, 100)
 // }
+let flopper = 0
 function main() {
     if (counter == 1) {
-
+        flopper++
         canvas_context.clearRect(0, 0, canvas.width * 4, canvas.height * 4)  // refreshes the image
         gamepadAPI[0].update()
         gamepadAPI[1].update()
@@ -8130,8 +8188,14 @@ function main() {
         for (let t = 0; t < boys.length; t++) {
             boys[t].draw()
         }
-        for (let t = 0; t < boys.length; t++) {
-            boys[t].enemycollide()
+        if(flopper%2==0){
+            for (let t = 0; t < boys.length; t++) {
+                boys[t].enemycollide()
+            }
+        }else{
+            for (let t = boys.length-1; t > 0; t--) {
+                boys[t].enemycollide()
+            }
         }
         for (let t = 0; t < boom.length; t++) {
             if (boys[t].body.y > (1440 * (invscale * .5)) || boys[t].body.x < 0 || boys[t].body.x > (2560 * (invscale * .5))) {
