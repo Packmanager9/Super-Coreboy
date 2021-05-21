@@ -2473,8 +2473,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
         draw() {
             this.link.draw()
-            this.edgeleft.draw()
-            this.edgeright.draw()
+            // this.edgeleft.draw()
+            // this.edgeright.draw()
             // this.edgeright.draw()
             // this.edgeleft.draw()
         }
