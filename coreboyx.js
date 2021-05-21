@@ -1813,18 +1813,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     break
                 }
             }
-            // if(counter == 1){
-            //     boys[0].righthand.anchored = 0
-            //     boys[0].lefthand.anchored = 0
-            //     boys[0].righthand.x += (TIP_engine.x * 1) - boys[0].righthand.x
-            //     boys[0].righthand.y += (TIP_engine.y * 1) - boys[0].righthand.y
-            //     boys[0].lefthand.x += (TIP_engine.x * 1) - boys[0].lefthand.x
-            //     boys[0].lefthand.y += (TIP_engine.y * 1) - boys[0].lefthand.y
-            //     boys[0].body.x = TIP_engine.x * 1
-            //     boys[0].body.y = TIP_engine.y * 1
-            //     boys[0].body.xmom = 0
-            //     boys[0].body.ymom = 0
-            // }
+            if(counter == 1){
+                boys[0].righthand.anchored = 0
+                boys[0].lefthand.anchored = 0
+                boys[0].righthand.x += (TIP_engine.x * 1) - boys[0].righthand.x
+                boys[0].righthand.y += (TIP_engine.y * 1) - boys[0].righthand.y
+                boys[0].lefthand.x += (TIP_engine.x * 1) - boys[0].lefthand.x
+                boys[0].lefthand.y += (TIP_engine.y * 1) - boys[0].lefthand.y
+                boys[0].body.x = TIP_engine.x * 1
+                boys[0].body.y = TIP_engine.y * 1
+                boys[0].body.xmom = 0
+                boys[0].body.ymom = 0
+            }
             // example usage: if(object.isPointInside(TIP_engine)){ take action }
             window.addEventListener('pointermove', continued_stimuli);
         });
@@ -2127,7 +2127,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             // this.bricks = [new Brick(1440, 1760, 200), new Brick(1040, 1760, 200), new Brick(640, 1760, 200), new Brick(240, 1760, 200)]
             // for(let t = 0;t<5;t++){
             //     this.bricks.push(new Brick(Math.random()*invscale*canvas.width, Math.random()*invscale*canvas.height, 300))
-            // }
+            // // }
             // this.bricks = []
             // for (let t = 0; t < 2; t++) {
             //     this.bricks.push(new Brick((t * 1400) + 200, 1760, 300))
@@ -2807,6 +2807,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
         }
         fightcontrol() {
+            this.safe = 0
+            for (let t = 0; t < stage.bricks.length; t++) {
+                if (stage.bricks[t].edgeleft.x < this.body.x && stage.bricks[t].edgeright.x > this.body.x) {
+                    if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) > this.body.y) {
+                        this.safe = 1
+                        break
+                    }
+                }
+            }
             this.breaks()
             this.righthand.fired--
             this.lefthand.fired--
@@ -3023,6 +3032,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 }
                                 if (boys[k].brick == stage.bricks[t]) {
                                     this.under = 1
+                                } else {
+                                    if (Math.abs(Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) - this.body.y) < 300) {
+                                        this.under = 4
+//console.log("hit")
+                                    }
                                 }
                                 if (Math.abs(this.body.x - Math.max(stage.bricks[t].edgeright.x)) < Math.abs(this.body.x - Math.max(stage.bricks[t].edgeleft.x))) {
                                     if (boys[k].body.x < this.body.x) {
@@ -3085,11 +3099,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         if ((this.brick.edgeright.x > this.body.x - this.body.radius)) {
                                             this.amomu = (Math.abs(this.brick.edgeright.x - this.body.x)) / this.speed
                                             this.amomu += 25
+                                            this.lefthand.anchored = -10
+                                            this.righthand.anchored = -10
                                         }
                                     } else {
                                         if ((this.brick.edgeleft.x < this.body.x + this.body.radius)) {
                                             this.dmomu = (Math.abs(this.brick.edgeleft.x - this.body.x)) / this.speed
                                             this.dmomu += 25
+                                            this.lefthand.anchored = -10
+                                            this.righthand.anchored = -10
                                         }
                                     }
                                 }
@@ -3160,7 +3178,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 for (let t = 0; t < boys.length; t++) {
                     if (this != boys[t]) {
                         if (boys[t].damage >= this.tarmax) {
-                            this.target = boys[t]
+                            if(boys[t].safe == 1){
+                                this.target = boys[t]
+                            
                             this.tarmax = boys[t].damage
                             if (Math.random() < .1) {
                                 this.bricksto = this.brick
@@ -3193,9 +3213,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     }
                                 }
                             }
+                            }
                         }
                     }
                 }
+                if(this.target.safe == 1){
                 if (this.target.body.x > this.body.x) {
                     let xdisR = Math.abs(this.brick.edgeright.x - (this.body.x - (this.body.radius * 1.1)))
                     let runtimeR = xdisR / this.speed
@@ -3220,7 +3242,30 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
                 }
 
+            }else{
+                this.fleeing = 1
             }
+        }else{
+            if (this.safe == 0) {
+                this.screwshot = 1
+                if (this.body.x > (this.brick.center.x)) {
+                    this.amove = 1
+                    this.dmove = 0
+                    this.wmove = 1
+                    this.amomu = 0
+                    this.dmomu = 0
+                } else {
+                    this.amove = 0
+                    this.dmove = 1
+                    this.wmove = 1
+                    this.amomu = 0
+                    this.dmomu = 0
+                }
+                this.fleeing = 0
+            } else {
+
+            }
+        }
             if (this.shield == 0) {
 
                 if (this.dmove == 0 && this.amove == 0) {
@@ -3834,6 +3879,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     class Mass {
         constructor(controller) {
+            this.safe = 1
             this.striker = 10000
             this.name = "Mass"
             this.blasting = 0
@@ -4316,6 +4362,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) < this.body.y) {
                                 if (boys[k].brick == stage.bricks[t]) {
                                     this.under = 1
+                                } else {
+                                    if (Math.abs(Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) - this.body.y) < 300) {
+                                        this.under = 4
+//console.log("hit")
+                                    }
                                 }
                                 if (Math.abs(this.body.x - Math.max(stage.bricks[t].edgeright.x)) < Math.abs(this.body.x - Math.max(stage.bricks[t].edgeleft.x))) {
                                     if (boys[k].body.x < this.body.x) {
@@ -4378,11 +4429,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         if ((this.brick.edgeright.x > this.body.x - this.body.radius)) {
                                             this.amomu = (Math.abs(this.brick.edgeright.x - this.body.x)) / this.speed
                                             this.amomu += 25
+                                            this.lefthand.anchored = -10
+                                            this.righthand.anchored = -10
                                         }
                                     } else {
                                         if ((this.brick.edgeleft.x < this.body.x + this.body.radius)) {
                                             this.dmomu = (Math.abs(this.brick.edgeleft.x - this.body.x)) / this.speed
                                             this.dmomu += 25
+                                            this.lefthand.anchored = -10
+                                            this.righthand.anchored = -10
                                         }
                                     }
                                 }
@@ -4453,7 +4508,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 for (let t = 0; t < boys.length; t++) {
                     if (this != boys[t]) {
                         if (boys[t].damage >= this.tarmax) {
-                            this.target = boys[t]
+                            if(boys[t].safe == 1){
+                                this.target = boys[t]
+                            
                             this.tarmax = boys[t].damage
                             if (Math.random() < .1) {
                                 this.bricksto = this.brick
@@ -4488,7 +4545,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             }
                         }
                     }
-                }
+                    }
+                } if(this.target.safe == 1){
                 if (this.target.body.x > this.body.x) {
                     let xdisR = Math.abs(this.brick.edgeright.x - (this.body.x - (this.body.radius * 1.1)))
                     let runtimeR = xdisR / this.speed
@@ -4512,7 +4570,30 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         this.wmove = 1
                     }
                 }
+            }else{
+                this.fleeing = 1
             }
+        }else{
+            if (this.safe == 0) {
+                this.screwshot = 1
+                if (this.body.x > (this.brick.center.x)) {
+                    this.amove = 1
+                    this.dmove = 0
+                    this.wmove = 1
+                    this.amomu = 0
+                    this.dmomu = 0
+                } else {
+                    this.amove = 0
+                    this.dmove = 1
+                    this.wmove = 1
+                    this.amomu = 0
+                    this.dmomu = 0
+                }
+                this.fleeing = 0
+            } else {
+
+            }
+        }
             if (this.shield == 0) {
 
                 if (this.dmove == 0 && this.amove == 0) {
@@ -4811,8 +4892,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.fleeing = 0
                             this.leftshoulder.xmom = 0
                             this.leftshoulder.ymom = 0
-                            this.righthand.ymom = (this.punchspeed * 5) //+ this.body.ymom
-                            this.righthand.xmom = -(this.punchspeed * 11.1) //+ this.body.xmom
+                            this.lefthand.ymom = (this.punchspeed * 5) //+ this.body.ymom
+                            this.lefthand.xmom = -(this.punchspeed * 11.1) //+ this.body.xmom
                             this.lefthand.fired = 18
                         }
                     }
@@ -4877,6 +4958,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
         }
         fightcontrol() {
+            this.safe = 0
+            for (let t = 0; t < stage.bricks.length; t++) {
+                if (stage.bricks[t].edgeleft.x < this.body.x && stage.bricks[t].edgeright.x > this.body.x) {
+                    if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) > this.body.y) {
+                        this.safe = 1
+                        break
+                    }
+                }
+            }
             this.breaks()
 
 
@@ -5871,11 +5961,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         if ((this.brick.edgeright.x > this.body.x - this.body.radius)) {
                                             this.amomu = (Math.abs(this.brick.edgeright.x - this.body.x)) / this.speed
                                             this.amomu += 25
+                                            this.lefthand.anchored = -10
+                                            this.righthand.anchored = -10
                                         }
                                     } else {
                                         if ((this.brick.edgeleft.x < this.body.x + this.body.radius)) {
                                             this.dmomu = (Math.abs(this.brick.edgeleft.x - this.body.x)) / this.speed
                                             this.dmomu += 25
+                                            this.lefthand.anchored = -10
+                                            this.righthand.anchored = -10
                                         }
                                     }
                                 }
@@ -5947,7 +6041,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 for (let t = 0; t < boys.length; t++) {
                     if (this != boys[t]) {
                         if (boys[t].damage >= this.tarmax) {
-                            this.target = boys[t]
+                            if(boys[t].safe == 1){
+                                this.target = boys[t]
+                            
                             this.tarmax = boys[t].damage
                             if (Math.random() < .1) {
                                 this.bricksto = this.brick
@@ -5980,9 +6076,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     }
                                 }
                             }
+                            }
                         }
                     }
                 }
+                if(this.target.safe == 1){
                 if (this.target.body.x > this.body.x) {
                     let xdisR = Math.abs(this.brick.edgeright.x - (this.body.x - (this.body.radius * 1.1)))
                     let runtimeR = xdisR / this.speed
@@ -6004,7 +6102,29 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         this.wmove = 1
                     }
                 }
-
+            }else{
+                this.fleeing = 1
+            }
+            }else{
+                if (this.safe == 0) {
+                    this.screwshot = 1
+                    if (this.body.x > (this.brick.center.x)) {
+                        this.amove = 1
+                        this.dmove = 0
+                        this.wmove = 1
+                        this.amomu = 0
+                        this.dmomu = 0
+                    } else {
+                        this.amove = 0
+                        this.dmove = 1
+                        this.wmove = 1
+                        this.amomu = 0
+                        this.dmomu = 0
+                    }
+                    this.fleeing = 0
+                } else {
+    
+                }
             }
             if (this.shield == 0) {
 
@@ -6393,6 +6513,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
         }
         fightcontrol() {
+            this.safe = 0
+            for (let t = 0; t < stage.bricks.length; t++) {
+                if (stage.bricks[t].edgeleft.x < this.body.x && stage.bricks[t].edgeright.x > this.body.x) {
+                    if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) > this.body.y) {
+                        this.safe = 1
+                        break
+                    }
+                }
+            }
             this.breaks()
 
 
@@ -7297,6 +7426,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 } else {
                                     if (Math.abs(Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) - this.body.y) < 300) {
                                         this.under = 4
+//console.log("hit")
                                     }
                                 }
                                 if (Math.abs(this.body.x - Math.max(stage.bricks[t].edgeright.x)) < Math.abs(this.body.x - Math.max(stage.bricks[t].edgeleft.x))) {
@@ -7360,11 +7490,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         if ((this.brick.edgeright.x > this.body.x - this.body.radius)) {
                                             this.amomu = (Math.abs(this.brick.edgeright.x - this.body.x)) / this.speed
                                             this.amomu += 25
+                                            this.lefthand.anchored = -10
+                                            this.righthand.anchored = -10
                                         }
                                     } else {
                                         if ((this.brick.edgeleft.x < this.body.x + this.body.radius)) {
                                             this.dmomu = (Math.abs(this.brick.edgeleft.x - this.body.x)) / this.speed
                                             this.dmomu += 25
+                                            this.lefthand.anchored = -10
+                                            this.righthand.anchored = -10
                                         }
                                     }
                                 }
@@ -7444,7 +7578,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 for (let t = 0; t < boys.length; t++) {
                     if (this != boys[t]) {
                         if (boys[t].damage >= this.tarmax) {
-                            this.target = boys[t]
+                            if(boys[t].safe == 1){
+                                this.target = boys[t]
                             this.tarmax = boys[t].damage
                             if (Math.random() < .1) {
                                 this.bricksto = this.brick
@@ -7476,10 +7611,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         this.brick = this.bricksto
                                     }
                                 }
+                                }
                             }
                         }
                     }
                 }
+                if(this.target.safe == 1){
                 if (this.target.body.x > this.body.x) {
                     let xdisR = Math.abs(this.brick.edgeright.x - (this.body.x - (this.body.radius * 1.1)))
                     let runtimeR = xdisR / this.speed
@@ -7503,7 +7640,30 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         this.wmove = 1
                     }
                 }
+            }else{
+                this.fleeing = 1
             }
+        }else{
+            if (this.safe == 0) {
+                this.screwshot = 1
+                if (this.body.x > (this.brick.center.x)) {
+                    this.amove = 1
+                    this.dmove = 0
+                    this.wmove = 1
+                    this.amomu = 0
+                    this.dmomu = 0
+                } else {
+                    this.amove = 0
+                    this.dmove = 1
+                    this.wmove = 1
+                    this.amomu = 0
+                    this.dmomu = 0
+                }
+                this.fleeing = 0
+            } else {
+
+            }
+        }
             if (this.shield == 0) {
 
                 if (this.dmove == 0 && this.amove == 0) {
@@ -7866,6 +8026,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
         }
         fightcontrol() {
+            this.safe = 0
+            for (let t = 0; t < stage.bricks.length; t++) {
+                if (stage.bricks[t].edgeleft.x < this.body.x && stage.bricks[t].edgeright.x > this.body.x) {
+                    if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) > this.body.y) {
+                        this.safe = 1
+                        break
+                    }
+                }
+            }
             this.breaks()
 
 
