@@ -1854,7 +1854,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (keysPressed['s']) {
                 object.self.righthand.anchored = 0
                 object.self.lefthand.anchored = 0
-            } else if ((gamepadAPI[controller].axesStatus[1] * speed) < speed * .5) {
+            } else if ((gamepadAPI[controller].axesStatus[1] * speed) > speed * .5) {
                 object.self.righthand.anchored = 0
                 object.self.lefthand.anchored = 0
             }
@@ -2473,6 +2473,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
         draw() {
             this.link.draw()
+            this.edgeleft.draw()
+            this.edgeright.draw()
             // this.edgeright.draw()
             // this.edgeleft.draw()
         }
@@ -2571,7 +2573,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (controller == 1) {
                 this.color = "#ff0000"
             }
-            this.body = new Circle(800 + ((boys.length * 350) % 800), 500, 37, this.color)
+            this.body = new Circle((400 + ((boys.length * 150*invscale)) % ((canvas.width*invscale)-800)), 500, 37, this.color)
             this.nodes.push(this.body)
             this.leftshoulder = new Circle(this.body.x - (this.body.radius + this.shoulderwidth), 350, 10, "magenta", 0, 0, .999)
             this.rightshoulder = new Circle(this.body.x + (this.body.radius + this.shoulderwidth), 350, 10, "red", 0, 0, .999)
@@ -4112,7 +4114,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (controller == 1) {
                 this.color = "#ff0000"
             }
-            this.body = new Shot(800 + ((boys.length * 350) % 800), 500, 35, this.color)
+            this.body = new Shot((400 + ((boys.length * 150*invscale)) % ((canvas.width*invscale)-800)), 500, 35, this.color)
             this.nodes.push(this.body)
             this.leftshoulder = new Shot(this.body.x - (this.body.radius + this.shoulderwidth), 350, 10, "magenta", 0, 0, .999)
             this.rightshoulder = new Shot(this.body.x + (this.body.radius + this.shoulderwidth), 350, 10, "red", 0, 0, .999)
@@ -5792,7 +5794,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (controller == 1) {
                 this.color = "#ff0000"
             }
-            this.body = new Shotb(700 + ((boys.length * 1200) % 2260), 500, 55, this.color)
+            this.body = new Shotb((400 + ((boys.length * 150*invscale)) % ((canvas.width*invscale)-800)), 500, 55, this.color)
             this.nodes.push(this.body)
             this.leftshoulder = new Shotb(this.body.x - (this.body.radius + this.shoulderwidth), 350, 17, "magenta", 0, 0, .999)
             this.rightshoulder = new Shotb(this.body.x + (this.body.radius + this.shoulderwidth), 350, 17, "red", 0, 0, .999)
@@ -7502,7 +7504,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (controller == 1) {
                 this.color = "#ff0000"
             }
-            this.body = new ShotC(700 + ((boys.length * 1200) % 2260), 500, 37, this.color)
+            this.body = new ShotC((400 + ((boys.length * 150*invscale)) % ((canvas.width*invscale)-800)), 500, 37, this.color)
             this.nodes.push(this.body)
             this.leftshoulder = new ShotC(this.body.x - (this.body.radius + this.shoulderwidth), 350, 12, "magenta", 0, 0, .999)
             this.rightshoulder = new ShotC(this.body.x + (this.body.radius + this.shoulderwidth), 350, 12, "red", 0, 0, .999)
