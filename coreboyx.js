@@ -7601,8 +7601,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             if (this.screwtimer > 0) {
                 this.screwtimer--
-                if (this.screwtimer <= 15) {
+                if (this.screwtimer <= 45) {
+                    if (this.screwtimer >= 30) {
                     this.body.ymom = -jumplimit
+                    }
                 }
                 this.screwangle += this.screwmomentum
             } else {
@@ -7889,8 +7891,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             if (this.screwtimer > 0) {
                 this.screwtimer--
-                if (this.screwtimer <= 15) {
+                if (this.screwtimer <= 45) {
+                    if (this.screwtimer >= 30) {
                     this.body.ymom = -jumplimit
+                    }
                 }
                 this.screwangle += this.screwmomentum
             } else {
