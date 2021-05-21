@@ -1813,18 +1813,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     break
                 }
             }
-            if(counter == 1){
-                boys[0].righthand.anchored = 0
-                boys[0].lefthand.anchored = 0
-                boys[0].righthand.x += (TIP_engine.x * 1) - boys[0].righthand.x
-                boys[0].righthand.y += (TIP_engine.y * 1) - boys[0].righthand.y
-                boys[0].lefthand.x += (TIP_engine.x * 1) - boys[0].lefthand.x
-                boys[0].lefthand.y += (TIP_engine.y * 1) - boys[0].lefthand.y
-                boys[0].body.x = TIP_engine.x * 1
-                boys[0].body.y = TIP_engine.y * 1
-                boys[0].body.xmom = 0
-                boys[0].body.ymom = 0
-            }
+            // if(counter == 1){
+            //     boys[0].righthand.anchored = 0
+            //     boys[0].lefthand.anchored = 0
+            //     boys[0].righthand.x += (TIP_engine.x * 1) - boys[0].righthand.x
+            //     boys[0].righthand.y += (TIP_engine.y * 1) - boys[0].righthand.y
+            //     boys[0].lefthand.x += (TIP_engine.x * 1) - boys[0].lefthand.x
+            //     boys[0].lefthand.y += (TIP_engine.y * 1) - boys[0].lefthand.y
+            //     boys[0].body.x = TIP_engine.x * 1
+            //     boys[0].body.y = TIP_engine.y * 1
+            //     boys[0].body.xmom = 0
+            //     boys[0].body.ymom = 0
+            // }
             // example usage: if(object.isPointInside(TIP_engine)){ take action }
             window.addEventListener('pointermove', continued_stimuli);
         });
