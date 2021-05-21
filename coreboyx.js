@@ -1813,16 +1813,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     break
                 }
             }
-            // boys[0].righthand.anchored = 0
-            // boys[0].lefthand.anchored = 0
-            // boys[0].righthand.x += (TIP_engine.x * 1) - boys[0].righthand.x
-            // boys[0].righthand.y += (TIP_engine.y * 1) - boys[0].righthand.y
-            // boys[0].lefthand.x += (TIP_engine.x * 1) - boys[0].lefthand.x
-            // boys[0].lefthand.y += (TIP_engine.y * 1) - boys[0].lefthand.y
-            // boys[0].body.x = TIP_engine.x * 1
-            // boys[0].body.y = TIP_engine.y * 1
-            // boys[0].body.xmom = 0
-            // boys[0].body.ymom = 0
+            // if(counter == 1){
+            //     boys[0].righthand.anchored = 0
+            //     boys[0].lefthand.anchored = 0
+            //     boys[0].righthand.x += (TIP_engine.x * 1) - boys[0].righthand.x
+            //     boys[0].righthand.y += (TIP_engine.y * 1) - boys[0].righthand.y
+            //     boys[0].lefthand.x += (TIP_engine.x * 1) - boys[0].lefthand.x
+            //     boys[0].lefthand.y += (TIP_engine.y * 1) - boys[0].lefthand.y
+            //     boys[0].body.x = TIP_engine.x * 1
+            //     boys[0].body.y = TIP_engine.y * 1
+            //     boys[0].body.xmom = 0
+            //     boys[0].body.ymom = 0
+            // }
             // example usage: if(object.isPointInside(TIP_engine)){ take action }
             window.addEventListener('pointermove', continued_stimuli);
         });
@@ -2122,8 +2124,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
         constructor() {
             this.bricks = [new Brick(1440, 1760, 1410), new Brick(2400, 1460, 1000), new Brick(1430, 1200, 400), new Brick(500, 1420, 750)]
+            // this.bricks = [new Brick(1440, 1760, 200), new Brick(1040, 1760, 200), new Brick(640, 1760, 200), new Brick(240, 1760, 200)]
             // for(let t = 0;t<5;t++){
             //     this.bricks.push(new Brick(Math.random()*invscale*canvas.width, Math.random()*invscale*canvas.height, 300))
+            // }
+            // this.bricks = []
+            // for (let t = 0; t < 2; t++) {
+            //     this.bricks.push(new Brick((t * 1400) + 200, 1760, 300))
             // }
         }
         draw() {
@@ -2296,21 +2303,21 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             } else {
                                 while (this.shape.doesPerimeterTouch(circle)) {
                                     if (circle != circle.self.lefthand && circle != circle.self.righthand) {
-                                        if(circle.anchored != 1){
+                                        if (circle.anchored != 1) {
                                             circle.y -= .1
-                                            }else {
-                                                break
-                                            }
+                                        } else {
+                                            break
+                                        }
                                     } else {
                                         if (circle == circle.self.lefthand) {
                                             if (circle.self.leftarm.hypotenuse() < this.height * 15.2) {
                                                 if (circle.self.body.y <= this.edgeleft.y) {
                                                     //// console.log("hit15")
-                                                    if(circle.anchored != 1){
+                                                    if (circle.anchored != 1) {
                                                         circle.y -= .1
-                                                        }else {
-                                                            break
-                                                        }
+                                                    } else {
+                                                        break
+                                                    }
                                                 } else {
                                                     //// console.log("hit2")
                                                     break
@@ -2320,7 +2327,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                                     if (circle == circle.self.righthand) {
                                                         if (circle.self.body.y > circle.y) {
                                                             if (circle.x > circle.self.body.x) {
-                                                                if(circle.anchored != 1){
+                                                                if (circle.anchored != 1) {
                                                                     circle.x -= .15
                                                                 }
                                                             }
@@ -2330,8 +2337,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                                     if (circle == circle.self.lefthand) {
                                                         if (circle.self.body.y > circle.y) {
                                                             if (circle.x < circle.self.body.x) {
-                                                                if(circle.anchored != 1){
-                                                                circle.x += .15
+                                                                if (circle.anchored != 1) {
+                                                                    circle.x += .15
                                                                 }
                                                             }
                                                         }
@@ -2345,11 +2352,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         if (circle == circle.self.righthand) {
                                             if (circle.self.rightarm.hypotenuse() < this.height * 15.2) {
                                                 if (circle.self.body.y <= this.edgeleft.y) {
-                                                    if(circle.anchored != 1){
+                                                    if (circle.anchored != 1) {
                                                         circle.y -= .1
-                                                        }else {
-                                                            break
-                                                        }
+                                                    } else {
+                                                        break
+                                                    }
                                                 } else {
                                                     // console.log("hit3")
                                                     break
@@ -2358,8 +2365,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                                     if (circle == circle.self.righthand) {
                                                         if (circle.self.body.y > circle.y) {
                                                             if (circle.x > circle.self.body.x) {
-                                                                if(circle.anchored != 1){
-                                                                circle.x -= .15
+                                                                if (circle.anchored != 1) {
+                                                                    circle.x -= .15
                                                                 }
                                                             }
                                                         }
@@ -2368,8 +2375,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                                     if (circle == circle.self.lefthand) {
                                                         if (circle.self.body.y > circle.y) {
                                                             if (circle.x < circle.self.body.x) {
-                                                                if(circle.anchored != 1){
-                                                                circle.x += .15
+                                                                if (circle.anchored != 1) {
+                                                                    circle.x += .15
                                                                 }
                                                             }
                                                         }
@@ -2386,8 +2393,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         if (circle == circle.self.righthand) {
                                             if (circle.self.body.y > circle.y) {
                                                 if (circle.x > circle.self.body.x) {
-                                                    if(circle.anchored != 1){
-                                                    circle.x -= .15
+                                                    if (circle.anchored != 1) {
+                                                        circle.x -= .15
                                                     }
                                                 }
                                             }
@@ -2396,8 +2403,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         if (circle == circle.self.lefthand) {
                                             if (circle.self.body.y > circle.y) {
                                                 if (circle.x < circle.self.body.x) {
-                                                    if(circle.anchored != 1){
-                                                    circle.x += .15
+                                                    if (circle.anchored != 1) {
+                                                        circle.x += .15
                                                     }
                                                 }
                                             }
@@ -2428,18 +2435,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 
             while (this.shape.doesPerimeterTouch(circle)) {
-                if (circle.self.body.x < this.edgeright.x + (circle.self.body.radius*1.2)) {
-                    if (circle.self.body.x > this.edgeleft.x - (circle.self.body.radius*1.2)) {
+                if (circle.self.body.x < this.edgeright.x + (circle.self.body.radius * 1.2)) {
+                    if (circle.self.body.x > this.edgeleft.x - (circle.self.body.radius * 1.2)) {
                         if (circle.self.body.y < this.edgeleft.y) {
-                            if(circle.anchored != 1){
-                            circle.y -= .1
-                            }else {
+                            if (circle.anchored != 1) {
+                                circle.y -= .1
+                            } else {
                                 break
                             }
                         } else if (circle.self.body.y > this.edgeleft.y + (this.height * 2)) {
-                            if(circle.anchored != 1){
-                            circle.y += .1
-                            }else {
+                            if (circle.anchored != 1) {
+                                circle.y += .1
+                            } else {
                                 break
                             }
                         } else {
@@ -2453,13 +2460,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }
             }
         }
-    
-    draw() {
-        this.link.draw()
-        // this.edgeright.draw()
-        // this.edgeleft.draw()
+
+        draw() {
+            this.link.draw()
+            // this.edgeright.draw()
+            // this.edgeleft.draw()
+        }
     }
-}
 
     let stage = new Stage()
 
@@ -2562,6 +2569,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             for (let t = 0; t < this.nodes.length; t++) {
                 this.nodes[t].self = this // lmao
             }
+            this.target = {}
         }
         copy() {
             let copy = new Boy(this.controller)
@@ -2713,7 +2721,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 this.body.ymom = (((boys[t].body.ymom * (this.damage / 200)) + (boys[t].body.ymom * baselaunch)) * 2)
                                 this.damage += (Math.abs(boys[t].body.xmom) + Math.max(20, Math.abs(boys[t].body.ymom))) / 2
                             }
-                            boys[t].body.fired = 0
+                            //boys[t].body.fired = 0
                             if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                                 this.lefthand.anchored = -40
                                 this.righthand.anchored = -40
@@ -2995,7 +3003,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.safe = 0
             this.recovering = 0
             for (let t = 0; t < stage.bricks.length; t++) {
-                
+
                 if (stage.bricks[t].edgeleft.x < (this.body.x + (this.body.radius * .05)) && stage.bricks[t].edgeright.x > (this.body.x - (this.body.radius * 0.05))) {
                     if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) > this.body.y) {
                         this.safe = 1
@@ -3128,7 +3136,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             if (this.safe == 0) {
                 this.downspike = 1
-                if (this.body.x > (1280 * (invscale * .5))) {
+                if (this.body.x > (this.brick.center.x)) {
                     this.amove = 1
                     this.dmove = 0
                     this.wmove = 1
@@ -3145,6 +3153,72 @@ window.addEventListener('DOMContentLoaded', (event) => {
             } else {
 
             }
+
+
+            this.tarmax = 0
+            for (let t = 0; t < boys.length; t++) {
+                if (this != boys[t]) {
+                    if (boys[t].damage >= this.tarmax) {
+                        this.target = boys[t]
+                        this.tarmax = boys[t].damage
+                        if (Math.random() < .1) {
+                            this.bricksto = this.brick
+                            this.brick = this.target.brick
+                            if (this.target.body.x > this.body.x) {
+                                let xdisR = Math.abs(this.brick.edgeright.x - (this.body.x - (this.body.radius * 1.1)))
+                                let runtimeR = xdisR / this.speed
+                                let droptimerR = ((this.body.ymom + (this.gravity * runtimeR)) * runtimeR) / runtimeR
+                                if (droptimerR < (runtimeR * .8)) {
+                                    this.dmove = 1
+                                    this.amove = 0
+                                    this.safe = 1
+                                    this.downspike = 1
+                                    this.wmove = 1
+                                }else{
+                                    this.brick = this.bricksto
+                                }
+                            } else {
+                                let xdisL = Math.abs(this.brick.edgeleft.x - (this.body.x + (this.body.radius * 1.1)))
+                                let runtimeL = xdisL / this.speed
+                                let droptimerL = ((this.body.ymom + (this.gravity * runtimeL)) * runtimeL) / runtimeL
+                                if (droptimerL < (runtimeL * .8)) {
+                                    this.amove = 1
+                                    this.dmove = 0
+                                    this.safe = 1
+                                    this.downspike = 1
+                                    this.wmove = 1
+                                }else{
+                                    this.brick = this.bricksto
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if (this.target.body.x > this.body.x) {
+                let xdisR = Math.abs(this.brick.edgeright.x - (this.body.x - (this.body.radius * 1.1)))
+                let runtimeR = xdisR / this.speed
+                let droptimerR = ((this.body.ymom + (this.gravity * runtimeR)) * runtimeR) / runtimeR
+                if (droptimerR < (runtimeR * .87)) {
+                    this.dmove = 1
+                    this.amove = 0
+                    this.safe = 1
+                    this.downspike = 1
+                    this.wmove = 1
+                }
+            } else {
+                let xdisL = Math.abs(this.brick.edgeleft.x - (this.body.x + (this.body.radius * 1.1)))
+                let runtimeL = xdisL / this.speed
+                let droptimerL = ((this.body.ymom + (this.gravity * runtimeL)) * runtimeL) / runtimeL
+                if (droptimerL < (runtimeL * .87)) {
+                    this.amove = 1
+                    this.dmove = 0
+                    this.safe = 1
+                    this.downspike = 1
+                    this.wmove = 1
+                }
+            }
+
 
             if (this.shield == 0) {
 
@@ -3246,7 +3320,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
                     for (let g = 0; g < boys[t].shots.length; g++) {
                         let link = new LineOP(this.body, boys[t].shots[g])
-                        if (link.hypotenuse()+(this.body.radius+boys[t].shots[g].radius) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 40) {
+                        if (link.hypotenuse() + (this.body.radius + boys[t].shots[g].radius) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 40) {
                             this.storeshield = 1
                         }
                     }
@@ -3806,7 +3880,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (controller == 1) {
                 this.color = "#ff0000"
             }
-            this.body = new Shot(700 + ((boys.length * 1200) % 2260), 500, 35, this.color)
+            this.body = new Shot(800 + ((boys.length * 400) % 2260), 500, 35, this.color)
             this.nodes.push(this.body)
             this.leftshoulder = new Shot(this.body.x - (this.body.radius + this.shoulderwidth), 350, 10, "magenta", 0, 0, .999)
             this.rightshoulder = new Shot(this.body.x + (this.body.radius + this.shoulderwidth), 350, 10, "red", 0, 0, .999)
@@ -3837,6 +3911,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             for (let t = 0; t < this.nodes.length; t++) {
                 this.nodes[t].self = this // lmao
             }
+            this.target = {}
         }
         copy() {
             let copy = new Mass(this.controller)
@@ -4041,7 +4116,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         this.damage += (Math.abs(boys[t].body.xmom) + Math.max(20, Math.abs(boys[t].body.ymom))) / 2
                                         this.breaktimer = 0
                                     }
-                                    boys[t].body.fired = 0
+                                    //boys[t].body.fired = 0
                                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                                         this.lefthand.anchored = -40
                                         this.righthand.anchored = -40
@@ -4185,6 +4260,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             }
 
+
             for (let t = 0; t < boys.length; t++) {
                 if (this != boys[t]) {
                     if (Math.abs(this.body.x - boys[t].body.x) > 1 && this.body.y > (boys[t].body.y + 15)) {
@@ -4222,8 +4298,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             this.safe = 0
             for (let t = 0; t < stage.bricks.length; t++) {
-                
-                if (stage.bricks[t].edgeleft.x < (this.body.x + (this.body.radius * .05)) && stage.bricks[t].edgeright.x > (this.body.x - (this.body.radius * 0.05))) {
+
+                if (stage.bricks[t].edgeleft.x < (this.body.x + (this.body.radius * 1.1)) && stage.bricks[t].edgeright.x > (this.body.x - (this.body.radius * 1.1))) {
                     if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) > this.body.y) {
                         this.safe = 1
                         break
@@ -4352,7 +4428,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             if (this.safe == 0) {
                 this.screwshot = 1
-                if (this.body.x > (1280 * (invscale * .5))) {
+                if (this.body.x > (this.brick.center.x)) {
                     this.amove = 1
                     this.dmove = 0
                     this.wmove = 1
@@ -4368,6 +4444,71 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 this.fleeing = 0
             } else {
 
+            }
+
+
+            this.tarmax = 0
+            for (let t = 0; t < boys.length; t++) {
+                if (this != boys[t]) {
+                    if (boys[t].damage >= this.tarmax) {
+                        this.target = boys[t]
+                        this.tarmax = boys[t].damage
+                        if (Math.random() < .1) {
+                            this.bricksto = this.brick
+                            this.brick = this.target.brick
+                            if (this.target.body.x > this.body.x) {
+                                let xdisR = Math.abs(this.brick.edgeright.x - (this.body.x - (this.body.radius * 1.1)))
+                                let runtimeR = xdisR / this.speed
+                                let droptimerR = ((this.body.ymom + (this.gravity * runtimeR)) * runtimeR) / runtimeR
+                                if (droptimerR < (runtimeR * .850)) {
+                                    this.dmove = 1
+                                    this.amove = 0
+                                    this.safe = 1
+                                    this.screwshot = 1
+                                    this.wmove =1
+                                }else{
+                                    this.brick = this.bricksto
+                                }
+                            } else {
+                                let xdisL = Math.abs(this.brick.edgeleft.x - (this.body.x + (this.body.radius * 1.1)))
+                                let runtimeL = xdisL / this.speed
+                                let droptimerL = ((this.body.ymom + (this.gravity * runtimeL)) * runtimeL) / runtimeL
+                                if (droptimerL < (runtimeL * .850)) {
+                                    this.amove = 1
+                                    this.dmove = 0
+                                    this.safe = 1
+                                    this.screwshot = 1
+                                    this.wmove =1
+                                }else{
+                                    this.brick = this.bricksto
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if (this.target.body.x > this.body.x) {
+                let xdisR = Math.abs(this.brick.edgeright.x - (this.body.x - (this.body.radius * 1.1)))
+                let runtimeR = xdisR / this.speed
+                let droptimerR = ((this.body.ymom + (this.gravity * runtimeR)) * runtimeR) / runtimeR
+                if (droptimerR < (runtimeR * .855)) {
+                    this.dmove = 1
+                    this.amove = 0
+                    this.safe = 1
+                    this.screwshot = 1
+                    this.wmove =1
+                }
+            } else {
+                let xdisL = Math.abs(this.brick.edgeleft.x - (this.body.x + (this.body.radius * 1.1)))
+                let runtimeL = xdisL / this.speed
+                let droptimerL = ((this.body.ymom + (this.gravity * runtimeL)) * runtimeL) / runtimeL
+                if (droptimerL < (runtimeL * .855)) {
+                    this.amove = 1
+                    this.dmove = 0
+                    this.safe = 1
+                    this.screwshot = 1
+                    this.wmove =1
+                }
             }
 
             if (this.shield == 0) {
@@ -4571,7 +4712,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             this.safe = 0
             for (let t = 0; t < stage.bricks.length; t++) {
-                if (stage.bricks[t].edgeleft.x < (this.body.x + (this.body.radius * .05)) && stage.bricks[t].edgeright.x > (this.body.x - (this.body.radius * 0.05))) {
+                if (stage.bricks[t].edgeleft.x < (this.body.x + (this.body.radius * 1.1)) && stage.bricks[t].edgeright.x > (this.body.x - (this.body.radius * 1.1))) {
                     if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) > this.body.y) {
                         this.safe = 1
                         break
@@ -4620,13 +4761,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 if (this.screwshot == 1) {
                     if (this.body.fired <= 0) {
                         this.screwmomentum = Math.PI / 5
-                        this.screwtimer = 30
+                        this.screwtimer = 42
                         this.jumping = 1
                         this.lefthand.fired = 30
                         this.righthand.fired = 30
                         // this.degripr()
                         // this.degripl()
-                        this.body.fired = 40
+                        this.body.fired = 42
                         this.lefthand.anchored = -10
                         this.righthand.anchored = -10
                         this.body.ymom = -jumplimit //-this.speed * 3
@@ -4843,13 +4984,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 if (gamepadAPI[this.controller].buttonsStatus.includes('Y') || keysPressed['i']) {
                     if (this.body.fired <= 0) {
                         this.screwmomentum = Math.PI / 5
-                        this.screwtimer = 30
+                        this.screwtimer = 42
                         this.jumping = 1
                         this.lefthand.fired = 30
                         this.righthand.fired = 30
                         // this.degripr()
                         // this.degripl()
-                        this.body.fired = 40
+                        this.body.fired = 42
                         this.lefthand.anchored = -10
                         this.righthand.anchored = -10
                         this.body.ymom = -jumplimit  //-this.speed * 3
@@ -5259,6 +5400,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             for (let t = 0; t < this.nodes.length; t++) {
                 this.nodes[t].self = this // lmao
             }
+            this.target = {}
         }
         copy() {
             let copy = new Blastgirl(this.controller)
@@ -5463,7 +5605,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         this.damage += (Math.abs(boys[t].body.xmom) + Math.max(20, Math.abs(boys[t].body.ymom))) / 2
                                         this.breaktimer = 0
                                     }
-                                    boys[t].body.fired = 0
+                                    //boys[t].body.fired = 0
                                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                                         this.lefthand.anchored = -40
                                         this.righthand.anchored = -40
@@ -5644,7 +5786,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             this.safe = 0
             for (let t = 0; t < stage.bricks.length; t++) {
-                
+
                 if (stage.bricks[t].edgeleft.x < (this.body.x + (this.body.radius * .05)) && stage.bricks[t].edgeright.x > (this.body.x - (this.body.radius * 0.05))) {
                     if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) > this.body.y) {
                         this.safe = 1
@@ -5780,7 +5922,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 if (this.under == 0) {
                     this.screwshot = 1
                 }
-                if (this.body.x > (1280 * (invscale * .5))) {
+                if (this.body.x > (this.brick.center.x)) {
                     this.amove = 1
                     this.dmove = 0
                     this.wmove = 1
@@ -5797,6 +5939,69 @@ window.addEventListener('DOMContentLoaded', (event) => {
             } else {
 
             }
+
+            this.tarmax = 0
+            for (let t = 0; t < boys.length; t++) {
+                if (this != boys[t]) {
+                    if (boys[t].damage >= this.tarmax) {
+                        this.target = boys[t]
+                        this.tarmax = boys[t].damage
+                        if (Math.random() < .1) {
+                            this.bricksto = this.brick
+                            this.brick = this.target.brick
+                            if (this.target.body.x > this.body.x) {
+                                let xdisR = Math.abs(this.brick.edgeright.x - (this.body.x - (this.body.radius * 1.1)))
+                                let runtimeR = xdisR / this.speed
+                                let droptimerR = ((this.body.ymom + (this.gravity * runtimeR)) * runtimeR) / runtimeR
+                                if (droptimerR < (runtimeR * .95) && this.body.fired < 3.8*runtimeR) {
+                                    this.dmove = 1
+                                    this.amove = 0
+                                    this.safe = 1
+                                    this.screwshot = 1
+                                    this.wmove = 1
+                                }else{
+                                    this.brick = this.bricksto
+                                }
+                            } else {
+                                let xdisL = Math.abs(this.brick.edgeleft.x - (this.body.x +  (this.body.radius * 1.1)))
+                                let runtimeL = xdisL / this.speed
+                                let droptimerL = ((this.body.ymom + (this.gravity * runtimeL)) * runtimeL) / runtimeL
+                                if (droptimerL < (runtimeL * .95) && this.body.fired < 3.8*runtimeL) {
+                                    this.amove = 1
+                                    this.dmove = 0
+                                    this.safe = 1
+                                    this.screwshot = 1
+                                    this.wmove = 1
+                                }else{
+                                    this.brick = this.bricksto
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if (this.target.body.x > this.body.x) {
+                let xdisR = Math.abs(this.brick.edgeright.x - (this.body.x - (this.body.radius * 1.1)))
+                let runtimeR = xdisR / this.speed
+                let droptimerR = ((this.body.ymom + (this.gravity * runtimeR)) * runtimeR) / runtimeR
+                if (droptimerR < (runtimeR * .8) && this.body.fired < 1.8*runtimeR) {
+                    this.dmove = 1
+                    this.amove = 0
+                    this.safe = 1
+                    this.wmove = 1
+                }
+            } else {
+                let xdisL = Math.abs(this.brick.edgeleft.x - (this.body.x + (this.body.radius * 1.1)))
+                let runtimeL = xdisL / this.speed
+                let droptimerL = ((this.body.ymom + (this.gravity * runtimeL)) * runtimeL) / runtimeL
+                if (droptimerL < (runtimeL * .8) && this.body.fired < 1.8*runtimeL) {
+                    this.amove = 1
+                    this.dmove = 0
+                    this.safe = 1
+                    this.wmove = 1
+                }
+            }
+
 
             if (this.shield == 0) {
 
@@ -6065,20 +6270,20 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (this.breaktimer <= 0 && this.shield == 0) {
 
                 if (this.body.fired > 0) {
-                    this.body.ymom -= this.body.fired * .025
+                    this.body.ymom -= this.body.fired * .018
                 }
                 if (this.screwshot == 1) {
                     if (this.body.fired <= 0) {
                         this.jumping = 1
                         this.screwangle = Math.PI * 1.5
-                        this.screwtimer = 30
+                        this.screwtimer = 50
                         this.lefthand.ymom = -70
                         this.righthand.ymom = -70
                         this.lefthand.xmom = 25
                         this.righthand.xmom = -25
                         this.lefthand.fired = 40
                         this.righthand.fired = 40
-                        this.body.fired = 35
+                        this.body.fired = 50
                         this.lefthand.anchored = -10
                         this.righthand.anchored = -10
                         this.body.ymom = -jumplimit
@@ -6292,21 +6497,21 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }
 
                 if (this.body.fired > 0) {
-                    this.body.ymom -= this.body.fired * .025
+                    this.body.ymom -= this.body.fired * .018
                 }
                 if (gamepadAPI[this.controller].buttonsStatus.includes('Y') || keysPressed['i']) {
 
                     if (this.body.fired <= 0) {
                         this.jumping = 1
                         this.screwangle = Math.PI * 1.5
-                        this.screwtimer = 30
+                        this.screwtimer = 50
                         this.lefthand.fired = 40
                         this.righthand.fired = 40
                         this.lefthand.ymom = -70
                         this.righthand.ymom = -70
                         this.lefthand.xmom = 25
                         this.righthand.xmom = -25
-                        this.body.fired = 35
+                        this.body.fired = 50
                         this.lefthand.anchored = -10
                         this.righthand.anchored = -10
                         this.body.ymom = -jumplimit
@@ -6723,7 +6928,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             for (let t = 0; t < this.nodes.length; t++) {
                 this.nodes[t].self = this // lmao
             }
-
+            this.target = {}
         }
         copy() {
             let copy = new Jox(this.controller)
@@ -6749,53 +6954,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }
             }
 
-            if (this.screwangle != 0) {
-
-                this.leftshoulder.x = this.body.x + ((((this.body.radius + this.shoulderwidth) * (Math.cos(this.screwangle)))))
-                this.leftshoulder.y = this.body.y - (((this.body.radius + this.shoulderwidth) * (Math.sin(this.screwangle))))
-
-                this.rightshoulder.x = this.body.x + (((this.body.radius + this.shoulderwidth) * (Math.cos(this.screwangle))))
-                this.rightshoulder.y = this.body.y - (((this.body.radius + this.shoulderwidth) * (Math.sin(this.screwangle))))
-
-                this.leftshoulder.color = this.body.color
-                this.rightshoulder.color = this.body.color
-                this.lefthand.color = this.body.color
-                this.righthand.color = this.body.color
-
-
-                if (this.lefthand.anchored !== 1) {
-                    this.lefthand.x = this.leftshoulder.x
-                    this.lefthand.y = this.leftshoulder.y
-                    // this.lefthand.xmom *=  this.lefthand.friction
-                    // this.lefthand.ymom *=  this.lefthand.friction
-                    // this.leftshoulder.xmom *= 0
-                    // this.leftshoulder.ymom *= 0
-                }
-                if (this.righthand.anchored !== 1) {
-                    this.righthand.x = this.rightshoulder.x
-                    this.righthand.y = this.rightshoulder.y
-                    // this.righthand.xmom *=  this.righthand.friction
-                    // this.righthand.ymom *=  this.righthand.friction
-                    // this.rightshoulder.xmom *= 0
-                    // this.rightshoulder.ymom *= 0
-                }
-
-                if (this.body.ymom < -vsmashlimit) {
-                    this.body.ymom = -vsmashlimit
-                }
-                if (this.body.ymom > vsmashlimit) {
-                    this.body.ymom = vsmashlimit
-                }
-
-
-                // this.lefthand.xmom += (this.lefthand.x - this.body.x) / 100
-                // this.righthand.xmom += (this.righthand.x - this.body.x) / 100
-
-                // this.lefthand.ymom += (this.lefthand.y - this.body.y) / 100
-                // this.righthand.ymom += (this.righthand.y - this.body.y) / 100
-
-
-            } else {
                 this.leftshoulder.x = this.body.x - (this.body.radius + this.shoulderwidth * .3)
                 this.leftshoulder.y = this.body.y + (this.shoulderwidth * .7)
 
@@ -6827,7 +6985,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 
 
-            }
+            
 
 
             // this.leftshoulder.x = this.body.x - (this.body.radius + this.shoulderwidth)
@@ -6935,7 +7093,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         this.damage += (Math.abs(boys[t].body.xmom) + Math.max(20, Math.abs(boys[t].body.ymom))) / 2
                                         this.breaktimer = 0
                                     }
-                                    boys[t].body.fired = 0
+                                    //boys[t].body.fired = 0
                                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                                         this.lefthand.anchored = -40
                                         this.righthand.anchored = -40
@@ -7116,7 +7274,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             this.safe = 0
             for (let t = 0; t < stage.bricks.length; t++) {
-                
+
                 if (stage.bricks[t].edgeleft.x < (this.body.x + (this.body.radius * .05)) && stage.bricks[t].edgeright.x > (this.body.x - (this.body.radius * 0.05))) {
                     if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) > this.body.y) {
                         this.safe = 1
@@ -7256,7 +7414,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 if (this.under == 0) {
                     this.screwshot = 1
                 }
-                if (this.body.x > (1280 * (invscale * .5))) {
+                if (this.body.x > (this.brick.center.x)) {
                     this.leftshot = 1
                     this.rightshot = 0
                     this.amove = 1
@@ -7276,6 +7434,70 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 this.fleeing = 0
             } else {
 
+            }
+
+            this.tarmax = 0
+            for (let t = 0; t < boys.length; t++) {
+                if (this != boys[t]) {
+                    if (boys[t].damage >= this.tarmax) {
+                        this.target = boys[t]
+                        this.tarmax = boys[t].damage
+                        if (Math.random() < .1) {
+                            this.bricksto = this.brick
+                            this.brick = this.target.brick
+                            if (this.target.body.x > this.body.x) {
+                                let xdisR = Math.abs(this.brick.edgeright.x - (this.body.x - (this.body.radius * 1.1)))
+                                let runtimeR = xdisR / this.speed
+                                let droptimerR = ((this.body.ymom + (this.gravity * runtimeR)) * runtimeR) / runtimeR
+                                if (droptimerR < (runtimeR * .9)) {
+                                    this.dmove = 1
+                                    this.amove = 0
+                                    this.safe = 1
+                                    this.screwshot = 1
+                                    this.wmove =1
+                                }else{
+                                    this.brick = this.bricksto
+                                }
+                            } else {
+                                let xdisL = Math.abs(this.brick.edgeleft.x - (this.body.x + (this.body.radius * 1.1)))
+                                let runtimeL = xdisL / this.speed
+                                let droptimerL = ((this.body.ymom + (this.gravity * runtimeL)) * runtimeL) / runtimeL
+                                if (droptimerL < (runtimeL * .9)) {
+                                    this.amove = 1
+                                    this.dmove = 0
+                                    this.safe = 1
+                                    this.screwshot = 1
+                                    this.wmove =1
+                                }else{
+                                    this.brick = this.bricksto
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if (this.target.body.x > this.body.x) {
+                let xdisR = Math.abs(this.brick.edgeright.x - (this.body.x - (this.body.radius * 1.1)))
+                let runtimeR = xdisR / this.speed
+                let droptimerR = ((this.body.ymom + (this.gravity * runtimeR)) * runtimeR) / runtimeR
+                if (droptimerR < (runtimeR * .9)) {
+                    this.dmove = 1
+                    this.amove = 0
+                    this.safe = 1
+                    this.screwshot = 1
+                    this.wmove =1
+                }
+            } else {
+                let xdisL = Math.abs(this.brick.edgeleft.x - (this.body.x + (this.body.radius * 1.1)))
+                let runtimeL = xdisL / this.speed
+                let droptimerL = ((this.body.ymom + (this.gravity * runtimeL)) * runtimeL) / runtimeL
+                if (droptimerL < (runtimeL * .9)) {
+                    this.amove = 1
+                    this.dmove = 0
+                    this.safe = 1
+                    this.screwshot = 1
+                    this.wmove =1
+                }
             }
 
             if (this.shield == 0) {
@@ -7537,14 +7759,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     if (this.body.fired <= 0) {
                         this.jumping = 1
                         this.screwangle = Math.PI * 1.5
-                        this.screwtimer = 35
+                        this.screwtimer = 75
                         this.lefthand.ymom = -70
                         this.righthand.ymom = -70
                         this.lefthand.xmom = 25
                         this.righthand.xmom = -25
                         this.lefthand.fired = 40
                         this.righthand.fired = 40
-                        this.body.fired = 35
+                        this.body.fired = 75
                         this.lefthand.anchored = -10
                         this.righthand.anchored = -10
                         this.body.ymom = -jumplimit
@@ -7591,7 +7813,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     this.rightshot = 0
                 }
 
-                if (this.blasting <= -15) {
+                if (this.blasting <= -45) {
                     if (this.rightshot == 1) {
                         if (this.face == 1) {
                             if (this.righthand.anchored == 0) {
@@ -7711,7 +7933,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (this.breaktimer <= 0 && this.shield == 0) {
 
 
-                if (this.blasting <= -15) {
+                if (this.blasting <= -45) {
                     if (gamepadAPI[this.controller].buttonsStatus.includes('B') || keysPressed['l']) {
                         if (this.face == 1) {
                             if (this.righthand.anchored == 0) {
@@ -7757,14 +7979,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     if (this.body.fired <= 0) {
                         this.jumping = 1
                         this.screwangle = Math.PI * 1.5
-                        this.screwtimer = 35
+                        this.screwtimer = 75
                         this.lefthand.fired = 40
                         this.righthand.fired = 40
                         this.lefthand.ymom = -70
                         this.righthand.ymom = -70
                         this.lefthand.xmom = 25
                         this.righthand.xmom = -25
-                        this.body.fired = 35
+                        this.body.fired = 75
                         this.lefthand.anchored = -10
                         this.righthand.anchored = -10
                         this.body.ymom = -jumplimit
@@ -8095,251 +8317,251 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     for (let t = 0; t < 8; t++) {
 
-    let selector = new Selector()
-    if (t == 0) {
-        selector.body.color = "#FF0000"
-    }
-    if (t == 1) {
-        selector.body.color = "#00FF00"
-    }
-    if (t == 2) {
-        selector.body.color = "#0000FF"
-    }
-    if (t == 3) {
-        selector.body.color = "#FFFF00"
-    }
-    if (t == 4) {
-        selector.body.color = "#FFAA00"
-    }
-    if (t == 5) {
-        selector.body.color = "#00FFFF"
-    }
-    if (t == 6) {
-        selector.body.color = "#FF00FF"
-    }
-    if (t == 7) {
-        selector.body.color = "#bbbbbb"
-    }
-    selectors.push(selector)
-
-}
-
-// object instantiation and creation happens here 
-
-//, new Circle(0, 0, 1, "transparent"), new Circle(0, 0, 1, "transparent")]
-let counter = 0
-
-// if (keysPressed['v']) {
-//     if (keysPressed['q']) {
-//         if (Math.random() < .01) {
-
-//             canvas_context.clearRect(0, 0, canvas.width * 4, canvas.height * 4)  // refreshes the image
-//             gamepadAPI[0].update()
-//             gamepadAPI[1].update()
-//             gamepadAPI[2].update()
-//             gamepadAPI[3].update() //checks for button presses/stick movement on the connected controller)
-//             // game code goes here
-//             stage.draw()
-//             for (let t = 0; t < boys.length; t++) {
-//                 boys[t].draw()
-//             }
-//             for (let t = 0; t < boom.length; t++) {
-//                 if (boys[t].body.y > 1440 || boys[t].body.x < 0 || boys[t].body.x > 2560) {
-//                     scores[t]++
-//                     if (boys[t].go !== 1) {
-//                         boys[t].go = 1
-//                         boom[t] = new Explosion(boys[t].body.x)
-//                         // if (Math.random() < .5) {
-//                         //     boys[t] = new Mass(t)
-//                         //     boys[t].body.color = getRandomColor()
-//                         // } else {
-//                         boys[t] = new Mass(t)
-//                         boys[t].body.color = getRandomColor()
-//                         if (t == 0) {
-//                             boys[t].body.color = "#ffAA00"
-//                         }
-//                         if (t == 1) {
-//                             boys[t].body.color = "#ff0000"
-//                         }
-//                         // }
-//                     }
-//                 }
-//                 boom[t].draw()
-//             }
-//             canvas_context.font = "50px arial"
-//             canvas_context.fillStyle = "white"
-//             canvas_context.fillText(`Score: Human ${scores[1]}, Robot ${scores[0]}`, 1000, 100)
-
-//         }
-//     }
-
-// } else {
-
-// canvas_context.clearRect(0, 0, canvas.width * 4, canvas.height * 4)  // refreshes the image
-
-// stage.draw()
-// for (let t = 0; t < boys.length; t++) {
-//     boys[t].draw()
-// }
-// canvas_context.font = "50px arial"
-// canvas_context.fillStyle = "white"
-
-
-
-let massSelector = new Circle(700, 700, 200, "White")
-
-let boySelector = new Circle(1200, 700, 200, "White")
-let blastSelector = new Circle(1700, 700, 200, "White")
-let joxSelector = new Circle(2200, 700, 200, "White")
-characterbuttons.push(massSelector)
-characterbuttons.push(boySelector)
-characterbuttons.push(blastSelector)
-characterbuttons.push(joxSelector)
-
-
-// canvas_context.fillText(`Score: Human ${scores[1]}, Robot ${scores[0]}`, 1000, 100)
-// }
-let flopper = 0
-function main() {
-    if (counter == 1) {
-        flopper++
-        canvas_context.clearRect(0, 0, canvas.width * 4, canvas.height * 4)  // refreshes the image
-        gamepadAPI[0].update()
-        gamepadAPI[1].update()
-        gamepadAPI[2].update()
-        gamepadAPI[3].update() //checks for button presses/stick movement on the connected controller)
-        // game code goes here
-        stage.draw()
-        for (let t = 0; t < boys.length; t++) {
-            boys[t].draw()
+        let selector = new Selector()
+        if (t == 0) {
+            selector.body.color = "#FF0000"
         }
-        if(flopper%2==0){
+        if (t == 1) {
+            selector.body.color = "#00FF00"
+        }
+        if (t == 2) {
+            selector.body.color = "#0000FF"
+        }
+        if (t == 3) {
+            selector.body.color = "#FFFF00"
+        }
+        if (t == 4) {
+            selector.body.color = "#FFAA00"
+        }
+        if (t == 5) {
+            selector.body.color = "#00FFFF"
+        }
+        if (t == 6) {
+            selector.body.color = "#FF00FF"
+        }
+        if (t == 7) {
+            selector.body.color = "#bbbbbb"
+        }
+        selectors.push(selector)
+
+    }
+
+    // object instantiation and creation happens here 
+
+    //, new Circle(0, 0, 1, "transparent"), new Circle(0, 0, 1, "transparent")]
+    let counter = 0
+
+    // if (keysPressed['v']) {
+    //     if (keysPressed['q']) {
+    //         if (Math.random() < .01) {
+
+    //             canvas_context.clearRect(0, 0, canvas.width * 4, canvas.height * 4)  // refreshes the image
+    //             gamepadAPI[0].update()
+    //             gamepadAPI[1].update()
+    //             gamepadAPI[2].update()
+    //             gamepadAPI[3].update() //checks for button presses/stick movement on the connected controller)
+    //             // game code goes here
+    //             stage.draw()
+    //             for (let t = 0; t < boys.length; t++) {
+    //                 boys[t].draw()
+    //             }
+    //             for (let t = 0; t < boom.length; t++) {
+    //                 if (boys[t].body.y > 1440 || boys[t].body.x < 0 || boys[t].body.x > 2560) {
+    //                     scores[t]++
+    //                     if (boys[t].go !== 1) {
+    //                         boys[t].go = 1
+    //                         boom[t] = new Explosion(boys[t].body.x)
+    //                         // if (Math.random() < .5) {
+    //                         //     boys[t] = new Mass(t)
+    //                         //     boys[t].body.color = getRandomColor()
+    //                         // } else {
+    //                         boys[t] = new Mass(t)
+    //                         boys[t].body.color = getRandomColor()
+    //                         if (t == 0) {
+    //                             boys[t].body.color = "#ffAA00"
+    //                         }
+    //                         if (t == 1) {
+    //                             boys[t].body.color = "#ff0000"
+    //                         }
+    //                         // }
+    //                     }
+    //                 }
+    //                 boom[t].draw()
+    //             }
+    //             canvas_context.font = "50px arial"
+    //             canvas_context.fillStyle = "white"
+    //             canvas_context.fillText(`Score: Human ${scores[1]}, Robot ${scores[0]}`, 1000, 100)
+
+    //         }
+    //     }
+
+    // } else {
+
+    // canvas_context.clearRect(0, 0, canvas.width * 4, canvas.height * 4)  // refreshes the image
+
+    // stage.draw()
+    // for (let t = 0; t < boys.length; t++) {
+    //     boys[t].draw()
+    // }
+    // canvas_context.font = "50px arial"
+    // canvas_context.fillStyle = "white"
+
+
+
+    let massSelector = new Circle(700, 700, 200, "White")
+
+    let boySelector = new Circle(1200, 700, 200, "White")
+    let blastSelector = new Circle(1700, 700, 200, "White")
+    let joxSelector = new Circle(2200, 700, 200, "White")
+    characterbuttons.push(massSelector)
+    characterbuttons.push(boySelector)
+    characterbuttons.push(blastSelector)
+    characterbuttons.push(joxSelector)
+
+
+    // canvas_context.fillText(`Score: Human ${scores[1]}, Robot ${scores[0]}`, 1000, 100)
+    // }
+    let flopper = 0
+    function main() {
+        if (counter == 1) {
+            flopper++
+            canvas_context.clearRect(0, 0, canvas.width * 4, canvas.height * 4)  // refreshes the image
+            gamepadAPI[0].update()
+            gamepadAPI[1].update()
+            gamepadAPI[2].update()
+            gamepadAPI[3].update() //checks for button presses/stick movement on the connected controller)
+            // game code goes here
+            stage.draw()
             for (let t = 0; t < boys.length; t++) {
-                boys[t].enemycollide()
+                boys[t].draw()
             }
-        }else{
-            for (let t = boys.length-1; t > 0; t--) {
-                boys[t].enemycollide()
-            }
-        }
-        for (let t = 0; t < boom.length; t++) {
-            if (boys[t].body.y > (1440 * (invscale * .5)) || boys[t].body.x < 0 || boys[t].body.x > (2560 * (invscale * .5))) {
-                if(t!=boys[t].striker){
-                    scores[boys[t].striker]++
+            if (flopper % 2 == 0) {
+                for (let t = 0; t < boys.length; t++) {
+                    boys[t].enemycollide()
                 }
-                drops[t]++
-                if (boys[t].go !== 1) {
-                    boys[t].go = 1
-                    boom[t] = new Explosion(boys[t].body.x)
-                    // if (Math.random() < .5) {
-                    //     boys[t] = new Mass(t)
-                    //     boys[t].body.color = getRandomColor()
-                    // } else {
-
-                    if (t == 0) {
-                        if (Math.random() < .5) {
-                            boys[t] = boys[t].copy()
-                        } else {
-                            boys[t] = boys[t].copy()
-                        }
-
-                    } else {
-                        if (Math.random() < .5) {
-                            boys[t] = boys[t].copy()
-                        } else {
-                            boys[t] = boys[t].copy()
-                        }
+            } else {
+                for (let t = boys.length - 1; t > 0; t--) {
+                    boys[t].enemycollide()
+                }
+            }
+            for (let t = 0; t < boom.length; t++) {
+                if (boys[t].body.y > (1440 * (invscale * .5)) || boys[t].body.x < 0 || boys[t].body.x > (2560 * (invscale * .5))) {
+                    if (t != boys[t].striker) {
+                        scores[boys[t].striker]++
                     }
+                    drops[t]++
+                    if (boys[t].go !== 1) {
+                        boys[t].go = 1
+                        boom[t] = new Explosion(boys[t].body.x)
+                        // if (Math.random() < .5) {
+                        //     boys[t] = new Mass(t)
+                        //     boys[t].body.color = getRandomColor()
+                        // } else {
 
-                    // }
+                        if (t == 0) {
+                            if (Math.random() < .5) {
+                                boys[t] = boys[t].copy()
+                            } else {
+                                boys[t] = boys[t].copy()
+                            }
+
+                        } else {
+                            if (Math.random() < .5) {
+                                boys[t] = boys[t].copy()
+                            } else {
+                                boys[t] = boys[t].copy()
+                            }
+                        }
+
+                        // }
+                    }
                 }
+                boom[t].draw()
             }
-            boom[t].draw()
-        }
-        canvas_context.font = "60px arial"
-        canvas_context.fillStyle = "white"
-        // if (boys.length == 2) {
+            canvas_context.font = "60px arial"
+            canvas_context.fillStyle = "white"
+            // if (boys.length == 2) {
             // canvas_context.fillText(`Score: ${boys[0].name+" "} ${scores[0]}/${drops[0]}, ${boys[1].name+" "} ${scores[1]}/${drops[1]}`, 800, 100)
-        // }else{
-            for(let t = 0;t<boys.length;t++){
+            // }else{
+            for (let t = 0; t < boys.length; t++) {
                 canvas_context.font = "60px arial"
                 canvas_context.fillStyle = boys[t].body.color
-                canvas_context.fillText(`${boys[t].name+" "} ${scores[t]}/${drops[t]}`, 800, (t*61)+100)
+                canvas_context.fillText(`${boys[t].name + " "} ${scores[t]}/${drops[t]}`, 800, (t * 61) + 100)
             }
-        // }
-        // canvas_context.fillText(`Falls: `, 200, 100)
-        // canvas_context.fillText(`Red ${scores[0]}`, 200, 150)
-        // canvas_context.fillText(`Green ${scores[1]}`, 200, 200)
-        // canvas_context.fillText(`Blue ${scores[2]} `, 200, 250)
-        // canvas_context.fillText(`Yellow ${scores[3]} `, 200, 300)
-        // }
-    } else {
-        canvas_context.clearRect(0, 0, canvas.width * 4, canvas.height * 4)
+            // }
+            // canvas_context.fillText(`Falls: `, 200, 100)
+            // canvas_context.fillText(`Red ${scores[0]}`, 200, 150)
+            // canvas_context.fillText(`Green ${scores[1]}`, 200, 200)
+            // canvas_context.fillText(`Blue ${scores[2]} `, 200, 250)
+            // canvas_context.fillText(`Yellow ${scores[3]} `, 200, 300)
+            // }
+        } else {
+            canvas_context.clearRect(0, 0, canvas.width * 4, canvas.height * 4)
 
 
-        massSelector.draw()
-        boySelector.draw()
-        blastSelector.draw()
-        joxSelector.draw()
+            massSelector.draw()
+            boySelector.draw()
+            blastSelector.draw()
+            joxSelector.draw()
 
-        canvas_context.font = "60px arial"
-        canvas_context.fillStyle = "black"
-        canvas_context.fillText(`Mass`, massSelector.x - (massSelector.radius * .4), massSelector.y - (massSelector.radius * .5))
+            canvas_context.font = "60px arial"
+            canvas_context.fillStyle = "black"
+            canvas_context.fillText(`Mass`, massSelector.x - (massSelector.radius * .4), massSelector.y - (massSelector.radius * .5))
 
-        canvas_context.font = "60px arial"
-        canvas_context.fillStyle = "black"
-        canvas_context.fillText(`Coreboy`, boySelector.x - (boySelector.radius * .6), boySelector.y - (boySelector.radius * .5))
+            canvas_context.font = "60px arial"
+            canvas_context.fillStyle = "black"
+            canvas_context.fillText(`Coreboy`, boySelector.x - (boySelector.radius * .6), boySelector.y - (boySelector.radius * .5))
 
-        canvas_context.font = "60px arial"
-        canvas_context.fillStyle = "black"
-        canvas_context.fillText(`Blastgirl`, blastSelector.x - (blastSelector.radius * .6), blastSelector.y - (blastSelector.radius * .5))
+            canvas_context.font = "60px arial"
+            canvas_context.fillStyle = "black"
+            canvas_context.fillText(`Blastgirl`, blastSelector.x - (blastSelector.radius * .6), blastSelector.y - (blastSelector.radius * .5))
 
-        canvas_context.font = "60px arial"
-        canvas_context.fillStyle = "black"
-        canvas_context.fillText(`Jox`, joxSelector.x - (joxSelector.radius * .2), joxSelector.y - (joxSelector.radius * .5))
+            canvas_context.font = "60px arial"
+            canvas_context.fillStyle = "black"
+            canvas_context.fillText(`Jox`, joxSelector.x - (joxSelector.radius * .2), joxSelector.y - (joxSelector.radius * .5))
 
 
-        for (let t = 0; t < selectors.length; t++) {
-            selectors[t].draw()
-        }
-
-        canvas_context.font = "60px arial"
-        canvas_context.fillStyle = "white"
-        canvas_context.fillText(`Press Space to Start`, 1000, 300)
-        if (keysPressed[' ']) {
-            let wet = boys.length
             for (let t = 0; t < selectors.length; t++) {
-                for (let k = 0; k < characterbuttons.length; k++) {
-                    if (characterbuttons[k].isPointInside(selectors[t].body)) {
-                        let coreboy
-                        if (k == 0) {
-                            coreboy = new Mass(boys.length)
-                            coreboy.body.color = selectors[t].body.color
-                        } else if (k == 1) {
-                            coreboy = new Boy(boys.length)
-                            coreboy.body.color = selectors[t].body.color
-                        } else if (k == 2) {
-                            coreboy = new Blastgirl(boys.length)
-                            coreboy.body.color = selectors[t].body.color
-                        } else if (k == 3) {
-                            coreboy = new Jox(boys.length)
-                            coreboy.body.color = invertColor(selectors[t].body.color)
-                        }
+                selectors[t].draw()
+            }
 
-                        boys.push(coreboy)
-                        boom.push(new Circle(0, 0, 1, "transparent"))
-                        scores.push(0)
-                        drops.push(0)
-                        wet--
+            canvas_context.font = "60px arial"
+            canvas_context.fillStyle = "white"
+            canvas_context.fillText(`Press Space to Start`, 1000, 300)
+            if (keysPressed[' ']) {
+                let wet = boys.length
+                for (let t = 0; t < selectors.length; t++) {
+                    for (let k = 0; k < characterbuttons.length; k++) {
+                        if (characterbuttons[k].isPointInside(selectors[t].body)) {
+                            let coreboy
+                            if (k == 0) {
+                                coreboy = new Mass(boys.length)
+                                coreboy.body.color = selectors[t].body.color
+                            } else if (k == 1) {
+                                coreboy = new Boy(boys.length)
+                                coreboy.body.color = selectors[t].body.color
+                            } else if (k == 2) {
+                                coreboy = new Blastgirl(boys.length)
+                                coreboy.body.color = selectors[t].body.color
+                            } else if (k == 3) {
+                                coreboy = new Jox(boys.length)
+                                coreboy.body.color = invertColor(selectors[t].body.color)
+                            }
+
+                            boys.push(coreboy)
+                            boom.push(new Circle(0, 0, 1, "transparent"))
+                            scores.push(0)
+                            drops.push(0)
+                            wet--
+                        }
                     }
                 }
-            }
 
-            if (wet == 0) {
+                if (wet == 0) {
+                    counter = 1
+                }
                 counter = 1
             }
-            counter = 1
         }
     }
-}
 })
