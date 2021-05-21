@@ -7,7 +7,7 @@ let drops = []
 let baselaunch = .3
 let vsmashlimit = 35
 let jumplimit = 20
-let scale = .4
+let scale = .33
 let invscale = 1 / scale
 window.addEventListener('DOMContentLoaded', (event) => {
     const gamepadAPI = [{
@@ -1788,7 +1788,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         canvas = canvas_pass
         canvas_context = canvas.getContext('2d');
         canvas.style.background = style
-        canvas_context.scale(.4, .4)
+        canvas_context.scale(scale, scale)
         window.setInterval(function () {
             main()
         }, 22)
@@ -1806,6 +1806,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             TIP_engine.y = YS_engine * invscale
             TIP_engine.body = TIP_engine
 
+            console.log(TIP_engine)
             for (let t = 0; t < selectors.length; t++) {
                 if (selectors[t].body.isPointInside(TIP_engine)) {
                     selectors[t].body.anchored = 2
@@ -2130,7 +2131,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     class Stage {
 
         constructor() {
-            this.bricks = [new Brick(1440, 1760, 1410), new Brick(2400, 1460, 1000), new Brick(1430, 1200, 400), new Brick(500, 1420, 750)]
+            this.bricks = [new Brick(1440 * (invscale * .4), 1760 * (invscale * .4), 1410 * (invscale * .4)), new Brick(2400 * (invscale * .4), 1470 * (invscale * .4), 1000 * (invscale * .4)), new Brick(1430 * (invscale * .4), 1200 * (invscale * .4), 400 * (invscale * .4)), new Brick(500 * (invscale * .4), 1470 * (invscale * .4), 750 * (invscale * .4))]
             // this.bricks = [new Brick(1440, 1760, 200), new Brick(1040, 1760, 200), new Brick(640, 1760, 200), new Brick(240, 1760, 200)]
             // for(let t = 0;t<5;t++){
             //     this.bricks.push(new Brick(Math.random()*invscale*canvas.width, Math.random()*invscale*canvas.height, 300))
@@ -2503,6 +2504,30 @@ window.addEventListener('DOMContentLoaded', (event) => {
         }
     }
 
+    class ExplosionTop {
+        constructor(x) {
+            this.count = -90
+            this.center = x
+            this.links = []
+            for (let t = 0; t < 12; t++) {
+                let curve = ((Math.random() - .5) * 150)
+                let link = new Line(this.center + curve, 720 + (Math.abs(curve) * 2), this.center + curve, -10000 + ((Math.random() - .5) * 1000), getRandomLightColor(), 10)
+                this.links.push(link)
+            }
+        }
+        draw() {
+            this.count += 5.5
+            for (let t = 0; t < this.links.length; t++) {
+                this.links[t].draw()
+                this.links[t].width -= .5
+                if (this.links[t].width < 1) {
+                    this.links[t].width = 1
+                }
+                this.links[t].y1 -= this.count
+            }
+        }
+    }
+
 
     class Boy {
         constructor(controller) {
@@ -2797,6 +2822,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
         }
 
         doubleJump() {
+            if (this.body.y < 700) {
+                this.wmove = 0
+                this.downspike = 0
+            }
             this.jumpcount--
             if (this.jumpcount <= -20) {
                 if (this == boys[0]) {
@@ -3108,10 +3137,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 if (this != boys[k]) {
                     for (let t = 0; t < stage.bricks.length; t++) {
                         if (stage.bricks[t].edgeleft.x < (this.body.x + (this.body.radius * 1.6)) && stage.bricks[t].edgeright.x > (this.body.x - (this.body.radius * 1.6))) {
-                            if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) < this.body.y) {    
-                            if (this.body.y - Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) > (stage.bricks[t].height * 2) + 10) {
-                                this.recovering = 1
-                            }
+                            if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) < this.body.y) {
+                                if (this.body.y - Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) > (stage.bricks[t].height * 2) + 10) {
+                                    this.recovering = 1
+                                }
                                 if (boys[k].brick == stage.bricks[t]) {
                                     this.under = 1
                                 } else {
@@ -3394,6 +3423,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 } else {
 
                 }
+            }
+
+            if (this.body.y < 700) {
+                this.wmove = 0
+                this.downspike = 0
             }
             if (this.shield == 0) {
 
@@ -4372,6 +4406,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
         }
         doubleJump() {
+            if (this.body.y < 700) {
+                this.wmove = 0
+                this.screwshot = 0
+            }
             this.jumpcount--
             if (this.jumpcount <= -20) {
                 if (this == boys[0]) {
@@ -4836,6 +4874,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }
             }
 
+            if (this.body.y < 700) {
+                this.wmove = 0
+                this.screwshot = 0
+            }
             if (this.shield == 0) {
 
                 if (this.dmove == 0 && this.amove == 0) {
@@ -6045,6 +6087,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
         }
         doubleJump() {
+            if (this.body.y < 700) {
+                this.wmove = 0
+                this.screwshot = 0
+            }
             this.jumpcount--
             if (this.jumpcount <= -20) {
                 if (this == boys[0]) {
@@ -6203,7 +6249,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
                 }
             }
-            
+
 
             this.under = 0
             this.trapped = 0
@@ -6502,6 +6548,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 } else {
 
                 }
+            }
+
+            if (this.body.y < 700) {
+                this.wmove = 0
+                this.screwshot = 0
             }
             if (this.shield == 0) {
 
@@ -7705,6 +7756,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
         }
         doubleJump() {
+            if (this.body.y < 1200) {
+                this.wmove = 0
+                this.screwshot = 0
+            }
             this.jumpcount--
             if (this.jumpcount <= -20) {
                 if (this == boys[0]) {
@@ -8172,6 +8227,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 } else {
 
                 }
+            }
+
+            if (this.body.y < 1200) {
+                this.wmove = 0
+                this.screwshot = 0
             }
             if (this.shield == 0) {
 
@@ -9178,14 +9238,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }
             }
             for (let t = 0; t < boom.length; t++) {
-                if (boys[t].body.y > (1440 * (invscale * .5)) || boys[t].body.x < 0 || boys[t].body.x > (2560 * (invscale * .5))) {
+                if (boys[t].body.y > (1440 * (invscale * .5)) || boys[t].body.x < 0 || boys[t].body.x > (2560 * (invscale * .5)) || boys[t].body.y < 0) {
                     if (t != boys[t].striker) {
                         scores[boys[t].striker]++
                     }
                     drops[t]++
                     if (boys[t].go !== 1) {
                         boys[t].go = 1
-                        boom[t] = new Explosion(boys[t].body.x)
+                        if (boys[t].body.y < 0) {
+                            boom[t] = new ExplosionTop(boys[t].body.x)
+                        } else {
+                            boom[t] = new Explosion(boys[t].body.x)
+                        }
                         // if (Math.random() < .5) {
                         //     boys[t] = new Mass(t)
                         //     boys[t].body.color = getRandomColor()
@@ -9219,7 +9283,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             for (let t = 0; t < boys.length; t++) {
                 canvas_context.font = "60px arial"
                 canvas_context.fillStyle = boys[t].body.color
-                canvas_context.fillText(`${boys[t].name + " "} ${scores[t]}/${drops[t]}`, 800, (t * 61) + 100)
+                canvas_context.fillText(`${boys[t].name + " "} ${scores[t]}/${drops[t]}`, 20, (t * 61) + 70)
             }
             // }
             // canvas_context.fillText(`Falls: `, 200, 100)
@@ -9229,7 +9293,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             // canvas_context.fillText(`Yellow ${scores[3]} `, 200, 300)
             // }
         } else {
-            canvas_context.clearRect(0, 0, canvas.width * 4, canvas.height * 4)
+            canvas_context.clearRect(0, 0, canvas.width * invscale, canvas.height * invscale)
 
 
             massSelector.draw()
