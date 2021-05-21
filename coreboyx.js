@@ -3155,71 +3155,72 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
 
 
-            this.tarmax = 0
-            for (let t = 0; t < boys.length; t++) {
-                if (this != boys[t]) {
-                    if (boys[t].damage >= this.tarmax) {
-                        this.target = boys[t]
-                        this.tarmax = boys[t].damage
-                        if (Math.random() < .1) {
-                            this.bricksto = this.brick
-                            this.brick = this.target.brick
-                            if (this.target.body.x > this.body.x) {
-                                let xdisR = Math.abs(this.brick.edgeright.x - (this.body.x - (this.body.radius * 1.1)))
-                                let runtimeR = xdisR / this.speed
-                                let droptimerR = ((this.body.ymom + (this.gravity * runtimeR)) * runtimeR) / runtimeR
-                                if (droptimerR < (runtimeR * .8)) {
-                                    this.dmove = 1
-                                    this.amove = 0
-                                    this.safe = 1
-                                    this.downspike = 1
-                                    this.wmove = 1
-                                }else{
-                                    this.brick = this.bricksto
-                                }
-                            } else {
-                                let xdisL = Math.abs(this.brick.edgeleft.x - (this.body.x + (this.body.radius * 1.1)))
-                                let runtimeL = xdisL / this.speed
-                                let droptimerL = ((this.body.ymom + (this.gravity * runtimeL)) * runtimeL) / runtimeL
-                                if (droptimerL < (runtimeL * .8)) {
-                                    this.amove = 1
-                                    this.dmove = 0
-                                    this.safe = 1
-                                    this.downspike = 1
-                                    this.wmove = 1
-                                }else{
-                                    this.brick = this.bricksto
+            if (this.under == 0) {
+                this.tarmax = 0
+                for (let t = 0; t < boys.length; t++) {
+                    if (this != boys[t]) {
+                        if (boys[t].damage >= this.tarmax) {
+                            this.target = boys[t]
+                            this.tarmax = boys[t].damage
+                            if (Math.random() < .1) {
+                                this.bricksto = this.brick
+                                this.brick = this.target.brick
+                                if (this.target.body.x > this.body.x) {
+                                    let xdisR = Math.abs(this.brick.edgeright.x - (this.body.x - (this.body.radius * 1.1)))
+                                    let runtimeR = xdisR / this.speed
+                                    let droptimerR = ((this.body.ymom + (this.gravity * runtimeR)) * runtimeR) / runtimeR
+                                    if (droptimerR < (runtimeR * .8)) {
+                                        this.dmove = 1
+                                        this.amove = 0
+                                        this.safe = 1
+                                        this.downspike = 1
+                                        this.wmove = 1
+                                    } else {
+                                        this.brick = this.bricksto
+                                    }
+                                } else {
+                                    let xdisL = Math.abs(this.brick.edgeleft.x - (this.body.x + (this.body.radius * 1.1)))
+                                    let runtimeL = xdisL / this.speed
+                                    let droptimerL = ((this.body.ymom + (this.gravity * runtimeL)) * runtimeL) / runtimeL
+                                    if (droptimerL < (runtimeL * .8)) {
+                                        this.amove = 1
+                                        this.dmove = 0
+                                        this.safe = 1
+                                        this.downspike = 1
+                                        this.wmove = 1
+                                    } else {
+                                        this.brick = this.bricksto
+                                    }
                                 }
                             }
                         }
                     }
                 }
-            }
-            if (this.target.body.x > this.body.x) {
-                let xdisR = Math.abs(this.brick.edgeright.x - (this.body.x - (this.body.radius * 1.1)))
-                let runtimeR = xdisR / this.speed
-                let droptimerR = ((this.body.ymom + (this.gravity * runtimeR)) * runtimeR) / runtimeR
-                if (droptimerR < (runtimeR * .87)) {
-                    this.dmove = 1
-                    this.amove = 0
-                    this.safe = 1
-                    this.downspike = 1
-                    this.wmove = 1
+                if (this.target.body.x > this.body.x) {
+                    let xdisR = Math.abs(this.brick.edgeright.x - (this.body.x - (this.body.radius * 1.1)))
+                    let runtimeR = xdisR / this.speed
+                    let droptimerR = ((this.body.ymom + (this.gravity * runtimeR)) * runtimeR) / runtimeR
+                    if (droptimerR < (runtimeR * .87)) {
+                        this.dmove = 1
+                        this.amove = 0
+                        this.safe = 1
+                        this.downspike = 1
+                        this.wmove = 1
+                    }
+                } else {
+                    let xdisL = Math.abs(this.brick.edgeleft.x - (this.body.x + (this.body.radius * 1.1)))
+                    let runtimeL = xdisL / this.speed
+                    let droptimerL = ((this.body.ymom + (this.gravity * runtimeL)) * runtimeL) / runtimeL
+                    if (droptimerL < (runtimeL * .87)) {
+                        this.amove = 1
+                        this.dmove = 0
+                        this.safe = 1
+                        this.downspike = 1
+                        this.wmove = 1
+                    }
                 }
-            } else {
-                let xdisL = Math.abs(this.brick.edgeleft.x - (this.body.x + (this.body.radius * 1.1)))
-                let runtimeL = xdisL / this.speed
-                let droptimerL = ((this.body.ymom + (this.gravity * runtimeL)) * runtimeL) / runtimeL
-                if (droptimerL < (runtimeL * .87)) {
-                    this.amove = 1
-                    this.dmove = 0
-                    this.safe = 1
-                    this.downspike = 1
-                    this.wmove = 1
-                }
+
             }
-
-
             if (this.shield == 0) {
 
                 if (this.dmove == 0 && this.amove == 0) {
@@ -4447,70 +4448,71 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
 
 
-            this.tarmax = 0
-            for (let t = 0; t < boys.length; t++) {
-                if (this != boys[t]) {
-                    if (boys[t].damage >= this.tarmax) {
-                        this.target = boys[t]
-                        this.tarmax = boys[t].damage
-                        if (Math.random() < .1) {
-                            this.bricksto = this.brick
-                            this.brick = this.target.brick
-                            if (this.target.body.x > this.body.x) {
-                                let xdisR = Math.abs(this.brick.edgeright.x - (this.body.x - (this.body.radius * 1.1)))
-                                let runtimeR = xdisR / this.speed
-                                let droptimerR = ((this.body.ymom + (this.gravity * runtimeR)) * runtimeR) / runtimeR
-                                if (droptimerR < (runtimeR * .850)) {
-                                    this.dmove = 1
-                                    this.amove = 0
-                                    this.safe = 1
-                                    this.screwshot = 1
-                                    this.wmove =1
-                                }else{
-                                    this.brick = this.bricksto
-                                }
-                            } else {
-                                let xdisL = Math.abs(this.brick.edgeleft.x - (this.body.x + (this.body.radius * 1.1)))
-                                let runtimeL = xdisL / this.speed
-                                let droptimerL = ((this.body.ymom + (this.gravity * runtimeL)) * runtimeL) / runtimeL
-                                if (droptimerL < (runtimeL * .850)) {
-                                    this.amove = 1
-                                    this.dmove = 0
-                                    this.safe = 1
-                                    this.screwshot = 1
-                                    this.wmove =1
-                                }else{
-                                    this.brick = this.bricksto
+            if (this.under == 0) {
+                this.tarmax = 0
+                for (let t = 0; t < boys.length; t++) {
+                    if (this != boys[t]) {
+                        if (boys[t].damage >= this.tarmax) {
+                            this.target = boys[t]
+                            this.tarmax = boys[t].damage
+                            if (Math.random() < .1) {
+                                this.bricksto = this.brick
+                                this.brick = this.target.brick
+                                if (this.target.body.x > this.body.x) {
+                                    let xdisR = Math.abs(this.brick.edgeright.x - (this.body.x - (this.body.radius * 1.1)))
+                                    let runtimeR = xdisR / this.speed
+                                    let droptimerR = ((this.body.ymom + (this.gravity * runtimeR)) * runtimeR) / runtimeR
+                                    if (droptimerR < (runtimeR * .850)) {
+                                        this.dmove = 1
+                                        this.amove = 0
+                                        this.safe = 1
+                                        this.screwshot = 1
+                                        this.wmove = 1
+                                    } else {
+                                        this.brick = this.bricksto
+                                    }
+                                } else {
+                                    let xdisL = Math.abs(this.brick.edgeleft.x - (this.body.x + (this.body.radius * 1.1)))
+                                    let runtimeL = xdisL / this.speed
+                                    let droptimerL = ((this.body.ymom + (this.gravity * runtimeL)) * runtimeL) / runtimeL
+                                    if (droptimerL < (runtimeL * .850)) {
+                                        this.amove = 1
+                                        this.dmove = 0
+                                        this.safe = 1
+                                        this.screwshot = 1
+                                        this.wmove = 1
+                                    } else {
+                                        this.brick = this.bricksto
+                                    }
                                 }
                             }
                         }
                     }
                 }
-            }
-            if (this.target.body.x > this.body.x) {
-                let xdisR = Math.abs(this.brick.edgeright.x - (this.body.x - (this.body.radius * 1.1)))
-                let runtimeR = xdisR / this.speed
-                let droptimerR = ((this.body.ymom + (this.gravity * runtimeR)) * runtimeR) / runtimeR
-                if (droptimerR < (runtimeR * .855)) {
-                    this.dmove = 1
-                    this.amove = 0
-                    this.safe = 1
-                    this.screwshot = 1
-                    this.wmove =1
+                if (this.target.body.x > this.body.x) {
+                    let xdisR = Math.abs(this.brick.edgeright.x - (this.body.x - (this.body.radius * 1.1)))
+                    let runtimeR = xdisR / this.speed
+                    let droptimerR = ((this.body.ymom + (this.gravity * runtimeR)) * runtimeR) / runtimeR
+                    if (droptimerR < (runtimeR * .855)) {
+                        this.dmove = 1
+                        this.amove = 0
+                        this.safe = 1
+                        this.screwshot = 1
+                        this.wmove = 1
+                    }
+                } else {
+                    let xdisL = Math.abs(this.brick.edgeleft.x - (this.body.x + (this.body.radius * 1.1)))
+                    let runtimeL = xdisL / this.speed
+                    let droptimerL = ((this.body.ymom + (this.gravity * runtimeL)) * runtimeL) / runtimeL
+                    if (droptimerL < (runtimeL * .855)) {
+                        this.amove = 1
+                        this.dmove = 0
+                        this.safe = 1
+                        this.screwshot = 1
+                        this.wmove = 1
+                    }
                 }
-            } else {
-                let xdisL = Math.abs(this.brick.edgeleft.x - (this.body.x + (this.body.radius * 1.1)))
-                let runtimeL = xdisL / this.speed
-                let droptimerL = ((this.body.ymom + (this.gravity * runtimeL)) * runtimeL) / runtimeL
-                if (droptimerL < (runtimeL * .855)) {
-                    this.amove = 1
-                    this.dmove = 0
-                    this.safe = 1
-                    this.screwshot = 1
-                    this.wmove =1
-                }
             }
-
             if (this.shield == 0) {
 
                 if (this.dmove == 0 && this.amove == 0) {
@@ -5940,69 +5942,70 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             }
 
-            this.tarmax = 0
-            for (let t = 0; t < boys.length; t++) {
-                if (this != boys[t]) {
-                    if (boys[t].damage >= this.tarmax) {
-                        this.target = boys[t]
-                        this.tarmax = boys[t].damage
-                        if (Math.random() < .1) {
-                            this.bricksto = this.brick
-                            this.brick = this.target.brick
-                            if (this.target.body.x > this.body.x) {
-                                let xdisR = Math.abs(this.brick.edgeright.x - (this.body.x - (this.body.radius * 1.1)))
-                                let runtimeR = xdisR / this.speed
-                                let droptimerR = ((this.body.ymom + (this.gravity * runtimeR)) * runtimeR) / runtimeR
-                                if (droptimerR < (runtimeR * .95) && this.body.fired < 3.8*runtimeR) {
-                                    this.dmove = 1
-                                    this.amove = 0
-                                    this.safe = 1
-                                    this.screwshot = 1
-                                    this.wmove = 1
-                                }else{
-                                    this.brick = this.bricksto
-                                }
-                            } else {
-                                let xdisL = Math.abs(this.brick.edgeleft.x - (this.body.x +  (this.body.radius * 1.1)))
-                                let runtimeL = xdisL / this.speed
-                                let droptimerL = ((this.body.ymom + (this.gravity * runtimeL)) * runtimeL) / runtimeL
-                                if (droptimerL < (runtimeL * .95) && this.body.fired < 3.8*runtimeL) {
-                                    this.amove = 1
-                                    this.dmove = 0
-                                    this.safe = 1
-                                    this.screwshot = 1
-                                    this.wmove = 1
-                                }else{
-                                    this.brick = this.bricksto
+            if (this.under == 0) {
+                this.tarmax = 0
+                for (let t = 0; t < boys.length; t++) {
+                    if (this != boys[t]) {
+                        if (boys[t].damage >= this.tarmax) {
+                            this.target = boys[t]
+                            this.tarmax = boys[t].damage
+                            if (Math.random() < .1) {
+                                this.bricksto = this.brick
+                                this.brick = this.target.brick
+                                if (this.target.body.x > this.body.x) {
+                                    let xdisR = Math.abs(this.brick.edgeright.x - (this.body.x - (this.body.radius * 1.1)))
+                                    let runtimeR = xdisR / this.speed
+                                    let droptimerR = ((this.body.ymom + (this.gravity * runtimeR)) * runtimeR) / runtimeR
+                                    if (droptimerR < (runtimeR * .95) && this.body.fired < 3.8 * runtimeR) {
+                                        this.dmove = 1
+                                        this.amove = 0
+                                        this.safe = 1
+                                        this.screwshot = 1
+                                        this.wmove = 1
+                                    } else {
+                                        this.brick = this.bricksto
+                                    }
+                                } else {
+                                    let xdisL = Math.abs(this.brick.edgeleft.x - (this.body.x + (this.body.radius * 1.1)))
+                                    let runtimeL = xdisL / this.speed
+                                    let droptimerL = ((this.body.ymom + (this.gravity * runtimeL)) * runtimeL) / runtimeL
+                                    if (droptimerL < (runtimeL * .95) && this.body.fired < 3.8 * runtimeL) {
+                                        this.amove = 1
+                                        this.dmove = 0
+                                        this.safe = 1
+                                        this.screwshot = 1
+                                        this.wmove = 1
+                                    } else {
+                                        this.brick = this.bricksto
+                                    }
                                 }
                             }
                         }
                     }
                 }
-            }
-            if (this.target.body.x > this.body.x) {
-                let xdisR = Math.abs(this.brick.edgeright.x - (this.body.x - (this.body.radius * 1.1)))
-                let runtimeR = xdisR / this.speed
-                let droptimerR = ((this.body.ymom + (this.gravity * runtimeR)) * runtimeR) / runtimeR
-                if (droptimerR < (runtimeR * .8) && this.body.fired < 1.8*runtimeR) {
-                    this.dmove = 1
-                    this.amove = 0
-                    this.safe = 1
-                    this.wmove = 1
+                if (this.target.body.x > this.body.x) {
+                    let xdisR = Math.abs(this.brick.edgeright.x - (this.body.x - (this.body.radius * 1.1)))
+                    let runtimeR = xdisR / this.speed
+                    let droptimerR = ((this.body.ymom + (this.gravity * runtimeR)) * runtimeR) / runtimeR
+                    if (droptimerR < (runtimeR * .8) && this.body.fired < 1.8 * runtimeR) {
+                        this.dmove = 1
+                        this.amove = 0
+                        this.safe = 1
+                        this.wmove = 1
+                    }
+                } else {
+                    let xdisL = Math.abs(this.brick.edgeleft.x - (this.body.x + (this.body.radius * 1.1)))
+                    let runtimeL = xdisL / this.speed
+                    let droptimerL = ((this.body.ymom + (this.gravity * runtimeL)) * runtimeL) / runtimeL
+                    if (droptimerL < (runtimeL * .8) && this.body.fired < 1.8 * runtimeL) {
+                        this.amove = 1
+                        this.dmove = 0
+                        this.safe = 1
+                        this.wmove = 1
+                    }
                 }
-            } else {
-                let xdisL = Math.abs(this.brick.edgeleft.x - (this.body.x + (this.body.radius * 1.1)))
-                let runtimeL = xdisL / this.speed
-                let droptimerL = ((this.body.ymom + (this.gravity * runtimeL)) * runtimeL) / runtimeL
-                if (droptimerL < (runtimeL * .8) && this.body.fired < 1.8*runtimeL) {
-                    this.amove = 1
-                    this.dmove = 0
-                    this.safe = 1
-                    this.wmove = 1
-                }
+
             }
-
-
             if (this.shield == 0) {
 
                 if (this.dmove == 0 && this.amove == 0) {
@@ -6954,38 +6957,38 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }
             }
 
-                this.leftshoulder.x = this.body.x - (this.body.radius + this.shoulderwidth * .3)
-                this.leftshoulder.y = this.body.y + (this.shoulderwidth * .7)
+            this.leftshoulder.x = this.body.x - (this.body.radius + this.shoulderwidth * .3)
+            this.leftshoulder.y = this.body.y + (this.shoulderwidth * .7)
 
-                this.rightshoulder.x = this.body.x + (this.body.radius + this.shoulderwidth * .3)
-                this.rightshoulder.y = this.body.y + (this.shoulderwidth * .7)
+            this.rightshoulder.x = this.body.x + (this.body.radius + this.shoulderwidth * .3)
+            this.rightshoulder.y = this.body.y + (this.shoulderwidth * .7)
 
-                this.leftshoulder.color = this.body.color
-                this.rightshoulder.color = this.body.color
-                this.lefthand.color = this.body.color
-                this.righthand.color = this.body.color
-
-
-                if (this.lefthand.anchored == 0) {
-                    this.lefthand.x = this.lefthand.x + (this.leftshoulder.x - (this.body.x - (this.body.radius + this.shoulderwidth * .3)))
-                    this.lefthand.y -= this.leftshoulder.y - (this.body.y + (this.shoulderwidth * .7))
-                    this.leftshoulder.xmom *= 0
-                    this.leftshoulder.ymom *= 0
-                }
-                if (this.righthand.anchored == 0) {
-                    this.righthand.x = this.righthand.x + (this.rightshoulder.x - (this.body.x + (this.body.radius + this.shoulderwidth * .3)))
-                    this.righthand.y -= this.rightshoulder.y - (this.body.y + (this.shoulderwidth * .7))
-                    this.rightshoulder.xmom *= 0
-                    this.rightshoulder.ymom *= 0
-                }
-
-                if (this.body.ymom < -vsmashlimit) {
-                    this.body.ymom = -vsmashlimit
-                }
+            this.leftshoulder.color = this.body.color
+            this.rightshoulder.color = this.body.color
+            this.lefthand.color = this.body.color
+            this.righthand.color = this.body.color
 
 
+            if (this.lefthand.anchored == 0) {
+                this.lefthand.x = this.lefthand.x + (this.leftshoulder.x - (this.body.x - (this.body.radius + this.shoulderwidth * .3)))
+                this.lefthand.y -= this.leftshoulder.y - (this.body.y + (this.shoulderwidth * .7))
+                this.leftshoulder.xmom *= 0
+                this.leftshoulder.ymom *= 0
+            }
+            if (this.righthand.anchored == 0) {
+                this.righthand.x = this.righthand.x + (this.rightshoulder.x - (this.body.x + (this.body.radius + this.shoulderwidth * .3)))
+                this.righthand.y -= this.rightshoulder.y - (this.body.y + (this.shoulderwidth * .7))
+                this.rightshoulder.xmom *= 0
+                this.rightshoulder.ymom *= 0
+            }
 
-            
+            if (this.body.ymom < -vsmashlimit) {
+                this.body.ymom = -vsmashlimit
+            }
+
+
+
+
 
 
             // this.leftshoulder.x = this.body.x - (this.body.radius + this.shoulderwidth)
@@ -7436,70 +7439,71 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             }
 
-            this.tarmax = 0
-            for (let t = 0; t < boys.length; t++) {
-                if (this != boys[t]) {
-                    if (boys[t].damage >= this.tarmax) {
-                        this.target = boys[t]
-                        this.tarmax = boys[t].damage
-                        if (Math.random() < .1) {
-                            this.bricksto = this.brick
-                            this.brick = this.target.brick
-                            if (this.target.body.x > this.body.x) {
-                                let xdisR = Math.abs(this.brick.edgeright.x - (this.body.x - (this.body.radius * 1.1)))
-                                let runtimeR = xdisR / this.speed
-                                let droptimerR = ((this.body.ymom + (this.gravity * runtimeR)) * runtimeR) / runtimeR
-                                if (droptimerR < (runtimeR * .9)) {
-                                    this.dmove = 1
-                                    this.amove = 0
-                                    this.safe = 1
-                                    this.screwshot = 1
-                                    this.wmove =1
-                                }else{
-                                    this.brick = this.bricksto
-                                }
-                            } else {
-                                let xdisL = Math.abs(this.brick.edgeleft.x - (this.body.x + (this.body.radius * 1.1)))
-                                let runtimeL = xdisL / this.speed
-                                let droptimerL = ((this.body.ymom + (this.gravity * runtimeL)) * runtimeL) / runtimeL
-                                if (droptimerL < (runtimeL * .9)) {
-                                    this.amove = 1
-                                    this.dmove = 0
-                                    this.safe = 1
-                                    this.screwshot = 1
-                                    this.wmove =1
-                                }else{
-                                    this.brick = this.bricksto
+            if (this.under == 0) {
+                this.tarmax = 0
+                for (let t = 0; t < boys.length; t++) {
+                    if (this != boys[t]) {
+                        if (boys[t].damage >= this.tarmax) {
+                            this.target = boys[t]
+                            this.tarmax = boys[t].damage
+                            if (Math.random() < .1) {
+                                this.bricksto = this.brick
+                                this.brick = this.target.brick
+                                if (this.target.body.x > this.body.x) {
+                                    let xdisR = Math.abs(this.brick.edgeright.x - (this.body.x - (this.body.radius * 1.1)))
+                                    let runtimeR = xdisR / this.speed
+                                    let droptimerR = ((this.body.ymom + (this.gravity * runtimeR)) * runtimeR) / runtimeR
+                                    if (droptimerR < (runtimeR * .9)) {
+                                        this.dmove = 1
+                                        this.amove = 0
+                                        this.safe = 1
+                                        this.screwshot = 1
+                                        this.wmove = 1
+                                    } else {
+                                        this.brick = this.bricksto
+                                    }
+                                } else {
+                                    let xdisL = Math.abs(this.brick.edgeleft.x - (this.body.x + (this.body.radius * 1.1)))
+                                    let runtimeL = xdisL / this.speed
+                                    let droptimerL = ((this.body.ymom + (this.gravity * runtimeL)) * runtimeL) / runtimeL
+                                    if (droptimerL < (runtimeL * .9)) {
+                                        this.amove = 1
+                                        this.dmove = 0
+                                        this.safe = 1
+                                        this.screwshot = 1
+                                        this.wmove = 1
+                                    } else {
+                                        this.brick = this.bricksto
+                                    }
                                 }
                             }
                         }
                     }
                 }
-            }
-            if (this.target.body.x > this.body.x) {
-                let xdisR = Math.abs(this.brick.edgeright.x - (this.body.x - (this.body.radius * 1.1)))
-                let runtimeR = xdisR / this.speed
-                let droptimerR = ((this.body.ymom + (this.gravity * runtimeR)) * runtimeR) / runtimeR
-                if (droptimerR < (runtimeR * .9)) {
-                    this.dmove = 1
-                    this.amove = 0
-                    this.safe = 1
-                    this.screwshot = 1
-                    this.wmove =1
+                if (this.target.body.x > this.body.x) {
+                    let xdisR = Math.abs(this.brick.edgeright.x - (this.body.x - (this.body.radius * 1.1)))
+                    let runtimeR = xdisR / this.speed
+                    let droptimerR = ((this.body.ymom + (this.gravity * runtimeR)) * runtimeR) / runtimeR
+                    if (droptimerR < (runtimeR * .9)) {
+                        this.dmove = 1
+                        this.amove = 0
+                        this.safe = 1
+                        this.screwshot = 1
+                        this.wmove = 1
+                    }
+                } else {
+                    let xdisL = Math.abs(this.brick.edgeleft.x - (this.body.x + (this.body.radius * 1.1)))
+                    let runtimeL = xdisL / this.speed
+                    let droptimerL = ((this.body.ymom + (this.gravity * runtimeL)) * runtimeL) / runtimeL
+                    if (droptimerL < (runtimeL * .9)) {
+                        this.amove = 1
+                        this.dmove = 0
+                        this.safe = 1
+                        this.screwshot = 1
+                        this.wmove = 1
+                    }
                 }
-            } else {
-                let xdisL = Math.abs(this.brick.edgeleft.x - (this.body.x + (this.body.radius * 1.1)))
-                let runtimeL = xdisL / this.speed
-                let droptimerL = ((this.body.ymom + (this.gravity * runtimeL)) * runtimeL) / runtimeL
-                if (droptimerL < (runtimeL * .9)) {
-                    this.amove = 1
-                    this.dmove = 0
-                    this.safe = 1
-                    this.screwshot = 1
-                    this.wmove =1
-                }
             }
-
             if (this.shield == 0) {
 
                 if (this.dmove == 0 && this.amove == 0) {
