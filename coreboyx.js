@@ -2656,6 +2656,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     class Boy {
         constructor(controller) {
+            this.shot = {}
             this.striker = 10000
             this.name = "Coreboy"
             this.blasting = 0
@@ -3088,8 +3089,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 if (gamepadAPI[this.controller].buttonsStatus.includes('X') || keysPressed['j']) {
                     if (this.lefthand.fired <= 0) {
                         if (this.righthand.fired <= 0) {
-                            let shot = new Shot(this.body.x, this.body.y, 20, "#bbbbbb", 0, (this.speed * 3))
-                            this.shots.push(shot)
+                            this.shot = new Shot(this.body.x, this.body.y, 20, "#bbbbbb", 0, (this.speed * 3))
+                            this.shots.push(this.shot)
                             if (this.body.ymom > -jumplimit) {
                                 this.body.ymom -= 8
                                 if (this.body.ymom < -jumplimit) {
@@ -3839,8 +3840,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 if (this.downspike == 1) {
                     if (this.lefthand.fired <= 0) {
                         if (this.righthand.fired <= 0) {
-                            let shot = new Shot(this.body.x, this.body.y, 20, "#bbbbbb", 0, (this.speed * 3))
-                            this.shots.push(shot)
+                            this.shot = new Shot(this.body.x, this.body.y, 20, "#bbbbbb", 0, (this.speed * 3))
+                            this.shots.push(this.shot)
                             if (this.body.ymom > -jumplimit) {
                                 this.body.ymom -= 8
                                 if (this.body.ymom < -jumplimit) {
@@ -3970,19 +3971,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
             //this.enemycollide()
         }
         draw() {
-
-
-            if (this.righthand.anchored == 1) {
-                if (this.body.x > this.righthand.x) {
-                    this.righthand.anchored = -10
-                }
-            }
-            if (this.lefthand.anchored == 1) {
-                if (this.body.x < this.lefthand.x) {
-                    this.lefthand.anchored = -10
-                }
-            }
-
             for (let t = 0; t < this.shots.length; t++) {
                 this.shots[t].radius *= 1.02
                 this.shots[t].ymom *= 1.02
@@ -3998,6 +3986,50 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     this.shots.splice(t, 1)
                 }
             }
+            this.leftarm = new LineOP(this.leftshoulder, this.lefthand, invertColor(this.body.color), 8)
+            this.rightarm = new LineOP(this.rightshoulder, this.righthand, invertColor(this.body.color), 8)
+            this.collideStage()
+            for (let t = 0; t < this.links.length; t++) {
+                this.links[t].color = invertColor(this.body.color)
+                this.links[t].draw()
+            }
+            for (let t = 0; t < this.nodes.length; t++) {
+                this.nodes[t].draw()
+            }
+
+            // if (this.controller == 0) {
+                let link = new Line(this.body.x, this.body.y, this.body.x + (((this.body.radius * .8) * this.face)), this.body.y, invertColor(this.body.color), this.body.radius * .2)
+
+                canvas_context.lineWidth = 0
+                canvas_context.strokeStyle = invertColor(this.body.color)
+                canvas_context.beginPath();
+                canvas_context.arc((link.x1 + link.x2) * .5, link.y1 - this.body.radius * .09, this.body.radius * .4, 0, (Math.PI * 1), true)
+                canvas_context.fillStyle = invertColor(this.body.color)
+                canvas_context.fill()
+                // canvas_context.stroke();
+                link.draw()
+
+                canvas_context.font = "32px arial"
+                canvas_context.fillStyle = `rgb(${255 - (this.damage / 10)},${255 - this.damage},${255 - this.damage})`
+                canvas_context.fillText(`${Math.round(this.damage)}%`, this.body.x - 20, this.body.y - 60)
+    
+    
+                // this.bodyx = this.body.x
+        }
+        operate() {
+
+
+            if (this.righthand.anchored == 1) {
+                if (this.body.x > this.righthand.x) {
+                    this.righthand.anchored = -10
+                }
+            }
+            if (this.lefthand.anchored == 1) {
+                if (this.body.x < this.lefthand.x) {
+                    this.lefthand.anchored = -10
+                }
+            }
+
             if (this.lefthand.anchored != 1 && this.righthand.anchored != 1) {
                 this.body.sxmom = 0
                 this.body.symom = 0
@@ -4116,21 +4148,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
             // this.rightshoulder.xmom *= 0
             // this.rightshoulder.ymom *= 0
 
-
-            this.leftarm = new LineOP(this.leftshoulder, this.lefthand, invertColor(this.body.color), 8)
-            this.rightarm = new LineOP(this.rightshoulder, this.righthand, invertColor(this.body.color), 8)
-
-            this.collideStage()
-
-            for (let t = 0; t < this.links.length; t++) {
-                //this.collideStage()
-                this.links[t].color = invertColor(this.body.color)
-                this.links[t].draw()
-            }
-            for (let t = 0; t < this.nodes.length; t++) {
-                //this.collideStage()
-                this.nodes[t].draw()
-            }
             for (let t = 0; t < this.springs.length; t++) {
                 this.springs[t].beam.color = invertColor(this.body.color)
                 this.springs[t].balance()
@@ -4138,17 +4155,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
             for (let t = 0; t < this.hitboxes.length; t++) {
 
             }
-            // if (this.controller == 0) {
-            let link = new Line(this.body.x, this.body.y, this.body.x + (((this.body.radius * .8) * this.face)), this.body.y, invertColor(this.body.color), this.body.radius * .2)
-
-            canvas_context.lineWidth = 0
-            canvas_context.strokeStyle = invertColor(this.body.color)
-            canvas_context.beginPath();
-            canvas_context.arc((link.x1 + link.x2) * .5, link.y1 - this.body.radius * .09, this.body.radius * .4, 0, (Math.PI * 1), true)
-            canvas_context.fillStyle = invertColor(this.body.color)
-            canvas_context.fill()
-            // canvas_context.stroke();
-            link.draw()
             if (this == boys[0]) {
 
                 this.fightcontrol()
@@ -4162,13 +4168,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     spot.draw()
                 }
             }
-
-            canvas_context.font = "32px arial"
-            canvas_context.fillStyle = `rgb(${255 - (this.damage / 10)},${255 - this.damage},${255 - this.damage})`
-            canvas_context.fillText(`${Math.round(this.damage)}%`, this.body.x - 20, this.body.y - 60)
-
-
-            // this.bodyx = this.body.x
         }
     }
 
@@ -4188,6 +4187,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     class Mass {
         constructor(controller) {
+            this.shot = {}
             this.safe = 1
             this.striker = 10000
             this.name = "Mass"
@@ -5081,16 +5081,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
         }
         AI() {
             this.breaks()
-            for (let t = 0; t < this.shots.length; t++) {
-                this.shots[t].move()
-                this.shots[t].draw()
-            }
-            for (let t = 0; t < this.shots.length; t++) {
-                if (this.shots[t].marked == 1) {
-                    this.shots.splice(t, 1)
-                }
-            }
-
             if (this.screwtimer > 0) {
                 this.screwtimer--
                 this.screwangle += this.screwmomentum
@@ -5365,16 +5355,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     if (this.righthand.anchored == 0) {
                         if (this.rightshot == 1) {
                             if (this.face == 1) {
-                                let shot = new Shot(this.righthand.x, this.righthand.y, this.charge * .66, "#00FFFF", this.speed * 2, 0)
+                                this.shot = new Shot(this.righthand.x, this.righthand.y, this.charge * .66, "#00FFFF", this.speed * 2, 0)
                                 if (this.charge > 80) {
-                                    shot.color = "#88FFFF"
+                                    this.shot.color = "#88FFFF"
                                 }
                                 // if(this.wasfalse[1] == 0){
                                 if (this.charge >= 100) {
                                     this.charge = 0
                                     this.righthand.xmom = 10
                                     this.righthand.ymom = 0
-                                    this.shots.push(shot)
+                                    this.shots.push(this.shot)
                                     if (this.grounded != 1) {
                                         this.body.xmom -= 5
                                     }
@@ -5384,21 +5374,21 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     this.righthand.ymom -= 1
                                     this.charge += 3.5
                                 }
-                                shot.draw()
+                                this.shot.draw()
                             }
                         }
                         if (this.leftshot == 1) {
                             if (this.face == -1) {
                                 if (this.lefthand.anchored == 0) {
-                                    let shot = new Shot(this.lefthand.x, this.lefthand.y, this.charge * .66, "#00FFFF", -this.speed * 2, 0)
+                                    this.shot = new Shot(this.lefthand.x, this.lefthand.y, this.charge * .66, "#00FFFF", -this.speed * 2, 0)
                                     if (this.charge > 80) {
-                                        shot.color = "#88FFFF"
+                                        this.shot.color = "#88FFFF"
                                     }
                                     if (this.charge >= 100) {
                                         this.charge = 0
                                         this.lefthand.xmom = -10
                                         this.lefthand.ymom = 0
-                                        this.shots.push(shot)
+                                        this.shots.push(this.shot)
                                         if (this.grounded != 1) {
                                             this.body.xmom += 5
                                         }
@@ -5408,7 +5398,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         this.lefthand.ymom -= 1
                                         this.charge += 3.5
                                     }
-                                    shot.draw()
+                                    this.shot.draw()
 
                                 }
                             }
@@ -5453,15 +5443,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 
 
-            for (let t = 0; t < this.shots.length; t++) {
-                this.shots[t].move()
-                this.shots[t].draw()
-            }
-            for (let t = 0; t < this.shots.length; t++) {
-                if (this.shots[t].marked == 1) {
-                    this.shots.splice(t, 1)
-                }
-            }
 
             if (this.screwtimer > 0) {
                 this.screwtimer--
@@ -5499,6 +5480,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 
 
+            this.shotdraw = 0
             if (this.breaktimer <= 0 && this.shield == 0) {
 
                 if (this.righthand.fired <= 0) {
@@ -5506,16 +5488,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
                         if (this.face == 1) {
                             if (this.righthand.anchored == 0) {
-                                let shot = new Shot(this.righthand.x, this.righthand.y, this.charge * .66, "#00FFFF", this.speed * 2, 0)
+                                this.shot = new Shot(this.righthand.x, this.righthand.y, this.charge * .66, "#00FFFF", this.speed * 2, 0)
                                 if (this.charge > 80) {
-                                    shot.color = "#88FFFF"
+                                    this.shot.color = "#88FFFF"
                                 }
                                 // if(this.wasfalse[1] == 0){
                                 if (this.charge >= 100) {
                                     this.charge = 0
                                     this.righthand.xmom = 10
                                     this.righthand.ymom = 0
-                                    this.shots.push(shot)
+                                    this.shots.push(this.shot)
                                     if (this.grounded != 1) {
                                         this.body.xmom -= 5
                                     }
@@ -5525,20 +5507,20 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     this.righthand.ymom -= 1
                                     this.charge += 3.5
                                 }
-                                shot.draw()
+                                this.shotdraw = 1
                             }
                         }
                         if (this.face == -1) {
                             if (this.lefthand.anchored == 0) {
-                                let shot = new Shot(this.lefthand.x, this.lefthand.y, this.charge * .66, "#00FFFF", -this.speed * 2, 0)
+                                this.shot = new Shot(this.lefthand.x, this.lefthand.y, this.charge * .66, "#00FFFF", -this.speed * 2, 0)
                                 if (this.charge > 80) {
-                                    shot.color = "#88FFFF"
+                                    this.shot.color = "#88FFFF"
                                 }
                                 if (this.charge >= 100) {
                                     this.charge = 0
                                     this.lefthand.xmom = -10
                                     this.lefthand.ymom = 0
-                                    this.shots.push(shot)
+                                    this.shots.push(this.shot)
                                     if (this.grounded != 1) {
                                         this.body.xmom += 5
                                     }
@@ -5548,7 +5530,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     this.lefthand.ymom -= 1
                                     this.charge += 3.5
                                 }
-                                shot.draw()
+                                this.shotdraw = 1
 
                             }
                         }
@@ -5668,6 +5650,76 @@ window.addEventListener('DOMContentLoaded', (event) => {
             //this.enemycollide()
         }
         draw() {
+            for (let t = 0; t < this.shots.length; t++) {
+                this.shots[t].move()
+                this.shots[t].draw()
+            }
+            for (let t = 0; t < this.shots.length; t++) {
+                if (this.shots[t].marked == 1) {
+                    this.shots.splice(t, 1)
+                }
+            }
+
+            this.leftarm = new LineOP(this.leftshoulder, this.lefthand, invertColor(this.body.color), 8)
+            this.rightarm = new LineOP(this.rightshoulder, this.righthand, invertColor(this.body.color), 8)
+            this.collideStage()
+            for (let t = 0; t < this.links.length; t++) {
+                this.links[t].color = invertColor(this.body.color)
+                this.links[t].draw()
+            }
+            for (let t = 0; t < this.nodes.length; t++) {
+                this.nodes[t].draw()
+            }
+
+            if (this.breaktimer > 0) {
+                for (let t = 0; t < 5; t++) {
+                    let spot = new Circle(this.body.x + ((Math.random() - .5) * this.body.radius * 2), this.body.y - (this.body.radius + 4), 3, "yellow")
+                    spot.draw()
+                }
+            }
+            if (this.screwangle != 0) {
+                for (let t = 0; t < 25; t++) {
+                    let spot = new Circle(this.body.x + ((Math.random() - .5) * this.body.radius * 2), this.body.y - ((Math.random() - .5) * this.body.radius * 2), 3, invertColor(this.body.color))
+                    if (spot.doesPerimeterTouch(this.body)) {
+                        spot.draw()
+                    }
+                }
+            }
+
+            canvas_context.font = "32px arial"
+            canvas_context.fillStyle = `rgb(${255 - (this.damage / 10)},${255 - this.damage},${255 - this.damage})`
+            canvas_context.fillText(`${Math.round(this.damage)}%`, this.body.x - 20, this.body.y - 60)
+            // canvas_context.fillText(`Height:${Math.round(this.brick.edgeright.y)}`, this.body.x - 20, this.body.y - 250)
+            // canvas_context.fillText(`Safe:${Math.round(this.safe)}`, this.body.x - 20, this.body.y - 200)
+            // if (this != boys[0]) {
+            //     canvas_context.fillText(`M ${Math.round(this.dmove)},${Math.round(this.amove)}`, this.body.x - 20, this.body.y - 100)
+            //     canvas_context.fillText(`U ${Math.round(this.dmomu)},${Math.round(this.amomu)}`, this.body.x - 20, this.body.y - 150)
+            //     canvas_context.fillText(`Under:${Math.round(this.under)},Safe:${Math.round(this.safe)}`, this.body.x - 20, this.body.y - 200)
+            //     canvas_context.fillText(`_ ${Math.round(this.dmom)},${Math.round(this.amom)}`, this.body.x - 20, this.body.y - 300)
+            //     if (this.fleeing == 1) {
+            //         canvas_context.fillText(`fleeing`, this.body.x - 20, this.body.y - 100)
+            //     }
+            // }
+
+
+            let link = new Line(this.body.x, this.body.y, this.body.x + (((this.body.radius * .8) * this.face)), this.body.y + Math.sin(this.screwangle), invertColor(this.body.color), this.body.radius * .2)
+
+            canvas_context.lineWidth = this.strokeWidth
+            canvas_context.strokeStyle = invertColor(this.body.color)
+            canvas_context.beginPath();
+            canvas_context.arc(((link.x1 + link.x2) * .5) + Math.cos(this.screwangle), link.y1 - this.body.radius * .1, this.body.radius * .4, this.screwangle, (Math.PI * 1) + this.screwangle, false)
+            canvas_context.fillStyle = invertColor(this.body.color)
+            canvas_context.fill()
+            canvas_context.stroke();
+            if (this.screwangle == 0) {
+                link.draw()
+            }
+
+            if(this.shotdraw == 1){
+                this.shot.draw()
+            }
+        }
+        operate() {
 
             if (this.righthand.anchored == 1) {
                 if (this.body.x > this.righthand.x) {
@@ -5811,27 +5863,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
             // this.rightshoulder.ymom *= 0
 
 
-            this.leftarm = new LineOP(this.leftshoulder, this.lefthand, invertColor(this.body.color), 8)
-            this.rightarm = new LineOP(this.rightshoulder, this.righthand, invertColor(this.body.color), 8)
 
 
-            this.collideStage()
-
-            for (let t = 0; t < this.links.length; t++) {
-                //this.collideStage()
-                this.links[t].color = invertColor(this.body.color)
-                this.links[t].draw()
-            }
-            for (let t = 0; t < this.nodes.length; t++) {
-                //this.collideStage()
-
-                // if(this.righthand.fired > 14){
-                //     this.righthand.color = "#ffffff"
-                // }else{
-                //     this.righthand.color = "#FF0000"
-                // }
-                this.nodes[t].draw()
-            }
             for (let t = 0; t < this.springs.length; t++) {
                 this.springs[t].beam.color = invertColor(this.body.color)
                 this.springs[t].balance()
@@ -5841,19 +5874,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
             // if (this.controller == 0) {
 
-            let link = new Line(this.body.x, this.body.y, this.body.x + (((this.body.radius * .8) * this.face)), this.body.y + Math.sin(this.screwangle), invertColor(this.body.color), this.body.radius * .2)
-
-            canvas_context.lineWidth = this.strokeWidth
-            canvas_context.strokeStyle = invertColor(this.body.color)
-            canvas_context.beginPath();
-            canvas_context.arc(((link.x1 + link.x2) * .5) + Math.cos(this.screwangle), link.y1 - this.body.radius * .1, this.body.radius * .4, this.screwangle, (Math.PI * 1) + this.screwangle, false)
-            canvas_context.fillStyle = invertColor(this.body.color)
-            canvas_context.fill()
-            canvas_context.stroke();
-            if (this.screwangle == 0) {
-                link.draw()
-            }
-
             if (this == boys[0]) {
 
                 // this.AI()
@@ -5862,36 +5882,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 this.AI()
             }
             // }
-            if (this.breaktimer > 0) {
-                for (let t = 0; t < 5; t++) {
-                    let spot = new Circle(this.body.x + ((Math.random() - .5) * this.body.radius * 2), this.body.y - (this.body.radius + 4), 3, "yellow")
-                    spot.draw()
-                }
-            }
-            if (this.screwangle != 0) {
-                for (let t = 0; t < 25; t++) {
-                    let spot = new Circle(this.body.x + ((Math.random() - .5) * this.body.radius * 2), this.body.y - ((Math.random() - .5) * this.body.radius * 2), 3, invertColor(this.body.color))
-                    if (spot.doesPerimeterTouch(this.body)) {
-                        spot.draw()
-                    }
-                }
-            }
-
-            canvas_context.font = "32px arial"
-            canvas_context.fillStyle = `rgb(${255 - (this.damage / 10)},${255 - this.damage},${255 - this.damage})`
-            canvas_context.fillText(`${Math.round(this.damage)}%`, this.body.x - 20, this.body.y - 60)
-            // canvas_context.fillText(`Height:${Math.round(this.brick.edgeright.y)}`, this.body.x - 20, this.body.y - 250)
-            // canvas_context.fillText(`Safe:${Math.round(this.safe)}`, this.body.x - 20, this.body.y - 200)
-            // if (this != boys[0]) {
-            //     canvas_context.fillText(`M ${Math.round(this.dmove)},${Math.round(this.amove)}`, this.body.x - 20, this.body.y - 100)
-            //     canvas_context.fillText(`U ${Math.round(this.dmomu)},${Math.round(this.amomu)}`, this.body.x - 20, this.body.y - 150)
-            //     canvas_context.fillText(`Under:${Math.round(this.under)},Safe:${Math.round(this.safe)}`, this.body.x - 20, this.body.y - 200)
-            //     canvas_context.fillText(`_ ${Math.round(this.dmom)},${Math.round(this.amom)}`, this.body.x - 20, this.body.y - 300)
-            //     if (this.fleeing == 1) {
-            //         canvas_context.fillText(`fleeing`, this.body.x - 20, this.body.y - 100)
-            //     }
-            // }
-
         }
     }
 
@@ -5899,6 +5889,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     class Blastgirl {
         constructor(controller) {
+            this.shot = new Brick(-1, -1, 1, 1)
             this.striker = 10000
             this.name = "Blastgirl"
             this.blasting = 0
@@ -6788,20 +6779,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
         AI() {
             this.breaks()
             for (let t = 0; t < this.shots.length; t++) {
-                if (typeof this.shots[t].gravity == "number") {
-                    this.shots[t].ymom += this.shots[t].gravity
-                }
-                if (typeof this.shots[t].countdown == "number") {
-                    this.shots[t].countdown--
-                    this.shots[t].gravity = Math.cos(this.shots[t].countdown * (Math.PI / 4)) * 20
-                    if (this.shots[t].countdown <= 0) {
-                        this.shots[t].marked = 1
-                    }
-                }
-                this.shots[t].move()
-                this.shots[t].draw()
-            }
-            for (let t = 0; t < this.shots.length; t++) {
                 if (this.shots[t].marked == 1) {
                     this.shots.splice(t, 1)
                 }
@@ -7041,9 +7018,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 if (this.hortsmash == 1) {
                     if (this.righthand.fired <= 0) {
                         if (this.righthand.anchored == 0) {
-                            let shot = new Shot(this.rightshoulder.x, this.rightshoulder.y, 20, "#FFAA00", this.speed * 1.2, -this.speed * 1.4)
-                            shot.gravity = 1
-                            this.shots.push(shot)
+                            this.shot = new Shot(this.rightshoulder.x, this.rightshoulder.y, 20, "#FFAA00", this.speed * 1.2, -this.speed * 1.4)
+                            this.shot.gravity = 1
+                            this.shots.push(this.shot)
                             this.fleeing = 0
                             this.rightshoulder.xmom = 0
                             this.rightshoulder.ymom = 0
@@ -7054,9 +7031,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
                     if (this.lefthand.fired <= 0) {
                         if (this.lefthand.anchored == 0) {
-                            let shot = new Shot(this.leftshoulder.x, this.leftshoulder.y, 20, "#FFAA00", - this.speed * 1.2, -this.speed * 1.4)
-                            shot.gravity = 1
-                            this.shots.push(shot)
+                            this.shot = new Shot(this.leftshoulder.x, this.leftshoulder.y, 20, "#FFAA00", - this.speed * 1.2, -this.speed * 1.4)
+                            this.shot.gravity = 1
+                            this.shots.push(this.shot)
                             this.fleeing = 0
                             this.leftshoulder.xmom = 0
                             this.leftshoulder.ymom = 0
@@ -7072,16 +7049,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (this.rightshot == 1) {
                             if (this.face == 1) {
                                 if (this.righthand.anchored == 0) {
-                                    let shot = new Shot(this.righthand.x, this.righthand.y, 40, "#FF0000", this.speed * (1.9), 0)
+                                    this.shot = new Shot(this.righthand.x, this.righthand.y, 40, "#FF0000", this.speed * (1.9), 0)
                                     // if(this.wasfalse[1] == 0){
-                                    shot.gravity = -.1
-                                    shot.countdown = 100
+                                    this.shot.gravity = -.1
+                                    this.shot.countdown = 100
                                     if (this.charge <= 0) {
                                         this.righthand.fired = 10
                                         if (this.righthand.anchored == 0) {
                                             this.charge += 40.5
                                         }
-                                        this.shots.push(shot)
+                                        this.shots.push(this.shot)
                                         if (this.grounded != 1) {
                                             this.body.xmom -= .5
                                         }
@@ -7096,15 +7073,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (this.leftshot == 1) {
                             if (this.face == -1) {
                                 if (this.lefthand.anchored == 0) {
-                                    let shot = new Shot(this.lefthand.x, this.lefthand.y, 40, "#FF0000", -this.speed * (1.9), 0)
-                                    shot.gravity = -.1
-                                    shot.countdown = 100
+                                    this.shot = new Shot(this.lefthand.x, this.lefthand.y, 40, "#FF0000", -this.speed * (1.9), 0)
+                                    this.shot.gravity = -.1
+                                    this.shot.countdown = 100
                                     if (this.charge <= 0) {
                                         this.lefthand.fired = 10
                                         if (this.lefthand.anchored == 0) {
                                             this.charge += 40.5
                                         }
-                                        this.shots.push(shot)
+                                        this.shots.push(this.shot)
                                         if (this.grounded != 1) {
                                             this.body.xmom -= .5
                                         }
@@ -7152,20 +7129,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.breaks()
 
 
-            for (let t = 0; t < this.shots.length; t++) {
-                if (typeof this.shots[t].gravity == "number") {
-                    this.shots[t].ymom += this.shots[t].gravity
-                }
-                if (typeof this.shots[t].countdown == "number") {
-                    this.shots[t].countdown--
-                    this.shots[t].gravity = Math.cos(this.shots[t].countdown * (Math.PI / 4)) * 20
-                    if (this.shots[t].countdown <= 0) {
-                        this.shots[t].marked = 1
-                    }
-                }
-                this.shots[t].move()
-                this.shots[t].draw()
-            }
             for (let t = 0; t < this.shots.length; t++) {
                 if (this.shots[t].marked == 1) {
                     this.shots.splice(t, 1)
@@ -7219,16 +7182,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     if (gamepadAPI[this.controller].buttonsStatus.includes('B') || keysPressed['l']) {
                         if (this.face == 1) {
                             if (this.righthand.anchored == 0) {
-                                let shot = new Shot(this.righthand.x, this.righthand.y, 40, "#FF0000", this.speed * (1.9), 0)
+                                this.shot = new Shot(this.righthand.x, this.righthand.y, 40, "#FF0000", this.speed * (1.9), 0)
                                 // if(this.wasfalse[1] == 0){
-                                shot.gravity = -.1
-                                shot.countdown = 100
+                                this.shot.gravity = -.1
+                                this.shot.countdown = 100
                                 if (this.charge <= 0) {
                                     this.righthand.fired = 10
                                     if (this.righthand.anchored == 0) {
                                         this.charge += 40.5
                                     }
-                                    this.shots.push(shot)
+                                    this.shots.push(this.shot)
                                     if (this.grounded != 1) {
                                         this.body.xmom -= .5
                                     }
@@ -7237,15 +7200,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         }
                         if (this.face == -1) {
                             if (this.lefthand.anchored == 0) {
-                                let shot = new Shot(this.lefthand.x, this.lefthand.y, 40, "#FF0000", -this.speed * (1.9), 0)
-                                shot.gravity = -.1
-                                shot.countdown = 100
+                                this.shot = new Shot(this.lefthand.x, this.lefthand.y, 40, "#FF0000", -this.speed * (1.9), 0)
+                                this.shot.gravity = -.1
+                                this.shot.countdown = 100
                                 if (this.charge <= 0) {
                                     this.lefthand.fired = 10
                                     if (this.lefthand.anchored == 0) {
                                         this.charge += 40.5
                                     }
-                                    this.shots.push(shot)
+                                    this.shots.push(this.shot)
                                     if (this.grounded != 1) {
                                         this.body.xmom -= .5
                                     }
@@ -7300,9 +7263,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 if (gamepadAPI[this.controller].buttonsStatus.includes('X') || keysPressed['j']) {
                     if (this.righthand.fired <= 0) {
                         if (this.righthand.anchored == 0) {
-                            let shot = new Shot(this.rightshoulder.x, this.rightshoulder.y, 20, "#FFAA00", this.speed * 1.2, -this.speed * 1.4)
-                            shot.gravity = 1
-                            this.shots.push(shot)
+                            this.shot = new Shot(this.rightshoulder.x, this.rightshoulder.y, 20, "#FFAA00", this.speed * 1.2, -this.speed * 1.4)
+                            this.shot.gravity = 1
+                            this.shots.push(this.shot)
                             this.fleeing = 0
                             this.rightshoulder.xmom = 0
                             this.rightshoulder.ymom = 0
@@ -7313,9 +7276,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
                     if (this.lefthand.fired <= 0) {
                         if (this.lefthand.anchored == 0) {
-                            let shot = new Shot(this.leftshoulder.x, this.leftshoulder.y, 20, "#FFAA00", - this.speed * 1.2, -this.speed * 1.4)
-                            shot.gravity = 1
-                            this.shots.push(shot)
+                            this.shot = new Shot(this.leftshoulder.x, this.leftshoulder.y, 20, "#FFAA00", - this.speed * 1.2, -this.speed * 1.4)
+                            this.shot.gravity = 1
+                            this.shots.push(this.shot)
                             this.fleeing = 0
                             this.leftshoulder.xmom = 0
                             this.leftshoulder.ymom = 0
@@ -7382,6 +7345,65 @@ window.addEventListener('DOMContentLoaded', (event) => {
             //this.enemycollide()
         }
         draw() {
+            for (let t = 0; t < this.shots.length; t++) {
+                if (typeof this.shots[t].gravity == "number") {
+                    this.shots[t].ymom += this.shots[t].gravity
+                }
+                if (typeof this.shots[t].countdown == "number") {
+                    this.shots[t].countdown--
+                    this.shots[t].gravity = Math.cos(this.shots[t].countdown * (Math.PI / 4)) * 20
+                    if (this.shots[t].countdown <= 0) {
+                        this.shots[t].marked = 1
+                    }
+                }
+                this.shots[t].move()
+                this.shots[t].draw()
+            }
+            this.leftarm = new LineOP(this.leftshoulder, this.lefthand, invertColor(this.body.color), 8)
+            this.rightarm = new LineOP(this.rightshoulder, this.righthand, invertColor(this.body.color), 8)
+            this.collideStage()
+            for (let t = 0; t < this.links.length; t++) {
+                this.links[t].color = invertColor(this.body.color)
+                this.links[t].draw()
+            }
+            for (let t = 0; t < this.nodes.length; t++) {
+                this.nodes[t].draw()
+            }
+
+            // if (this.controller == 0) {
+
+                let link = new Line(this.body.x, this.body.y, this.body.x + (((this.body.radius * .8) * this.face)), this.body.y + Math.sin(this.screwangle), invertColor(this.body.color), this.body.radius * .2)
+
+                canvas_context.lineWidth = this.strokeWidth
+                canvas_context.strokeStyle = (this.body.color)
+                canvas_context.beginPath();
+                canvas_context.arc(((link.x1 + link.x2) * .5) + Math.cos(this.screwangle), link.y1 + this.body.radius * .1, this.body.radius * .4, this.screwangle, (Math.PI * 1) + this.screwangle, true)
+                canvas_context.fillStyle = (this.body.color)
+                canvas_context.fill()
+                canvas_context.stroke();
+                canvas_context.beginPath();
+                canvas_context.arc(((link.x1 + link.x2) * .5) + Math.cos(this.screwangle), link.y1 - this.body.radius * .1, this.body.radius * .4, this.screwangle, (Math.PI * 1) + this.screwangle, false)
+                canvas_context.fillStyle = (this.body.color)
+                canvas_context.fill()
+                canvas_context.stroke();
+                // if (this.screwangle == 0) {
+                //     link.draw()
+                // }
+            canvas_context.font = "32px arial"
+            canvas_context.fillStyle = `rgb(${255 - (this.damage / 10)},${255 - this.damage},${255 - this.damage})`
+            canvas_context.fillText(`${Math.round(this.damage)}%`, this.body.x - 20, this.body.y - 60)
+            // if (this != boys[0]) {
+            //     canvas_context.fillText(`${Math.round(this.dmomu)},${Math.round(this.amomu)}`, this.body.x - 20, this.body.y - 150)
+            //     canvas_context.fillText(`Under:${Math.round(this.under)},Safe:${Math.round(this.safe)}`, this.body.x - 20, this.body.y - 200)
+            //     canvas_context.fillText(`Height:${Math.round(this.brick.edgeright.y)}`, this.body.x - 20, this.body.y - 250)
+            //     if (this.fleeing == 1) {
+            //         canvas_context.fillText(`fleeing`, this.body.x - 20, this.body.y - 100)
+            //     }
+            // }
+
+    
+        }
+        operate() {
 
             if (this.righthand.anchored == 1) {
                 if (this.body.x > this.righthand.x) {
@@ -7524,22 +7546,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
             // this.rightshoulder.xmom *= 0
             // this.rightshoulder.ymom *= 0
 
-
-            this.leftarm = new LineOP(this.leftshoulder, this.lefthand, invertColor(this.body.color), 8)
-            this.rightarm = new LineOP(this.rightshoulder, this.righthand, invertColor(this.body.color), 8)
-
-
-
-            this.collideStage()
-            for (let t = 0; t < this.links.length; t++) {
-                //this.collideStage()
-                this.links[t].color = invertColor(this.body.color)
-                this.links[t].draw()
-            }
-            for (let t = 0; t < this.nodes.length; t++) {
-                //this.collideStage()
-                this.nodes[t].draw()
-            }
             for (let t = 0; t < this.springs.length; t++) {
                 this.springs[t].beam.color = invertColor(this.body.color)
                 this.springs[t].balance()
@@ -7547,26 +7553,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
             for (let t = 0; t < this.hitboxes.length; t++) {
 
             }
-            // if (this.controller == 0) {
-
-            let link = new Line(this.body.x, this.body.y, this.body.x + (((this.body.radius * .8) * this.face)), this.body.y + Math.sin(this.screwangle), invertColor(this.body.color), this.body.radius * .2)
-
-            canvas_context.lineWidth = this.strokeWidth
-            canvas_context.strokeStyle = (this.body.color)
-            canvas_context.beginPath();
-            canvas_context.arc(((link.x1 + link.x2) * .5) + Math.cos(this.screwangle), link.y1 + this.body.radius * .1, this.body.radius * .4, this.screwangle, (Math.PI * 1) + this.screwangle, true)
-            canvas_context.fillStyle = (this.body.color)
-            canvas_context.fill()
-            canvas_context.stroke();
-            canvas_context.beginPath();
-            canvas_context.arc(((link.x1 + link.x2) * .5) + Math.cos(this.screwangle), link.y1 - this.body.radius * .1, this.body.radius * .4, this.screwangle, (Math.PI * 1) + this.screwangle, false)
-            canvas_context.fillStyle = (this.body.color)
-            canvas_context.fill()
-            canvas_context.stroke();
-            // if (this.screwangle == 0) {
-            //     link.draw()
-            // }
-
             if (this == boys[0]) {
 
                 // this.AI()
@@ -7588,18 +7574,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 link2.draw()
             }
 
-            canvas_context.font = "32px arial"
-            canvas_context.fillStyle = `rgb(${255 - (this.damage / 10)},${255 - this.damage},${255 - this.damage})`
-            canvas_context.fillText(`${Math.round(this.damage)}%`, this.body.x - 20, this.body.y - 60)
-            // if (this != boys[0]) {
-            //     canvas_context.fillText(`${Math.round(this.dmomu)},${Math.round(this.amomu)}`, this.body.x - 20, this.body.y - 150)
-            //     canvas_context.fillText(`Under:${Math.round(this.under)},Safe:${Math.round(this.safe)}`, this.body.x - 20, this.body.y - 200)
-            //     canvas_context.fillText(`Height:${Math.round(this.brick.edgeright.y)}`, this.body.x - 20, this.body.y - 250)
-            //     if (this.fleeing == 1) {
-            //         canvas_context.fillText(`fleeing`, this.body.x - 20, this.body.y - 100)
-            //     }
-            // }
-
         }
     }
 
@@ -7608,6 +7582,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     class Jox {
         constructor(controller) {
+            this.shot = {}
             this.striker = 10000
             this.name = "Jox"
             this.blasting = 0
@@ -8503,25 +8478,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
         }
         AI() {
             this.breaks()
-            for (let t = 0; t < this.shots.length; t++) {
-                if (typeof this.shots[t].gravity == "number") {
-                    this.shots[t].ymom += this.shots[t].gravity
-                }
-                if (typeof this.shots[t].countdown == "number") {
-                    this.shots[t].countdown--
-                    this.shots[t].gravity = Math.cos(this.shots[t].countdown * (Math.PI / 4)) * 20
-                    if (this.shots[t].countdown <= 0) {
-                        this.shots[t].marked = 1
-                    }
-                }
-                this.shots[t].move()
-                this.shots[t].draw()
-            }
-            for (let t = 0; t < this.shots.length; t++) {
-                if (this.shots[t].marked == 1) {
-                    this.shots.splice(t, 1)
-                }
-            }
 
             if (this.screwtimer > 0) {
                 this.screwtimer--
@@ -8849,26 +8805,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.breaks()
 
 
-            for (let t = 0; t < this.shots.length; t++) {
-                if (typeof this.shots[t].gravity == "number") {
-                    this.shots[t].ymom += this.shots[t].gravity
-                }
-                if (typeof this.shots[t].countdown == "number") {
-                    this.shots[t].countdown--
-                    this.shots[t].gravity = Math.cos(this.shots[t].countdown * (Math.PI / 4)) * 20
-                    if (this.shots[t].countdown <= 0) {
-                        this.shots[t].marked = 1
-                    }
-                }
-                this.shots[t].move()
-                this.shots[t].draw()
-            }
-            for (let t = 0; t < this.shots.length; t++) {
-                if (this.shots[t].marked == 1) {
-                    this.shots.splice(t, 1)
-                }
-            }
-
             if (this.screwtimer > 0) {
                 this.screwtimer--
                 if (this.screwtimer <= 65) {
@@ -9069,6 +9005,89 @@ window.addEventListener('DOMContentLoaded', (event) => {
             //this.enemycollide()
         }
         draw() {
+            for (let t = 0; t < this.shots.length; t++) {
+                if (typeof this.shots[t].gravity == "number") {
+                    this.shots[t].ymom += this.shots[t].gravity
+                }
+                if (typeof this.shots[t].countdown == "number") {
+                    this.shots[t].countdown--
+                    this.shots[t].gravity = Math.cos(this.shots[t].countdown * (Math.PI / 4)) * 20
+                    if (this.shots[t].countdown <= 0) {
+                        this.shots[t].marked = 1
+                    }
+                }
+                this.shots[t].move()
+                this.shots[t].draw()
+            }
+            for (let t = 0; t < this.shots.length; t++) {
+                if (this.shots[t].marked == 1) {
+                    this.shots.splice(t, 1)
+                }
+            }
+            this.leftarm = new LineOP(this.leftshoulder, this.lefthand, invertColor(this.body.color), 8)
+            this.rightarm = new LineOP(this.rightshoulder, this.righthand, invertColor(this.body.color), 8)
+            this.collideStage()
+            for (let t = 0; t < this.links.length; t++) {
+                this.links[t].color = invertColor(this.body.color)
+                this.links[t].draw()
+            }
+            for (let t = 0; t < this.nodes.length; t++) {
+                this.nodes[t].draw()
+            }
+
+            // }
+            if (this.breaktimer > 0) {
+                for (let t = 0; t < 5; t++) {
+                    let spot = new Circle(this.body.x + ((Math.random() - .5) * this.body.radius * 2), this.body.y - (this.body.radius + 4), 3, "yellow")
+                    spot.draw()
+                }
+            }
+            // if (this.screwangle != 0) {
+            //         let link1 = new Line(this.rightshoulder.x, this.rightshoulder.y, this.rightshoulder.x+50, this.rightshoulder.y+50,  invertColor(this.body.color), 8)
+            //         let link2 = new Line(this.leftshoulder.x, this.leftshoulder.y, this.leftshoulder.x-50, this.leftshoulder.y+50,  invertColor(this.body.color), 8)
+            //         link1.draw()
+            //         link2.draw()
+            // }
+
+            // if (this.controller == 0) {
+
+                let link = new Line(this.body.x, this.body.y, this.body.x + (((this.body.radius * .8) * this.face)), this.body.y + Math.sin(this.screwangle), invertColor(this.body.color), this.body.radius * .2)
+
+                canvas_context.lineWidth = this.strokeWidth
+                canvas_context.strokeStyle = invertColorx(this.body.color)
+                canvas_context.fillStyle = invertColorx(this.body.color)
+                canvas_context.beginPath();
+                canvas_context.fillRect(((this.body.x - (this.body.radius * .4 * (-this.face)))) - ((this.body.radius * .4)), this.body.y - (this.body.radius * .4), (this.body.radius * .8), (this.body.radius * .8))
+                canvas_context.fill()
+                canvas_context.strokeStyle = invertColorx(this.body.color)
+                canvas_context.fillStyle = invertColor(this.body.color)
+                canvas_context.beginPath();
+                canvas_context.fillRect(((this.body.x - (this.body.radius * .2 * (-this.face)))) - ((this.body.radius * .2)), this.body.y - (this.body.radius * .2), (this.body.radius * .4), (this.body.radius * .4))
+                canvas_context.fill()
+                canvas_context.stroke();
+                // if (this.screwangle == 0) {
+                //     link.draw()
+                // }
+    
+            canvas_context.font = "32px arial"
+            canvas_context.fillStyle = `rgb(${255 - (this.damage / 10)},${255 - this.damage},${255 - this.damage})`
+            canvas_context.fillText(`${Math.round(this.damage)}%`, this.body.x - 20, this.body.y - 60)
+            // if (this != boys[0]) {
+            //     canvas_context.fillText(`${Math.round(this.dmomu)},${Math.round(this.amomu)}`, this.body.x - 20, this.body.y - 150)
+            //     canvas_context.fillText(`Under:${Math.round(this.under)},Safe:${Math.round(this.safe)}`, this.body.x - 20, this.body.y - 200)
+            //     canvas_context.fillText(`Height:${Math.round(this.brick.edgeright.y)}`, this.body.x - 20, this.body.y - 250)
+            //     if (this.fleeing == 1) {
+            //         canvas_context.fillText(`fleeing`, this.body.x - 20, this.body.y - 100)
+            //     }
+            // }
+
+            if (this.reflecting > 0) {
+                let polygot = new Polygon(this.body.x, this.body.y, (Math.max((new LineOP(this.body, this.lefthand)).hypotenuse(), (new LineOP(this.body, this.righthand)).hypotenuse())) + this.lefthand.radius, getRandomLightColor(), 7, 0, 0, (Math.PI / 2))
+                polygot.draw()
+            }
+
+        }
+        operate() {
 
             if (this.righthand.anchored == 1) {
                 if (this.body.x > this.righthand.x) {
@@ -9216,21 +9235,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
             // this.rightshoulder.ymom *= 0
 
 
-            this.leftarm = new LineOP(this.leftshoulder, this.lefthand, invertColor(this.body.color), 8)
-            this.rightarm = new LineOP(this.rightshoulder, this.righthand, invertColor(this.body.color), 8)
 
 
 
             //this.collideStage()
-            this.collideStage()
-            for (let t = 0; t < this.links.length; t++) {
-                // //this.collideStage()
-                this.links[t].color = invertColor(this.body.color)
-                this.links[t].draw()
-            }
-            for (let t = 0; t < this.nodes.length; t++) {
-                this.nodes[t].draw()
-            }
             for (let t = 0; t < this.springs.length; t++) {
                 this.springs[t].beam.color = invertColor(this.body.color)
                 this.springs[t].balance()
@@ -9238,26 +9246,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
             for (let t = 0; t < this.hitboxes.length; t++) {
 
             }
-            // if (this.controller == 0) {
-
-            let link = new Line(this.body.x, this.body.y, this.body.x + (((this.body.radius * .8) * this.face)), this.body.y + Math.sin(this.screwangle), invertColor(this.body.color), this.body.radius * .2)
-
-            canvas_context.lineWidth = this.strokeWidth
-            canvas_context.strokeStyle = invertColorx(this.body.color)
-            canvas_context.fillStyle = invertColorx(this.body.color)
-            canvas_context.beginPath();
-            canvas_context.fillRect(((this.body.x - (this.body.radius * .4 * (-this.face)))) - ((this.body.radius * .4)), this.body.y - (this.body.radius * .4), (this.body.radius * .8), (this.body.radius * .8))
-            canvas_context.fill()
-            canvas_context.strokeStyle = invertColorx(this.body.color)
-            canvas_context.fillStyle = invertColor(this.body.color)
-            canvas_context.beginPath();
-            canvas_context.fillRect(((this.body.x - (this.body.radius * .2 * (-this.face)))) - ((this.body.radius * .2)), this.body.y - (this.body.radius * .2), (this.body.radius * .4), (this.body.radius * .4))
-            canvas_context.fill()
-            canvas_context.stroke();
-            // if (this.screwangle == 0) {
-            //     link.draw()
-            // }
-
             if (this == boys[0]) {
 
                 // this.AI()
@@ -9265,37 +9253,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
             } else {
                 this.AI()
             }
-            // }
-            if (this.breaktimer > 0) {
-                for (let t = 0; t < 5; t++) {
-                    let spot = new Circle(this.body.x + ((Math.random() - .5) * this.body.radius * 2), this.body.y - (this.body.radius + 4), 3, "yellow")
-                    spot.draw()
-                }
-            }
-            // if (this.screwangle != 0) {
-            //         let link1 = new Line(this.rightshoulder.x, this.rightshoulder.y, this.rightshoulder.x+50, this.rightshoulder.y+50,  invertColor(this.body.color), 8)
-            //         let link2 = new Line(this.leftshoulder.x, this.leftshoulder.y, this.leftshoulder.x-50, this.leftshoulder.y+50,  invertColor(this.body.color), 8)
-            //         link1.draw()
-            //         link2.draw()
-            // }
-
-            canvas_context.font = "32px arial"
-            canvas_context.fillStyle = `rgb(${255 - (this.damage / 10)},${255 - this.damage},${255 - this.damage})`
-            canvas_context.fillText(`${Math.round(this.damage)}%`, this.body.x - 20, this.body.y - 60)
-            // if (this != boys[0]) {
-            //     canvas_context.fillText(`${Math.round(this.dmomu)},${Math.round(this.amomu)}`, this.body.x - 20, this.body.y - 150)
-            //     canvas_context.fillText(`Under:${Math.round(this.under)},Safe:${Math.round(this.safe)}`, this.body.x - 20, this.body.y - 200)
-            //     canvas_context.fillText(`Height:${Math.round(this.brick.edgeright.y)}`, this.body.x - 20, this.body.y - 250)
-            //     if (this.fleeing == 1) {
-            //         canvas_context.fillText(`fleeing`, this.body.x - 20, this.body.y - 100)
-            //     }
-            // }
-
-            if (this.reflecting > 0) {
-                let polygot = new Polygon(this.body.x, this.body.y, (Math.max((new LineOP(this.body, this.lefthand)).hypotenuse(), (new LineOP(this.body, this.righthand)).hypotenuse())) + this.lefthand.radius, getRandomLightColor(), 7, 0, 0, (Math.PI / 2))
-                polygot.draw()
-            }
-
         }
     }
 
@@ -9420,17 +9377,27 @@ window.addEventListener('DOMContentLoaded', (event) => {
             gamepadAPI[3].update() //checks for button presses/stick movement on the connected controller)
             // game code goes here
             stage.draw()
-            for (let t = 0; t < boys.length; t++) {
-                boys[t].draw()
+
+            if (flopper % 2 == 0) {
+                for (let t = boys.length - 1; t >= 0; t--) {
+                    boys[t].operate()
+                }
+            } else {
+                for (let t = 0; t < boys.length; t++) {
+                    boys[t].operate()
+                }
             }
             if (flopper % 2 == 0) {
                 for (let t = 0; t < boys.length; t++) {
                     boys[t].enemycollide()
                 }
             } else {
-                for (let t = boys.length - 1; t > 0; t--) {
+                for (let t = boys.length - 1; t >= 0; t--) {
                     boys[t].enemycollide()
                 }
+            }
+            for (let t = 0; t < boys.length; t++) {
+                boys[t].draw()
             }
             for (let t = 0; t < boom.length; t++) {
                 if (boys[t].body.y > (1440 * (invscale * .5)) || boys[t].body.x < 0 || boys[t].body.x > (2560 * (invscale * .5)) || boys[t].body.y < 0) {
