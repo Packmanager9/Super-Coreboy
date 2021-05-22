@@ -9,6 +9,7 @@ let vsmashlimit = 35
 let jumplimit = 20
 let scale = .33
 let invscale = 1 / scale
+let humanPlayers = 0
 window.addEventListener('DOMContentLoaded', (event) => {
     const gamepadAPI = [{
         controller: {},
@@ -2954,7 +2955,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
             this.jumpcount--
             if (this.jumpcount <= -20) {
-                if (this == boys[0]) {
+                if (boys.indexOf(this) <= humanPlayers) {
                     gamepad_control_controller_proto_dj(this.body, this.speed, this.controller)
                 } else {
                     this.AIarmControl()
@@ -3069,7 +3070,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (this.righthand.anchored == 0) {
                             this.rightshoulder.xmom = 0
                             this.rightshoulder.ymom = 0
-                            this.righthand.ymom = this.punchspeed * 14
+                            this.righthand.ymom = (this.punchspeed * 14)+ this.body.ymom*2
                             this.righthand.xmom = this.punchspeed * 9
                             this.righthand.fired = 18
                         }
@@ -3078,7 +3079,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (this.lefthand.anchored == 0) {
                             this.leftshoulder.xmom = 0
                             this.leftshoulder.ymom = 0
-                            this.lefthand.ymom = this.punchspeed * 14
+                            this.lefthand.ymom = (this.punchspeed * 14)+ this.body.ymom*2
                             this.lefthand.xmom = -this.punchspeed * 9
                             this.lefthand.fired = 18
                         }
@@ -3899,7 +3900,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (this.righthand.anchored == 0) {
                             this.rightshoulder.xmom = 0
                             this.rightshoulder.ymom = 0
-                            this.righthand.ymom = this.punchspeed * 14
+                            this.righthand.ymom = (this.punchspeed * 14)+ this.body.ymom*2
                             this.righthand.xmom = this.punchspeed * 9
                             this.righthand.fired = 18
                         }
@@ -3908,7 +3909,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (this.lefthand.anchored == 0) {
                             this.leftshoulder.xmom = 0
                             this.leftshoulder.ymom = 0
-                            this.lefthand.ymom = this.punchspeed * 14
+                            this.lefthand.ymom = (this.punchspeed * 14)+ this.body.ymom*2
                             this.lefthand.xmom = -this.punchspeed * 9
                             this.lefthand.fired = 18
                         }
@@ -4009,9 +4010,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 // canvas_context.stroke();
                 link.draw()
 
-                canvas_context.font = "32px arial"
-                canvas_context.fillStyle = `rgb(${255 - (this.damage / 10)},${255 - this.damage},${255 - this.damage})`
-                canvas_context.fillText(`${Math.round(this.damage)}%`, this.body.x - 20, this.body.y - 60)
+                canvas_context.font = "42px arial"
+                canvas_context.fillStyle = `rgb(${Math.max(255 - (this.damage / 10), 50)},${255 - this.damage},${255 - this.damage})`
+                canvas_context.fillText(`${Math.round(this.damage)}%`, this.body.x - 20, this.body.y - 70)
     
     
                 // this.bodyx = this.body.x
@@ -4036,7 +4037,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
             // if (this.controller == 0) {
 
-            if (this == boys[0]) {
+            if (boys.indexOf(this) <= humanPlayers) {
                 if (this.breaktimer < 0) {
                     gamepad_control_controller_proto(this.body, this.speed, this.controller)
 
@@ -4155,7 +4156,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             for (let t = 0; t < this.hitboxes.length; t++) {
 
             }
-            if (this == boys[0]) {
+            if (boys.indexOf(this) <= humanPlayers) {
 
                 this.fightcontrol()
             } else {
@@ -4536,7 +4537,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
             this.jumpcount--
             if (this.jumpcount <= -20) {
-                if (this == boys[0]) {
+                if (boys.indexOf(this) <= humanPlayers) {
                     gamepad_control_controller_proto_dj(this.body, this.speed, this.controller)
                 } else {
                     this.AIarmControl()
@@ -5313,8 +5314,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (this.righthand.anchored == 0) {
                             this.rightshoulder.xmom = 0
                             this.rightshoulder.ymom = 0
-                            this.lefthand.ymom = (this.punchspeed * 12) //+ this.body.ymom
-                            this.lefthand.xmom = -(this.punchspeed * 2.1) //+ this.body.xmom
+
+
+                            this.righthand.ymom = (this.punchspeed * 12) + this.body.ymom*2
+                            this.righthand.xmom = -((this.punchspeed * 2.1)) //+ this.body.xmom)
+
+                            
+                            // this.righthand.ymom = (this.punchspeed * 12) //+ this.body.ymom
+                            // this.righthand.xmom = -(this.punchspeed * 2.1) //+ this.body.xmom
+
+                            
                             this.righthand.fired = 18
                         }
                     }
@@ -5322,8 +5331,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (this.lefthand.anchored == 0) {
                             this.leftshoulder.xmom = 0
                             this.leftshoulder.ymom = 0
-                            this.lefthand.ymom = (this.punchspeed * 12) //+ this.body.ymom
-                            this.lefthand.xmom = (this.punchspeed * 2.1) //+ this.body.xmom
+
+                            this.lefthand.ymom = (this.punchspeed * 12) + this.body.ymom*2
+                            this.lefthand.xmom = ((this.punchspeed * 2.1))// + this.body.xmom)
+
+                            // this.lefthand.ymom = (this.punchspeed * 12) //+ this.body.ymom
+                            // this.lefthand.xmom = (this.punchspeed * 2.1) //+ this.body.xmom
                             this.lefthand.fired = 18
                         }
                     }
@@ -5557,8 +5570,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (this.righthand.anchored == 0) {
                             this.rightshoulder.xmom = 0
                             this.rightshoulder.ymom = 0
-                            this.righthand.ymom = (this.punchspeed * 12) //+ this.body.ymom
-                            this.righthand.xmom = -(this.punchspeed * 2.1) //+ this.body.xmom
+                            this.righthand.ymom = (this.punchspeed * 12) + this.body.ymom*2
+                            this.righthand.xmom = -((this.punchspeed * 2.1)) // + this.body.xmom)
                             this.righthand.fired = 18
                         }
                     }
@@ -5566,8 +5579,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (this.lefthand.anchored == 0) {
                             this.leftshoulder.xmom = 0
                             this.leftshoulder.ymom = 0
-                            this.lefthand.ymom = (this.punchspeed * 12) //+ this.body.ymom
-                            this.lefthand.xmom = (this.punchspeed * 2.1) //+ this.body.xmom
+                            this.lefthand.ymom = (this.punchspeed * 12) + this.body.ymom*2
+                            this.lefthand.xmom = (this.punchspeed * 2.1) // + this.body.xmom
                             this.lefthand.fired = 18
                         }
                     }
@@ -5686,9 +5699,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }
             }
 
-            canvas_context.font = "32px arial"
-            canvas_context.fillStyle = `rgb(${255 - (this.damage / 10)},${255 - this.damage},${255 - this.damage})`
-            canvas_context.fillText(`${Math.round(this.damage)}%`, this.body.x - 20, this.body.y - 60)
+            canvas_context.font = "42px arial"
+            canvas_context.fillStyle = `rgb(${Math.max(255 - (this.damage / 10), 50)},${255 - this.damage},${255 - this.damage})`
+            canvas_context.fillText(`${Math.round(this.damage)}%`, this.body.x - 20, this.body.y - 70)
             // canvas_context.fillText(`Height:${Math.round(this.brick.edgeright.y)}`, this.body.x - 20, this.body.y - 250)
             // canvas_context.fillText(`Safe:${Math.round(this.safe)}`, this.body.x - 20, this.body.y - 200)
             // if (this != boys[0]) {
@@ -5737,7 +5750,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 this.body.symom = 0
             }
             // if (this.controller == 0) {
-            if (this == boys[0]) {
+            if (boys.indexOf(this) <= humanPlayers) {
                 // if (this.breaktimer < 0) {
                 //     this.AImove(this.body, this.speed, this.controller)
 
@@ -5874,7 +5887,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
             // if (this.controller == 0) {
 
-            if (this == boys[0]) {
+            if (boys.indexOf(this) <= humanPlayers) {
 
                 // this.AI()
                 this.fightcontrol()
@@ -6238,7 +6251,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
             this.jumpcount--
             if (this.jumpcount <= -20) {
-                if (this == boys[0]) {
+                if (boys.indexOf(this) <= humanPlayers) {
                     gamepad_control_controller_proto_dj(this.body, this.speed, this.controller)
                 } else {
                     this.AIarmControl()
@@ -7389,9 +7402,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 // if (this.screwangle == 0) {
                 //     link.draw()
                 // }
-            canvas_context.font = "32px arial"
-            canvas_context.fillStyle = `rgb(${255 - (this.damage / 10)},${255 - this.damage},${255 - this.damage})`
-            canvas_context.fillText(`${Math.round(this.damage)}%`, this.body.x - 20, this.body.y - 60)
+            canvas_context.font = "42px arial"
+            canvas_context.fillStyle = `rgb(${Math.max(255 - (this.damage / 10), 50)},${255 - this.damage},${255 - this.damage})`
+            canvas_context.fillText(`${Math.round(this.damage)}%`, this.body.x - 20, this.body.y - 70)
             // if (this != boys[0]) {
             //     canvas_context.fillText(`${Math.round(this.dmomu)},${Math.round(this.amomu)}`, this.body.x - 20, this.body.y - 150)
             //     canvas_context.fillText(`Under:${Math.round(this.under)},Safe:${Math.round(this.safe)}`, this.body.x - 20, this.body.y - 200)
@@ -7421,7 +7434,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 this.body.symom = 0
             }
             // if (this.controller == 0) {
-            if (this == boys[0]) {
+            if (boys.indexOf(this) <= humanPlayers) {
                 // if (this.breaktimer < 0) {
                 //     this.AImove(this.body, this.speed, this.controller)
 
@@ -7553,7 +7566,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             for (let t = 0; t < this.hitboxes.length; t++) {
 
             }
-            if (this == boys[0]) {
+            if (boys.indexOf(this) <= humanPlayers) {
 
                 // this.AI()
                 this.fightcontrol()
@@ -7927,7 +7940,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
             this.jumpcount--
             if (this.jumpcount <= -20) {
-                if (this == boys[0]) {
+                if (boys.indexOf(this) <= humanPlayers) {
                     gamepad_control_controller_proto_dj(this.body, this.speed, this.controller)
                 } else {
                     this.AIarmControl()
@@ -9069,9 +9082,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 //     link.draw()
                 // }
     
-            canvas_context.font = "32px arial"
-            canvas_context.fillStyle = `rgb(${255 - (this.damage / 10)},${255 - this.damage},${255 - this.damage})`
-            canvas_context.fillText(`${Math.round(this.damage)}%`, this.body.x - 20, this.body.y - 60)
+            canvas_context.font = "42px arial"
+            canvas_context.fillStyle = `rgb(${Math.max(255 - (this.damage / 10), 50)},${255 - this.damage},${255 - this.damage})`
+            canvas_context.fillText(`${Math.round(this.damage)}%`, this.body.x - 20, this.body.y - 70)
             // if (this != boys[0]) {
             //     canvas_context.fillText(`${Math.round(this.dmomu)},${Math.round(this.amomu)}`, this.body.x - 20, this.body.y - 150)
             //     canvas_context.fillText(`Under:${Math.round(this.under)},Safe:${Math.round(this.safe)}`, this.body.x - 20, this.body.y - 200)
@@ -9105,7 +9118,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 this.body.symom = 0
             }
             // if (this.controller == 0) {
-            if (this == boys[0]) {
+            if (boys.indexOf(this) <= humanPlayers) {
                 // if (this.breaktimer < 0) {
                 //     this.AImove(this.body, this.speed, this.controller)
 
@@ -9246,7 +9259,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             for (let t = 0; t < this.hitboxes.length; t++) {
 
             }
-            if (this == boys[0]) {
+            if (boys.indexOf(this) <= humanPlayers) {
 
                 // this.AI()
                 this.fightcontrol()
