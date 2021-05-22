@@ -7006,6 +7006,7 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
                 }
                 if (this.screwshot == 1) {
                     if (this.body.fired <= 0) {
+                        if (this.screwangle == 0) {
                         this.jumping = 1
                         this.screwangle = Math.PI * 1.5
                         this.screwtimer = 50
@@ -7019,6 +7020,7 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
                         this.lefthand.anchored = -10
                         this.righthand.anchored = -10
                         this.body.ymom = -jumplimit
+                        }
                     }
                 }
                 if (this.downspike == 1) {
@@ -7248,6 +7250,7 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
                     this.body.ymom -= this.body.fired * .018
                 }
                 if (gamepadAPI[this.controller].buttonsStatus.includes('Y') || keysPressed['i']) {
+                    if (this.screwangle == 0) {
 
                     if (this.body.fired <= 0) {
                         this.jumping = 1
@@ -7264,6 +7267,7 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
                         this.righthand.anchored = -10
                         this.body.ymom = -jumplimit
                     }
+                }
                 }
                 if (gamepadAPI[this.controller].buttonsStatus.includes('A') || keysPressed['k']) {
                     if (this.righthand.fired <= 0) {
@@ -8699,6 +8703,7 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
                 }
                 if (this.screwshot == 1) {
                     if (this.body.fired <= 0) {
+                        if (this.screwangle == 0) {
                         this.jumping = 1
                         this.screwangle = Math.PI * 1.5
                         this.screwtimer = 75
@@ -8712,6 +8717,7 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
                         this.lefthand.anchored = -10
                         this.righthand.anchored = -10
                         this.body.ymom = -jumplimit
+                        }
                     }
                 }
                 if (this.downspike == 1) {
@@ -8930,6 +8936,7 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
 
                 if (gamepadAPI[this.controller].buttonsStatus.includes('Y') || keysPressed['i']) {
 
+                    if (this.screwangle == 0) {
                     if (this.body.fired <= 0) {
                         this.jumping = 1
                         this.screwangle = Math.PI * 1.5
@@ -8944,6 +8951,7 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
                         this.lefthand.anchored = -10
                         this.righthand.anchored = -10
                         this.body.ymom = -jumplimit
+                    }
                     }
                 }
                 if (gamepadAPI[this.controller].buttonsStatus.includes('A') || keysPressed['k']) {
