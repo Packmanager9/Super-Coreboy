@@ -9635,19 +9635,35 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
             this.fixupshoulder()
         }
         draw() {
-            for (let t = 0; t < this.shots.length; t++) {
-                if (typeof this.shots[t].gravity == "number") {
-                    this.shots[t].ymom += this.shots[t].gravity
-                }
-                if (typeof this.shots[t].countdown == "number") {
-                    this.shots[t].countdown--
-                    this.shots[t].gravity = Math.cos(this.shots[t].countdown * (Math.PI / 4)) * 20
-                    if (this.shots[t].countdown <= 0) {
-                        this.shots[t].marked = 1
+
+            this.safe = 0
+            this.safesto = 0
+            for (let t = 0; t < stage.bricks.length; t++) {
+                if (stage.bricks[t].edgeleft.x < (this.body.x + (this.body.radius * .05)) && stage.bricks[t].edgeright.x > (this.body.x - (this.body.radius * 0.05))) {
+                    if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) >= this.body.y + (this.body.radius * .1)) {
+                        this.safe = 1
+
+                        if (stage.bricks[t].center.y < this.brick.center.y) {
+                            this.brick = stage.bricks[t]
+                        } else if (!(this.brick.edgeleft.x < (this.body.x + (this.body.radius * .05)) && this.brick.edgeright.x > (this.body.x - (this.body.radius * 0.05)))) {
+                            this.brick = stage.bricks[t]
+                        } else if (!(Math.max(this.brick.edgeright.y, this.brick.edgeleft.y) >= this.body.y + (this.body.radius * .1))) {
+                            this.brick = stage.bricks[t]
+                        }
+                    }
+                } else if (stage.bricks[t].edgeleft.x < (this.body.x + (this.body.radius * 4.05)) && stage.bricks[t].edgeright.x > (this.body.x - (this.body.radius * 4.05))) {
+                    if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) >= this.body.y + (this.body.radius * .1)) {
+                        this.safesto = 2
+
+                        if (stage.bricks[t].center.y < this.brick.center.y) {
+                            this.brick = stage.bricks[t]
+                        } else if (!(this.brick.edgeleft.x < (this.body.x + (this.body.radius * .05)) && this.brick.edgeright.x > (this.body.x - (this.body.radius * 0.05)))) {
+                            this.brick = stage.bricks[t]
+                        } else if (!(Math.max(this.brick.edgeright.y, this.brick.edgeleft.y) >= this.body.y + (this.body.radius * .1))) {
+                            this.brick = stage.bricks[t]
+                        }
                     }
                 }
-                this.shots[t].move()
-                this.shots[t].draw()
             }
             this.leftarm = new LineOP(this.leftshoulder, this.lefthand, invertColor(this.body.color), 8)
             this.rightarm = new LineOP(this.rightshoulder, this.righthand, invertColor(this.body.color), 8)
