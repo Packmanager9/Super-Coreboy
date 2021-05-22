@@ -5126,7 +5126,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             break
                         } else if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 16) {
                             if (boys[t].shots[g].ymom > 0) {
-                                if (boys[t].body.y > this.body.y) {
+                                if (boys[t].body.y < this.body.y) {
                                     this.fleeing = 1
                                 }
                             } else {
