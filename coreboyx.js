@@ -4449,7 +4449,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 this.fleeing = 0
             }
             if (Math.random() < .05) {
-                // this.fleeing = 0
+                this.fleeing = 0
             }
 
 
@@ -5010,6 +5010,35 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         let link = new LineOP(this.body, boys[t].shots[g])
                         if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 4) {
                             this.storeshield = 1
+                            break
+                        }else if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 16) {
+                            if(boys[t].shots[g].ymom > 0){
+                                if(boys[t].body.y > this.body.y){
+                                    this.fleeing = 1
+                                }
+                            }else{
+                                if(Math.abs(this.body.y-boys[t].shots[g].y) <= this.body.radius + boys[t].shots[g].radius){
+                                    if(this.body.y < boys[t].shots[g].y){
+                                        if(boys[t].shots[g].x > this.body.y){
+                                            if(boys[t].shots[g].xmom < 0){
+                                                this.fleeing = 1
+                                            }
+                                        }else{
+                                            if(boys[t].shots[g].xmom > 0){
+                                                this.fleeing = 1
+                                            }
+                                        }
+                                    }else{
+                                        if(this.grounded == 1){
+                                            this.fleeing = 1
+                                        }
+                                    }
+                                    if(this.under == 0){
+                                        this.wmove = 1
+                                        this.screwshot = 1
+                                    }
+                                }
+                            }
                         }
                     }
 
