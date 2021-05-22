@@ -71,7 +71,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
             gamepadAPI[0].axesStatus = axes;// assign received values
             gamepadAPI[0].buttonsStatus = pressed;
-            // //////////console.log(pressed); // return buttons for debugging purposes
+            // ////////////console.log(pressed); // return buttons for debugging purposes
             return pressed;
         },
         buttonPressed: function (button, hold) {
@@ -158,7 +158,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
             gamepadAPI[1].axesStatus = axes;// assign received values
             gamepadAPI[1].buttonsStatus = pressed;
-            // //////////console.log(pressed); // return buttons for debugging purposes
+            // ////////////console.log(pressed); // return buttons for debugging purposes
             return pressed;
         },
         buttonPressed: function (button, hold) {
@@ -245,7 +245,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
             gamepadAPI[2].axesStatus = axes;// assign received values
             gamepadAPI[2].buttonsStatus = pressed;
-            // //////////console.log(pressed); // return buttons for debugging purposes
+            // ////////////console.log(pressed); // return buttons for debugging purposes
             return pressed;
         },
         buttonPressed: function (button, hold) {
@@ -332,7 +332,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
             gamepadAPI[3].axesStatus = axes;// assign received values
             gamepadAPI[3].buttonsStatus = pressed;
-            // //////////console.log(pressed); // return buttons for debugging purposes
+            // ////////////console.log(pressed); // return buttons for debugging purposes
             return pressed;
         },
         buttonPressed: function (button, hold) {
@@ -571,7 +571,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 canvas_context.fill()
                 canvas_context.stroke();
             } else {
-                // //////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
+                // ////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
             }
         }
         track() {
@@ -762,7 +762,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 canvas_context.fillStyle = this.color
 
 
-                var gard = canvas_context.createRadialGradient(this.x, this.y, 0, this.x - (0), this.y - (0), this.radius)
+                var gard = canvas_context.createRadialGradient(this.x, this.y, 0, this.x - (0), this.y - (0), Math.max(this.radius-canvas_context.lineWidth, 0))
                 this.string = this.color
 
                 gard.addColorStop(0, this.string + `ff`)
@@ -773,7 +773,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 canvas_context.fill()
                 canvas_context.stroke();
             } else {
-                // //////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
+                // ////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
             }
         }
         move() {
@@ -954,7 +954,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 canvas_context.fillStyle = this.color
 
 
-                var gard = canvas_context.createRadialGradient(this.x, this.y, 0, this.x - (0), this.y - (0), this.radius)
+                var gard = canvas_context.createRadialGradient(this.x, this.y, 0, this.x - (0), this.y - (0), Math.max(this.radius-canvas_context.lineWidth, 0))
                 this.string = this.color
 
                 gard.addColorStop(0, invertColor(this.string) + `51`)
@@ -965,7 +965,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 canvas_context.fill()
                 canvas_context.stroke();
             } else {
-                // //////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
+                // ////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
             }
         }
         move() {
@@ -1146,7 +1146,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 canvas_context.fillStyle = this.color
 
 
-                var gard = canvas_context.createRadialGradient(this.x, this.y, 0, this.x - (0), this.y - (0), this.radius)
+                var gard = canvas_context.createRadialGradient(this.x, this.y, 0, this.x - (0), this.y - (0), Math.max(this.radius-canvas_context.lineWidth, 0))
                 this.string = this.color
 
                 gard.addColorStop(0, (this.string) + `ff`)
@@ -1157,7 +1157,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 canvas_context.fill()
                 canvas_context.stroke();
             } else {
-                // //////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
+                // ////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
             }
         }
         move() {
@@ -1806,7 +1806,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             TIP_engine.y = YS_engine * invscale
             TIP_engine.body = TIP_engine
 
-            console.log(TIP_engine)
+            //console.log(TIP_engine)
             for (let t = 0; t < selectors.length; t++) {
                 if (selectors[t].body.isPointInside(TIP_engine)) {
                     selectors[t].body.anchored = 2
@@ -1848,7 +1848,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 
     function gamepad_control_controller_proto(object, speed = 1, controller) { // basic control for objects using the controler
-        //         //////////console.log(gamepadAPI[0].axesStatus[1]*gamepadAPI[0].axesStatus[0]) //debugging
+        //         ////////////console.log(gamepadAPI[0].axesStatus[1]*gamepadAPI[0].axesStatus[0]) //debugging
 
         if (object.self.shield == 0) {
             if (keysPressed['s']) {
@@ -1962,7 +1962,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     }
 
     function gamepad_control_controller_proto_dj(object, speed = 1, controller) { // basic control for objects using the controler
-        //         //////////console.log(gamepadAPI[0].axesStatus[1]*gamepadAPI[0].axesStatus[0]) //debugging
+        //         ////////////console.log(gamepadAPI[0].axesStatus[1]*gamepadAPI[0].axesStatus[0]) //debugging
 
 
         if (keysPressed['w']) {
@@ -1997,7 +1997,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         }
     }
     function gamepad_control(object, speed = 1) { // basic control for objects using the controler
-        //         //////////console.log(gamepadAPI[0].axesStatus[1]*gamepadAPI[0].axesStatus[0]) //debugging
+        //         ////////////console.log(gamepadAPI[0].axesStatus[1]*gamepadAPI[0].axesStatus[0]) //debugging
         if (typeof object.body != 'undefined') {
             if (typeof (gamepadAPI[controller].axesStatus[1]) != 'undefined') {
                 if (typeof (gamepadAPI[controller].axesStatus[0]) != 'undefined') {
@@ -2216,7 +2216,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             }
                             if (circle.ymom > 4) {
                                 if (circle.ymom > 1) {
-                                    // //////////console.log("hitr")
+                                    // ////////////console.log("hitr")
                                     // if (circle.self.jumping == 0) {
                                     if (circle == circle.self.righthand) {
                                         // if (circle.self.rightarm.hypotenuse() < this.height * 5.2) {
@@ -2224,7 +2224,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             circle.ymom *= -1
                                         }
                                         // } else {
-                                        //    // //////////console.log("hit7")
+                                        //    // ////////////console.log("hit7")
                                         // }
                                     } else if (circle == circle.self.lefthand) {
                                         // if (circle.self.leftarm.hypotenuse() < this.height * 5.2) {
@@ -2232,7 +2232,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             circle.ymom *= -1
                                         }
                                         // } else {
-                                        //    // //////////console.log("hit8")
+                                        //    // ////////////console.log("hit8")
                                         // }
                                     } else {
                                         if (circle.self.jumping == 0) {
@@ -2273,7 +2273,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             if (circle.y > this.center.y) {
                                 if (circle == circle.self.body) {
                                     if (circle.ymom < 0) {
-                                        // //////////console.log("hit14")
+                                        // ////////////console.log("hit14")
                                         circle.ymom *= -1
                                         circle.frictiveMove()
                                     }
@@ -2285,7 +2285,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                                 if (circle.self.leftarm.hypotenuse() < this.height * 5.2) {
                                                     circle.y += .1
                                                 } else {
-                                                    // //////////console.log("hit9")
+                                                    // ////////////console.log("hit9")
                                                     break
                                                 }
                                             }
@@ -2293,7 +2293,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                                 if (circle.self.rightarm.hypotenuse() < this.height * 5.2) {
                                                     circle.y += .1
                                                 } else {
-                                                    // //////////console.log("hit10")
+                                                    // ////////////console.log("hit10")
                                                     break
                                                 }
                                             }
@@ -2302,7 +2302,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 } else {
                                     if (circle.self.body.y > circle.y) {
                                         if (circle.ymom < 0) {
-                                            // //////////console.log("hit11")
+                                            // ////////////console.log("hit11")
                                             circle.ymom *= -1
                                             circle.frictiveMove()
                                         }
@@ -2321,14 +2321,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         if (circle == circle.self.lefthand) {
                                             if (circle.self.leftarm.hypotenuse() < this.height * 15.2) {
                                                 if (circle.self.body.y <= this.edgeleft.y) {
-                                                    //// //////////console.log("hit15")
+                                                    //// ////////////console.log("hit15")
                                                     if (circle.anchored != 1) {
                                                         circle.y -= .1
                                                     } else {
                                                         break
                                                     }
                                                 } else {
-                                                    //// //////////console.log("hit2")
+                                                    //// ////////////console.log("hit2")
                                                     break
                                                 }
 
@@ -2354,7 +2354,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                                     }
                                                 }
                                             } else {
-                                                // //////////console.log("hit1")
+                                                // ////////////console.log("hit1")
                                                 break
                                             }
                                         }
@@ -2367,7 +2367,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                                         break
                                                     }
                                                 } else {
-                                                    // //////////console.log("hit3")
+                                                    // ////////////console.log("hit3")
                                                     break
                                                 }
                                                 if (this.shape.doesPerimeterTouch(circle)) {
@@ -2392,7 +2392,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                                     }
                                                 }
                                             } else {
-                                                // //////////console.log("hit4")
+                                                // ////////////console.log("hit4")
                                                 break
                                             }
                                         }
@@ -2420,7 +2420,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         }
                                     }
                                 }
-                                //// //////////console.log("hit13")
+                                //// ////////////console.log("hit13")
                                 circle.y += .1
                             }
                         } else {
@@ -2432,7 +2432,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             if (circle.x < this.edgeright.x) {
                                                 circle.self.grounded = 1
                                                 // circle.self.brick = this
-                                                // ////////console.log("what")
+                                                // //////////console.log("what")
                                             }
                                         }
                                     }
@@ -3221,7 +3221,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     }
                                 }
                                 if (this.under !== 0 && this.under !== 4 && (this.amom <= 0 && this.dmom <= 0)) {
-                                    // console.log( (this.amom + this.dmom))
+                                    // //console.log( (this.amom + this.dmom))
                                     if (this.under == 3) {
                                         this.amove = 0
                                         this.dmom = ((boys[k].brick.width - Math.abs(boys[k].brick.center.x - this.body.x)) / this.speed) * 2.45
@@ -4114,12 +4114,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (controller == 1) {
                 this.color = "#ff0000"
             }
-            this.body = new Shot((400 + ((boys.length * 150*invscale)) % ((canvas.width*invscale)-800)), 500, 35, this.color)
+            this.body = new Shot((400 + ((boys.length * 150*invscale)) % ((canvas.width*invscale)-800)), 500, 37.5, this.color)
             this.nodes.push(this.body)
             this.leftshoulder = new Shot(this.body.x - (this.body.radius + this.shoulderwidth), 350, 10, "magenta", 0, 0, .999)
             this.rightshoulder = new Shot(this.body.x + (this.body.radius + this.shoulderwidth), 350, 10, "red", 0, 0, .999)
-            this.lefthand = new Shot(this.leftshoulder.x, (this.leftshoulder.y + this.armlength), 19, "magenta", 0, 0, .85)
-            this.righthand = new Shot(this.rightshoulder.x, (this.rightshoulder.y + this.armlength), 19, "red", 0, 0, .85)
+            this.lefthand = new Shot(this.leftshoulder.x, (this.leftshoulder.y + this.armlength), 21.5, "magenta", 0, 0, .85)
+            this.righthand = new Shot(this.rightshoulder.x, (this.rightshoulder.y + this.armlength), 21.5, "red", 0, 0, .85)
             this.nodes.push(this.leftshoulder)
             this.nodes.push(this.rightshoulder)
             this.nodes.push(this.righthand)
@@ -4404,7 +4404,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 this.lefthand.ymom = -this.speed * 2
                 this.righthand.ymom = -this.speed * 2
                 this.jumpcount = 100
-                //console.log(this)
+                ////console.log(this)
             }
         }
         doubleJump() {
@@ -4667,7 +4667,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     }
                                 }
                                 if (this.under !== 0 && this.under !== 4 && (this.amom <= 0 && this.dmom <= 0)) {
-                                    // console.log( (this.amom + this.dmom))
+                                    // //console.log( (this.amom + this.dmom))
                                     if (this.under == 3) {
                                         this.amove = 0
                                         this.dmom = ((boys[k].brick.width - Math.abs(boys[k].brick.center.x - this.body.x)) / this.speed) * 1.45
@@ -4857,7 +4857,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 if (this.safe == 0) {
                     this.screwshot = 1
                     if (this.body.x > (this.brick.center.x)) {
-                        ////////console.log(this.brick.center.x, this.body.x)
+                        //////////console.log(this.brick.center.x, this.body.x)
                         this.amove = 1
                         this.dmove = 0
                         this.wmove = 1
@@ -6348,7 +6348,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     }
                                 }
                                 if (this.under !== 0 && this.under !== 4 && (this.amom <= 0 && this.dmom <= 0)) {
-                                    // console.log( (this.amom + this.dmom))
+                                    // //console.log( (this.amom + this.dmom))
                                     if (this.under == 3) {
                                         this.amove = 0
                                         this.dmom = ((boys[k].brick.width - Math.abs(boys[k].brick.center.x - this.body.x)) / this.speed) * 1.45
@@ -7504,7 +7504,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (controller == 1) {
                 this.color = "#ff0000"
             }
-            this.body = new ShotC((400 + ((boys.length * 150*invscale)) % ((canvas.width*invscale)-800)), 500, 37, this.color)
+            this.body = new ShotC((400 + ((boys.length * 150*invscale)) % ((canvas.width*invscale)-800)), 500, 39.5, this.color)
             this.nodes.push(this.body)
             this.leftshoulder = new ShotC(this.body.x - (this.body.radius + this.shoulderwidth), 350, 12, "magenta", 0, 0, .999)
             this.rightshoulder = new ShotC(this.body.x + (this.body.radius + this.shoulderwidth), 350, 12, "red", 0, 0, .999)
@@ -8052,7 +8052,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     }
                                 }
                                 if (this.under !== 0 && this.under !== 4 && (this.amom <= 0 && this.dmom <= 0)) {
-                                    // console.log( (this.amom + this.dmom))
+                                    // //console.log( (this.amom + this.dmom))
                                     if (this.under == 3) {
                                         this.amove = 0
                                         this.dmom = ((boys[k].brick.width - Math.abs(boys[k].brick.center.x - this.body.x)) / this.speed) * 1.45
