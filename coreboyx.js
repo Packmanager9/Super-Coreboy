@@ -762,7 +762,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 canvas_context.fillStyle = this.color
 
 
-                var gard = canvas_context.createRadialGradient(this.x, this.y, 0, this.x - (0), this.y - (0), Math.max(this.radius-canvas_context.lineWidth, 0))
+                var gard = canvas_context.createRadialGradient(this.x, this.y, 0, this.x - (0), this.y - (0), Math.max(this.radius - canvas_context.lineWidth, 0))
                 this.string = this.color
 
                 gard.addColorStop(0, this.string + `ff`)
@@ -954,7 +954,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 canvas_context.fillStyle = this.color
 
 
-                var gard = canvas_context.createRadialGradient(this.x, this.y, 0, this.x - (0), this.y - (0), Math.max(this.radius-canvas_context.lineWidth, 0))
+                var gard = canvas_context.createRadialGradient(this.x, this.y, 0, this.x - (0), this.y - (0), Math.max(this.radius - canvas_context.lineWidth, 0))
                 this.string = this.color
 
                 gard.addColorStop(0, invertColor(this.string) + `51`)
@@ -1146,7 +1146,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 canvas_context.fillStyle = this.color
 
 
-                var gard = canvas_context.createRadialGradient(this.x, this.y, 0, this.x - (0), this.y - (0), Math.max(this.radius-canvas_context.lineWidth, 0))
+                var gard = canvas_context.createRadialGradient(this.x, this.y, 0, this.x - (0), this.y - (0), Math.max(this.radius - canvas_context.lineWidth, 0))
                 this.string = this.color
 
                 gard.addColorStop(0, (this.string) + `ff`)
@@ -2157,8 +2157,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.edgeright = new Circle(x + (width * .5), y, 4, "blue")
             this.link = new Line(this.edgeleft.x - 5, this.edgeleft.y, this.edgeright.x + 5, this.edgeright.y, getRandomColor(), height * 2)
             this.shape = castBetween(this.edgeleft, this.edgeright, 20, height)
-            this.edgeleft = new Circle(x - (width * .5), y - (height * 1), 8, "cyan")
-            this.edgeright = new Circle(x + (width * .5), y - (height * 1), 8, "blue")
+            this.edgeleft = new Circle(x - (width * .5), y - (height * 1), 16, "cyan")
+            this.edgeright = new Circle(x + (width * .5), y - (height * 1), 16, "blue")
         }
         doesPerimeterTouch(circle) {
             // this.edgeleft.draw()
@@ -2445,28 +2445,151 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 
             while (this.shape.doesPerimeterTouch(circle)) {
-                if (circle.self.body.x < this.edgeright.x + (circle.self.body.radius * 1.2)) {
-                    if (circle.self.body.x > this.edgeleft.x - (circle.self.body.radius * 1.2)) {
-                        if (circle.self.body.y < this.edgeleft.y) {
+
+                if (circle == circle.self.body) {
+                    if (circle.self.body.x < this.edgeright.x + (circle.self.body.radius * 1.2)) {
+                        if (circle.self.body.x > this.edgeleft.x - (circle.self.body.radius * 1.2)) {
+                            if (circle.self.body.y < this.edgeleft.y) {
+                                if (circle.anchored != 1) {
+                                    circle.y -= .1
+                                } else {
+                                    break
+                                }
+                            } else if (circle.self.body.y > this.edgeleft.y + (this.height * 2)) {
+                                if (circle.anchored != 1) {
+                                    circle.y += .1
+                                } else {
+                                    break
+                                }
+                            } else {
+                                if (circle.anchored != 1) {
+                                    circle.y -= ((circle.y - this.center.y) / (this.height)) * .1
+                                    if (circle.x > this.center.x) {
+                                        if (circle != circle.self.body) {
+                                            circle.x += .1
+                                        } else {
+                                            break
+                                        }
+                                    } else if (circle.x < this.center.x) {
+                                        if (circle != circle.self.body) {
+                                            circle.x -= .1
+                                        } else {
+                                            break
+                                        }
+                                    } else {
+                                        break
+                                    }
+                                } else {
+                                    break
+                                }
+                            }
+                        } else {
                             if (circle.anchored != 1) {
-                                circle.y -= .1
+                                circle.y -= ((circle.y - this.center.y) / (this.height)) * .1
+                                if (circle.x > this.center.x) {
+                                    if (circle != circle.self.body) {
+                                        circle.x += .1
+                                    } else {
+                                        break
+                                    }
+                                } else if (circle.x < this.center.x) {
+                                    if (circle != circle.self.body) {
+                                        circle.x -= .1
+                                    } else {
+                                        break
+                                    }
+                                } else {
+                                    break
+                                }
                             } else {
                                 break
                             }
-                        } else if (circle.self.body.y > this.edgeleft.y + (this.height * 2)) {
-                            if (circle.anchored != 1) {
-                                circle.y += .1
+                        }
+                    } else {
+                        if (circle.anchored != 1) {
+                            circle.y -= ((circle.y - this.center.y) / (this.height)) * .1
+                            if (circle.x > this.center.x) {
+                                if (circle != circle.self.body) {
+                                    circle.x += .1
+                                } else {
+                                    break
+                                }
+                            } else if (circle.x < this.center.x) {
+                                if (circle != circle.self.body) {
+                                    circle.x -= .1
+                                } else {
+                                    break
+                                }
                             } else {
                                 break
                             }
                         } else {
                             break
                         }
+                    }
+                }else{
+                    if (circle.x < this.edgeright.x + circle.radius) {
+                        if (circle.x > this.edgeleft.x - circle.radius) {
+                            if (circle.self.body.y < this.edgeleft.y) {
+                                if (circle.anchored != 1) {
+                                    circle.y -= .1
+                                } else {
+                                    break
+                                }
+                            } else if (circle.self.body.y > this.edgeleft.y + (this.height * 2)) {
+                                if (circle.anchored != 1) {
+                                    circle.y += .1
+                                } else {
+                                    break
+                                }
+                            } else {
+                                if (circle.anchored != 1) {
+                                    circle.y -= ((circle.y - this.center.y) / (this.height)) * .1
+                                    if (circle.x > this.center.x) {
+                                        if (circle != circle.self.body) {
+                                            circle.x += .1
+                                        } else {
+                                            break
+                                        }
+                                    } else if (circle.x < this.center.x) {
+                                        if (circle != circle.self.body) {
+                                            circle.x -= .1
+                                        } else {
+                                            break
+                                        }
+                                    } else {
+                                        break
+                                    }
+                                } else {
+                                    break
+                                }
+                            }
+                        } else {
+                            if (circle.anchored != 1) {
+                                circle.y -= ((circle.y - this.center.y) / (this.height)) * .1
+                                if (circle.x > this.center.x) {
+                                    if (circle != circle.self.body) {
+                                        circle.x += .1
+                                    } else {
+                                        break
+                                    }
+                                } else if (circle.x < this.center.x) {
+                                    if (circle != circle.self.body) {
+                                        circle.x -= .1
+                                    } else {
+                                        break
+                                    }
+                                } else {
+                                    break
+                                }
+                            } else {
+                                break
+                            }
+                        }
                     } else {
                         break
                     }
-                } else {
-                    break
+
                 }
             }
         }
@@ -2573,7 +2696,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (controller == 1) {
                 this.color = "#ff0000"
             }
-            this.body = new Circle((400 + ((boys.length * 150*invscale)) % ((canvas.width*invscale)-800)), 500, 37, this.color)
+            this.body = new Circle((400 + ((boys.length * 150 * invscale)) % ((canvas.width * invscale) - 800)), 500, 37, this.color)
             this.nodes.push(this.body)
             this.leftshoulder = new Circle(this.body.x - (this.body.radius + this.shoulderwidth), 350, 10, "magenta", 0, 0, .999)
             this.rightshoulder = new Circle(this.body.x + (this.body.radius + this.shoulderwidth), 350, 10, "red", 0, 0, .999)
@@ -4113,7 +4236,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (controller == 1) {
                 this.color = "#ff0000"
             }
-            this.body = new Shot((400 + ((boys.length * 150*invscale)) % ((canvas.width*invscale)-800)), 500, 37.5, this.color)
+            this.body = new Shot((400 + ((boys.length * 150 * invscale)) % ((canvas.width * invscale) - 800)), 500, 37.5, this.color)
             this.nodes.push(this.body)
             this.leftshoulder = new Shot(this.body.x - (this.body.radius + this.shoulderwidth), 350, 10, "magenta", 0, 0, .999)
             this.rightshoulder = new Shot(this.body.x + (this.body.radius + this.shoulderwidth), 350, 10, "red", 0, 0, .999)
@@ -5003,7 +5126,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 this.hortsmash = 0
             }
 
-            
+
             for (let t = 0; t < boys.length; t++) {
                 if (this != boys[t]) {
                     for (let g = 0; g < boys[t].shots.length; g++) {
@@ -5011,29 +5134,29 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 4) {
                             this.storeshield = 1
                             break
-                        }else if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 16) {
-                            if(boys[t].shots[g].ymom > 0){
-                                if(boys[t].body.y > this.body.y){
+                        } else if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 16) {
+                            if (boys[t].shots[g].ymom > 0) {
+                                if (boys[t].body.y > this.body.y) {
                                     this.fleeing = 1
                                 }
-                            }else{
-                                if(Math.abs(this.body.y-boys[t].shots[g].y) <= this.body.radius + boys[t].shots[g].radius){
-                                    if(this.body.y < boys[t].shots[g].y){
-                                        if(boys[t].shots[g].x > this.body.y){
-                                            if(boys[t].shots[g].xmom < 0){
+                            } else {
+                                if (Math.abs(this.body.y - boys[t].shots[g].y) <= this.body.radius + boys[t].shots[g].radius) {
+                                    if (this.body.y < boys[t].shots[g].y) {
+                                        if (boys[t].shots[g].x > this.body.y) {
+                                            if (boys[t].shots[g].xmom < 0) {
                                                 this.fleeing = 1
                                             }
-                                        }else{
-                                            if(boys[t].shots[g].xmom > 0){
+                                        } else {
+                                            if (boys[t].shots[g].xmom > 0) {
                                                 this.fleeing = 1
                                             }
                                         }
-                                    }else{
-                                        if(this.grounded == 1){
+                                    } else {
+                                        if (this.grounded == 1) {
                                             this.fleeing = 1
                                         }
                                     }
-                                    if(this.under == 0){
+                                    if (this.under == 0) {
                                         this.wmove = 1
                                         this.screwshot = 1
                                     }
@@ -5823,7 +5946,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (controller == 1) {
                 this.color = "#ff0000"
             }
-            this.body = new Shotb((400 + ((boys.length * 150*invscale)) % ((canvas.width*invscale)-800)), 500, 55, this.color)
+            this.body = new Shotb((400 + ((boys.length * 150 * invscale)) % ((canvas.width * invscale) - 800)), 500, 55, this.color)
             this.nodes.push(this.body)
             this.leftshoulder = new Shotb(this.body.x - (this.body.radius + this.shoulderwidth), 350, 17, "magenta", 0, 0, .999)
             this.rightshoulder = new Shotb(this.body.x + (this.body.radius + this.shoulderwidth), 350, 17, "red", 0, 0, .999)
@@ -7533,7 +7656,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (controller == 1) {
                 this.color = "#ff0000"
             }
-            this.body = new ShotC((400 + ((boys.length * 150*invscale)) % ((canvas.width*invscale)-800)), 500, 39.5, this.color)
+            this.body = new ShotC((400 + ((boys.length * 150 * invscale)) % ((canvas.width * invscale) - 800)), 500, 39.5, this.color)
             this.nodes.push(this.body)
             this.leftshoulder = new ShotC(this.body.x - (this.body.radius + this.shoulderwidth), 350, 12, "magenta", 0, 0, .999)
             this.rightshoulder = new ShotC(this.body.x + (this.body.radius + this.shoulderwidth), 350, 12, "red", 0, 0, .999)
@@ -7576,69 +7699,69 @@ window.addEventListener('DOMContentLoaded', (event) => {
         }
         fixupshoulder() {
 
-            if(this.screwtimer <= 0){
+            if (this.screwtimer <= 0) {
 
-            this.leftshoulder.x = this.body.x - (this.body.radius + this.shoulderwidth * .3)
-            this.leftshoulder.y = this.body.y + (this.shoulderwidth * .7)
+                this.leftshoulder.x = this.body.x - (this.body.radius + this.shoulderwidth * .3)
+                this.leftshoulder.y = this.body.y + (this.shoulderwidth * .7)
 
-            this.rightshoulder.x = this.body.x + (this.body.radius + this.shoulderwidth * .3)
-            this.rightshoulder.y = this.body.y + (this.shoulderwidth * .7)
+                this.rightshoulder.x = this.body.x + (this.body.radius + this.shoulderwidth * .3)
+                this.rightshoulder.y = this.body.y + (this.shoulderwidth * .7)
 
-            this.leftshoulder.color = this.body.color
-            this.rightshoulder.color = this.body.color
-            this.lefthand.color = this.body.color
-            this.righthand.color = this.body.color
-
-
-            if (this.lefthand.anchored == 0) {
-                this.lefthand.x = this.lefthand.x + (this.leftshoulder.x - (this.body.x - (this.body.radius + this.shoulderwidth * .3)))
-                this.lefthand.y -= this.leftshoulder.y - (this.body.y + (this.shoulderwidth * .7))
-                this.leftshoulder.xmom *= 0
-                this.leftshoulder.ymom *= 0
-            }
-            if (this.righthand.anchored == 0) {
-                this.righthand.x = this.righthand.x + (this.rightshoulder.x - (this.body.x + (this.body.radius + this.shoulderwidth * .3)))
-                this.righthand.y -= this.rightshoulder.y - (this.body.y + (this.shoulderwidth * .7))
-                this.rightshoulder.xmom *= 0
-                this.rightshoulder.ymom *= 0
-            }
-
-            if (this.body.ymom < -vsmashlimit) {
-                this.body.ymom = -vsmashlimit
-            }
-
-            }else{
+                this.leftshoulder.color = this.body.color
+                this.rightshoulder.color = this.body.color
+                this.lefthand.color = this.body.color
+                this.righthand.color = this.body.color
 
 
-            
-            this.leftshoulder.x = this.body.x - (this.body.radius + this.shoulderwidth * 4)
-            this.leftshoulder.y = this.body.y + (this.shoulderwidth * .7)
+                if (this.lefthand.anchored == 0) {
+                    this.lefthand.x = this.lefthand.x + (this.leftshoulder.x - (this.body.x - (this.body.radius + this.shoulderwidth * .3)))
+                    this.lefthand.y -= this.leftshoulder.y - (this.body.y + (this.shoulderwidth * .7))
+                    this.leftshoulder.xmom *= 0
+                    this.leftshoulder.ymom *= 0
+                }
+                if (this.righthand.anchored == 0) {
+                    this.righthand.x = this.righthand.x + (this.rightshoulder.x - (this.body.x + (this.body.radius + this.shoulderwidth * .3)))
+                    this.righthand.y -= this.rightshoulder.y - (this.body.y + (this.shoulderwidth * .7))
+                    this.rightshoulder.xmom *= 0
+                    this.rightshoulder.ymom *= 0
+                }
 
-            this.rightshoulder.x = this.body.x + (this.body.radius + this.shoulderwidth * 4)
-            this.rightshoulder.y = this.body.y + (this.shoulderwidth * .7)
+                if (this.body.ymom < -vsmashlimit) {
+                    this.body.ymom = -vsmashlimit
+                }
 
-            this.leftshoulder.color = this.body.color
-            this.rightshoulder.color = this.body.color
-            this.lefthand.color = this.body.color
-            this.righthand.color = this.body.color
+            } else {
 
 
-            if (this.lefthand.anchored == 0) {
-                this.lefthand.x = this.lefthand.x + (this.leftshoulder.x - (this.body.x - (this.body.radius + this.shoulderwidth * 4)))
-                this.lefthand.y -= this.leftshoulder.y - (this.body.y + (this.shoulderwidth * .7))
-                this.leftshoulder.xmom *= 0
-                this.leftshoulder.ymom *= 0
-            }
-            if (this.righthand.anchored == 0) {
-                this.righthand.x = this.righthand.x + (this.rightshoulder.x - (this.body.x + (this.body.radius + this.shoulderwidth * 4)))
-                this.righthand.y -= this.rightshoulder.y - (this.body.y + (this.shoulderwidth * .7))
-                this.rightshoulder.xmom *= 0
-                this.rightshoulder.ymom *= 0
-            }
 
-            if (this.body.ymom < -vsmashlimit) {
-                this.body.ymom = -vsmashlimit
-            }
+                this.leftshoulder.x = this.body.x - (this.body.radius + this.shoulderwidth * 4)
+                this.leftshoulder.y = this.body.y + (this.shoulderwidth * .7)
+
+                this.rightshoulder.x = this.body.x + (this.body.radius + this.shoulderwidth * 4)
+                this.rightshoulder.y = this.body.y + (this.shoulderwidth * .7)
+
+                this.leftshoulder.color = this.body.color
+                this.rightshoulder.color = this.body.color
+                this.lefthand.color = this.body.color
+                this.righthand.color = this.body.color
+
+
+                if (this.lefthand.anchored == 0) {
+                    this.lefthand.x = this.lefthand.x + (this.leftshoulder.x - (this.body.x - (this.body.radius + this.shoulderwidth * 4)))
+                    this.lefthand.y -= this.leftshoulder.y - (this.body.y + (this.shoulderwidth * .7))
+                    this.leftshoulder.xmom *= 0
+                    this.leftshoulder.ymom *= 0
+                }
+                if (this.righthand.anchored == 0) {
+                    this.righthand.x = this.righthand.x + (this.rightshoulder.x - (this.body.x + (this.body.radius + this.shoulderwidth * 4)))
+                    this.righthand.y -= this.rightshoulder.y - (this.body.y + (this.shoulderwidth * .7))
+                    this.rightshoulder.xmom *= 0
+                    this.rightshoulder.ymom *= 0
+                }
+
+                if (this.body.ymom < -vsmashlimit) {
+                    this.body.ymom = -vsmashlimit
+                }
             }
 
 
@@ -8584,10 +8707,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             if (this.breaktimer <= 0 && this.shield == 0) {
 
-            if (this.body.y < 1500) {
-                this.wmove = 0
-                this.screwshot = 0
-            }
+                if (this.body.y < 1500) {
+                    this.wmove = 0
+                    this.screwshot = 0
+                }
                 if (this.screwshot == 1) {
                     if (this.body.fired <= 0) {
                         this.jumping = 1
