@@ -7547,6 +7547,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
         }
         fixupshoulder() {
 
+            if(this.screwtimer <= 0){
+
             this.leftshoulder.x = this.body.x - (this.body.radius + this.shoulderwidth * .3)
             this.leftshoulder.y = this.body.y + (this.shoulderwidth * .7)
 
@@ -7574,6 +7576,40 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             if (this.body.ymom < -vsmashlimit) {
                 this.body.ymom = -vsmashlimit
+            }
+
+            }else{
+
+
+            
+            this.leftshoulder.x = this.body.x - (this.body.radius + this.shoulderwidth * 4)
+            this.leftshoulder.y = this.body.y + (this.shoulderwidth * .7)
+
+            this.rightshoulder.x = this.body.x + (this.body.radius + this.shoulderwidth * 4)
+            this.rightshoulder.y = this.body.y + (this.shoulderwidth * .7)
+
+            this.leftshoulder.color = this.body.color
+            this.rightshoulder.color = this.body.color
+            this.lefthand.color = this.body.color
+            this.righthand.color = this.body.color
+
+
+            if (this.lefthand.anchored == 0) {
+                this.lefthand.x = this.lefthand.x + (this.leftshoulder.x - (this.body.x - (this.body.radius + this.shoulderwidth * 4)))
+                this.lefthand.y -= this.leftshoulder.y - (this.body.y + (this.shoulderwidth * .7))
+                this.leftshoulder.xmom *= 0
+                this.leftshoulder.ymom *= 0
+            }
+            if (this.righthand.anchored == 0) {
+                this.righthand.x = this.righthand.x + (this.rightshoulder.x - (this.body.x + (this.body.radius + this.shoulderwidth * 4)))
+                this.righthand.y -= this.rightshoulder.y - (this.body.y + (this.shoulderwidth * .7))
+                this.rightshoulder.xmom *= 0
+                this.rightshoulder.ymom *= 0
+            }
+
+            if (this.body.ymom < -vsmashlimit) {
+                this.body.ymom = -vsmashlimit
+            }
             }
 
 
@@ -7758,7 +7794,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
         }
         doubleJump() {
-            if (this.body.y < 1200) {
+            if (this.body.y < 1500) {
                 this.wmove = 0
                 this.screwshot = 0
             }
@@ -8231,7 +8267,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }
             }
 
-            if (this.body.y < 1200) {
+            if (this.body.y < 1500) {
                 this.wmove = 0
                 this.screwshot = 0
             }
@@ -8337,7 +8373,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             if (this.screwtimer > 0) {
                 this.screwtimer--
-                if (this.screwtimer <= 45) {
+                if (this.screwtimer <= 65) {
                     if (this.screwtimer >= 30) {
                         this.body.ymom = -jumplimit
                     }
@@ -8518,6 +8554,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
 
             if (this.breaktimer <= 0 && this.shield == 0) {
+
+            if (this.body.y < 1500) {
+                this.wmove = 0
+                this.screwshot = 0
+            }
                 if (this.screwshot == 1) {
                     if (this.body.fired <= 0) {
                         this.jumping = 1
@@ -8558,9 +8599,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 if (this.hortsmash == 1) {
                     if (this.reflecting <= -10) {
                         this.reflecting = 20
-                        this.lefthand.xmom = this.punchspeed * 23.5
+                        this.lefthand.xmom = this.punchspeed * -23.5
                         this.lefthand.fired = 21
-                        this.righthand.xmom = -this.punchspeed * 23.5
+                        this.righthand.xmom = -this.punchspeed * -23.5
                         this.righthand.fired = 21
                         this.righthand.ymom = this.punchspeed * 3
                         this.lefthand.ymom = this.punchspeed * 3
@@ -8678,7 +8719,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             if (this.screwtimer > 0) {
                 this.screwtimer--
-                if (this.screwtimer <= 45) {
+                if (this.screwtimer <= 65) {
                     if (this.screwtimer >= 30) {
                         this.body.ymom = -jumplimit
                     }
@@ -8700,7 +8741,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (this.charge <= 0) {
                 this.charge = 0
             }
-            this.body.fired -= .25
+            this.body.fired -= 1
             this.lefthand.fired--
 
             this.breaktimer--
@@ -8811,9 +8852,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 if (gamepadAPI[this.controller].buttonsStatus.includes('X') || keysPressed['j']) {
                     if (this.reflecting <= -10) {
                         this.reflecting = 20
-                        this.lefthand.xmom = this.punchspeed * 23.5
+                        this.lefthand.xmom = this.punchspeed * -23.5
                         this.lefthand.fired = 21
-                        this.righthand.xmom = -this.punchspeed * 23.5
+                        this.righthand.xmom = -this.punchspeed * -23.5
                         this.righthand.ymom = this.punchspeed * 3
                         this.lefthand.ymom = this.punchspeed * 3
                         this.righthand.fired = 21
