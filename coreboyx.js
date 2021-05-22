@@ -4063,7 +4063,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
         }
     }
 
-
     class Mass {
         constructor(controller) {
             this.safe = 1
@@ -5003,9 +5002,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (Math.random() < .1) {
                 this.hortsmash = 0
             }
+
+            
             for (let t = 0; t < boys.length; t++) {
                 if (this != boys[t]) {
-
                     for (let g = 0; g < boys[t].shots.length; g++) {
                         let link = new LineOP(this.body, boys[t].shots[g])
                         if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 4) {
