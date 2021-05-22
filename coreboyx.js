@@ -10,6 +10,7 @@ let jumplimit = 20
 let scale = .33
 let invscale = 1 / scale
 let humanPlayers = 0
+let stock = 0
 window.addEventListener('DOMContentLoaded', (event) => {
     const gamepadAPI = [{
         controller: {},
@@ -2528,7 +2529,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             break
                         }
                     }
-                }else{
+                } else {
                     if (circle.x < this.edgeright.x + circle.radius) {
                         if (circle.x > this.edgeleft.x - circle.radius) {
                             if (circle.self.body.y < this.edgeleft.y) {
@@ -2882,7 +2883,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 this.body.ymom = (((boys[t].body.ymom * (this.damage / 200)) + (boys[t].body.ymom * baselaunch)) * 2)
                                 this.damage += (Math.abs(boys[t].body.xmom) + Math.max(20, Math.abs(boys[t].body.ymom))) / 2
                             }
-                            //boys[t].body.fired = 0
+                            boys[t].body.fired = 0
                             if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                                 this.lefthand.anchored = -40
                                 this.righthand.anchored = -40
@@ -3070,7 +3071,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (this.righthand.anchored == 0) {
                             this.rightshoulder.xmom = 0
                             this.rightshoulder.ymom = 0
-                            this.righthand.ymom = (this.punchspeed * 14)+ this.body.ymom*2
+                            this.righthand.ymom = (this.punchspeed * 14) + this.body.ymom * 2
                             this.righthand.xmom = this.punchspeed * 9
                             this.righthand.fired = 18
                         }
@@ -3079,7 +3080,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (this.lefthand.anchored == 0) {
                             this.leftshoulder.xmom = 0
                             this.leftshoulder.ymom = 0
-                            this.lefthand.ymom = (this.punchspeed * 14)+ this.body.ymom*2
+                            this.lefthand.ymom = (this.punchspeed * 14) + this.body.ymom * 2
                             this.lefthand.xmom = -this.punchspeed * 9
                             this.lefthand.fired = 18
                         }
@@ -3900,7 +3901,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (this.righthand.anchored == 0) {
                             this.rightshoulder.xmom = 0
                             this.rightshoulder.ymom = 0
-                            this.righthand.ymom = (this.punchspeed * 14)+ this.body.ymom*2
+                            this.righthand.ymom = (this.punchspeed * 14) + this.body.ymom * 2
                             this.righthand.xmom = this.punchspeed * 9
                             this.righthand.fired = 18
                         }
@@ -3909,7 +3910,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (this.lefthand.anchored == 0) {
                             this.leftshoulder.xmom = 0
                             this.leftshoulder.ymom = 0
-                            this.lefthand.ymom = (this.punchspeed * 14)+ this.body.ymom*2
+                            this.lefthand.ymom = (this.punchspeed * 14) + this.body.ymom * 2
                             this.lefthand.xmom = -this.punchspeed * 9
                             this.lefthand.fired = 18
                         }
@@ -3999,23 +4000,27 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
 
             // if (this.controller == 0) {
-                let link = new Line(this.body.x, this.body.y, this.body.x + (((this.body.radius * .8) * this.face)), this.body.y, invertColor(this.body.color), this.body.radius * .2)
+            let link = new Line(this.body.x, this.body.y, this.body.x + (((this.body.radius * .8) * this.face)), this.body.y, invertColor(this.body.color), this.body.radius * .2)
 
-                canvas_context.lineWidth = 0
-                canvas_context.strokeStyle = invertColor(this.body.color)
-                canvas_context.beginPath();
-                canvas_context.arc((link.x1 + link.x2) * .5, link.y1 - this.body.radius * .09, this.body.radius * .4, 0, (Math.PI * 1), true)
-                canvas_context.fillStyle = invertColor(this.body.color)
-                canvas_context.fill()
-                // canvas_context.stroke();
-                link.draw()
+            canvas_context.lineWidth = 0
+            canvas_context.strokeStyle = invertColor(this.body.color)
+            canvas_context.beginPath();
+            canvas_context.arc((link.x1 + link.x2) * .5, link.y1 - this.body.radius * .09, this.body.radius * .4, 0, (Math.PI * 1), true)
+            canvas_context.fillStyle = invertColor(this.body.color)
+            canvas_context.fill()
+            // canvas_context.stroke();
+            link.draw()
 
-                canvas_context.font = "42px arial"
-                canvas_context.fillStyle = `rgb(${Math.max(255 - (this.damage / 10), 50)},${255 - this.damage},${255 - this.damage})`
-                canvas_context.fillText(`${Math.round(this.damage)}%`, this.body.x - 20, this.body.y - 70)
-    
-    
-                // this.bodyx = this.body.x
+            canvas_context.font = "42px arial"
+            canvas_context.fillStyle = `rgb(${Math.max(255 - (this.damage / 10), 50)},${255 - this.damage},${255 - this.damage})`
+            canvas_context.fillText(`${Math.round(this.damage)}%`, this.body.x - 20, this.body.y - 70)
+            canvas_context.fillStyle = "white"
+            if(stock>0){
+canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, this.body.x - 20, this.body.y + 90)
+}
+
+
+            // this.bodyx = this.body.x
         }
         operate() {
 
@@ -5296,17 +5301,19 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
                 if (this.screwshot == 1) {
                     if (this.body.fired <= 0) {
-                        this.screwmomentum = Math.PI / 5
-                        this.screwtimer = 42
-                        this.jumping = 1
-                        this.lefthand.fired = 30
-                        this.righthand.fired = 30
-                        // this.degripr()
-                        // this.degripl()
-                        this.body.fired = 42
-                        this.lefthand.anchored = -10
-                        this.righthand.anchored = -10
-                        this.body.ymom = -jumplimit //-this.speed * 3
+                        if (this.screwangle == 0) {
+                            this.screwmomentum = Math.PI / 5
+                            this.screwtimer = 42
+                            this.jumping = 1
+                            this.lefthand.fired = 30
+                            this.righthand.fired = 30
+                            // this.degripr()
+                            // this.degripl()
+                            this.body.fired = 42
+                            this.lefthand.anchored = -10
+                            this.righthand.anchored = -10
+                            this.body.ymom = -jumplimit //-this.speed * 3
+                        }
                     }
                 }
                 if (this.downspike == 1) {
@@ -5316,14 +5323,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.rightshoulder.ymom = 0
 
 
-                            this.righthand.ymom = (this.punchspeed * 12) + this.body.ymom*2
+                            this.righthand.ymom = (this.punchspeed * 12) + this.body.ymom * 2
                             this.righthand.xmom = -((this.punchspeed * 2.1)) //+ this.body.xmom)
 
-                            
+
                             // this.righthand.ymom = (this.punchspeed * 12) //+ this.body.ymom
                             // this.righthand.xmom = -(this.punchspeed * 2.1) //+ this.body.xmom
 
-                            
+
                             this.righthand.fired = 18
                         }
                     }
@@ -5332,7 +5339,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.leftshoulder.xmom = 0
                             this.leftshoulder.ymom = 0
 
-                            this.lefthand.ymom = (this.punchspeed * 12) + this.body.ymom*2
+                            this.lefthand.ymom = (this.punchspeed * 12) + this.body.ymom * 2
                             this.lefthand.xmom = ((this.punchspeed * 2.1))// + this.body.xmom)
 
                             // this.lefthand.ymom = (this.punchspeed * 12) //+ this.body.ymom
@@ -5552,17 +5559,19 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
                 if (gamepadAPI[this.controller].buttonsStatus.includes('Y') || keysPressed['i']) {
                     if (this.body.fired <= 0) {
-                        this.screwmomentum = Math.PI / 5
-                        this.screwtimer = 42
-                        this.jumping = 1
-                        this.lefthand.fired = 30
-                        this.righthand.fired = 30
-                        // this.degripr()
-                        // this.degripl()
-                        this.body.fired = 42
-                        this.lefthand.anchored = -10
-                        this.righthand.anchored = -10
-                        this.body.ymom = -jumplimit  //-this.speed * 3
+                        if (this.screwangle == 0) {
+                            this.screwmomentum = Math.PI / 5
+                            this.screwtimer = 42
+                            this.jumping = 1
+                            this.lefthand.fired = 30
+                            this.righthand.fired = 30
+                            // this.degripr()
+                            // this.degripl()
+                            this.body.fired = 42
+                            this.lefthand.anchored = -10
+                            this.righthand.anchored = -10
+                            this.body.ymom = -jumplimit  //-this.speed * 3
+                        }
                     }
                 }
                 if (gamepadAPI[this.controller].buttonsStatus.includes('A') || keysPressed['k']) {
@@ -5570,7 +5579,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (this.righthand.anchored == 0) {
                             this.rightshoulder.xmom = 0
                             this.rightshoulder.ymom = 0
-                            this.righthand.ymom = (this.punchspeed * 12) + this.body.ymom*2
+                            this.righthand.ymom = (this.punchspeed * 12) + this.body.ymom * 2
                             this.righthand.xmom = -((this.punchspeed * 2.1)) // + this.body.xmom)
                             this.righthand.fired = 18
                         }
@@ -5579,7 +5588,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (this.lefthand.anchored == 0) {
                             this.leftshoulder.xmom = 0
                             this.leftshoulder.ymom = 0
-                            this.lefthand.ymom = (this.punchspeed * 12) + this.body.ymom*2
+                            this.lefthand.ymom = (this.punchspeed * 12) + this.body.ymom * 2
                             this.lefthand.xmom = (this.punchspeed * 2.1) // + this.body.xmom
                             this.lefthand.fired = 18
                         }
@@ -5702,6 +5711,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
             canvas_context.font = "42px arial"
             canvas_context.fillStyle = `rgb(${Math.max(255 - (this.damage / 10), 50)},${255 - this.damage},${255 - this.damage})`
             canvas_context.fillText(`${Math.round(this.damage)}%`, this.body.x - 20, this.body.y - 70)
+            canvas_context.fillStyle = "white"
+            if(stock>0){
+canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, this.body.x - 20, this.body.y + 90)
+}
             // canvas_context.fillText(`Height:${Math.round(this.brick.edgeright.y)}`, this.body.x - 20, this.body.y - 250)
             // canvas_context.fillText(`Safe:${Math.round(this.safe)}`, this.body.x - 20, this.body.y - 200)
             // if (this != boys[0]) {
@@ -5728,7 +5741,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 link.draw()
             }
 
-            if(this.shotdraw == 1){
+            if (this.shotdraw == 1) {
                 this.shot.draw()
             }
         }
@@ -7385,26 +7398,30 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             // if (this.controller == 0) {
 
-                let link = new Line(this.body.x, this.body.y, this.body.x + (((this.body.radius * .8) * this.face)), this.body.y + Math.sin(this.screwangle), invertColor(this.body.color), this.body.radius * .2)
+            let link = new Line(this.body.x, this.body.y, this.body.x + (((this.body.radius * .8) * this.face)), this.body.y + Math.sin(this.screwangle), invertColor(this.body.color), this.body.radius * .2)
 
-                canvas_context.lineWidth = this.strokeWidth
-                canvas_context.strokeStyle = (this.body.color)
-                canvas_context.beginPath();
-                canvas_context.arc(((link.x1 + link.x2) * .5) + Math.cos(this.screwangle), link.y1 + this.body.radius * .1, this.body.radius * .4, this.screwangle, (Math.PI * 1) + this.screwangle, true)
-                canvas_context.fillStyle = (this.body.color)
-                canvas_context.fill()
-                canvas_context.stroke();
-                canvas_context.beginPath();
-                canvas_context.arc(((link.x1 + link.x2) * .5) + Math.cos(this.screwangle), link.y1 - this.body.radius * .1, this.body.radius * .4, this.screwangle, (Math.PI * 1) + this.screwangle, false)
-                canvas_context.fillStyle = (this.body.color)
-                canvas_context.fill()
-                canvas_context.stroke();
-                // if (this.screwangle == 0) {
-                //     link.draw()
-                // }
+            canvas_context.lineWidth = this.strokeWidth
+            canvas_context.strokeStyle = (this.body.color)
+            canvas_context.beginPath();
+            canvas_context.arc(((link.x1 + link.x2) * .5) + Math.cos(this.screwangle), link.y1 + this.body.radius * .1, this.body.radius * .4, this.screwangle, (Math.PI * 1) + this.screwangle, true)
+            canvas_context.fillStyle = (this.body.color)
+            canvas_context.fill()
+            canvas_context.stroke();
+            canvas_context.beginPath();
+            canvas_context.arc(((link.x1 + link.x2) * .5) + Math.cos(this.screwangle), link.y1 - this.body.radius * .1, this.body.radius * .4, this.screwangle, (Math.PI * 1) + this.screwangle, false)
+            canvas_context.fillStyle = (this.body.color)
+            canvas_context.fill()
+            canvas_context.stroke();
+            // if (this.screwangle == 0) {
+            //     link.draw()
+            // }
             canvas_context.font = "42px arial"
             canvas_context.fillStyle = `rgb(${Math.max(255 - (this.damage / 10), 50)},${255 - this.damage},${255 - this.damage})`
             canvas_context.fillText(`${Math.round(this.damage)}%`, this.body.x - 20, this.body.y - 70)
+            canvas_context.fillStyle = "white"
+            if(stock>0){
+canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, this.body.x - 20, this.body.y + 90)
+}
             // if (this != boys[0]) {
             //     canvas_context.fillText(`${Math.round(this.dmomu)},${Math.round(this.amomu)}`, this.body.x - 20, this.body.y - 150)
             //     canvas_context.fillText(`Under:${Math.round(this.under)},Safe:${Math.round(this.safe)}`, this.body.x - 20, this.body.y - 200)
@@ -7414,7 +7431,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             //     }
             // }
 
-    
+
         }
         operate() {
 
@@ -9064,27 +9081,31 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             // if (this.controller == 0) {
 
-                let link = new Line(this.body.x, this.body.y, this.body.x + (((this.body.radius * .8) * this.face)), this.body.y + Math.sin(this.screwangle), invertColor(this.body.color), this.body.radius * .2)
+            let link = new Line(this.body.x, this.body.y, this.body.x + (((this.body.radius * .8) * this.face)), this.body.y + Math.sin(this.screwangle), invertColor(this.body.color), this.body.radius * .2)
 
-                canvas_context.lineWidth = this.strokeWidth
-                canvas_context.strokeStyle = invertColorx(this.body.color)
-                canvas_context.fillStyle = invertColorx(this.body.color)
-                canvas_context.beginPath();
-                canvas_context.fillRect(((this.body.x - (this.body.radius * .4 * (-this.face)))) - ((this.body.radius * .4)), this.body.y - (this.body.radius * .4), (this.body.radius * .8), (this.body.radius * .8))
-                canvas_context.fill()
-                canvas_context.strokeStyle = invertColorx(this.body.color)
-                canvas_context.fillStyle = invertColor(this.body.color)
-                canvas_context.beginPath();
-                canvas_context.fillRect(((this.body.x - (this.body.radius * .2 * (-this.face)))) - ((this.body.radius * .2)), this.body.y - (this.body.radius * .2), (this.body.radius * .4), (this.body.radius * .4))
-                canvas_context.fill()
-                canvas_context.stroke();
-                // if (this.screwangle == 0) {
-                //     link.draw()
-                // }
-    
+            canvas_context.lineWidth = this.strokeWidth
+            canvas_context.strokeStyle = invertColorx(this.body.color)
+            canvas_context.fillStyle = invertColorx(this.body.color)
+            canvas_context.beginPath();
+            canvas_context.fillRect(((this.body.x - (this.body.radius * .4 * (-this.face)))) - ((this.body.radius * .4)), this.body.y - (this.body.radius * .4), (this.body.radius * .8), (this.body.radius * .8))
+            canvas_context.fill()
+            canvas_context.strokeStyle = invertColorx(this.body.color)
+            canvas_context.fillStyle = invertColor(this.body.color)
+            canvas_context.beginPath();
+            canvas_context.fillRect(((this.body.x - (this.body.radius * .2 * (-this.face)))) - ((this.body.radius * .2)), this.body.y - (this.body.radius * .2), (this.body.radius * .4), (this.body.radius * .4))
+            canvas_context.fill()
+            canvas_context.stroke();
+            // if (this.screwangle == 0) {
+            //     link.draw()
+            // }
+
             canvas_context.font = "42px arial"
             canvas_context.fillStyle = `rgb(${Math.max(255 - (this.damage / 10), 50)},${255 - this.damage},${255 - this.damage})`
             canvas_context.fillText(`${Math.round(this.damage)}%`, this.body.x - 20, this.body.y - 70)
+            canvas_context.fillStyle = "white"
+            if(stock>0){
+canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, this.body.x - 20, this.body.y + 90)
+}
             // if (this != boys[0]) {
             //     canvas_context.fillText(`${Math.round(this.dmomu)},${Math.round(this.amomu)}`, this.body.x - 20, this.body.y - 150)
             //     canvas_context.fillText(`Under:${Math.round(this.under)},Safe:${Math.round(this.safe)}`, this.body.x - 20, this.body.y - 200)
@@ -9414,10 +9435,20 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
             for (let t = 0; t < boom.length; t++) {
                 if (boys[t].body.y > (1440 * (invscale * .5)) || boys[t].body.x < 0 || boys[t].body.x > (2560 * (invscale * .5)) || boys[t].body.y < 0) {
-                    if (t != boys[t].striker) {
-                        scores[boys[t].striker]++
+                    boys[t].body.y = (canvas.height * invscale * 10)
+                    if(stock>0){
+                        if (drops[t] < stock) {
+                            if (t != boys[t].striker) {
+                                scores[boys[t].striker]++
+                            }
+                            drops[t]++
+                        }
+                    }else{
+                        if (t != boys[t].striker) {
+                            scores[boys[t].striker]++
+                        }
+                        drops[t]++
                     }
-                    drops[t]++
                     if (boys[t].go !== 1) {
                         boys[t].go = 1
                         if (boys[t].body.y < 0) {
@@ -9430,21 +9461,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         //     boys[t].body.color = getRandomColor()
                         // } else {
 
-                        if (t == 0) {
-                            if (Math.random() < .5) {
-                                boys[t] = boys[t].copy()
-                            } else {
-                                boys[t] = boys[t].copy()
-                            }
-
-                        } else {
-                            if (Math.random() < .5) {
-                                boys[t] = boys[t].copy()
-                            } else {
+                        // if (t == 0) {
+                            if(stock>0){
+                                if (drops[t] < stock) {
+                                    boys[t] = boys[t].copy()
+                                }
+                            }else{
                                 boys[t] = boys[t].copy()
                             }
-                        }
-
+                        // }
                         // }
                     }
                 }
@@ -9467,6 +9492,25 @@ window.addEventListener('DOMContentLoaded', (event) => {
             // canvas_context.fillText(`Blue ${scores[2]} `, 200, 250)
             // canvas_context.fillText(`Yellow ${scores[3]} `, 200, 300)
             // }
+
+            if(stock>0){
+                let wet = boys.length-1
+                let winner = {}
+                for(let g = 0;g<boys.length;g++){
+                    if(drops[g] >= stock){
+                        wet--
+                    }else{
+                        winner = boys[g]
+                    }
+                }
+                if(wet == 0){
+                    if(boys.length > 1){
+                        canvas_context.font = "100px arial"
+                        canvas_context.fillStyle = winner.body.color
+                        canvas_context.fillText(`The Winner of this Match is: ${winner.name+"!"} `, 800, 100)
+                    }
+                }
+            }
         } else {
             canvas_context.clearRect(0, 0, canvas.width * invscale, canvas.height * invscale)
 
