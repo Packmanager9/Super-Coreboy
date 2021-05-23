@@ -73,7 +73,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
             gamepadAPI[0].axesStatus = axes;// assign received values
             gamepadAPI[0].buttonsStatus = pressed;
-            // ////////////console.log(pressed); // return buttons for debugging purposes
+            // //////////////console.log(pressed); // return buttons for debugging purposes
             return pressed;
         },
         buttonPressed: function (button, hold) {
@@ -160,7 +160,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
             gamepadAPI[1].axesStatus = axes;// assign received values
             gamepadAPI[1].buttonsStatus = pressed;
-            // ////////////console.log(pressed); // return buttons for debugging purposes
+            // //////////////console.log(pressed); // return buttons for debugging purposes
             return pressed;
         },
         buttonPressed: function (button, hold) {
@@ -247,7 +247,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
             gamepadAPI[2].axesStatus = axes;// assign received values
             gamepadAPI[2].buttonsStatus = pressed;
-            // ////////////console.log(pressed); // return buttons for debugging purposes
+            // //////////////console.log(pressed); // return buttons for debugging purposes
             return pressed;
         },
         buttonPressed: function (button, hold) {
@@ -334,7 +334,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
             gamepadAPI[3].axesStatus = axes;// assign received values
             gamepadAPI[3].buttonsStatus = pressed;
-            // ////////////console.log(pressed); // return buttons for debugging purposes
+            // //////////////console.log(pressed); // return buttons for debugging purposes
             return pressed;
         },
         buttonPressed: function (button, hold) {
@@ -573,7 +573,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 canvas_context.fill()
                 canvas_context.stroke();
             } else {
-                // ////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
+                // //////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
             }
         }
         track() {
@@ -775,7 +775,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 canvas_context.fill()
                 canvas_context.stroke();
             } else {
-                // ////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
+                // //////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
             }
         }
         move() {
@@ -967,7 +967,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 canvas_context.fill()
                 canvas_context.stroke();
             } else {
-                // ////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
+                // //////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
             }
         }
         move() {
@@ -1159,7 +1159,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 canvas_context.fill()
                 canvas_context.stroke();
             } else {
-                // ////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
+                // //////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
             }
         }
         move() {
@@ -1808,7 +1808,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             TIP_engine.y = YS_engine * invscale
             TIP_engine.body = TIP_engine
 
-            //console.log(TIP_engine)
+            ////console.log(TIP_engine)
             for (let t = 0; t < selectors.length; t++) {
                 if (selectors[t].body.isPointInside(TIP_engine)) {
                     selectors[t].body.anchored = 2
@@ -1816,18 +1816,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     break
                 }
             }
-            // if (counter == 1) {
-            //     boys[0].righthand.anchored = 0
-            //     boys[0].lefthand.anchored = 0
-            //     boys[0].righthand.x += (TIP_engine.x * 1) - boys[0].righthand.x
-            //     boys[0].righthand.y += (TIP_engine.y * 1) - boys[0].righthand.y
-            //     boys[0].lefthand.x += (TIP_engine.x * 1) - boys[0].lefthand.x
-            //     boys[0].lefthand.y += (TIP_engine.y * 1) - boys[0].lefthand.y
-            //     boys[0].body.x = TIP_engine.x * 1
-            //     boys[0].body.y = TIP_engine.y * 1
-            //     boys[0].body.xmom = 0
-            //     boys[0].body.ymom = 0
-            // }
+            if (counter == 1) {
+                boys[0].righthand.anchored = 0
+                boys[0].lefthand.anchored = 0
+                boys[0].righthand.x += (TIP_engine.x * 1) - boys[0].righthand.x
+                boys[0].righthand.y += (TIP_engine.y * 1) - boys[0].righthand.y
+                boys[0].lefthand.x += (TIP_engine.x * 1) - boys[0].lefthand.x
+                boys[0].lefthand.y += (TIP_engine.y * 1) - boys[0].lefthand.y
+                boys[0].body.x = TIP_engine.x * 1
+                boys[0].body.y = TIP_engine.y * 1
+                boys[0].body.xmom = 0
+                boys[0].body.ymom = 0
+            }
             // example usage: if(object.isPointInside(TIP_engine)){ take action }
             window.addEventListener('pointermove', continued_stimuli);
         });
@@ -1850,7 +1850,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 
     function gamepad_control_controller_proto(object, speed = 1, controller) { // basic control for objects using the controler
-        //         ////////////console.log(gamepadAPI[0].axesStatus[1]*gamepadAPI[0].axesStatus[0]) //debugging
+        //         //////////////console.log(gamepadAPI[0].axesStatus[1]*gamepadAPI[0].axesStatus[0]) //debugging
 
         if (object.self.shield == 0) {
             if (keysPressed['s']) {
@@ -1964,7 +1964,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     }
 
     function gamepad_control_controller_proto_dj(object, speed = 1, controller) { // basic control for objects using the controler
-        //         ////////////console.log(gamepadAPI[0].axesStatus[1]*gamepadAPI[0].axesStatus[0]) //debugging
+        //         //////////////console.log(gamepadAPI[0].axesStatus[1]*gamepadAPI[0].axesStatus[0]) //debugging
 
 
         if (keysPressed['w']) {
@@ -1999,7 +1999,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         }
     }
     function gamepad_control(object, speed = 1) { // basic control for objects using the controler
-        //         ////////////console.log(gamepadAPI[0].axesStatus[1]*gamepadAPI[0].axesStatus[0]) //debugging
+        //         //////////////console.log(gamepadAPI[0].axesStatus[1]*gamepadAPI[0].axesStatus[0]) //debugging
         if (typeof object.body != 'undefined') {
             if (typeof (gamepadAPI[controller].axesStatus[1]) != 'undefined') {
                 if (typeof (gamepadAPI[controller].axesStatus[0]) != 'undefined') {
@@ -2218,7 +2218,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             }
                             if (circle.ymom > 4) {
                                 if (circle.ymom > 1) {
-                                    // ////////////console.log("hitr")
+                                    // //////////////console.log("hitr")
                                     // if (circle.self.jumping == 0) {
                                     if (circle == circle.self.righthand) {
                                         // if (circle.self.rightarm.hypotenuse() < this.height * 5.2) {
@@ -2226,7 +2226,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             circle.ymom *= -1
                                         }
                                         // } else {
-                                        //    // ////////////console.log("hit7")
+                                        //    // //////////////console.log("hit7")
                                         // }
                                     } else if (circle == circle.self.lefthand) {
                                         // if (circle.self.leftarm.hypotenuse() < this.height * 5.2) {
@@ -2234,7 +2234,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             circle.ymom *= -1
                                         }
                                         // } else {
-                                        //    // ////////////console.log("hit8")
+                                        //    // //////////////console.log("hit8")
                                         // }
                                     } else {
                                         if (circle.self.jumping == 0) {
@@ -2275,7 +2275,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             if (circle.y > this.center.y) {
                                 if (circle == circle.self.body) {
                                     if (circle.ymom < 0) {
-                                        // ////////////console.log("hit14")
+                                        // //////////////console.log("hit14")
                                         circle.ymom *= -1
                                         circle.frictiveMove()
                                     }
@@ -2287,7 +2287,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                                 if (circle.self.leftarm.hypotenuse() < this.height * 5.2) {
                                                     circle.y += .1
                                                 } else {
-                                                    // ////////////console.log("hit9")
+                                                    // //////////////console.log("hit9")
                                                     break
                                                 }
                                             }
@@ -2295,7 +2295,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                                 if (circle.self.rightarm.hypotenuse() < this.height * 5.2) {
                                                     circle.y += .1
                                                 } else {
-                                                    // ////////////console.log("hit10")
+                                                    // //////////////console.log("hit10")
                                                     break
                                                 }
                                             }
@@ -2304,7 +2304,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 } else {
                                     if (circle.self.body.y > circle.y) {
                                         if (circle.ymom < 0) {
-                                            // ////////////console.log("hit11")
+                                            // //////////////console.log("hit11")
                                             circle.ymom *= -1
                                             circle.frictiveMove()
                                         }
@@ -2323,14 +2323,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         if (circle == circle.self.lefthand) {
                                             if (circle.self.leftarm.hypotenuse() < this.height * 15.2) {
                                                 if (circle.self.body.y <= this.edgeleft.y) {
-                                                    //// ////////////console.log("hit15")
+                                                    //// //////////////console.log("hit15")
                                                     if (circle.anchored != 1) {
                                                         circle.y -= .1
                                                     } else {
                                                         break
                                                     }
                                                 } else {
-                                                    //// ////////////console.log("hit2")
+                                                    //// //////////////console.log("hit2")
                                                     break
                                                 }
 
@@ -2356,7 +2356,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                                     }
                                                 }
                                             } else {
-                                                // ////////////console.log("hit1")
+                                                // //////////////console.log("hit1")
                                                 break
                                             }
                                         }
@@ -2369,7 +2369,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                                         break
                                                     }
                                                 } else {
-                                                    // ////////////console.log("hit3")
+                                                    // //////////////console.log("hit3")
                                                     break
                                                 }
                                                 if (this.shape.doesPerimeterTouch(circle)) {
@@ -2394,7 +2394,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                                     }
                                                 }
                                             } else {
-                                                // ////////////console.log("hit4")
+                                                // //////////////console.log("hit4")
                                                 break
                                             }
                                         }
@@ -2422,7 +2422,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         }
                                     }
                                 }
-                                //// ////////////console.log("hit13")
+                                //// //////////////console.log("hit13")
                                 circle.y += .1
                             }
                         } else {
@@ -2434,7 +2434,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             if (circle.x < this.edgeright.x) {
                                                 circle.self.grounded = 1
                                                 // circle.self.brick = this
-                                                // //////////console.log("what")
+                                                // ////////////console.log("what")
                                             }
                                         }
                                     }
@@ -3266,113 +3266,77 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     for (let t = 0; t < stage.bricks.length; t++) {
                         if (stage.bricks[t].edgeleft.x < (this.body.x + (this.body.radius * 1.6)) && stage.bricks[t].edgeright.x > (this.body.x - (this.body.radius * 1.6))) {
                             if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) < this.body.y) {
-                                if (this.body.y - Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) > (stage.bricks[t].height * 2) + 10) {
-                                    this.recovering = 1
-                                }
                                 if (boys[k].brick == stage.bricks[t]) {
                                     this.under = 1
-                                } else {
+                                    this.bricksto = stage.bricks[t]
                                     if (Math.abs(Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) - this.body.y) < 300) {
                                         this.under = 4
+                                        this.bricksto = stage.bricks[t]
+                                        if(this.brick.edgeleft.x < stage.bricks[t].edgeleft.x  && this.brick.edgeright.x < stage.bricks[t].edgeright.x ){
+                                            if ((boys[k].body.y - (boys[k].body.radius * .9)) < Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y)) {
+                                            this.under = 2
+                                            this.bricksto = stage.bricks[t]
+                                            break
+                                            }else{
+                                                if(Math.random()<.01){
+                                                    this.under = 2
+                                                    this.bricksto = stage.bricks[t]
+                                                    break
+                                                }
+                                            }
+                                        }else{
+                                            if(Math.random()<.01){
+                                                this.under = 2
+                                                this.bricksto = stage.bricks[t]
+                                                break
+                                            }
+                                        }
+                                        if(this.brick.edgeright.x > stage.bricks[t].edgeright.x  && this.brick.edgeleft.x > stage.bricks[t].edgeleft.x ){
+                                            if ((boys[k].body.y - (boys[k].body.radius * .9)) < Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y)) {
+                                            this.under = 3
+                                            this.bricksto = stage.bricks[t]
+                                            break
+                                            }else{
+                                                if(Math.random()<.01){
+                                                    this.under = 3
+                                                    this.bricksto = stage.bricks[t]
+                                                    break
+                                                }
+                                            }
+                                        }else{
+                                            if(Math.random()<.01){
+                                                this.under = 3
+                                                this.bricksto = stage.bricks[t]
+                                                break
+                                            }
+                                        }
                                     }
                                 }
-                                if (Math.abs(this.body.x - Math.max(stage.bricks[t].edgeright.x)) < Math.abs(this.body.x - Math.max(stage.bricks[t].edgeleft.x))) {
-                                    if (boys[k].body.x > this.body.x) {
-                                        if ((boys[k].body.y - (boys[k].body.radius * 1)) < Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y)) {
-                                            if (this.body.x - (this.body.radius * 1.2) <= stage.bricks[t].edgeright.x) {
-                                                if (this.grounded == 1 || this.jumping == 1) {
-                                                    // if (boys[k].brick == stage.bricks[t]) {
-                                                    this.under = 2
-                                                    // }
-                                                }
-                                            } else {
-                                                if (this.grounded == 1 || this.jumping == 1) {
-                                                    // if (boys[k].brick == stage.bricks[t]) {
-                                                    this.under = 3
-                                                    // }
-                                                }
-                                            }
-                                        }
-                                    } else {
-                                        if ((boys[k].body.y - (boys[k].body.radius * 1)) < Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y)) {
-                                            if (this.body.x + (this.body.radius * 1.2) >= stage.bricks[t].edgeleft.x) {
-                                                if (this.grounded == 1 || this.jumping == 1) {
-                                                    // if (boys[k].brick == stage.bricks[t]) {
-                                                    this.under = 3
-                                                    // }
-                                                }
-                                            } else {
-                                                if (this.grounded == 1 || this.jumping == 1) {
-                                                    // if (boys[k].brick == stage.bricks[t]) {
-                                                    this.under = 2
-                                                    // }
-                                                }
-                                            }
-                                        }
-                                    }
-                                } else if (Math.abs(this.body.x - Math.max(stage.bricks[t].edgeright.x)) > Math.abs(this.body.x - Math.max(stage.bricks[t].edgeleft.x))) {
-                                    if (boys[k].body.x < this.body.x) {
-                                        if ((boys[k].body.y - (boys[k].body.radius * 1)) < Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y)) {
-                                            if (this.body.x + (this.body.radius * 1.2) >= stage.bricks[t].edgeleft.x) {
-                                                if (this.grounded == 1 || this.jumping == 1) {
-                                                    // if (boys[k].brick == stage.bricks[t]) {
-                                                    this.under = 3
-                                                    // }
-                                                }
-                                            } else {
-                                                if (this.grounded == 1 || this.jumping == 1) {
-                                                    // if (boys[k].brick == stage.bricks[t]) {
-                                                    this.under = 2
-                                                    // }
-                                                }
-                                            }
-                                        }
-                                    } else {
-                                        if ((boys[k].body.y - (boys[k].body.radius * 1)) < Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y)) {
-                                            if (this.body.x + (this.body.radius * 1.2) >= stage.bricks[t].edgeleft.x) {
-                                                if (this.grounded == 1 || this.jumping == 1) {
-                                                    // if (boys[k].brick == stage.bricks[t]) {
-                                                    this.under = 2
-                                                    // }
-                                                }
-                                            } else {
-                                                if (this.grounded == 1 || this.jumping == 1) {
-                                                    // if (boys[k].brick == stage.bricks[t]) {
-                                                    this.under = 3
-                                                    // }
-                                                }
-                                            }
-                                        }
-
-                                    }
-                                }
-                                if (this.under !== 0 && this.under !== 4 && (this.amom <= 0 && this.dmom <= 0)) {
-                                    // //console.log( (this.amom + this.dmom))
-                                    if (this.under == 3) {
-                                        this.amove = 0
-                                        this.dmom = ((boys[k].brick.width - Math.abs(boys[k].brick.center.x - this.body.x)) / this.speed) * 2.45
-                                        this.amom = 0
-                                        this.dmove = 1
-                                        this.screwshot = 1
-                                        this.wmove = 1
-                                    }
-                                    if (this.under == 2) {
-                                        this.amove = 1
-                                        this.amom = ((boys[k].brick.width - Math.abs(boys[k].brick.center.x - this.body.x)) / this.speed) * 2.45
-                                        this.dmom = 0
-                                        this.dmove = 0
-                                        this.wmove = 1
-                                        this.screwshot = 1
-                                    }
-                                }
-
+                                this.bricksto = stage.bricks[t]
                                 break
                             }
                         }
                     }
                 }
             }
-
+            if (this.under !== 0 && this.under !== 4 && (this.amom <= 0 && this.dmom <= 0)) {
+                if (this.under == 3) {
+                    this.amove = 0
+                    this.dmom = (Math.abs(Math.abs(this.bricksto.center.x - this.body.x) - this.bricksto.width) / this.speed) * 1.03
+                    this.amom = 0
+                    this.dmove = 1
+                    this.screwshot = 1
+                    this.wmove = 1
+                }
+                if (this.under == 2) {
+                    this.amove = 1
+                    this.amom = (Math.abs(Math.abs(this.bricksto.center.x - this.body.x) - this.bricksto.width) / this.speed) * 1.03
+                    this.dmom = 0
+                    this.dmove = 0
+                    this.wmove = 1
+                    this.screwshot = 1
+                }
+            }
             this.exgrip = 0
             for (let t = 0; t < boys.length; t++) {
                 if (this.amomu <= 0 && this.dmomu <= 0) {
@@ -4532,7 +4496,7 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
                 this.lefthand.ymom = -this.speed * 2
                 this.righthand.ymom = -this.speed * 2
                 this.jumpcount = 100
-                ////console.log(this)
+                //////console.log(this)
             }
         }
         doubleJump() {
@@ -4719,126 +4683,95 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
                             if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) < this.body.y) {
                                 if (boys[k].brick == stage.bricks[t]) {
                                     this.under = 1
-                                } else {
+                                    this.bricksto = stage.bricks[t]
                                     if (Math.abs(Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) - this.body.y) < 300) {
                                         this.under = 4
+                                        this.bricksto = stage.bricks[t]
+                                        if(this.brick.edgeleft.x < stage.bricks[t].edgeleft.x  && this.brick.edgeright.x < stage.bricks[t].edgeright.x ){
+                                            if ((boys[k].body.y - (boys[k].body.radius * .9)) < Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y)) {
+                                            this.under = 2
+                                            this.bricksto = stage.bricks[t]
+                                            break
+                                            }else{
+                                                if(Math.random()<.01){
+                                                    this.under = 2
+                                                    this.bricksto = stage.bricks[t]
+                                                    break
+                                                }
+                                            }
+                                        }else{
+                                            if(Math.random()<.01){
+                                                this.under = 2
+                                                this.bricksto = stage.bricks[t]
+                                                break
+                                            }
+                                        }
+                                        if(this.brick.edgeright.x > stage.bricks[t].edgeright.x  && this.brick.edgeleft.x > stage.bricks[t].edgeleft.x ){
+                                            if ((boys[k].body.y - (boys[k].body.radius * .9)) < Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y)) {
+                                            this.under = 3
+                                            this.bricksto = stage.bricks[t]
+                                            break
+                                            }else{
+                                                if(Math.random()<.01){
+                                                    this.under = 3
+                                                    this.bricksto = stage.bricks[t]
+                                                    break
+                                                }
+                                            }
+                                        }else{
+                                            if(Math.random()<.01){
+                                                this.under = 3
+                                                this.bricksto = stage.bricks[t]
+                                                break
+                                            }
+                                        }
                                     }
                                 }
-                                if (Math.abs(this.body.x - Math.max(stage.bricks[t].edgeright.x)) < Math.abs(this.body.x - Math.max(stage.bricks[t].edgeleft.x))) {
-                                    if (boys[k].body.x > this.body.x) {
-                                        if ((boys[k].body.y - (boys[k].body.radius * 1)) < Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y)) {
-                                            if (this.body.x - (this.body.radius * 1.2) <= stage.bricks[t].edgeright.x) {
-                                                if (this.grounded == 1 || this.jumping == 1) {
-                                                    // if (boys[k].brick == stage.bricks[t]) {
-                                                    this.under = 2
-                                                    // }
-                                                }
-                                            } else {
-                                                if (this.grounded == 1 || this.jumping == 1) {
-                                                    // if (boys[k].brick == stage.bricks[t]) {
-                                                    this.under = 3
-                                                    // }
-                                                }
-                                            }
-                                        }
-                                    } else {
-                                        if ((boys[k].body.y - (boys[k].body.radius * 1)) < Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y)) {
-                                            if (this.body.x + (this.body.radius * 1.2) >= stage.bricks[t].edgeleft.x) {
-                                                if (this.grounded == 1 || this.jumping == 1) {
-                                                    // if (boys[k].brick == stage.bricks[t]) {
-                                                    this.under = 3
-                                                    // }
-                                                }
-                                            } else {
-                                                if (this.grounded == 1 || this.jumping == 1) {
-                                                    // if (boys[k].brick == stage.bricks[t]) {
-                                                    this.under = 2
-                                                    // }
-                                                }
-                                            }
-                                        }
-                                    }
-                                } else if (Math.abs(this.body.x - Math.max(stage.bricks[t].edgeright.x)) > Math.abs(this.body.x - Math.max(stage.bricks[t].edgeleft.x))) {
-                                    if (boys[k].body.x < this.body.x) {
-                                        if ((boys[k].body.y - (boys[k].body.radius * 1)) < Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y)) {
-                                            if (this.body.x + (this.body.radius * 1.2) >= stage.bricks[t].edgeleft.x) {
-                                                if (this.grounded == 1 || this.jumping == 1) {
-                                                    // if (boys[k].brick == stage.bricks[t]) {
-                                                    this.under = 3
-                                                    // }
-                                                }
-                                            } else {
-                                                if (this.grounded == 1 || this.jumping == 1) {
-                                                    // if (boys[k].brick == stage.bricks[t]) {
-                                                    this.under = 2
-                                                    // }
-                                                }
-                                            }
-                                        }
-                                    } else {
-                                        if ((boys[k].body.y - (boys[k].body.radius * 1)) < Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y)) {
-                                            if (this.body.x + (this.body.radius * 1.2) >= stage.bricks[t].edgeleft.x) {
-                                                if (this.grounded == 1 || this.jumping == 1) {
-                                                    // if (boys[k].brick == stage.bricks[t]) {
-                                                    this.under = 2
-                                                    // }
-                                                }
-                                            } else {
-                                                if (this.grounded == 1 || this.jumping == 1) {
-                                                    // if (boys[k].brick == stage.bricks[t]) {
-                                                    this.under = 3
-                                                    // }
-                                                }
-                                            }
-                                        }
-
-                                    }
-                                }
-                                if (this.under !== 0 && this.under !== 4 && (this.amom <= 0 && this.dmom <= 0)) {
-                                    // //console.log( (this.amom + this.dmom))
-                                    if (this.under == 3) {
-                                        this.amove = 0
-                                        this.dmom = ((boys[k].brick.width - Math.abs(boys[k].brick.center.x - this.body.x)) / this.speed) * 1.45
-                                        this.amom = 0
-                                        this.dmove = 1
-                                        this.screwshot = 1
-                                        this.wmove = 1
-                                    }
-                                    if (this.under == 2) {
-                                        this.amove = 1
-                                        this.amom = ((boys[k].brick.width - Math.abs(boys[k].brick.center.x - this.body.x)) / this.speed) * 1.45
-                                        this.dmom = 0
-                                        this.dmove = 0
-                                        this.wmove = 1
-                                        this.screwshot = 1
-                                    }
-                                }
-
+                                this.bricksto = stage.bricks[t]
                                 break
                             }
                         }
                     }
                 }
             }
-
+            if (this.under !== 0 && this.under !== 4 && (this.amom <= 0 && this.dmom <= 0)) {
+                if (this.under == 3) {
+                    this.amove = 0
+                    this.dmom = (Math.abs(Math.abs(this.bricksto.center.x - this.body.x) - this.bricksto.width) / this.speed) * 1.03
+                    this.amom = 0
+                    this.dmove = 1
+                    this.screwshot = 1
+                    this.wmove = 1
+                }
+                if (this.under == 2) {
+                    this.amove = 1
+                    this.amom = (Math.abs(Math.abs(this.bricksto.center.x - this.body.x) - this.bricksto.width) / this.speed) * 1.03
+                    this.dmom = 0
+                    this.dmove = 0
+                    this.wmove = 1
+                    this.screwshot = 1
+                }
+            }
             this.exgrip = 0
-            for (let t = 0; t < boys.length; t++) {
-                if (this.amomu <= 0 && this.dmomu <= 0) {
-                    if (this != boys[t]) {
-                        if (boys[t].brick.center.y > this.brick.center.y) {
-                            if (boys[t].body.x < this.body.x) {
-                                this.amomu = (Math.abs(this.brick.edgeleft.x - this.body.x)) / this.speed
-                                this.amomu += 15
-                                this.exgrip = 1
-                            } else {
-                                this.dmomu = (Math.abs(this.brick.edgeright.x - this.body.x)) / this.speed
-                                this.dmomu += 15
-                                this.exgrip = 1
+            if(this.under == 0){
+                for (let t = 0; t < boys.length; t++) {
+                    if (this.amomu <= 0 && this.dmomu <= 0) {
+                        if (this != boys[t]) {
+                            if (boys[t].brick.center.y > this.brick.center.y) {
+                                if (boys[t].body.x < this.body.x) {
+                                    this.amomu = (Math.abs(this.brick.edgeleft.x - this.body.x)) / this.speed
+                                    this.amomu += 15
+                                    this.exgrip = 1
+                                } else {
+                                    this.dmomu = (Math.abs(this.brick.edgeright.x - this.body.x)) / this.speed
+                                    this.dmomu += 15
+                                    this.exgrip = 1
+                                }
                             }
                         }
+                    } else {
+                        this.exgrip = 1
                     }
-                } else {
-                    this.exgrip = 1
                 }
             }
 
@@ -4851,6 +4784,7 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
                 this.dmove = 1
                 this.wmove = 1
                 this.amove = 0
+                this.amom = 0
                 // this.amomu = 0
                 // this.dmomu = 0
             } else {
@@ -4868,6 +4802,7 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
                 // if (Math.random() < .003 || this.jumping == 1) {
                 this.screwshot = 1
                 // }
+                this.dmom = 0
                 this.amove = 1
                 this.wmove = 1
                 this.dmove = 0
@@ -4985,7 +4920,7 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
                 if (this.safe == 0) {
                     this.screwshot = 1
                     if (this.body.x > (this.brick.center.x)) {
-                        //////////console.log(this.brick.center.x, this.body.x)
+                        ////////////console.log(this.brick.center.x, this.body.x)
                         this.amove = 1
                         this.dmove = 0
                         this.wmove = 1
@@ -5717,7 +5652,7 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
 }
             // canvas_context.fillText(`Height:${Math.round(this.brick.edgeright.y)}`, this.body.x - 20, this.body.y - 250)
             // canvas_context.fillText(`Safe:${Math.round(this.safe)}`, this.body.x - 20, this.body.y - 200)
-            // if (this != boys[0]) {
+            // // if (this != boys[0]) {
             //     canvas_context.fillText(`M ${Math.round(this.dmove)},${Math.round(this.amove)}`, this.body.x - 20, this.body.y - 100)
             //     canvas_context.fillText(`U ${Math.round(this.dmomu)},${Math.round(this.amomu)}`, this.body.x - 20, this.body.y - 150)
             //     canvas_context.fillText(`Under:${Math.round(this.under)},Safe:${Math.round(this.safe)}`, this.body.x - 20, this.body.y - 200)
@@ -6441,108 +6376,75 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
                             if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) < this.body.y) {
                                 if (boys[k].brick == stage.bricks[t]) {
                                     this.under = 1
-                                } else {
+                                    this.bricksto = stage.bricks[t]
                                     if (Math.abs(Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) - this.body.y) < 300) {
                                         this.under = 4
+                                        this.bricksto = stage.bricks[t]
+                                        if(this.brick.edgeleft.x < stage.bricks[t].edgeleft.x  && this.brick.edgeright.x < stage.bricks[t].edgeright.x ){
+                                            if ((boys[k].body.y - (boys[k].body.radius * .9)) < Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y)) {
+                                            this.under = 2
+                                            this.bricksto = stage.bricks[t]
+                                            break
+                                            }else{
+                                                if(Math.random()<.01){
+                                                    this.under = 2
+                                                    this.bricksto = stage.bricks[t]
+                                                    break
+                                                }
+                                            }
+                                        }else{
+                                            if(Math.random()<.01){
+                                                this.under = 2
+                                                this.bricksto = stage.bricks[t]
+                                                break
+                                            }
+                                        }
+                                        if(this.brick.edgeright.x > stage.bricks[t].edgeright.x  && this.brick.edgeleft.x > stage.bricks[t].edgeleft.x ){
+                                            if ((boys[k].body.y - (boys[k].body.radius * .9)) < Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y)) {
+                                            this.under = 3
+                                            this.bricksto = stage.bricks[t]
+                                            break
+                                            }else{
+                                                if(Math.random()<.01){
+                                                    this.under = 3
+                                                    this.bricksto = stage.bricks[t]
+                                                    break
+                                                }
+                                            }
+                                        }else{
+                                            if(Math.random()<.01){
+                                                this.under = 3
+                                                this.bricksto = stage.bricks[t]
+                                                break
+                                            }
+                                        }
                                     }
                                 }
-                                if (Math.abs(this.body.x - Math.max(stage.bricks[t].edgeright.x)) < Math.abs(this.body.x - Math.max(stage.bricks[t].edgeleft.x))) {
-                                    if (boys[k].body.x > this.body.x) {
-                                        if ((boys[k].body.y - (boys[k].body.radius * 1)) < Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y)) {
-                                            if (this.body.x - (this.body.radius * 1.2) <= stage.bricks[t].edgeright.x) {
-                                                if (this.grounded == 1 || this.jumping == 1) {
-                                                    // if (boys[k].brick == stage.bricks[t]) {
-                                                    this.under = 2
-                                                    // }
-                                                }
-                                            } else {
-                                                if (this.grounded == 1 || this.jumping == 1) {
-                                                    // if (boys[k].brick == stage.bricks[t]) {
-                                                    this.under = 3
-                                                    // }
-                                                }
-                                            }
-                                        }
-                                    } else {
-                                        if ((boys[k].body.y - (boys[k].body.radius * 1)) < Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y)) {
-                                            if (this.body.x + (this.body.radius * 1.2) >= stage.bricks[t].edgeleft.x) {
-                                                if (this.grounded == 1 || this.jumping == 1) {
-                                                    // if (boys[k].brick == stage.bricks[t]) {
-                                                    this.under = 3
-                                                    // }
-                                                }
-                                            } else {
-                                                if (this.grounded == 1 || this.jumping == 1) {
-                                                    // if (boys[k].brick == stage.bricks[t]) {
-                                                    this.under = 2
-                                                    // }
-                                                }
-                                            }
-                                        }
-                                    }
-                                } else if (Math.abs(this.body.x - Math.max(stage.bricks[t].edgeright.x)) > Math.abs(this.body.x - Math.max(stage.bricks[t].edgeleft.x))) {
-                                    if (boys[k].body.x < this.body.x) {
-                                        if ((boys[k].body.y - (boys[k].body.radius * 1)) < Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y)) {
-                                            if (this.body.x + (this.body.radius * 1.2) >= stage.bricks[t].edgeleft.x) {
-                                                if (this.grounded == 1 || this.jumping == 1) {
-                                                    // if (boys[k].brick == stage.bricks[t]) {
-                                                    this.under = 3
-                                                    // }
-                                                }
-                                            } else {
-                                                if (this.grounded == 1 || this.jumping == 1) {
-                                                    // if (boys[k].brick == stage.bricks[t]) {
-                                                    this.under = 2
-                                                    // }
-                                                }
-                                            }
-                                        }
-                                    } else {
-                                        if ((boys[k].body.y - (boys[k].body.radius * 1)) < Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y)) {
-                                            if (this.body.x + (this.body.radius * 1.2) >= stage.bricks[t].edgeleft.x) {
-                                                if (this.grounded == 1 || this.jumping == 1) {
-                                                    // if (boys[k].brick == stage.bricks[t]) {
-                                                    this.under = 2
-                                                    // }
-                                                }
-                                            } else {
-                                                if (this.grounded == 1 || this.jumping == 1) {
-                                                    // if (boys[k].brick == stage.bricks[t]) {
-                                                    this.under = 3
-                                                    // }
-                                                }
-                                            }
-                                        }
-
-                                    }
-                                }
-                                if (this.under !== 0 && this.under !== 4 && (this.amom <= 0 && this.dmom <= 0)) {
-                                    // //console.log( (this.amom + this.dmom))
-                                    if (this.under == 3) {
-                                        this.amove = 0
-                                        this.dmom = ((boys[k].brick.width - Math.abs(boys[k].brick.center.x - this.body.x)) / this.speed) * 1.45
-                                        this.amom = 0
-                                        this.dmove = 1
-                                        this.screwshot = 1
-                                        this.wmove = 1
-                                    }
-                                    if (this.under == 2) {
-                                        this.amove = 1
-                                        this.amom = ((boys[k].brick.width - Math.abs(boys[k].brick.center.x - this.body.x)) / this.speed) * 1.45
-                                        this.dmom = 0
-                                        this.dmove = 0
-                                        this.wmove = 1
-                                        this.screwshot = 1
-                                    }
-                                }
-
+                                this.bricksto = stage.bricks[t]
                                 break
                             }
                         }
                     }
                 }
             }
-
+            if (this.under !== 0 && this.under !== 4 && (this.amom <= 0 && this.dmom <= 0)) {
+                if (this.under == 3) {
+                    this.amove = 0
+                    this.dmom = (Math.abs(Math.abs(this.bricksto.center.x - this.body.x) - this.bricksto.width) / this.speed) * 1.03
+                    this.amom = 0
+                    this.dmove = 1
+                    this.screwshot = 1
+                    this.wmove = 1
+                }
+                if (this.under == 2) {
+                    this.amove = 1
+                    this.amom = (Math.abs(Math.abs(this.bricksto.center.x - this.body.x) - this.bricksto.width) / this.speed) * 1.03
+                    this.dmom = 0
+                    this.dmove = 0
+                    this.wmove = 1
+                    this.screwshot = 1
+                }
+            }
             this.exgrip = 0
             for (let t = 0; t < boys.length; t++) {
                 if (this.amomu <= 0 && this.dmomu <= 0) {
@@ -6564,14 +6466,13 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
                 }
             }
 
-
-
             if (this.dmom > 0) {
                 if (Math.random() < .003) {
                     this.screwshot = 1
                 }
                 this.dmove = 1
                 this.wmove = 1
+                this.amove = 0
                 //this.amomu = 0
                 //this.dmomu = 0
             }
@@ -6581,6 +6482,7 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
                 }
                 this.amove = 1
                 this.wmove = 1
+                this.dmove = 0
                 //this.amomu = 0
                 //this.dmomu = 0
             }
@@ -8137,108 +8039,75 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
                             if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) < this.body.y) {
                                 if (boys[k].brick == stage.bricks[t]) {
                                     this.under = 1
-                                } else {
+                                    this.bricksto = stage.bricks[t]
                                     if (Math.abs(Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) - this.body.y) < 300) {
                                         this.under = 4
+                                        this.bricksto = stage.bricks[t]
+                                        if(this.brick.edgeleft.x < stage.bricks[t].edgeleft.x  && this.brick.edgeright.x < stage.bricks[t].edgeright.x ){
+                                            if ((boys[k].body.y - (boys[k].body.radius * .9)) < Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y)) {
+                                            this.under = 2
+                                            this.bricksto = stage.bricks[t]
+                                            break
+                                            }else{
+                                                if(Math.random()<.01){
+                                                    this.under = 2
+                                                    this.bricksto = stage.bricks[t]
+                                                    break
+                                                }
+                                            }
+                                        }else{
+                                            if(Math.random()<.01){
+                                                this.under = 2
+                                                this.bricksto = stage.bricks[t]
+                                                break
+                                            }
+                                        }
+                                        if(this.brick.edgeright.x > stage.bricks[t].edgeright.x  && this.brick.edgeleft.x > stage.bricks[t].edgeleft.x ){
+                                            if ((boys[k].body.y - (boys[k].body.radius * .9)) < Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y)) {
+                                            this.under = 3
+                                            this.bricksto = stage.bricks[t]
+                                            break
+                                            }else{
+                                                if(Math.random()<.01){
+                                                    this.under = 3
+                                                    this.bricksto = stage.bricks[t]
+                                                    break
+                                                }
+                                            }
+                                        }else{
+                                            if(Math.random()<.01){
+                                                this.under = 3
+                                                this.bricksto = stage.bricks[t]
+                                                break
+                                            }
+                                        }
                                     }
                                 }
-                                if (Math.abs(this.body.x - Math.max(stage.bricks[t].edgeright.x)) < Math.abs(this.body.x - Math.max(stage.bricks[t].edgeleft.x))) {
-                                    if (boys[k].body.x > this.body.x) {
-                                        if ((boys[k].body.y - (boys[k].body.radius * 1)) < Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y)) {
-                                            if (this.body.x - (this.body.radius * 1.2) <= stage.bricks[t].edgeright.x) {
-                                                if (this.grounded == 1 || this.jumping == 1) {
-                                                    // if (boys[k].brick == stage.bricks[t]) {
-                                                    this.under = 2
-                                                    // }
-                                                }
-                                            } else {
-                                                if (this.grounded == 1 || this.jumping == 1) {
-                                                    // if (boys[k].brick == stage.bricks[t]) {
-                                                    this.under = 3
-                                                    // }
-                                                }
-                                            }
-                                        }
-                                    } else {
-                                        if ((boys[k].body.y - (boys[k].body.radius * 1)) < Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y)) {
-                                            if (this.body.x + (this.body.radius * 1.2) >= stage.bricks[t].edgeleft.x) {
-                                                if (this.grounded == 1 || this.jumping == 1) {
-                                                    // if (boys[k].brick == stage.bricks[t]) {
-                                                    this.under = 3
-                                                    // }
-                                                }
-                                            } else {
-                                                if (this.grounded == 1 || this.jumping == 1) {
-                                                    // if (boys[k].brick == stage.bricks[t]) {
-                                                    this.under = 2
-                                                    // }
-                                                }
-                                            }
-                                        }
-                                    }
-                                } else if (Math.abs(this.body.x - Math.max(stage.bricks[t].edgeright.x)) > Math.abs(this.body.x - Math.max(stage.bricks[t].edgeleft.x))) {
-                                    if (boys[k].body.x < this.body.x) {
-                                        if ((boys[k].body.y - (boys[k].body.radius * 1)) < Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y)) {
-                                            if (this.body.x + (this.body.radius * 1.2) >= stage.bricks[t].edgeleft.x) {
-                                                if (this.grounded == 1 || this.jumping == 1) {
-                                                    // if (boys[k].brick == stage.bricks[t]) {
-                                                    this.under = 3
-                                                    // }
-                                                }
-                                            } else {
-                                                if (this.grounded == 1 || this.jumping == 1) {
-                                                    // if (boys[k].brick == stage.bricks[t]) {
-                                                    this.under = 2
-                                                    // }
-                                                }
-                                            }
-                                        }
-                                    } else {
-                                        if ((boys[k].body.y - (boys[k].body.radius * 1)) < Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y)) {
-                                            if (this.body.x + (this.body.radius * 1.2) >= stage.bricks[t].edgeleft.x) {
-                                                if (this.grounded == 1 || this.jumping == 1) {
-                                                    // if (boys[k].brick == stage.bricks[t]) {
-                                                    this.under = 2
-                                                    // }
-                                                }
-                                            } else {
-                                                if (this.grounded == 1 || this.jumping == 1) {
-                                                    // if (boys[k].brick == stage.bricks[t]) {
-                                                    this.under = 3
-                                                    // }
-                                                }
-                                            }
-                                        }
-
-                                    }
-                                }
-                                if (this.under !== 0 && this.under !== 4 && (this.amom <= 0 && this.dmom <= 0)) {
-                                    // //console.log( (this.amom + this.dmom))
-                                    if (this.under == 3) {
-                                        this.amove = 0
-                                        this.dmom = ((boys[k].brick.width - Math.abs(boys[k].brick.center.x - this.body.x)) / this.speed) * 1.45
-                                        this.amom = 0
-                                        this.dmove = 1
-                                        // this.screwshot = 1
-                                        this.wmove = 1
-                                    }
-                                    if (this.under == 2) {
-                                        this.amove = 1
-                                        this.amom = ((boys[k].brick.width - Math.abs(boys[k].brick.center.x - this.body.x)) / this.speed) * 1.45
-                                        this.dmom = 0
-                                        this.dmove = 0
-                                        this.wmove = 1
-                                        // this.screwshot = 1
-                                    }
-                                }
-
+                                this.bricksto = stage.bricks[t]
                                 break
                             }
                         }
                     }
                 }
             }
-
+            if (this.under !== 0 && this.under !== 4 && (this.amom <= 0 && this.dmom <= 0)) {
+                if (this.under == 3) {
+                    this.amove = 0
+                    this.dmom = (Math.abs(Math.abs(this.bricksto.center.x - this.body.x) - this.bricksto.width) / this.speed) * 1.03
+                    this.amom = 0
+                    this.dmove = 1
+                    this.screwshot = 1
+                    this.wmove = 1
+                }
+                if (this.under == 2) {
+                    this.amove = 1
+                    this.amom = (Math.abs(Math.abs(this.bricksto.center.x - this.body.x) - this.bricksto.width) / this.speed) * 1.03
+                    this.dmom = 0
+                    this.dmove = 0
+                    this.wmove = 1
+                    this.screwshot = 1
+                }
+            } 
             this.exgrip = 0
             for (let t = 0; t < boys.length; t++) {
                 if (this.amomu <= 0 && this.dmomu <= 0) {
