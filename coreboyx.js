@@ -1793,7 +1793,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         canvas_context.scale(scale, scale)
         window.setInterval(function () {
             main()
-        }, 22)
+        }, 18)
         document.addEventListener('keydown', (event) => {
             keysPressed[event.key] = true;
         });
@@ -4412,7 +4412,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.hitboxes = []
             this.links = []
             this.speed = 11.5
-            this.punchspeed = 5.7 // 5
+            this.punchspeed = 6 // 5 // 5.7
             this.grounded = 0
             this.jumping = 1
 
@@ -4688,7 +4688,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
         }
         doubleJump() {
-            if (this.body.y < 700) {
+            if (this.body.y < 900) {
                 this.wmove = 0
                 this.screwshot = 0
             }
@@ -5119,7 +5119,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }
             }
 
-            if (this.body.y < 700) {
+            if (this.body.y < 900) {
                 this.wmove = 0
                 this.screwshot = 0
             }
@@ -5513,7 +5513,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             if (this.breaktimer <= 0 && this.shield == 0) {
 
-                if (this.body.y < 700) {
+                if (this.body.y < 900) {
                     this.wmove = 0
                     this.screwshot = 0
                 }
@@ -6447,7 +6447,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
         }
         doubleJump() {
-            if (this.body.y < 700) {
+            if (this.body.y < 900) {
                 this.wmove = 0
                 this.screwshot = 0
             }
@@ -6916,7 +6916,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }
             }
 
-            if (this.body.y < 700) {
+            if (this.body.y < 900) {
                 this.wmove = 0
                 this.screwshot = 0
             }
@@ -7367,7 +7367,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 if (this.body.fired > 0) {
                     this.body.ymom -= this.body.fired * .018
                 }
-                if (this.body.y < 700) {
+                if (this.body.y < 900) {
                     this.wmove = 0
                     this.screwshot = 0
                 }
@@ -9991,7 +9991,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
         }
         doubleJump() {
-            if (this.body.y < 700) {
+            if (this.body.y < 900) {
                 this.wmove = 0
                 this.screwshot = 0
             }
