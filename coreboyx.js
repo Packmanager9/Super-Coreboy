@@ -13395,10 +13395,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
         }
 
         doubleJump() {
-            if (this.body.y < 1200) {
-                this.wmove = 0
-                this.downspike = 0
+            if (this.body.y < 1400) {
+                if(this.ymom < 0){
+                    this.wmove = 0
+                    this.downspike = 0
+                }else if (this.body.y < 950) {
+                    if(this.ymom < 0){
+                        this.wmove = 0
+                        this.downspike = 0
+                    }
+                }
             }
+
             this.jumpcount--
             if (this.jumpcount <= -20) {
                 if (boys.indexOf(this) <= humanPlayers) {
@@ -14023,10 +14031,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }
             }
 
-            if (this.body.y < 1200) {
-                this.wmove = 0
-                this.downspike = 0
+            if (this.body.y < 1400) {
+                if(this.ymom < 0){
+                    this.wmove = 0
+                    this.downspike = 0
+                }else if (this.body.y < 950) {
+                    if(this.ymom < 0){
+                        this.wmove = 0
+                        this.downspike = 0
+                    }
+                }
             }
+
             if (this.shield == 0) {
 
                 for (let t = 0; t < boys.length; t++) {
@@ -14678,9 +14694,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
                 }
 
-                if (this.body.y < 1200) {
-                    this.wmove = 0
-                    this.screwshot = 0
+                if (this.body.y < 1400) {
+                    if(this.ymom < 0){
+                        this.wmove = 0
+                        this.downspike = 0
+                    }else if (this.body.y < 950) {
+                        if(this.ymom < 0){
+                            this.wmove = 0
+                            this.downspike = 0
+                        }
+                    }
                 }
 
                 if (this.screwshot == 1) {
@@ -15064,6 +15087,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 
 
+    let circx = new Circle(700, 1000, 10, "red")
     let go = 0
     let boom = []// [new Circle(0, 0, 1, "transparent"), new Circle(0, 0, 1, "transparent")]
 
@@ -15182,6 +15206,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         if (counter == 1) {
             flopper++
             canvas_context.clearRect(0, 0, canvas.width * 4, canvas.height * 4)  // refreshes the image
+            // circx.draw()
             gamepadAPI[0].update()
             gamepadAPI[1].update()
             gamepadAPI[2].update()
