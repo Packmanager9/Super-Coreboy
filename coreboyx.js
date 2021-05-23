@@ -1300,7 +1300,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
             return false
         }
-    } 
+    }
     class ShotD {
         constructor(x, y, radius, color, xmom = 0, ymom = 0, friction = 1, reflect = 0, strokeWidth = 0, strokeColor = "transparent") {
             this.x = x
@@ -2354,9 +2354,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.edgeleft = new Circle(x - (width * .5), y - (height * 1), 16, "cyan")
             this.edgeright = new Circle(x + (width * .5), y - (height * 1), 16, "blue")
         }
-        stick(point){
-            if(point.x>this.edgeleft.x && point.x<this.edgeright.x){
-                if(this.shape.doesPerimeterTouch(point)){
+        stick(point) {
+            if (point.x > this.edgeleft.x && point.x < this.edgeright.x) {
+                if (this.shape.doesPerimeterTouch(point)) {
                     point.stuck = 1
                 }
             }
@@ -3102,7 +3102,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
 
 
-            for (let t = 0; t < boys.length;t++) {
+            for (let t = 0; t < boys.length; t++) {
                 if (this != boys[t]) {
                     while (boys[t].body.doesPerimeterTouch(this.body)) {
                         this.body.x += (this.body.x - boys[t].body.x) / (this.body.radius + boys[t].body.radius)
@@ -3695,7 +3695,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             let link = new LineOP(this.body, boys[t].shots[g])
                             if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 4) {
                                 if (this.grounded == 1) {
-                                    this.storeshield = 1
+                                    if (boys[t].shots[g].stuck != 1) {
+                                        this.storeshield = 1
+                                    } else {
+                                        this.wmove = 1
+                                    }
                                 } else {
                                     if (this.body.x < boys[t].shots[g].x) {
                                         if (this.amom <= 0 && this.dmom <= 0) {
@@ -3788,7 +3792,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             let link = new LineOP(this.body, boys[t].shots[g])
                             if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 4) {
                                 if (this.grounded == 1) {
-                                    this.storeshield = 1
+                                    if (boys[t].shots[g].stuck != 1) {
+                                        this.storeshield = 1
+                                    } else {
+                                        this.wmove = 1
+                                    }
                                 } else {
                                     if (this.body.x < boys[t].shots[g].x) {
                                         if (this.amom <= 0 && this.dmom <= 0) {
@@ -4120,7 +4128,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         let link = new LineOP(this.body, boys[t].shots[g])
                         if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 4) {
                             if (this.grounded == 1) {
+                                       if (boys[t].shots[g].stuck != 1) {
                                 this.storeshield = 1
+                            } else {
+                                this.wmove = 1
+                            }
                             } else {
                                 if (this.body.x < boys[t].shots[g].x) {
                                     if (this.amom <= 0 && this.dmom <= 0) {
@@ -5330,7 +5342,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             let link = new LineOP(this.body, boys[t].shots[g])
                             if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 4) {
                                 if (this.grounded == 1) {
-                                    this.storeshield = 1
+                                    if (boys[t].shots[g].stuck != 1) {
+                                        this.storeshield = 1
+                                    } else {
+                                        this.wmove = 1
+                                    }
                                 } else {
                                     if (this.body.x < boys[t].shots[g].x) {
                                         if (this.amom <= 0 && this.dmom <= 0) {
@@ -5533,8 +5549,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     for (let g = 0; g < boys[t].shots.length; g++) {
                         let link = new LineOP(this.body, boys[t].shots[g])
                         if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 4) {
-                            this.storeshield = 1
-                            break
+                            if (boys[t].shots[g].stuck != 1) {
+                                this.storeshield = 1
+                                break
+                            } else {
+                                this.wmove = 1
+                            }
                         } else if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 16) {
                             if (boys[t].shots[g].ymom > 0) {
                                 if (boys[t].body.y < this.body.y) {
@@ -6749,8 +6769,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     for (let g = 0; g < boys[t].shots.length; g++) {
                         let link = new LineOP(this.body, boys[t].shots[g])
                         if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 4) {
-                            this.storeshield = 1
-                            break
+                            if (boys[t].shots[g].stuck != 1) {
+                                this.storeshield = 1
+                                break
+                            } else {
+                                this.wmove = 1
+                            }
                         } else if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 16) {
                             if (boys[t].shots[g].ymom > 0) {
                                 if (boys[t].body.y < this.body.y) {
@@ -7127,7 +7151,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             let link = new LineOP(this.body, boys[t].shots[g])
                             if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 4) {
                                 if (this.grounded == 1) {
-                                    this.storeshield = 1
+                                    if (boys[t].shots[g].stuck != 1) {
+                                        this.storeshield = 1
+                                    } else {
+                                        this.wmove = 1
+                                    }
                                 } else {
                                     if (this.body.x < boys[t].shots[g].x) {
                                         if (this.amom <= 0 && this.dmom <= 0) {
@@ -7343,8 +7371,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     for (let g = 0; g < boys[t].shots.length; g++) {
                         let link = new LineOP(this.body, boys[t].shots[g])
                         if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 4) {
-                            this.storeshield = 1
-                            break
+                            if (boys[t].shots[g].stuck != 1) {
+                                this.storeshield = 1
+                                break
+                            } else {
+                                this.wmove = 1
+                            }
                         } else if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 16) {
                             if (boys[t].shots[g].ymom > 0) {
                                 if (boys[t].body.y < this.body.y) {
@@ -7497,8 +7529,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     for (let g = 0; g < boys[t].shots.length; g++) {
                         let link = new LineOP(this.body, boys[t].shots[g])
                         if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 4) {
-                            this.storeshield = 1
-                            break
+                            if (boys[t].shots[g].stuck != 1) {
+                                this.storeshield = 1
+                                break
+                            } else {
+                                this.wmove = 1
+                            }
                         } else if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 16) {
                             if (boys[t].shots[g].ymom > 0) {
                                 if (boys[t].body.y < this.body.y) {
@@ -8945,7 +8981,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             let link = new LineOP(this.body, boys[t].shots[g])
                             if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 4) {
                                 if (this.grounded == 1) {
-                                    this.hortsmash = 1
+                                    if (boys[t].shots[g].stuck != 1) {
+                                        this.storeshield = 1
+                                        break
+                                    } else {
+                                        this.wmove = 1
+                                    }
                                 } else {
                                     if (this.body.x < boys[t].shots[g].x) {
                                         if (this.amom <= 0 && this.dmom <= 0) {
@@ -9164,8 +9205,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     for (let g = 0; g < boys[t].shots.length; g++) {
                         let link = new LineOP(this.body, boys[t].shots[g])
                         if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 4) {
-                            this.hortsmash = 1
-                            break
+                            if (boys[t].shots[g].stuck != 1) {
+                                this.storeshield = 1
+                                break
+                            } else {
+                                this.hortsmash = 1
+                                this.wmove = 1
+                            }
                         } else if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 16) {
                             if (boys[t].shots[g].ymom > 0) {
                                 if (boys[t].body.y < this.body.y) {
@@ -10567,7 +10613,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.rightarm = new SpringOP(this.rightshoulder, this.righthand, this.armlength, 8)
             this.springs.push(this.leftarm)
             this.springs.push(this.rightarm)
-            this.gravity = 1.4
+            this.gravity = 1.2
             this.righthand.fired = 0
             this.lefthand.fired = 0
             this.body.fired = 0
@@ -11252,7 +11298,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             let link = new LineOP(this.body, boys[t].shots[g])
                             if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 4) {
                                 if (this.grounded == 1) {
-                                    this.storeshield = 1
+                                    if (boys[t].shots[g].stuck != 1) {
+                                        this.storeshield = 1
+                                    } else {
+                                        this.wmove = 1
+                                    }
                                 } else {
                                     if (this.body.x < boys[t].shots[g].x) {
                                         if (this.amom <= 0 && this.dmom <= 0) {
@@ -11455,8 +11505,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     for (let g = 0; g < boys[t].shots.length; g++) {
                         let link = new LineOP(this.body, boys[t].shots[g])
                         if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 4) {
-                            this.storeshield = 1
-                            break
+                            if (boys[t].shots[g].stuck != 1) {
+                                this.storeshield = 1
+                                break
+                            } else {
+                                this.wmove = 1
+                            }
                         } else if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 16) {
                             if (boys[t].shots[g].ymom > 0) {
                                 if (boys[t].body.y < this.body.y) {
@@ -11663,7 +11717,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.detonate = 1
                             this.shots.push(this.shot)
                             if (this.body.ymom > -jumplimit) {
-                                this.body.ymom -= this.speed*1.8
+                                this.body.ymom -= this.speed * 1.8
                                 if (this.body.ymom < -jumplimit) {
                                     this.body.ymom = -jumplimit
                                 }
@@ -11905,7 +11959,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.detonate = 1
                             this.shots.push(this.shot)
                             if (this.body.ymom > -jumplimit) {
-                                this.body.ymom -= this.speed*1.8
+                                this.body.ymom -= this.speed * 1.8
                                 if (this.body.ymom < -jumplimit) {
                                     this.body.ymom = -jumplimit
                                 }
@@ -11919,26 +11973,26 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 
                 if (gamepadAPI[this.controller].buttonsStatus.includes('X') || keysPressed['j']) {
-                if (this.righthand.fired <= 0) {
-                    if (this.righthand.anchored == 0) {
-                        this.fleeing = 0
-                        this.rightshoulder.xmom = 0
-                        this.rightshoulder.ymom = 0
-                        this.righthand.ymom = (this.punchspeed * 5) //+ this.body.ymom
-                        this.righthand.xmom = (this.punchspeed * 11.1) //+ this.body.xmom
-                        this.righthand.fired = 18
+                    if (this.righthand.fired <= 0) {
+                        if (this.righthand.anchored == 0) {
+                            this.fleeing = 0
+                            this.rightshoulder.xmom = 0
+                            this.rightshoulder.ymom = 0
+                            this.righthand.ymom = (this.punchspeed * 5) //+ this.body.ymom
+                            this.righthand.xmom = (this.punchspeed * 11.1) //+ this.body.xmom
+                            this.righthand.fired = 18
+                        }
                     }
-                }
-                if (this.lefthand.fired <= 0) {
-                    if (this.lefthand.anchored == 0) {
-                        this.fleeing = 0
-                        this.leftshoulder.xmom = 0
-                        this.leftshoulder.ymom = 0
-                        this.lefthand.ymom = (this.punchspeed * 5) //+ this.body.ymom
-                        this.lefthand.xmom = -(this.punchspeed * 11.1) //+ this.body.xmom
-                        this.lefthand.fired = 18
+                    if (this.lefthand.fired <= 0) {
+                        if (this.lefthand.anchored == 0) {
+                            this.fleeing = 0
+                            this.leftshoulder.xmom = 0
+                            this.leftshoulder.ymom = 0
+                            this.lefthand.ymom = (this.punchspeed * 5) //+ this.body.ymom
+                            this.lefthand.xmom = -(this.punchspeed * 11.1) //+ this.body.xmom
+                            this.lefthand.fired = 18
+                        }
                     }
-                }
                 }
             }
 
@@ -12000,29 +12054,29 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.grounded = 0
             for (let t = 0; t < this.shots.length; t++) {
 
-                if(this.shots[t].bomb == 1){
-                    if(this.shots[t].stuck != 1){
-                        for(let k = 0;k<stage.bricks.length;k++){
+                if (this.shots[t].bomb == 1) {
+                    if (this.shots[t].stuck != 1) {
+                        for (let k = 0; k < stage.bricks.length; k++) {
                             stage.bricks[k].stick(this.shots[t])
                         }
                         this.shots[t].move()
-                    }else{
-                        if(this.detonate == 1){
-                            let angle = Math.PI/4
+                    } else {
+                        if (this.detonate == 1) {
+                            let angle = Math.PI / 4
                             this.shots[t].marked = 1
-                            for(let f = 0;f<8;f++){
-                                let bullet = new ShotC(this.shots[t].x, this.shots[t].y, 12, getRandomColor(), Math.cos(angle*f)*12, Math.sin(angle*f)*12)
+                            for (let f = 0; f < 8; f++) {
+                                let bullet = new ShotC(this.shots[t].x, this.shots[t].y, 12, getRandomColor(), Math.cos(angle * f) * 12, Math.sin(angle * f) * 12)
                                 bullet.life = 15
                                 this.shots.push(bullet)
                             }
                         }
                     }
-                }else{
+                } else {
                     this.shots[t].life--
-                    if(this.shots[t].life <=0){
+                    if (this.shots[t].life <= 0) {
                         this.shots[t].marked = 1
                     }
-                this.shots[t].move()
+                    this.shots[t].move()
                 }
                 this.shots[t].draw()
             }
@@ -12052,7 +12106,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
             if (this.screwangle != 0) {
                 for (let t = 0; t < 25; t++) {
-                    let spot = new Circle(this.body.x + ((Math.random() - .5) * this.body.radius * 2), this.body.y - ((Math.random() - .5) * this.body.radius * 2), 3,"#ffffff")
+                    let spot = new Circle(this.body.x + ((Math.random() - .5) * this.body.radius * 2), this.body.y - ((Math.random() - .5) * this.body.radius * 2), 3, "#ffffff")
                     if (spot.doesPerimeterTouch(this.body)) {
                         spot.draw()
                     }
@@ -12079,12 +12133,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
             // }
 
 
-            let link = new Line(this.body.x, this.body.y+this.body.radius * .2, this.body.x + (((this.body.radius * .8) * this.face)), this.body.y + Math.sin(this.screwangle)+ this.body.radius * .2, "#FFFFFF", this.body.radius * .5)
+            let link = new Line(this.body.x, this.body.y + this.body.radius * .2, this.body.x + (((this.body.radius * .8) * this.face)), this.body.y + Math.sin(this.screwangle) + this.body.radius * .2, "#FFFFFF", this.body.radius * .5)
 
             canvas_context.lineWidth = this.strokeWidth
             canvas_context.strokeStyle = "#FFFFFF" //invertColor(this.body.color)
             canvas_context.beginPath();
-            canvas_context.arc(((link.x1 + link.x2) * .5) + Math.cos(this.screwangle), link.y1 - this.body.radius * .1, this.body.radius * .4, this.screwangle-1, (Math.PI * 1) + this.screwangle+1, false)
+            canvas_context.arc(((link.x1 + link.x2) * .5) + Math.cos(this.screwangle), link.y1 - this.body.radius * .1, this.body.radius * .4, this.screwangle - 1, (Math.PI * 1) + this.screwangle + 1, false)
             canvas_context.fillStyle = "#FFFFFF"//invertColor(this.body.color)
             // canvas_context.fill()
             canvas_context.stroke();
@@ -12520,7 +12574,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             canvas_context.font = "40px arial"
             canvas_context.fillStyle = "black"
             canvas_context.fillText(`Scorched Mass`, scorchSelector.x - (scorchSelector.radius * .7), scorchSelector.y - (scorchSelector.radius * .5))
-            
+
 
             for (let t = 0; t < selectors.length; t++) {
                 selectors[t].draw()
@@ -12547,7 +12601,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             } else if (k == 3) {
                                 coreboy = new Jox(boys.length)
                                 coreboy.body.color = invertColor(selectors[t].body.color)
-                            }else if (k == 4) {
+                            } else if (k == 4) {
                                 coreboy = new ScorchedMass(boys.length)
                                 coreboy.body.color = selectors[t].body.color
                             }
