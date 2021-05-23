@@ -2173,7 +2173,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
             //         // circle.self.shots[t].marked = 1
             //     }
             // }
-
             if (circle == circle.self.rightshoulder) {
                 return
             }
@@ -2316,6 +2315,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     if (circle != circle.self.lefthand && circle != circle.self.righthand) {
                                         if (circle.anchored != 1) {
                                             circle.y -= .1
+                                            circle.self.grounded = 1
                                         } else {
                                             break
                                         }
@@ -2658,6 +2658,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     class Boy {
         constructor(controller) {
+            this.shild = new Circle(0,0,0,"transparent")
             this.shot = {}
             this.striker = 10000
             this.name = "Coreboy"
@@ -3007,14 +3008,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.righthand.fired--
             this.lefthand.fired--
             this.breaktimer--
+            this.shielddraw = 0
             if (gamepadAPI[this.controller].buttonsStatus.includes('RB') || keysPressed['o']) {
                 if (this.breaktimer < 0) {
                     if (this.grounded == 1) {
                         this.shieldpower -= .63
                         this.shield = 1
-                        let shild = new Circle(this.body.x, this.body.y, (Math.max((new LineOP(this.body, this.lefthand)).hypotenuse(), (new LineOP(this.body, this.righthand)).hypotenuse())) + this.lefthand.radius, this.body.color + Math.min(Math.round(this.shieldpower + 11), 99))
-                        shild.draw()
-                    }
+                        this.shielddraw = 1
+                      }
                 }
             } else {
                 this.shield = 0
@@ -3592,7 +3593,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
 
 
-            // if (gamepadAPI[this.controller].buttonsStatus.includes('RB') || keysPressed['o']) {
 
             if (Math.random() < .1) {
                 this.storeshield = 0
@@ -3738,8 +3738,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.righthand.fired--
             this.lefthand.fired--
             this.breaktimer--
-            // if (gamepadAPI[this.controller].buttonsStatus.includes('RB') || keysPressed['o']) {
-
             if (Math.random() < .1) {
                 this.storeshield = 0
             }
@@ -3815,23 +3813,22 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     this.storeshield = 0
                 }
             }
+            this.shielddraw = 0
             if (this.storeshield == 1) {
-                if (this.breaktimer < 0) {
-                    if (this.grounded == 1) {
-                        this.shieldpower -= .63
-                        this.shield = 1
-                        let shild = new Circle(this.body.x, this.body.y, (Math.max((new LineOP(this.body, this.lefthand)).hypotenuse(), (new LineOP(this.body, this.righthand)).hypotenuse())) + this.lefthand.radius, this.body.color + Math.min(Math.round(this.shieldpower + 11), 99))
-                        shild.draw()
-                    }
-                }
-            } else {
-                this.shield = 0
-                this.shieldpower += .2
-                if (this.shieldpower > 100) {
-                    this.shieldpower = 100
-                }
+             if (this.breaktimer < 0) {
+                if (this.grounded == 1) {
+                    this.shieldpower -= .63
+                    this.shield = 1
+                    this.shielddraw = 1
+              }
             }
-
+        } else {
+            this.shield = 0
+            this.shieldpower += .2
+            if (this.shieldpower > 100) {
+                this.shieldpower = 100
+            }
+        }
 
             if (this.breaktimer <= 0 && this.shield == 0) {
 
@@ -3971,6 +3968,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             //this.enemycollide()
         }
         draw() {
+            this.grounded = 0
             for (let t = 0; t < this.shots.length; t++) {
                 this.shots[t].radius *= 1.02
                 this.shots[t].ymom *= 1.02
@@ -4008,7 +4006,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
             canvas_context.fill()
             // canvas_context.stroke();
             link.draw()
-
+            if (this.shielddraw == 1) {
+                this.shild = new Circle(this.body.x, this.body.y, (Math.max((new LineOP(this.body, this.lefthand)).hypotenuse(), (new LineOP(this.body, this.righthand)).hypotenuse())) + this.lefthand.radius, this.body.color + Math.min(Math.round(this.shieldpower + 11), 99))
+                this.shild.draw()
+            }
             canvas_context.font = "42px arial"
             canvas_context.fillStyle = `rgb(${Math.max(255 - (this.damage / 10), 50)},${255 - this.damage},${255 - this.damage})`
             canvas_context.fillText(`${Math.round(this.damage)}%`, this.body.x - 20, this.body.y - 70)
@@ -4104,7 +4105,6 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
             if (this.jumping < 0) {
                 this.jumping = 0
             }
-            this.grounded = 0
             if (this.lefthand.anchored <= -1) {
                 this.lefthand.anchored++
             } else {
@@ -4191,6 +4191,7 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
 
     class Mass {
         constructor(controller) {
+            this.shild = new Circle(0,0,0,"transparent")
             this.shot = {}
             this.safe = 1
             this.striker = 10000
@@ -5062,7 +5063,6 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
             this.lefthand.fired--
 
             this.breaktimer--
-            // if (gamepadAPI[this.controller].buttonsStatus.includes('RB') || keysPressed['o']) {
 
             if (Math.random() < .1) {
                 this.storeshield = 0
@@ -5249,14 +5249,14 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
                     this.storeshield = 0
                 }
             }
+            this.shielddraw = 0
             if (this.storeshield == 1) {
                 if (this.breaktimer < 0) {
                     if (this.grounded == 1) {
                         this.shieldpower -= .63
                         this.shield = 1
-                        let shild = new Circle(this.body.x, this.body.y, (Math.max((new LineOP(this.body, this.lefthand)).hypotenuse(), (new LineOP(this.body, this.righthand)).hypotenuse())) + this.lefthand.radius, this.body.color + Math.min(Math.round(this.shieldpower + 10), 99))
-                        shild.draw()
-                    }
+                        this.shielddraw = 1
+                  }
                 }
             } else {
                 this.shield = 0
@@ -5446,18 +5446,15 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
             this.body.fired--
             this.lefthand.fired--
 
+            this.shielddraw = 0
             this.breaktimer--
             if (gamepadAPI[this.controller].buttonsStatus.includes('RB') || keysPressed['o']) {
                 if (this.breaktimer < 0) {
-                    if (this.grounded !== 0) {
-                        // if(this.wasfalse.includes(0)){
-                        // }else{
+                    if (this.grounded == 1) {
                         this.shieldpower -= .63
                         this.shield = 1
-                        let shild = new Circle(this.body.x, this.body.y, (Math.max((new LineOP(this.body, this.lefthand)).hypotenuse(), (new LineOP(this.body, this.righthand)).hypotenuse())) + this.lefthand.radius, this.body.color + Math.min(Math.round(this.shieldpower + 10), 99))
-                        shild.draw()
-                        // }
-                    }
+                        this.shielddraw = 1
+                  }
                 }
             } else {
                 this.shield = 0
@@ -5641,6 +5638,7 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
             //this.enemycollide()
         }
         draw() {
+            this.grounded = 0
             for (let t = 0; t < this.shots.length; t++) {
                 this.shots[t].move()
                 this.shots[t].draw()
@@ -5712,6 +5710,10 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
 
             if (this.shotdraw == 1) {
                 this.shot.draw()
+            }
+            if (this.shielddraw == 1) {
+                this.shild = new Circle(this.body.x, this.body.y, (Math.max((new LineOP(this.body, this.lefthand)).hypotenuse(), (new LineOP(this.body, this.righthand)).hypotenuse())) + this.lefthand.radius, this.body.color + Math.min(Math.round(this.shieldpower + 11), 99))
+                this.shild.draw()
             }
         }
         operate() {
@@ -5807,7 +5809,6 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
             if (this.jumping < 0) {
                 this.jumping = 0
             }
-            this.grounded = 0
             if (this.lefthand.anchored <= -1) {
                 this.lefthand.anchored++
             } else {
@@ -5884,6 +5885,7 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
 
     class Blastgirl {
         constructor(controller) {
+            this.shild = new Circle(0,0,0,"transparent")
             this.shot = new Brick(-1, -1, 1, 1)
             this.striker = 10000
             this.name = "Blastgirl"
@@ -7031,14 +7033,14 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
                     this.storeshield = 0
                 }
             }
+            this.shielddraw = 0
             if (this.storeshield == 1) {
                 if (this.breaktimer < 0) {
                     if (this.grounded == 1) {
                         this.shieldpower -= .63
                         this.shield = 1
-                        let shild = new Circle(this.body.x, this.body.y, (Math.max((new LineOP(this.body, this.lefthand)).hypotenuse(), (new LineOP(this.body, this.righthand)).hypotenuse())) + this.lefthand.radius, this.body.color + Math.min(Math.round(this.shieldpower + 10), 99))
-                        shild.draw()
-                    }
+                        this.shielddraw = 1
+                  }
                 }
             } else {
                 this.shield = 0
@@ -7229,18 +7231,16 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
             this.body.fired -= .25
             this.lefthand.fired--
 
+            
+            this.shielddraw = 0
             this.breaktimer--
             if (gamepadAPI[this.controller].buttonsStatus.includes('RB') || keysPressed['o']) {
                 if (this.breaktimer < 0) {
-                    if (this.grounded !== 0) {
-                        // if(this.wasfalse.includes(0)){
-                        // }else{
+                    if (this.grounded == 1) {
                         this.shieldpower -= .63
                         this.shield = 1
-                        let shild = new Circle(this.body.x, this.body.y, (Math.max((new LineOP(this.body, this.lefthand)).hypotenuse(), (new LineOP(this.body, this.righthand)).hypotenuse())) + this.lefthand.radius, this.body.color + Math.min(Math.round(this.shieldpower + 10), 99))
-                        shild.draw()
-                        // }
-                    }
+                        this.shielddraw = 1
+                  }
                 }
             } else {
                 this.shield = 0
@@ -7249,7 +7249,6 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
                     this.shieldpower = 100
                 }
             }
-
 
 
             if (this.breaktimer <= 0 && this.shield == 0) {
@@ -7424,6 +7423,7 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
             //this.enemycollide()
         }
         draw() {
+            this.grounded = 0
             for (let t = 0; t < this.shots.length; t++) {
                 if (typeof this.shots[t].gravity == "number") {
                     this.shots[t].ymom += this.shots[t].gravity
@@ -7468,6 +7468,10 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
             // if (this.screwangle == 0) {
             //     link.draw()
             // }
+            if (this.shielddraw == 1) {
+                this.shild = new Circle(this.body.x, this.body.y, (Math.max((new LineOP(this.body, this.lefthand)).hypotenuse(), (new LineOP(this.body, this.righthand)).hypotenuse())) + this.lefthand.radius, this.body.color + Math.min(Math.round(this.shieldpower + 11), 99))
+                this.shild.draw()
+            }
             canvas_context.font = "42px arial"
             canvas_context.fillStyle = `rgb(${Math.max(255 - (this.damage / 10), 50)},${255 - this.damage},${255 - this.damage})`
             canvas_context.fillText(`${Math.round(this.damage)}%`, this.body.x - 20, this.body.y - 70)
@@ -7579,7 +7583,6 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
             if (this.jumping < 0) {
                 this.jumping = 0
             }
-            this.grounded = 0
             if (this.lefthand.anchored <= -1) {
                 this.lefthand.anchored++
             } else {
@@ -7665,6 +7668,7 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
 
     class Jox {
         constructor(controller) {
+            this.shild = new Circle(0,0,0,"transparent")
             this.shot = {}
             this.striker = 10000
             this.name = "Jox"
@@ -8557,7 +8561,6 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
             this.lefthand.fired--
 
             this.breaktimer--
-            // if (gamepadAPI[this.controller].buttonsStatus.includes('RB') || keysPressed['o']) {
 
             if (Math.random() < .1) {
                 this.storeshield = 0
@@ -8734,14 +8737,14 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
                     this.storeshield = 0
                 }
             }
+            this.shielddraw = 0
             if (this.storeshield == 1) {
                 if (this.breaktimer < 0) {
                     if (this.grounded == 1) {
                         this.shieldpower -= .63
                         this.shield = 1
-                        let shild = new Circle(this.body.x, this.body.y, (Math.max((new LineOP(this.body, this.lefthand)).hypotenuse(), (new LineOP(this.body, this.righthand)).hypotenuse())) + this.lefthand.radius, this.body.color + Math.min(Math.round(this.shieldpower + 10), 99))
-                        shild.draw()
-                    }
+                        this.shielddraw = 1
+                  }
                 }
             } else {
                 this.shield = 0
@@ -8924,18 +8927,16 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
             this.body.fired -= 1
             this.lefthand.fired--
 
+            
+            this.shielddraw = 0
             this.breaktimer--
             if (gamepadAPI[this.controller].buttonsStatus.includes('RB') || keysPressed['o']) {
                 if (this.breaktimer < 0) {
-                    if (this.grounded !== 0) {
-                        // if(this.wasfalse.includes(0)){
-                        // }else{
+                    if (this.grounded == 1) {
                         this.shieldpower -= .63
                         this.shield = 1
-                        let shild = new Circle(this.body.x, this.body.y, (Math.max((new LineOP(this.body, this.lefthand)).hypotenuse(), (new LineOP(this.body, this.righthand)).hypotenuse())) + this.lefthand.radius, this.body.color + Math.min(Math.round(this.shieldpower + 10), 99))
-                        shild.draw()
-                        // }
-                    }
+                        this.shielddraw = 1
+                  }
                 }
             } else {
                 this.shield = 0
@@ -9099,6 +9100,7 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
             //this.enemycollide()
         }
         draw() {
+            this.grounded = 0
             for (let t = 0; t < this.shots.length; t++) {
                 if (typeof this.shots[t].gravity == "number") {
                     this.shots[t].ymom += this.shots[t].gravity
@@ -9163,6 +9165,10 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
             //     link.draw()
             // }
 
+            if (this.shielddraw == 1) {
+                this.shild = new Circle(this.body.x, this.body.y, (Math.max((new LineOP(this.body, this.lefthand)).hypotenuse(), (new LineOP(this.body, this.righthand)).hypotenuse())) + this.lefthand.radius, this.body.color + Math.min(Math.round(this.shieldpower + 11), 99))
+                this.shild.draw()
+            }
             canvas_context.font = "42px arial"
             canvas_context.fillStyle = `rgb(${Math.max(255 - (this.damage / 10), 50)},${255 - this.damage},${255 - this.damage})`
             canvas_context.fillText(`${Math.round(this.damage)}%`, this.body.x - 20, this.body.y - 70)
@@ -9282,7 +9288,6 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
             if (this.jumping < 0) {
                 this.jumping = 0
             }
-            this.grounded = 0
             if (this.lefthand.anchored <= -1) {
                 this.lefthand.anchored++
             } else {
@@ -9358,6 +9363,7 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
 
     class Dummy {
         constructor(controller) {
+            this.shild = new Circle(0,0,0,"transparent")
             this.shot = new Brick(-1, -1, 1, 1)
             this.striker = 10000
             this.name = "Dummy"
@@ -9700,6 +9706,7 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
         }
         draw() {
 
+            this.grounded = 0
             this.safe = 0
             this.safesto = 0
             for (let t = 0; t < stage.bricks.length; t++) {
@@ -9750,6 +9757,10 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
             // if (this.screwangle == 0) {
             //     link.draw()
             // }
+            if (this.shielddraw == 1) {
+                this.shild = new Circle(this.body.x, this.body.y, (Math.max((new LineOP(this.body, this.lefthand)).hypotenuse(), (new LineOP(this.body, this.righthand)).hypotenuse())) + this.lefthand.radius, this.body.color + Math.min(Math.round(this.shieldpower + 11), 99))
+                this.shild.draw()
+            }
             canvas_context.font = "42px arial"
             canvas_context.fillStyle = `rgb(${Math.max(255 - (this.damage / 10), 50)},${255 - this.damage},${255 - this.damage})`
             canvas_context.fillText(`${Math.round(this.damage)}%`, this.body.x - 20, this.body.y - 100)
@@ -9861,7 +9872,6 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
             if (this.jumping < 0) {
                 this.jumping = 0
             }
-            this.grounded = 0
             if (this.lefthand.anchored <= -1) {
                 this.lefthand.anchored++
             } else {
@@ -10034,25 +10044,25 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
             gamepadAPI[3].update() //checks for button presses/stick movement on the connected controller)
             // game code goes here
             stage.draw()
+            if (flopper % 2 == 0) {
+                for (let t = boys.length - 1; t >= 0; t--) {
+                    boys[t].operate()
+                }
+            } else {
+                for (let t = 0; t < boys.length; t++) {
+                    boys[t].operate()
+                }
+            }
+            if (flopper % 2 == 0) {
+                for (let t = 0; t < boys.length; t++) {
+                    boys[t].enemycollide()
+                }
+            } else {
+                for (let t = boys.length - 1; t >= 0; t--) {
+                    boys[t].enemycollide()
+                }
+            }
 
-            if (flopper % 2 == 0) {
-                for (let t = boys.length - 1; t >= 0; t--) {
-                    boys[t].operate()
-                }
-            } else {
-                for (let t = 0; t < boys.length; t++) {
-                    boys[t].operate()
-                }
-            }
-            if (flopper % 2 == 0) {
-                for (let t = 0; t < boys.length; t++) {
-                    boys[t].enemycollide()
-                }
-            } else {
-                for (let t = boys.length - 1; t >= 0; t--) {
-                    boys[t].enemycollide()
-                }
-            }
             for (let t = 0; t < boys.length; t++) {
                 boys[t].draw()
             }
