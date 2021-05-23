@@ -11551,7 +11551,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
 
                     if (Math.abs(this.body.x - boys[t].body.x) < 50 && this.body.y < boys[t].body.y) {
-                        this.downspike = 1
+                        if(this.amomu <= 0 && this.dmomu <= 0){
+                            this.downspike = 1
+                        }
                     } else if (Math.abs(this.body.x - boys[t].body.x) < 150 && this.body.y <= boys[t].body.y && (boys[t].righthand.anchored == 1 || boys[t].lefthand.anchored == 1)) {
                         this.hortsmash = 1
                     }
