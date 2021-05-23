@@ -11855,7 +11855,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         }
                         if (this.face == -1) {
                             if (this.lefthand.anchored == 0) {
-                                this.shot = new Shot(this.lefthand.x, this.lefthand.y, this.charge * .91, "#FF4400", this.speed * 3, 0)
+                                this.shot = new Shot(this.lefthand.x, this.lefthand.y, this.charge * .91, "#FF4400", -this.speed * 3, 0)
                                 if (this.charge > 80) {
                                     this.shot.color = "#FF9944"
                                 }
@@ -11898,28 +11898,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
                 }
                 if (gamepadAPI[this.controller].buttonsStatus.includes('A') || keysPressed['k']) {
-                    if (this.righthand.fired <= 0) {
-                        if (this.righthand.anchored == 0) {
-                            this.rightshoulder.xmom = 0
-                            this.rightshoulder.ymom = 0
-                            this.righthand.ymom = (this.punchspeed * 12) + this.body.ymom * 2
-                            this.righthand.xmom = -((this.punchspeed * 2.1)) // + this.body.xmom)
-                            this.righthand.fired = 18
-                        }
-                    }
-                    if (this.lefthand.fired <= 0) {
-                        if (this.lefthand.anchored == 0) {
-                            this.leftshoulder.xmom = 0
-                            this.leftshoulder.ymom = 0
-                            this.lefthand.ymom = (this.punchspeed * 12) + this.body.ymom * 2
-                            this.lefthand.xmom = (this.punchspeed * 2.1) // + this.body.xmom
-                            this.lefthand.fired = 18
-                        }
-                    }
-                }
-
-
-                if (gamepadAPI[this.controller].buttonsStatus.includes('X') || keysPressed['j']) {
                     if (this.lefthand.fired <= 0) {
                         if (this.righthand.fired <= 0) {
                             this.shot = new ShotC(this.body.x, this.body.y, 24, "#FF0000", 0, (this.speed * 1.5))
@@ -11937,6 +11915,30 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.righthand.fired = 28
                         }
                     }
+                }
+
+
+                if (gamepadAPI[this.controller].buttonsStatus.includes('X') || keysPressed['j']) {
+                if (this.righthand.fired <= 0) {
+                    if (this.righthand.anchored == 0) {
+                        this.fleeing = 0
+                        this.rightshoulder.xmom = 0
+                        this.rightshoulder.ymom = 0
+                        this.righthand.ymom = (this.punchspeed * 5) //+ this.body.ymom
+                        this.righthand.xmom = (this.punchspeed * 11.1) //+ this.body.xmom
+                        this.righthand.fired = 18
+                    }
+                }
+                if (this.lefthand.fired <= 0) {
+                    if (this.lefthand.anchored == 0) {
+                        this.fleeing = 0
+                        this.leftshoulder.xmom = 0
+                        this.leftshoulder.ymom = 0
+                        this.lefthand.ymom = (this.punchspeed * 5) //+ this.body.ymom
+                        this.lefthand.xmom = -(this.punchspeed * 11.1) //+ this.body.xmom
+                        this.lefthand.fired = 18
+                    }
+                }
                 }
             }
 
