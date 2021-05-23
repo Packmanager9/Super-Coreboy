@@ -13475,12 +13475,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
                     if (this.lefthand2.fired <= 0) {
                             this.lefthand2.ymom = -this.punchspeed * 14
-                            this.lefthand2.xmom = -this.punchspeed * 4
+                            this.lefthand2.xmom = -this.punchspeed * -4
                             this.lefthand2.fired = 18
                     }
                     if (this.lefthand3.fired <= 0) {
                             this.lefthand3.ymom = -this.punchspeed * 14
-                            this.lefthand3.xmom = -this.punchspeed * -4
+                            this.lefthand3.xmom = -this.punchspeed * 4
                             this.lefthand3.fired = 18
                     }
                 }
@@ -13517,7 +13517,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.leftshoulder.xmom = 0
                             this.leftshoulder.ymom = 0
                             this.lefthand.ymom = (this.punchspeed * 14) + this.body.ymom * 2
-                            this.lefthand.xmom = this.punchspeed * 9
+                            this.lefthand.xmom = this.punchspeed * -9
                             this.body.ymom -= this.speed*.1275
                             this.lefthand.fired = 18
                         }
@@ -13534,7 +13534,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.leftshoulder3.xmom = 0
                             this.leftshoulder3.ymom = 0
                             this.lefthand3.ymom = (this.punchspeed * 14) + this.body.ymom * 2
-                            this.lefthand3.xmom = -this.punchspeed * 7
+                            this.lefthand3.xmom = -this.punchspeed * -7
                             this.body.ymom -= this.speed*.1275
                             this.lefthand3.fired = 19
                     }
@@ -14554,7 +14554,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.leftshoulder.xmom = 0
                             this.leftshoulder.ymom = 0
                             this.lefthand.ymom = (this.punchspeed * 14) + this.body.ymom * 2
-                            this.lefthand.xmom = this.punchspeed * 9
+                            this.lefthand.xmom = this.punchspeed * -9
                             this.body.ymom -= this.speed*.1275
                             this.lefthand.fired = 18
                         }
@@ -14571,7 +14571,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.leftshoulder3.xmom = 0
                             this.leftshoulder3.ymom = 0
                             this.lefthand3.ymom = (this.punchspeed * 14) + this.body.ymom * 2
-                            this.lefthand3.xmom = -this.punchspeed * 7
+                            this.lefthand3.xmom = -this.punchspeed * -7
                             this.body.ymom -= this.speed*.1275
                             this.lefthand3.fired = 19
                     }
@@ -14619,39 +14619,39 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     this.screwshot = 0
                 }
 
-                if (this.screwshot == 1) {
-                    if (this.righthand.fired <= 0) {
-                        if (this.righthand.anchored == 0) {
-                            this.righthand.ymom = -this.punchspeed * 14
-                            this.righthand.xmom = 0
-                            this.righthand.fired = 18
-                        }
-                    }  if (this.righthand2.fired <= 0) {
-                            this.righthand2.ymom = -this.punchspeed * 14
-                            this.righthand2.xmom = -this.punchspeed * 4
-                            this.righthand2.fired = 18
-                    }  if (this.righthand3.fired <= 0) {
-                            this.righthand3.ymom = -this.punchspeed * 14
-                            this.righthand3.xmom = this.punchspeed * 4
-                            this.righthand3.fired = 18
+                if (this.screwshot == 1) {  
+                if (this.righthand.fired <= 0) {
+                    if (this.righthand.anchored == 0) {
+                        this.righthand.ymom = -this.punchspeed * 14
+                        this.righthand.xmom = 0
+                        this.righthand.fired = 18
                     }
-                    if (this.lefthand.fired <= 0) {
-                        if (this.lefthand.anchored == 0) {
-                            this.lefthand.ymom = -this.punchspeed * 14
-                            this.lefthand.xmom = -this.punchspeed * 0
-                            this.lefthand.fired = 18
-                        }
+                }  if (this.righthand2.fired <= 0) {
+                        this.righthand2.ymom = -this.punchspeed * 14
+                        this.righthand2.xmom = -this.punchspeed * 4
+                        this.righthand2.fired = 18
+                }  if (this.righthand3.fired <= 0) {
+                        this.righthand3.ymom = -this.punchspeed * 14
+                        this.righthand3.xmom = this.punchspeed * 4
+                        this.righthand3.fired = 18
+                }
+                if (this.lefthand.fired <= 0) {
+                    if (this.lefthand.anchored == 0) {
+                        this.lefthand.ymom = -this.punchspeed * 14
+                        this.lefthand.xmom = -this.punchspeed * 0
+                        this.lefthand.fired = 18
                     }
-                    if (this.lefthand2.fired <= 0) {
-                            this.lefthand2.ymom = -this.punchspeed * 14
-                            this.lefthand2.xmom = -this.punchspeed * 4
-                            this.lefthand2.fired = 18
-                    }
-                    if (this.lefthand3.fired <= 0) {
-                            this.lefthand3.ymom = -this.punchspeed * 14
-                            this.lefthand3.xmom = -this.punchspeed * -4
-                            this.lefthand3.fired = 18
-                    }
+                }
+                if (this.lefthand2.fired <= 0) {
+                        this.lefthand2.ymom = -this.punchspeed * 14
+                        this.lefthand2.xmom = -this.punchspeed * -4
+                        this.lefthand2.fired = 18
+                }
+                if (this.lefthand3.fired <= 0) {
+                        this.lefthand3.ymom = -this.punchspeed * 14
+                        this.lefthand3.xmom = -this.punchspeed * 4
+                        this.lefthand3.fired = 18
+                }
                 }
 
                 if (this.hortsmash == 1) {
