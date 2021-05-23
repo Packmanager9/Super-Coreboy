@@ -5,7 +5,7 @@ let characterbuttons = []
 let scores = []
 let drops = []
 let baselaunch = .3
-let vsmashlimit = 35
+let vsmashlimit = 42
 let jumplimit = 20
 let scale = .33
 let invscale = 1 / scale
@@ -3325,7 +3325,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     this.dmom = (Math.abs(Math.abs(this.bricksto.center.x - this.body.x) - this.bricksto.width) / this.speed) * 1.03
                     this.amom = 0
                     this.dmove = 1
-                    this.screwshot = 1
+                    this.downspike = 1
                     this.wmove = 1
                 }
                 if (this.under == 2) {
@@ -3334,7 +3334,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     this.dmom = 0
                     this.dmove = 0
                     this.wmove = 1
-                    this.screwshot = 1
+                    this.downspike = 1
                 }
             }
             this.exgrip = 0
@@ -3361,41 +3361,38 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 
 
+
             if (this.dmom > 0) {
-                if (Math.random() < .1) {
-                    this.downspike = 1
-                }
+                this.screwshot = 1
                 this.dmove = 1
                 this.wmove = 1
-                //this.amomu = 0
-                //this.dmomu = 0
+                this.amove = 0
+                this.amom = 0
+            } else {
+
+                if (this.dmomu > 0) {
+                    this.dmove = 1
+                    this.amove = 0
+                    this.screwshot = 0
+                    if (Math.random() < .95) {
+                        this.wmove = 0
+                    }
+                }
             }
             if (this.amom > 0) {
-                if (Math.random() < .1) {
-                    this.downspike = 1
-                }
+                this.screwshot = 1
+                this.dmom = 0
                 this.amove = 1
                 this.wmove = 1
-                //this.amomu = 0
-                //this.dmomu = 0
-            }
-
-            if (this.dmomu > 0) {
-                this.dmove = 1
-                this.amove = 0
-                //this.amomu = 0
-                this.screwshot = 0
-                if (Math.random() < .5) {
-                    this.wmove = 0
-                }
-            }
-            if (this.amomu > 0) {
-                this.amove = 1
                 this.dmove = 0
-                //this.dmomu = 0
-                this.screwshot = 0
-                if (Math.random() < .5) {
-                    this.wmove = 0
+            } else {
+                if (this.amomu > 0) {
+                    this.amove = 1
+                    this.dmove = 0
+                    this.screwshot = 0
+                    if (Math.random() < .95) {
+                        this.wmove = 0
+                    }
                 }
             }
 
@@ -3769,8 +3766,45 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 if (this != boys[t]) {
                     for (let g = 0; g < boys[t].shots.length; g++) {
                         let link = new LineOP(this.body, boys[t].shots[g])
-                        if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 10) {
+                        if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 4) {
                             this.storeshield = 1
+                            break
+                        } else if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 20) {
+                            if (boys[t].shots[g].ymom > 0) {
+                                if (boys[t].body.y < this.body.y) {
+                                    if(Math.abs(this.body.x-boys[t].shots[g].x) < ((this.body.radius)+boys[t].shots[g].radius*2)){
+
+                                        this.fleeing = 1
+                                        if(this.body.x<boys[t].body.x){
+                                            this.amom = ((this.body.radius*3)+boys[t].shots[g].radius*2)/this.speed
+                                        }else{
+                                            this.dmom = ((this.body.radius*3)+boys[t].shots[g].radius*2)/this.speed
+                                        }
+                                    }
+                                }
+                            } else {
+                                if (Math.abs(this.body.y - boys[t].shots[g].y) <= this.body.radius + boys[t].shots[g].radius) {
+                                    if (this.body.y < boys[t].shots[g].y) {
+                                        if (boys[t].shots[g].x > this.body.y) {
+                                            if (boys[t].shots[g].xmom < 0) {
+                                                this.fleeing = 1
+                                            }
+                                        } else {
+                                            if (boys[t].shots[g].xmom > 0) {
+                                                this.fleeing = 1
+                                            }
+                                        }
+                                    } else {
+                                        if (this.grounded == 1) {
+                                            this.fleeing = 1
+                                        }
+                                    }
+                                    if (this.under == 0) {
+                                        this.wmove = 1
+                                        this.screwshot = 1
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -4537,7 +4571,7 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
             if (Math.random() < .0015) {
                 // this.fleeing = 1
             }
-            if (this.charge > 90) {
+            if (this.charge > 92) {
                 this.fleeing = 0
             }
             if (Math.random() < .05) {
@@ -4778,15 +4812,11 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
 
 
             if (this.dmom > 0) {
-                // if (Math.random() < .003 || this.jumping == 1) {
                 this.screwshot = 1
-                // }
                 this.dmove = 1
                 this.wmove = 1
                 this.amove = 0
                 this.amom = 0
-                // this.amomu = 0
-                // this.dmomu = 0
             } else {
 
                 if (this.dmomu > 0) {
@@ -4799,15 +4829,11 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
                 }
             }
             if (this.amom > 0) {
-                // if (Math.random() < .003 || this.jumping == 1) {
                 this.screwshot = 1
-                // }
                 this.dmom = 0
                 this.amove = 1
                 this.wmove = 1
                 this.dmove = 0
-                // this.amomu = 0
-                // this.dmomu = 0
             } else {
                 if (this.amomu > 0) {
                     this.amove = 1
@@ -5068,7 +5094,15 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
                         } else if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 16) {
                             if (boys[t].shots[g].ymom > 0) {
                                 if (boys[t].body.y < this.body.y) {
-                                    this.fleeing = 1
+                                    if(Math.abs(this.body.x-boys[t].shots[g].x) < ((this.body.radius)+boys[t].shots[g].radius*2)){
+
+                                        this.fleeing = 1
+                                        if(this.body.x<boys[t].body.x){
+                                            this.amom = ((this.body.radius)+boys[t].shots[g].radius*2)/this.speed
+                                        }else{
+                                            this.dmom = ((this.body.radius)+boys[t].shots[g].radius*2)/this.speed
+                                        }
+                                    }
                                 }
                             } else {
                                 if (Math.abs(this.body.y - boys[t].shots[g].y) <= this.body.radius + boys[t].shots[g].radius) {
@@ -6292,6 +6326,50 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
 
             for (let t = 0; t < boys.length; t++) {
                 if (this != boys[t]) {
+
+                    for (let g = 0; g < boys[t].shots.length; g++) {
+                        let link = new LineOP(this.body, boys[t].shots[g])
+                        if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 4) {
+                            this.storeshield = 1
+                            break
+                        } else if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 16) {
+                            if (boys[t].shots[g].ymom > 0) {
+                                if (boys[t].body.y < this.body.y) {
+                                    if(Math.abs(this.body.x-boys[t].shots[g].x) < ((this.body.radius)+boys[t].shots[g].radius*2)){
+
+                                        this.fleeing = 1
+                                        if(this.body.x<boys[t].body.x){
+                                            this.amom = ((this.body.radius*2)+boys[t].shots[g].radius*2)/this.speed
+                                        }else{
+                                            this.dmom = ((this.body.radius*2)+boys[t].shots[g].radius*2)/this.speed
+                                        }
+                                    }
+                                }
+                            } else {
+                                if (Math.abs(this.body.y - boys[t].shots[g].y) <= this.body.radius + boys[t].shots[g].radius) {
+                                    if (this.body.y < boys[t].shots[g].y) {
+                                        if (boys[t].shots[g].x > this.body.y) {
+                                            if (boys[t].shots[g].xmom < 0) {
+                                                this.fleeing = 1
+                                            }
+                                        } else {
+                                            if (boys[t].shots[g].xmom > 0) {
+                                                this.fleeing = 1
+                                            }
+                                        }
+                                    } else {
+                                        if (this.grounded == 1) {
+                                            this.fleeing = 1
+                                        }
+                                    }
+                                    if (this.under == 0) {
+                                        this.wmove = 1
+                                        this.screwshot = 1
+                                    }
+                                }
+                            }
+                        }
+                    }
                     if (Math.abs(this.body.x - boys[t].body.x) > 1 && this.body.y > (boys[t].body.y + 15)) {
                         this.wmove = 1
                     }
@@ -6466,43 +6544,38 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
                 }
             }
 
+
             if (this.dmom > 0) {
-                if (Math.random() < .003) {
-                    this.screwshot = 1
-                }
+                this.screwshot = 1
                 this.dmove = 1
                 this.wmove = 1
                 this.amove = 0
-                //this.amomu = 0
-                //this.dmomu = 0
+                this.amom = 0
+            } else {
+
+                if (this.dmomu > 0) {
+                    this.dmove = 1
+                    this.amove = 0
+                    this.screwshot = 0
+                    if (Math.random() < .95) {
+                        this.wmove = 0
+                    }
+                }
             }
             if (this.amom > 0) {
-                if (Math.random() < .003) {
-                    this.screwshot = 1
-                }
+                this.screwshot = 1
+                this.dmom = 0
                 this.amove = 1
                 this.wmove = 1
                 this.dmove = 0
-                //this.amomu = 0
-                //this.dmomu = 0
-            }
-
-            if (this.dmomu > 0) {
-                this.dmove = 1
-                this.amove = 0
-                //this.amomu = 0
-                this.screwshot = 0
-                if (Math.random() < .5) {
-                    this.wmove = 0
-                }
-            }
-            if (this.amomu > 0) {
-                this.amove = 1
-                this.dmove = 0
-                //this.dmomu = 0
-                this.screwshot = 0
-                if (Math.random() < .5) {
-                    this.wmove = 0
+            } else {
+                if (this.amomu > 0) {
+                    this.amove = 1
+                    this.dmove = 0
+                    this.screwshot = 0
+                    if (Math.random() < .95) {
+                        this.wmove = 0
+                    }
                 }
             }
 
@@ -6758,6 +6831,43 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
                         let link = new LineOP(this.body, boys[t].shots[g])
                         if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 4) {
                             this.storeshield = 1
+                            break
+                        } else if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 16) {
+                            if (boys[t].shots[g].ymom > 0) {
+                                if (boys[t].body.y < this.body.y) {
+                                    if(Math.abs(this.body.x-boys[t].shots[g].x) < ((this.body.radius)+boys[t].shots[g].radius*2)){
+
+                                        this.fleeing = 1
+                                        if(this.body.x<boys[t].body.x){
+                                            this.amom = ((this.body.radius*2)+boys[t].shots[g].radius*2)/this.speed
+                                        }else{
+                                            this.dmom = ((this.body.radius*2)+boys[t].shots[g].radius*2)/this.speed
+                                        }
+                                    }
+                                }
+                            } else {
+                                if (Math.abs(this.body.y - boys[t].shots[g].y) <= this.body.radius + boys[t].shots[g].radius) {
+                                    if (this.body.y < boys[t].shots[g].y) {
+                                        if (boys[t].shots[g].x > this.body.y) {
+                                            if (boys[t].shots[g].xmom < 0) {
+                                                this.fleeing = 1
+                                            }
+                                        } else {
+                                            if (boys[t].shots[g].xmom > 0) {
+                                                this.fleeing = 1
+                                            }
+                                        }
+                                    } else {
+                                        if (this.grounded == 1) {
+                                            this.fleeing = 1
+                                        }
+                                    }
+                                    if (this.under == 0) {
+                                        this.wmove = 1
+                                        this.screwshot = 1
+                                    }
+                                }
+                            }
                         }
                     }
 
@@ -6873,8 +6983,45 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
                 if (this != boys[t]) {
                     for (let g = 0; g < boys[t].shots.length; g++) {
                         let link = new LineOP(this.body, boys[t].shots[g])
-                        if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 10) {
+                        if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 4) {
                             this.storeshield = 1
+                            break
+                        } else if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 16) {
+                            if (boys[t].shots[g].ymom > 0) {
+                                if (boys[t].body.y < this.body.y) {
+                                    if(Math.abs(this.body.x-boys[t].shots[g].x) < ((this.body.radius)+boys[t].shots[g].radius*2)){
+
+                                        this.fleeing = 1
+                                        if(this.body.x<boys[t].body.x){
+                                            this.amom = ((this.body.radius*2)+boys[t].shots[g].radius*2)/this.speed
+                                        }else{
+                                            this.dmom = ((this.body.radius*2)+boys[t].shots[g].radius*2)/this.speed
+                                        }
+                                    }
+                                }
+                            } else {
+                                if (Math.abs(this.body.y - boys[t].shots[g].y) <= this.body.radius + boys[t].shots[g].radius) {
+                                    if (this.body.y < boys[t].shots[g].y) {
+                                        if (boys[t].shots[g].x > this.body.y) {
+                                            if (boys[t].shots[g].xmom < 0) {
+                                                this.fleeing = 1
+                                            }
+                                        } else {
+                                            if (boys[t].shots[g].xmom > 0) {
+                                                this.fleeing = 1
+                                            }
+                                        }
+                                    } else {
+                                        if (this.grounded == 1) {
+                                            this.fleeing = 1
+                                        }
+                                    }
+                                    if (this.under == 0) {
+                                        this.wmove = 1
+                                        this.screwshot = 1
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -8433,10 +8580,50 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
             for (let t = 0; t < boys.length; t++) {
                 if (this != boys[t]) {
 
+             
                     for (let g = 0; g < boys[t].shots.length; g++) {
                         let link = new LineOP(this.body, boys[t].shots[g])
-                        if (link.hypotenuse() / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 20) {
+                        if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 4) {
                             this.hortsmash = 1
+                            break
+                        } else if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 16) {
+                            if (boys[t].shots[g].ymom > 0) {
+                                if (boys[t].body.y < this.body.y) {
+                                    if(Math.abs(this.body.x-boys[t].shots[g].x) < ((this.body.radius)+boys[t].shots[g].radius*2)){
+
+                                        this.fleeing = 1
+                                        if(this.body.x<boys[t].body.x){
+                                            this.amom = ((this.body.radius*2)+boys[t].shots[g].radius*2)/this.speed
+                                        }else{
+                                            this.dmom = ((this.body.radius*2)+boys[t].shots[g].radius*2)/this.speed
+                                        }
+                                    }
+                                }
+                            } else {
+                                if (Math.abs(this.body.y - boys[t].shots[g].y) <= this.body.radius + boys[t].shots[g].radius) {
+                                    if (this.body.y < boys[t].shots[g].y) {
+                                        if (boys[t].shots[g].x > this.body.y) {
+                                            if (boys[t].shots[g].xmom < 0) {
+                                                this.fleeing = 1
+                                            }
+                                        } else {
+                                            if (boys[t].shots[g].xmom > 0) {
+                                                this.fleeing = 1
+                                            }
+                                        }
+                                    } else {
+                                        if (this.grounded == 1) {
+                                            this.fleeing = 1
+                                        }
+                                    }
+                                    if (this.under == 0) {
+                                        if(this.body.y > 1500){
+                                            this.wmove = 1
+                                            this.screwshot = 1
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
 
