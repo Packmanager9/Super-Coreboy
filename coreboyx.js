@@ -8868,7 +8868,7 @@ canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, th
                         let link = new LineOP(this.body, boys[t].shots[g])
                         if ((link.hypotenuse()) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 4) {
                             if(this.grounded == 1){
-                            this.storeshield = 1
+                            this.hortsmash = 1
                             }else{
                                 if(this.body.x<boys[t].shots[g].x){
                                     if(this.amom <=0 && this.dmom <= 0){
