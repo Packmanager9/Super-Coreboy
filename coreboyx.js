@@ -4424,7 +4424,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (controller == 1) {
                 this.color = "#ff0000"
             }
-            this.body = new Shot((400 + (Math.random() * 2000) + ((boys.length * 150 * invscale)) % ((canvas.width * invscale) - 800)), 500, 37.5, this.color)
+            this.body = new Shot((400 + (Math.random() * 0) + ((boys.length * 150 * invscale)) % ((canvas.width * invscale) - 800)), 500, 37.5, this.color)
             this.nodes.push(this.body)
             this.leftshoulder = new Shot(this.body.x - (this.body.radius + this.shoulderwidth), 350, 10, "magenta", 0, 0, .999)
             this.rightshoulder = new Shot(this.body.x + (this.body.radius + this.shoulderwidth), 350, 10, "red", 0, 0, .999)
