@@ -7365,7 +7365,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             if (this.safe == 0) {
                 if (this.under == 0) {
-                    this.screwshot = 1
+                    if(this.dmomu <= 0 && this.amomu <= 0){
+                        this.screwshot = 1
+                    }
                 }
                 if (this.body.x > (this.brick.center.x)) {
                     this.amove = 1
@@ -7553,7 +7555,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         }
                                         if (this.under == 0) {
                                             this.wmove = 1
-                                            this.screwshot = 1
+                                            if(this.dmomu <= 0 && this.amomu <= 0){
+                                                this.screwshot = 1
+                                            }
                                         }
                                     }
                                 }
@@ -7562,7 +7566,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
                 }
                 if (this.safe == 0) {
-                    this.screwshot = 1
+                    if(this.dmomu <= 0 && this.amomu <= 0){
+                        this.screwshot = 1
+                    }
                     if (this.body.x > (this.brick.center.x)) {
                         this.amove = 1
                         this.dmove = 0
@@ -7749,8 +7755,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         }
                                     }
                                     if (this.under == 0) {
-                                        this.wmove = 1
-                                        this.screwshot = 1
+                                        if(this.dmomu <= 0 && this.amomu <= 0){
+                                            this.wmove = 1
+                                            this.screwshot = 1
+                                        }
                                     }
                                 }
                             }
@@ -7763,7 +7771,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         this.downspike = 1
                     }
                     if (Math.abs(this.body.x - boys[t].body.x) < 70 && this.body.y > boys[t].body.y) {
-                        this.screwshot = 1
+                        if(this.dmomu <= 0 && this.amomu <= 0){
+                            this.screwshot = 1
+                        }
                     }
 
 
@@ -7859,7 +7869,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
             if (this.safe == 0) {
                 if (this.under == 0) {
-                    this.screwshot = 1
+                    if(this.dmomu <= 0 && this.amomu <= 0){
+                        this.screwshot = 1
+                    }
                 } else {
                     this.wmove = 1
                 }
@@ -7907,8 +7919,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         }
                                     }
                                     if (this.under == 0) {
-                                        this.wmove = 1
-                                        this.screwshot = 1
+                                        if(this.dmomu <= 0 && this.amomu <= 0){
+                                            this.screwshot = 1
+                                            this.wmove = 1
+                                        }
                                     }
                                 }
                             }
