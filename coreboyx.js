@@ -3227,7 +3227,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 this.nodes[t].self = this // lmao
             }
             this.target = {}
-this.target.body = {}
+            this.target.body = {}
         }
         copy() {
             let copy = new Boy(this.controller)
@@ -5106,7 +5106,7 @@ this.target.body = {}
                 this.nodes[t].self = this // lmao
             }
             this.target = {}
-this.target.body = {}
+            this.target.body = {}
         }
         copy() {
             let copy = new Mass(this.controller)
@@ -7020,7 +7020,7 @@ this.target.body = {}
                 this.nodes[t].self = this // lmao
             }
             this.target = {}
-this.target.body = {}
+            this.target.body = {}
         }
         copy() {
             let copy = new Blastgirl(this.controller)
@@ -9067,7 +9067,7 @@ this.target.body = {}
                 this.nodes[t].self = this // lmao
             }
             this.target = {}
-this.target.body = {}
+            this.target.body = {}
         }
         copy() {
             let copy = new Jox(this.controller)
@@ -10973,7 +10973,7 @@ this.target.body = {}
                 this.nodes[t].self = this // lmao
             }
             this.target = {}
-this.target.body = {}
+            this.target.body = {}
         }
         copy() {
             let copy = new Dummy(this.controller)
@@ -11669,7 +11669,7 @@ this.target.body = {}
                 this.nodes[t].self = this // lmao
             }
             this.target = {}
-this.target.body = {}
+            this.target.body = {}
         }
         copy() {
             let copy = new ScorchedMass(this.controller)
@@ -13664,7 +13664,7 @@ this.target.body = {}
                 this.nodes[t].self = this // lmao
             }
             this.target = {}
-this.target.body = {}
+            this.target.body = {}
         }
         copy() {
             let copy = new AsigMan(this.controller)
@@ -15757,7 +15757,7 @@ this.target.body = {}
                 this.nodes[t].self = this // lmao
             }
             this.target = {}
-this.target.body = {}
+            this.target.body = {}
         }
         copy() {
             let copy = new Princess(this.controller)
