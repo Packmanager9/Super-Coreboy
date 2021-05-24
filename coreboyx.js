@@ -2211,20 +2211,20 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     break
                 }
             }
-            if (counter == 1) {
-                for(let t = 0;t<boys.length;t++){
-                    boys[t].righthand.anchored = 0
-                    boys[t].lefthand.anchored = 0
-                    boys[t].righthand.x += (TIP_engine.x * 1) - boys[t].righthand.x
-                    boys[t].righthand.y += (TIP_engine.y * 1) - boys[t].righthand.y
-                    boys[t].lefthand.x += (TIP_engine.x * 1) - boys[t].lefthand.x
-                    boys[t].lefthand.y += (TIP_engine.y * 1) - boys[t].lefthand.y
-                    boys[t].body.x = TIP_engine.x * 1
-                    boys[t].body.y = TIP_engine.y * 1
-                    boys[t].body.xmom = 0
-                    boys[t].body.ymom = 0
-                }
-            }
+            // if (counter == 1) {
+            //     for(let t = 0;t<boys.length;t++){
+            //         boys[t].righthand.anchored = 0
+            //         boys[t].lefthand.anchored = 0
+            //         boys[t].righthand.x += (TIP_engine.x * 1) - boys[t].righthand.x
+            //         boys[t].righthand.y += (TIP_engine.y * 1) - boys[t].righthand.y
+            //         boys[t].lefthand.x += (TIP_engine.x * 1) - boys[t].lefthand.x
+            //         boys[t].lefthand.y += (TIP_engine.y * 1) - boys[t].lefthand.y
+            //         boys[t].body.x = TIP_engine.x * 1
+            //         boys[t].body.y = TIP_engine.y * 1
+            //         boys[t].body.xmom = 0
+            //         boys[t].body.ymom = 0
+            //     }
+            // }
             // example usage: if(object.isPointInside(TIP_engine)){ take action }
             window.addEventListener('pointermove', continued_stimuli);
         });
@@ -16894,9 +16894,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
 
                     if (Math.abs(this.body.x - boys[t].body.x) < 50 && this.body.y < boys[t].body.y) {
-                        this.downspike = 1
+                        if(this.brick == boys[t].brick){
+                            this.downspike = 1
+                        }
                     } else if (Math.abs(this.body.x - boys[t].body.x) < 150 && this.body.y <= boys[t].body.y && (boys[t].righthand.anchored == 1 || boys[t].lefthand.anchored == 1)) {
-                        this.downspike = 1
+                        if(this.brick == boys[t].brick){
+                            this.downspike = 1
+                        }
                     }
                     if (Math.abs(this.body.x - boys[t].body.x) < 70 && this.body.y > boys[t].body.y) {
                         if (this.dmomu <= 0 && this.amomu <= 0) {
