@@ -7248,6 +7248,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 this.wmove = 0
                 this.screwshot = 0
             }
+            if (this.body.y < 1200) {
+                if(this.body.ymom < 0){
+                    this.wmove = 0
+                    this.screwshot = 0
+                }
+            }
             this.jumpcount--
             if (this.jumpcount <= -20) {
                 if (boys.indexOf(this) <= humanPlayers) {
@@ -7723,6 +7729,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 this.wmove = 0
                 this.screwshot = 0
             }
+            if (this.body.y < 1200) {
+                if(this.body.ymom < 0){
+                    this.wmove = 0
+                    this.screwshot = 0
+                }
+            }
             if (this.shield == 0) {
 
                 for (let t = 0; t < boys.length; t++) {
@@ -8197,6 +8209,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 if (this.body.y < 900) {
                     this.wmove = 0
                     this.screwshot = 0
+                }
+                if (this.body.y < 1200) {
+                    if(this.body.ymom < 0){
+                        this.wmove = 0
+                        this.screwshot = 0
+                    }
                 }
                 if (this.screwshot == 1) {
                     if (this.body.fired <= 0) {
@@ -17127,8 +17145,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.grounded = 0
             for (let t = 0; t < this.shots.length; t++) {
                 if (typeof this.shots[t].gravity == "number") {
-                    if(this.shots[t].ymom > -(vsmashlimit/1.2)){
-                        this.shots[t].ymom += this.shots[t].gravity
+                    if(this.shots[t].ymom > -(vsmashlimit/1.4)){
+                        this.shots[t].ymom += this.shots[t].gravity/1.2
                         this.shots[t].radius -= .5
                         if(this.shots[t].radius < 10){
                             this.shots[t].radius = 10
