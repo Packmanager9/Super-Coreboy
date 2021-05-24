@@ -9872,6 +9872,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             if (this.breaktimer <= 0 && this.shield == 0) {
 
+
                 if (this.body.y < 1500) {
                     this.wmove = 0
                     this.screwshot = 0
@@ -13395,15 +13396,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
         }
 
         doubleJump() {
-            if (this.body.y < 1400) {
-                if(this.ymom < 0){
+            if (this.body.y < 1200) {
+                if(this.body.ymom < 0){
                     this.wmove = 0
                     this.downspike = 0
-                }else if (this.body.y < 950) {
-                    if(this.ymom < 0){
+                }else if (this.body.y < 800) {
                         this.wmove = 0
                         this.downspike = 0
-                    }
                 }
             }
 
@@ -14031,15 +14030,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }
             }
 
-            if (this.body.y < 1400) {
-                if(this.ymom < 0){
+
+            if (this.body.y < 1200) {
+                if(this.body.ymom < 0){
                     this.wmove = 0
                     this.downspike = 0
-                }else if (this.body.y < 950) {
-                    if(this.ymom < 0){
+                }else if (this.body.y < 800) {
                         this.wmove = 0
                         this.downspike = 0
-                    }
                 }
             }
 
@@ -14601,6 +14599,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             if (this.breaktimer <= 0 && this.shield == 0) {
 
+                if (this.body.y < 1200) {
+                    if(this.body.ymom < 0){
+                        this.wmove = 0
+                        this.downspike = 0
+                    }else if (this.body.y < 800) {
+                            this.wmove = 0
+                            this.downspike = 0
+                    }
+                }
+
 
                 if (this.downspike == 1) {
                     if (this.righthand.fired <= 0) {
@@ -14694,17 +14702,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
                 }
 
-                if (this.body.y < 1400) {
-                    if(this.ymom < 0){
-                        this.wmove = 0
-                        this.downspike = 0
-                    }else if (this.body.y < 950) {
-                        if(this.ymom < 0){
-                            this.wmove = 0
-                            this.downspike = 0
-                        }
-                    }
-                }
 
                 if (this.screwshot == 1) {
                     if (this.righthand.fired <= 0) {
