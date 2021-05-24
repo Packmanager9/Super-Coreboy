@@ -15030,6 +15030,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     if (this.lefthand.fired <= 0) {
                         if (this.righthand.fired <= 0) {
                             if (this.countering <= -30) {
+                                this.colorsto = this.body.color
                                 this.countering = 5
                             }
                         }
