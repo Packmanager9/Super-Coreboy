@@ -1157,11 +1157,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 this.string = this.color
 
 
-                for(let t = 0;t<13;t+=6) {
-                    gard.addColorStop(t/18.1, (this.string) + `ff`)
-                    gard.addColorStop((t+1.5)/18.1, invertColorx(this.string) + "ff")
-                    gard.addColorStop((t+3)/18.1, (this.string) + "ff")
-                    gard.addColorStop((t+4.5)/18.1, invertColor(this.string) + "ff")
+                for (let t = 0; t < 13; t += 6) {
+                    gard.addColorStop(t / 18.1, (this.string) + `ff`)
+                    gard.addColorStop((t + 1.5) / 18.1, invertColorx(this.string) + "ff")
+                    gard.addColorStop((t + 3) / 18.1, (this.string) + "ff")
+                    gard.addColorStop((t + 4.5) / 18.1, invertColor(this.string) + "ff")
                 }
 
 
@@ -2380,7 +2380,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         if (keysPressed['w']) {
             object.self.jumping = 1
             object.ymom = -speed * 2
-            object.self.jumpcount = 100-object.self.jumpreduction
+            object.self.jumpcount = 100 - object.self.jumpreduction
 
         }
         if (typeof object != 'undefined') {
@@ -3083,7 +3083,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.links = []
             for (let t = 0; t < 12; t++) {
                 let curve = ((Math.random() - .5) * 150)
-                let link = new Line( 1180 + (Math.abs(curve) * 2), this.center + curve,10000 + ((Math.random() - .5) * 1000), this.center + curve, getRandomLightColor(), 10)
+                let link = new Line(1180 + (Math.abs(curve) * 2), this.center + curve, 10000 + ((Math.random() - .5) * 1000), this.center + curve, getRandomLightColor(), 10)
                 this.links.push(link)
             }
         }
@@ -3107,7 +3107,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.links = []
             for (let t = 0; t < 12; t++) {
                 let curve = ((Math.random() - .5) * 150)
-                let link = new Line( 1180 + (Math.abs(curve) * 2), this.center + curve,-10000 + ((Math.random() - .5) * 1000), this.center + curve, getRandomLightColor(), 10)
+                let link = new Line(1180 + (Math.abs(curve) * 2), this.center + curve, -10000 + ((Math.random() - .5) * 1000), this.center + curve, getRandomLightColor(), 10)
                 this.links.push(link)
             }
         }
@@ -3227,6 +3227,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 this.nodes[t].self = this // lmao
             }
             this.target = {}
+this.target.body = {}
         }
         copy() {
             let copy = new Boy(this.controller)
@@ -4002,11 +4003,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             if (boys[t].safe == 1 || boys[t].safesto == 2) {
                                 this.target = boys[t]
                                 let cancel = 0
-                                if(typeof this.target.body.x == "number"){
-                                    if(this.brick.edgeright.x > this.target.brick.edgeleft.x){
+                                if (typeof this.target.body.x == "number") {
+                                    if (this.brick.edgeright.x > this.target.brick.edgeleft.x) {
                                         cancel = -1
                                     }
-                                    if(this.brick.edgeleft.x < this.target.brick.edgeright.x){
+                                    if (this.brick.edgeleft.x < this.target.brick.edgeright.x) {
                                         cancel = 1
                                     }
                                 }
@@ -4022,7 +4023,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             this.dmove = 1
                                             this.amove = 0
                                             this.safe = 1
-                                            if(cancel == 0){
+                                            if (cancel == 0) {
                                                 this.downspike = 1
                                                 this.wmove = 1
                                             }
@@ -4037,7 +4038,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             this.amove = 1
                                             this.dmove = 0
                                             this.safe = 1
-                                            if(cancel == 0){
+                                            if (cancel == 0) {
                                                 this.downspike = 1
                                                 this.wmove = 1
                                             }
@@ -4049,14 +4050,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             }
                         }
                     }
-                } 
+                }
                 let cancel = 0
-                if(typeof this.target.body.x == "number"){
-                    if(this.brick.edgeright.x > this.target.brick.edgeleft.x){
-                        cancel = -1
-                    }
-                    if(this.brick.edgeleft.x < this.target.brick.edgeright.x){
-                        cancel = 1
+
+                if (typeof this.target != "undefined") {
+                    if (typeof this.target.body.x == "number") {
+                        if (this.brick.edgeright.x > this.target.brick.edgeleft.x) {
+                            cancel = -1
+                        }
+                        if (this.brick.edgeleft.x < this.target.brick.edgeright.x) {
+                            cancel = 1
+                        }
                     }
                 }
                 if (this.target.safe == 1 || this.target.safesto == 2) {
@@ -4068,7 +4072,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.dmove = 1
                             this.amove = 0
                             this.safe = 1
-                            if(cancel == 0){
+                            if (cancel == 0) {
                                 this.downspike = 1
                                 this.wmove = 1
                             }
@@ -4081,7 +4085,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.amove = 1
                             this.dmove = 0
                             this.safe = 1
-                            if(cancel == 0){
+                            if (cancel == 0) {
                                 this.downspike = 1
                                 this.wmove = 1
                             }
@@ -5102,6 +5106,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 this.nodes[t].self = this // lmao
             }
             this.target = {}
+this.target.body = {}
         }
         copy() {
             let copy = new Mass(this.controller)
@@ -5790,11 +5795,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             if (boys[t].safe == 1 || boys[t].safesto == 2) {
                                 this.target = boys[t]
                                 let cancel = 0
-                                if(typeof this.target.body.x == "number"){
-                                    if(this.brick.edgeright.x > this.target.brick.edgeleft.x){
+                                if (typeof this.target.body.x == "number") {
+                                    if (this.brick.edgeright.x > this.target.brick.edgeleft.x) {
                                         cancel = -1
                                     }
-                                    if(this.brick.edgeleft.x < this.target.brick.edgeright.x){
+                                    if (this.brick.edgeleft.x < this.target.brick.edgeright.x) {
                                         cancel = 1
                                     }
                                 }
@@ -5810,7 +5815,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             this.dmove = 1
                                             this.amove = 0
                                             this.safe = 1
-                                            if(cancel == 0){
+                                            if (cancel == 0) {
                                                 this.screwshot = 1
                                                 this.wmove = 1
                                             }
@@ -5825,7 +5830,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             this.amove = 1
                                             this.dmove = 0
                                             this.safe = 1
-                                            if(cancel == 0){
+                                            if (cancel == 0) {
                                                 this.screwshot = 1
                                                 this.wmove = 1
                                             }
@@ -5837,14 +5842,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             }
                         }
                     }
-                } 
+                }
                 let cancel = 0
-                if(typeof this.target.body.x == "number"){
-                    if(this.brick.edgeright.x > this.target.brick.edgeleft.x){
-                        cancel = -1
-                    }
-                    if(this.brick.edgeleft.x < this.target.brick.edgeright.x){
-                        cancel = 1
+
+                if (typeof this.target != "undefined") {
+                    if (typeof this.target.body.x == "number") {
+                        if (this.brick.edgeright.x > this.target.brick.edgeleft.x) {
+                            cancel = -1
+                        }
+                        if (this.brick.edgeleft.x < this.target.brick.edgeright.x) {
+                            cancel = 1
+                        }
                     }
                 }
                 if (this.target.safe == 1 || this.target.safesto == 2) {
@@ -5856,7 +5864,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.dmove = 1
                             this.amove = 0
                             this.safe = 1
-                            if(cancel == 0){
+                            if (cancel == 0) {
                                 this.screwshot = 1
                                 this.wmove = 1
                             }
@@ -5869,7 +5877,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.amove = 1
                             this.dmove = 0
                             this.safe = 1
-                            if(cancel == 0){
+                            if (cancel == 0) {
                                 this.screwshot = 1
                                 this.wmove = 1
                             }
@@ -7012,6 +7020,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 this.nodes[t].self = this // lmao
             }
             this.target = {}
+this.target.body = {}
         }
         copy() {
             let copy = new Blastgirl(this.controller)
@@ -7365,7 +7374,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 this.screwshot = 0
             }
             if (this.body.y < 1200) {
-                if(this.body.ymom < 0){
+                if (this.body.ymom < 0) {
                     this.wmove = 0
                     this.screwshot = 0
                 }
@@ -7754,11 +7763,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             if (boys[t].safe == 1 || boys[t].safesto == 2) {
                                 this.target = boys[t]
                                 let cancel = 0
-                                if(typeof this.target.body.x == "number"){
-                                    if(this.brick.edgeright.x > this.target.brick.edgeleft.x){
+                                if (typeof this.target.body.x == "number") {
+                                    if (this.brick.edgeright.x > this.target.brick.edgeleft.x) {
                                         cancel = -1
                                     }
-                                    if(this.brick.edgeleft.x < this.target.brick.edgeright.x){
+                                    if (this.brick.edgeleft.x < this.target.brick.edgeright.x) {
                                         cancel = 1
                                     }
                                 }
@@ -7774,7 +7783,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             this.dmove = 1
                                             this.amove = 0
                                             this.safe = 1
-                                            if(cancel == 0){
+                                            if (cancel == 0) {
                                                 this.screwshot = 1
                                                 this.wmove = 1
                                             }
@@ -7789,7 +7798,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             this.amove = 1
                                             this.dmove = 0
                                             this.safe = 1
-                                            if(cancel == 0){
+                                            if (cancel == 0) {
                                                 this.screwshot = 1
                                                 this.wmove = 1
                                             }
@@ -7803,12 +7812,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
                 }
                 let cancel = 0
-                if(typeof this.target.body.x == "number"){
-                    if(this.brick.edgeright.x > this.target.brick.edgeleft.x){
-                        cancel = -1
-                    }
-                    if(this.brick.edgeleft.x < this.target.brick.edgeright.x){
-                        cancel = 1
+
+                if (typeof this.target != "undefined") {
+                    if (typeof this.target.body.x == "number") {
+                        if (this.brick.edgeright.x > this.target.brick.edgeleft.x) {
+                            cancel = -1
+                        }
+                        if (this.brick.edgeleft.x < this.target.brick.edgeright.x) {
+                            cancel = 1
+                        }
                     }
                 }
                 if (this.target.safe == 1 || this.target.safesto == 2) {
@@ -7820,7 +7832,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.dmove = 1
                             this.amove = 0
                             this.safe = 1
-                            if(cancel == 0){
+                            if (cancel == 0) {
                                 this.screwshot = 1 // erooro?
                                 this.wmove = 1
                             }
@@ -7833,7 +7845,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.amove = 1
                             this.dmove = 0
                             this.safe = 1
-                            if(cancel == 0){
+                            if (cancel == 0) {
                                 this.screwshot = 1 // erooro?
                                 this.wmove = 1
                             }
@@ -7873,7 +7885,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 this.screwshot = 0
             }
             if (this.body.y < 1200) {
-                if(this.body.ymom < 0){
+                if (this.body.ymom < 0) {
                     this.wmove = 0
                     this.screwshot = 0
                 }
@@ -8354,7 +8366,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     this.screwshot = 0
                 }
                 if (this.body.y < 1200) {
-                    if(this.body.ymom < 0){
+                    if (this.body.ymom < 0) {
                         this.wmove = 0
                         this.screwshot = 0
                     }
@@ -9055,6 +9067,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 this.nodes[t].self = this // lmao
             }
             this.target = {}
+this.target.body = {}
         }
         copy() {
             let copy = new Jox(this.controller)
@@ -9743,11 +9756,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             if (boys[t].safe == 1 || boys[t].safesto == 2) {
                                 this.target = boys[t]
                                 let cancel = 0
-                                if(typeof this.target.body.x == "number"){
-                                    if(this.brick.edgeright.x > this.target.brick.edgeleft.x){
+                                if (typeof this.target.body.x == "number") {
+                                    if (this.brick.edgeright.x > this.target.brick.edgeleft.x) {
                                         cancel = -1
                                     }
-                                    if(this.brick.edgeleft.x < this.target.brick.edgeright.x){
+                                    if (this.brick.edgeleft.x < this.target.brick.edgeright.x) {
                                         cancel = 1
                                     }
                                 }
@@ -9763,7 +9776,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             this.dmove = 1
                                             this.amove = 0
                                             this.safe = 1
-                                            if(cancel == 0){
+                                            if (cancel == 0) {
                                                 this.screwshot = 1
                                                 this.wmove = 1
                                             }
@@ -9778,7 +9791,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             this.amove = 1
                                             this.dmove = 0
                                             this.safe = 1
-                                            if(cancel == 0){
+                                            if (cancel == 0) {
                                                 this.screwshot = 1
                                                 this.wmove = 1
                                             }
@@ -9792,12 +9805,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
                 }
                 let cancel = 0
-                if(typeof this.target.body.x == "number"){
-                    if(this.brick.edgeright.x > this.target.brick.edgeleft.x){
-                        cancel = -1
-                    }
-                    if(this.brick.edgeleft.x < this.target.brick.edgeright.x){
-                        cancel = 1
+
+                if (typeof this.target != "undefined") {
+                    if (typeof this.target.body.x == "number") {
+                        if (this.brick.edgeright.x > this.target.brick.edgeleft.x) {
+                            cancel = -1
+                        }
+                        if (this.brick.edgeleft.x < this.target.brick.edgeright.x) {
+                            cancel = 1
+                        }
                     }
                 }
                 if (this.target.safe == 1 || this.target.safesto == 2) {
@@ -9809,7 +9825,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.dmove = 1
                             this.amove = 0
                             this.safe = 1
-                            if(cancel == 0){
+                            if (cancel == 0) {
                                 this.screwshot = 1
                                 this.wmove = 1
                             }
@@ -9822,7 +9838,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.amove = 1
                             this.dmove = 0
                             this.safe = 1
-                            if(cancel == 0){
+                            if (cancel == 0) {
                                 this.screwshot = 1
                                 this.wmove = 1
                             }
@@ -10957,6 +10973,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 this.nodes[t].self = this // lmao
             }
             this.target = {}
+this.target.body = {}
         }
         copy() {
             let copy = new Dummy(this.controller)
@@ -11034,7 +11051,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             this.shieldpower -= (Math.abs(boys[t].righthand2.xmom) + Math.abs(boys[t].righthand2.ymom)) / 11
                                         } else {
                                             //punchaud1.playbackrate = 2
-//punchaud1.play()
+                                            //punchaud1.play()
                                             this.body.xmom = .3 * ((boys[t].righthand2.xmom * (this.damage / 200)) + (boys[t].righthand2.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                             this.body.ymom = .3 * (((boys[t].righthand2.ymom * (this.damage / 200)) + (boys[t].righthand2.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                             this.damage += .3 * ((Math.abs(boys[t].righthand2.xmom) + Math.abs(boys[t].righthand2.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
@@ -11065,7 +11082,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             this.shieldpower -= .3 * (Math.abs(boys[t].lefthand2.xmom) + Math.abs(boys[t].lefthand2.ymom)) / 11
                                         } else {
                                             //punchaud1.playbackrate = 2
-//punchaud1.play()
+                                            //punchaud1.play()
                                             this.body.xmom = .3 * ((boys[t].lefthand2.xmom * (this.damage / 200)) + (boys[t].lefthand2.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                             this.body.ymom = .3 * (((boys[t].lefthand2.ymom * (this.damage / 200)) + (boys[t].lefthand2.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                             this.damage += .3 * ((Math.abs(boys[t].lefthand2.xmom) + Math.abs(boys[t].lefthand2.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
@@ -11095,7 +11112,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             this.shieldpower -= .3 * (Math.abs(boys[t].righthand3.xmom) + Math.abs(boys[t].righthand3.ymom)) / 11
                                         } else {
                                             //punchaud1.playbackrate = 2
-//punchaud1.play()
+                                            //punchaud1.play()
                                             this.body.xmom = .3 * ((boys[t].righthand3.xmom * (this.damage / 200)) + (boys[t].righthand3.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                             this.body.ymom = .3 * (((boys[t].righthand3.ymom * (this.damage / 200)) + (boys[t].righthand3.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                             this.damage += .3 * ((Math.abs(boys[t].righthand3.xmom) + Math.abs(boys[t].righthand3.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
@@ -11124,7 +11141,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             this.shieldpower -= .3 * (Math.abs(boys[t].lefthand3.xmom) + Math.abs(boys[t].lefthand3.ymom)) / 11
                                         } else {
                                             //punchaud1.playbackrate = 2
-//punchaud1.play()
+                                            //punchaud1.play()
                                             this.body.xmom = .3 * ((boys[t].lefthand3.xmom * (this.damage / 200)) + (boys[t].lefthand3.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                             this.body.ymom = .3 * (((boys[t].lefthand3.ymom * (this.damage / 200)) + (boys[t].lefthand3.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                             this.damage += .3 * ((Math.abs(boys[t].lefthand3.xmom) + Math.abs(boys[t].lefthand3.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
@@ -11155,7 +11172,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         this.shieldpower -= (Math.abs(boys[t].righthand.xmom) + Math.abs(boys[t].righthand.ymom)) / 11
                                     } else {
                                         //punchaud1.playbackrate = 2
-//punchaud1.play()
+                                        //punchaud1.play()
                                         this.body.xmom = ((boys[t].righthand.xmom * (this.damage / 200)) + (boys[t].righthand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                         this.body.ymom = (((boys[t].righthand.ymom * (this.damage / 200)) + (boys[t].righthand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                         this.damage += ((Math.abs(boys[t].righthand.xmom) + Math.abs(boys[t].righthand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
@@ -11185,7 +11202,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         this.shieldpower -= (Math.abs(boys[t].lefthand.xmom) + Math.abs(boys[t].lefthand.ymom)) / 11
                                     } else {
                                         //punchaud1.playbackrate = 2
-//punchaud1.play()
+                                        //punchaud1.play()
                                         this.body.xmom = (boys[t].lefthand.xmom * (this.damage / 200)) + (boys[t].lefthand.xmom * baselaunch)
                                         this.body.ymom = (((boys[t].lefthand.ymom * (this.damage / 200)) + (boys[t].lefthand.ymom * baselaunch)) * 1)
                                         this.damage += (Math.abs(boys[t].lefthand.xmom) + Math.abs(boys[t].lefthand.ymom)) / 11
@@ -11214,7 +11231,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         this.shieldpower -= (Math.abs(boys[t].body.xmom) + Math.max(20, Math.abs(boys[t].body.ymom))) / 3
                                     } else {
                                         //punchaud1.playbackrate = 2
-//punchaud1.play()
+                                        //punchaud1.play()
                                         this.body.xmom = (boys[t].body.xmom * (this.damage / 200)) + (boys[t].body.xmom * baselaunch) * 2
                                         this.body.ymom = (((boys[t].body.ymom * (this.damage / 200)) + (boys[t].body.ymom * baselaunch)) * 2)
                                         this.damage += (Math.abs(boys[t].body.xmom) + Math.max(20, Math.abs(boys[t].body.ymom))) / 2
@@ -11652,6 +11669,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 this.nodes[t].self = this // lmao
             }
             this.target = {}
+this.target.body = {}
         }
         copy() {
             let copy = new ScorchedMass(this.controller)
@@ -12349,11 +12367,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             if (boys[t].safe == 1 || boys[t].safesto == 2) {
                                 this.target = boys[t]
                                 let cancel = 0
-                                if(typeof this.target.body.x == "number"){
-                                    if(this.brick.edgeright.x > this.target.brick.edgeleft.x){
+                                if (typeof this.target.body.x == "number") {
+                                    if (this.brick.edgeright.x > this.target.brick.edgeleft.x) {
                                         cancel = -1
                                     }
-                                    if(this.brick.edgeleft.x < this.target.brick.edgeright.x){
+                                    if (this.brick.edgeleft.x < this.target.brick.edgeright.x) {
                                         cancel = 1
                                     }
                                 }
@@ -12369,7 +12387,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             this.dmove = 1
                                             this.amove = 0
                                             this.safe = 1
-                                            if(cancel == 0){
+                                            if (cancel == 0) {
                                                 this.screwshot = 1
                                                 this.wmove = 1
                                             }
@@ -12384,7 +12402,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             this.amove = 1
                                             this.dmove = 0
                                             this.safe = 1
-                                            if(cancel == 0){
+                                            if (cancel == 0) {
                                                 this.screwshot = 1
                                                 this.wmove = 1
                                             }
@@ -12398,15 +12416,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
                 }
                 let cancel = 0
-                if(typeof this.target.body.x == "number"){
-                    if(this.brick.edgeright.x > this.target.brick.edgeleft.x){
-                        cancel = -1
-                    }
-                    if(this.brick.edgeleft.x < this.target.brick.edgeright.x){
-                        cancel = 1
+
+                if (typeof this.target != "undefined") {
+                    if (typeof this.target.body.x == "number") {
+                        if (this.brick.edgeright.x > this.target.brick.edgeleft.x) {
+                            cancel = -1
+                        }
+                        if (this.brick.edgeleft.x < this.target.brick.edgeright.x) {
+                            cancel = 1
+                        }
                     }
                 }
-                 if (this.target.safe == 1 || this.target.safesto == 2) {
+                if (this.target.safe == 1 || this.target.safesto == 2) {
                     if (this.target.body.x > this.body.x) {
                         let xdisR = Math.abs(this.brick.edgeright.x - (this.body.x - (this.body.radius * 1.1)))
                         let runtimeR = xdisR / this.speed
@@ -12415,7 +12436,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.dmove = 1
                             this.amove = 0
                             this.safe = 1
-                            if(cancel == 0){
+                            if (cancel == 0) {
                                 this.screwshot = 1
                                 this.wmove = 1
                             }
@@ -12428,7 +12449,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.amove = 1
                             this.dmove = 0
                             this.safe = 1
-                            if(cancel == 0){
+                            if (cancel == 0) {
                                 this.screwshot = 1
                                 this.wmove = 1
                             }
@@ -12679,21 +12700,21 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
 
             let bombs = 0
-            for(let t = 0;t<this.shots.length;t++){
-                for(let k = 0;k<boys.length;k++){
-                    if(this!=boys[k]){
-                        if(this.shots[t].stuck == 1){
+            for (let t = 0; t < this.shots.length; t++) {
+                for (let k = 0; k < boys.length; k++) {
+                    if (this != boys[k]) {
+                        if (this.shots[t].stuck == 1) {
                             bombs++
                             let link = new LineOP(this.shots[t], boys[k].body)
-                            if(link.hypotenuse() < 200){
+                            if (link.hypotenuse() < 200) {
                                 this.downspike = 1
                             }
                         }
                     }
                 }
             }
-            if(bombs == 0){
-                if(Math.random()<.005){  //01
+            if (bombs == 0) {
+                if (Math.random() < .005) {  //01
                     this.downspike = 1
                 }
             }
@@ -13283,13 +13304,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 this.shots[t].draw()
             }
             this.detonate = 0
-        for (let j = 0; j < this.shots.length; j++) {
-            for (let t = 0; t < this.shots.length; t++) {
-                if (this.shots[t].marked == 1) {
-                    this.shots.splice(t, 1)
+            for (let j = 0; j < this.shots.length; j++) {
+                for (let t = 0; t < this.shots.length; t++) {
+                    if (this.shots[t].marked == 1) {
+                        this.shots.splice(t, 1)
+                    }
                 }
             }
-        }
 
             this.leftarm = new LineOP(this.leftshoulder, this.lefthand, invertColor(this.body.color), 8)
             this.rightarm = new LineOP(this.rightshoulder, this.righthand, invertColor(this.body.color), 8)
@@ -13643,12 +13664,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 this.nodes[t].self = this // lmao
             }
             this.target = {}
+this.target.body = {}
         }
         copy() {
             let copy = new AsigMan(this.controller)
-            if(typeof this.colorsto != "undefined"){
+            if (typeof this.colorsto != "undefined") {
                 copy.body.color = this.colorsto
-            }else{
+            } else {
                 copy.body.color = this.body.color
             }
             return copy
@@ -13879,12 +13901,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
         doubleJump() {
             if (this.body.y < 1200) {
-                if(this.body.ymom < 0){
+                if (this.body.ymom < 0) {
                     this.wmove = 0
                     this.downspike = 0
-                }else if (this.body.y < 800) {
-                        this.wmove = 0
-                        this.downspike = 0
+                } else if (this.body.y < 800) {
+                    this.wmove = 0
+                    this.downspike = 0
                 }
             }
 
@@ -14369,8 +14391,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 this.screwshot = 1
                 this.dmove = 1
                 if (Math.random() < .5) {
-                this.wmove = 1
-                //console.log("caseE")
+                    this.wmove = 1
+                    //console.log("caseE")
                 }
                 this.amove = 0
                 this.amom = 0
@@ -14433,11 +14455,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 this.target = boys[t]
 
                                 let cancel = 0
-                                if(typeof this.target.body.x == "number"){
-                                    if(this.brick.edgeright.x > this.target.brick.edgeleft.x){
+                                if (typeof this.target.body.x == "number") {
+                                    if (this.brick.edgeright.x > this.target.brick.edgeleft.x) {
                                         cancel = -1
                                     }
-                                    if(this.brick.edgeleft.x < this.target.brick.edgeright.x){
+                                    if (this.brick.edgeleft.x < this.target.brick.edgeright.x) {
                                         cancel = 1
                                     }
                                 }
@@ -14453,7 +14475,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             this.dmove = 1
                                             this.amove = 0
                                             this.safe = 1
-                                            if(cancel == 0){
+                                            if (cancel == 0) {
                                                 this.downspike = 1
                                                 this.wmove = 1
                                             }
@@ -14469,7 +14491,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             this.amove = 1
                                             this.dmove = 0
                                             this.safe = 1
-                                            if(cancel == 0){
+                                            if (cancel == 0) {
                                                 this.downspike = 1
                                                 this.wmove = 1
                                             }
@@ -14483,17 +14505,20 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         }
                     }
                 }
-                
+
                 let cancel = 0
-                if(typeof this.target.body.x == "number"){
-                    if(this.brick.edgeright.x > this.target.brick.edgeleft.x){
-                        cancel = -1
-                    }
-                    if(this.brick.edgeleft.x < this.target.brick.edgeright.x){
-                        cancel = 1
+
+                if (typeof this.target != "undefined") {
+                    if (typeof this.target.body.x == "number") {
+                        if (this.brick.edgeright.x > this.target.brick.edgeleft.x) {
+                            cancel = -1
+                        }
+                        if (this.brick.edgeleft.x < this.target.brick.edgeright.x) {
+                            cancel = 1
+                        }
                     }
                 }
-                
+
                 if (this.target.safe == 1 || this.target.safesto == 2) {
                     if (this.target.body.x > this.body.x) {
                         let xdisR = Math.abs(this.brick.edgeright.x - (this.body.x - (this.body.radius * 1.1)))
@@ -14504,7 +14529,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.amove = 0
                             this.safe = 1
                             //problem1
-                            if(cancel == 0){
+                            if (cancel == 0) {
                                 this.downspike = 1
                                 this.wmove = 1
                             }
@@ -14518,7 +14543,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.amove = 1
                             this.dmove = 0
                             this.safe = 1
-                            if(cancel == 0){
+                            if (cancel == 0) {
                                 this.downspike = 1
                                 this.wmove = 1
                             }
@@ -14560,12 +14585,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 
             if (this.body.y < 1200) {
-                if(this.body.ymom < 0){
+                if (this.body.ymom < 0) {
                     this.wmove = 0
                     this.downspike = 0
-                }else if (this.body.y < 800) {
-                        this.wmove = 0
-                        this.downspike = 0
+                } else if (this.body.y < 800) {
+                    this.wmove = 0
+                    this.downspike = 0
                 }
             }
 
@@ -14913,19 +14938,19 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
                     if (Math.abs(this.body.x - boys[t].body.x) < 45 && this.body.y < boys[t].body.y) {
                         if (this.amomu <= 0 && this.dmomu <= 0) {
-                        this.downspike = 1
+                            this.downspike = 1
                         }
                     } else if (Math.abs(this.body.x - boys[t].body.x) < 150 && this.body.y <= boys[t].body.y && (boys[t].righthand.anchored == 1 || boys[t].lefthand.anchored == 1)) {
                         this.hortsmash = 1
                     }
                     if (Math.abs(this.body.x - boys[t].body.x) < 170 && this.body.y < boys[t].body.y) {
                         if (this.amomu <= 0 && this.dmomu <= 0) {
-                        this.downspike = 1
+                            this.downspike = 1
                         }
                     } else if (this.body.y - boys[t].body.y > 100) {
                         if (Math.random() < .01) {
                             if (this.amomu <= 0 && this.dmomu <= 0) {
-                            this.downspike = 1
+                                this.downspike = 1
                             }
                         }
                     }
@@ -15152,12 +15177,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (this.breaktimer <= 0 && this.shield == 0) {
 
                 if (this.body.y < 1200) {
-                    if(this.body.ymom < 0){
+                    if (this.body.ymom < 0) {
                         this.wmove = 0
                         this.downspike = 0
-                    }else if (this.body.y < 800) {
-                            this.wmove = 0
-                            this.downspike = 0
+                    } else if (this.body.y < 800) {
+                        this.wmove = 0
+                        this.downspike = 0
                     }
                 }
 
@@ -15425,15 +15450,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, this.body.x - 20, this.body.y + 90)
             }
 
-        //  canvas_context.fillText(`Height:${Math.round(this.brick.edgeright.y)}`, this.body.x - 20, this.body.y - 250)
-        //         canvas_context.fillText(`M D${Math.round(this.dmove)},A${Math.round(this.amove)}`, this.body.x - 20, this.body.y - 110)
-        //         canvas_context.fillText(`U D${Math.round(this.dmomu)},A${Math.round(this.amomu)}`, this.body.x - 20, this.body.y - 150)
-        //         canvas_context.fillText(`Under:${Math.round(this.under)},Safe:${Math.round(this.safe)}`, this.body.x - 20, this.body.y - 200)
-        //         canvas_context.fillText(`_ D${Math.round(this.dmom)},A${Math.round(this.amom)}`, this.body.x - 20, this.body.y - 300)
-        //         if (this.fleeing == 1) {
-        //             canvas_context.fillText(`fleeing`, this.body.x - 20, this.body.y - 300)
-        //         }
-            
+            //  canvas_context.fillText(`Height:${Math.round(this.brick.edgeright.y)}`, this.body.x - 20, this.body.y - 250)
+            //         canvas_context.fillText(`M D${Math.round(this.dmove)},A${Math.round(this.amove)}`, this.body.x - 20, this.body.y - 110)
+            //         canvas_context.fillText(`U D${Math.round(this.dmomu)},A${Math.round(this.amomu)}`, this.body.x - 20, this.body.y - 150)
+            //         canvas_context.fillText(`Under:${Math.round(this.under)},Safe:${Math.round(this.safe)}`, this.body.x - 20, this.body.y - 200)
+            //         canvas_context.fillText(`_ D${Math.round(this.dmom)},A${Math.round(this.amom)}`, this.body.x - 20, this.body.y - 300)
+            //         if (this.fleeing == 1) {
+            //             canvas_context.fillText(`fleeing`, this.body.x - 20, this.body.y - 300)
+            //         }
+
 
             // this.bodyx = this.body.x
         }
@@ -15732,6 +15757,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 this.nodes[t].self = this // lmao
             }
             this.target = {}
+this.target.body = {}
         }
         copy() {
             let copy = new Princess(this.controller)
@@ -16501,11 +16527,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             if (boys[t].safe == 1 || boys[t].safesto == 2) {
                                 this.target = boys[t]
                                 let cancel = 0
-                                if(typeof this.target.body.x == "number"){
-                                    if(this.brick.edgeright.x > this.target.brick.edgeleft.x){
+                                if (typeof this.target.body.x == "number") {
+                                    if (this.brick.edgeright.x > this.target.brick.edgeleft.x) {
                                         cancel = -1
                                     }
-                                    if(this.brick.edgeleft.x < this.target.brick.edgeright.x){
+                                    if (this.brick.edgeleft.x < this.target.brick.edgeright.x) {
                                         cancel = 1
                                     }
                                 }
@@ -16521,7 +16547,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             this.dmove = 1
                                             this.amove = 0
                                             this.safe = 1
-                                            if(cancel == 0){
+                                            if (cancel == 0) {
                                                 this.screwshot = 1
                                                 this.wmove = 1
                                             }
@@ -16536,7 +16562,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             this.amove = 1
                                             this.dmove = 0
                                             this.safe = 1
-                                            if(cancel == 0){
+                                            if (cancel == 0) {
                                                 this.screwshot = 1
                                                 this.wmove = 1
                                             }
@@ -16550,12 +16576,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
                 }
                 let cancel = 0
-                if(typeof this.target.body.x == "number"){
-                    if(this.brick.edgeright.x > this.target.brick.edgeleft.x){
-                        cancel = -1
-                    }
-                    if(this.brick.edgeleft.x < this.target.brick.edgeright.x){
-                        cancel = 1
+
+                if (typeof this.target != "undefined") {
+                    if (typeof this.target.body.x == "number") {
+                        if (this.brick.edgeright.x > this.target.brick.edgeleft.x) {
+                            cancel = -1
+                        }
+                        if (this.brick.edgeleft.x < this.target.brick.edgeright.x) {
+                            cancel = 1
+                        }
                     }
                 }
                 if (this.target.safe == 1 || this.target.safesto == 2) {
@@ -16567,7 +16596,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.dmove = 1
                             this.amove = 0
                             this.safe = 1
-                            if(cancel == 0){
+                            if (cancel == 0) {
                                 this.screwshot = 1 //erroor
                                 this.wmove = 1
                             }
@@ -16580,7 +16609,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.amove = 1
                             this.dmove = 0
                             this.safe = 1
-                            if(cancel == 0){
+                            if (cancel == 0) {
                                 this.screwshot = 1//error
                                 this.wmove = 1
                             }
@@ -16894,11 +16923,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
 
                     if (Math.abs(this.body.x - boys[t].body.x) < 50 && this.body.y < boys[t].body.y) {
-                        if(this.brick == boys[t].brick){
+                        if (this.brick == boys[t].brick) {
                             this.downspike = 1
                         }
                     } else if (Math.abs(this.body.x - boys[t].body.x) < 150 && this.body.y <= boys[t].body.y && (boys[t].righthand.anchored == 1 || boys[t].lefthand.anchored == 1)) {
-                        if(this.brick == boys[t].brick){
+                        if (this.brick == boys[t].brick) {
                             this.downspike = 1
                         }
                     }
@@ -17087,12 +17116,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (this.body.fired > 30) {
                 this.body.ymom -= this.body.fired * .008
             }
-            if(this.screwtimer == 30){
+            if (this.screwtimer == 30) {
                 this.body.fired = 30
                 this.body.ymom = vsmashlimit
-            }else if(this.screwtimer <= 30){ 
-                if(this.screwtimer > 0){
-                this.body.ymom = vsmashlimit
+            } else if (this.screwtimer <= 30) {
+                if (this.screwtimer > 0) {
+                    this.body.ymom = vsmashlimit
                 }
             }
             if (this.breaktimer <= 0 && this.shield == 0) {
@@ -17114,7 +17143,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.rightshoulder.xmom = 0
                             this.rightshoulder.ymom = 0
                             this.righthand.fired = 30
-                            this.body.ymom -= this.speed/3
+                            this.body.ymom -= this.speed / 3
                         }
                     }
                     if (this.lefthand.fired <= 0) {
@@ -17126,7 +17155,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.leftshoulder.xmom = 0
                             this.leftshoulder.ymom = 0
                             this.lefthand.fired = 30
-                            this.body.ymom -= this.speed/3
+                            this.body.ymom -= this.speed / 3
                         }
                     }
                 }
@@ -17147,7 +17176,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.body.fired = 10
                             this.lefthand.anchored = -10
                             this.righthand.anchored = -10
-                            this.body.ymom = -jumplimit/3
+                            this.body.ymom = -jumplimit / 3
                         }
                     }
                 }
@@ -17157,7 +17186,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (this.righthand.anchored == 0) {
                             this.rightshoulder.xmom = 0
                             this.rightshoulder.ymom = 0
-                            this.righthand.ymom = this.punchspeed * 21 + (this.body.ymom*2)
+                            this.righthand.ymom = this.punchspeed * 21 + (this.body.ymom * 2)
                             this.righthand.xmom = -this.punchspeed * -5.1
                             this.righthand.fired = 19
                         }
@@ -17166,38 +17195,38 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (this.lefthand.anchored == 0) {
                             this.leftshoulder.xmom = 0
                             this.leftshoulder.ymom = 0
-                            this.lefthand.ymom = this.punchspeed * 21 + (this.body.ymom*2)
+                            this.lefthand.ymom = this.punchspeed * 21 + (this.body.ymom * 2)
                             this.lefthand.xmom = this.punchspeed * -5.1
                             this.lefthand.fired = 19
                         }
                     }
                 }
-                if(this.rightshot ==1){
+                if (this.rightshot == 1) {
                     //check
                     if (this.righthand.fired <= 0) {
                         if (this.face == 1) {
                             if (this.righthand.anchored == 0) {
-                            this.righthand.ymom = this.punchspeed * 8
-                            this.righthand.xmom = this.punchspeed * 19.1
-                            this.righthand.fired = 19
-                            this.body.xmom -= 5
+                                this.righthand.ymom = this.punchspeed * 8
+                                this.righthand.xmom = this.punchspeed * 19.1
+                                this.righthand.fired = 19
+                                this.body.xmom -= 5
                             }
                         }
                     }
                 }
-                if(this.leftshot ==1){
+                if (this.leftshot == 1) {
                     //check
-                if (this.lefthand.fired <= 0) {
-                if (this.face == -1) {
-                    if (this.lefthand.anchored == 0) {
-                        this.lefthand.ymom = this.punchspeed * 8
-                        this.lefthand.xmom = this.punchspeed * -19.1
-                        this.lefthand.fired = 19
-                        this.body.xmom += 5
+                    if (this.lefthand.fired <= 0) {
+                        if (this.face == -1) {
+                            if (this.lefthand.anchored == 0) {
+                                this.lefthand.ymom = this.punchspeed * 8
+                                this.lefthand.xmom = this.punchspeed * -19.1
+                                this.lefthand.fired = 19
+                                this.body.xmom += 5
+                            }
+                        }
                     }
                 }
-            }
-            }
 
             }
 
@@ -17278,37 +17307,37 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 
                 if (gamepadAPI[this.controller].buttonsStatus.includes('B') || keysPressed['l']) {
-                if (this.righthand.fired <= 0) {
+                    if (this.righthand.fired <= 0) {
                         if (this.face == 1) {
                             if (this.righthand.anchored == 0) {
-                            this.righthand.ymom = this.punchspeed * 8
-                            this.righthand.xmom = this.punchspeed * 19.1
-                            this.righthand.fired = 19
-                            this.body.xmom -= 5
+                                this.righthand.ymom = this.punchspeed * 8
+                                this.righthand.xmom = this.punchspeed * 19.1
+                                this.righthand.fired = 19
+                                this.body.xmom -= 5
                             }
                         }
                     }
                     if (this.lefthand.fired <= 0) {
-                    if (this.face == -1) {
-                        if (this.lefthand.anchored == 0) {
-                            this.lefthand.ymom = this.punchspeed * 8
-                            this.lefthand.xmom = this.punchspeed * -19.1
-                            this.lefthand.fired = 19
-                            this.body.xmom += 5
+                        if (this.face == -1) {
+                            if (this.lefthand.anchored == 0) {
+                                this.lefthand.ymom = this.punchspeed * 8
+                                this.lefthand.xmom = this.punchspeed * -19.1
+                                this.lefthand.fired = 19
+                                this.body.xmom += 5
+                            }
                         }
                     }
-                }
                 }
 
                 if (this.body.fired > 30) {
                     this.body.ymom -= this.body.fired * .008
                 }
-                if(this.screwtimer == 30){
+                if (this.screwtimer == 30) {
                     this.body.fired = 30
                     this.body.ymom = vsmashlimit
-                }else if(this.screwtimer <= 30){ 
-                    if(this.screwtimer > 0){
-                    this.body.ymom = vsmashlimit
+                } else if (this.screwtimer <= 30) {
+                    if (this.screwtimer > 0) {
+                        this.body.ymom = vsmashlimit
                     }
                 }
                 if (gamepadAPI[this.controller].buttonsStatus.includes('Y') || keysPressed['i']) {
@@ -17321,7 +17350,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.rightshoulder.xmom = 0
                             this.rightshoulder.ymom = 0
                             this.righthand.fired = 30
-                            this.body.ymom -= this.speed/3
+                            this.body.ymom -= this.speed / 3
                         }
                     }
                     if (this.lefthand.fired <= 0) {
@@ -17333,7 +17362,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.leftshoulder.xmom = 0
                             this.leftshoulder.ymom = 0
                             this.lefthand.fired = 30
-                            this.body.ymom -= this.speed/3
+                            this.body.ymom -= this.speed / 3
                         }
                     }
                 }
@@ -17355,11 +17384,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.body.fired = 10
                             this.lefthand.anchored = -10
                             this.righthand.anchored = -10
-                            this.body.ymom = -jumplimit/3
+                            this.body.ymom = -jumplimit / 3
                         }
                     }
 
-                    
+
                 }
 
                 if (gamepadAPI[this.controller].buttonsStatus.includes('X') || keysPressed['j']) {
@@ -17367,7 +17396,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (this.righthand.anchored == 0) {
                             this.rightshoulder.xmom = 0
                             this.rightshoulder.ymom = 0
-                            this.righthand.ymom = this.punchspeed * 21 + (this.body.ymom*2)
+                            this.righthand.ymom = this.punchspeed * 21 + (this.body.ymom * 2)
                             this.righthand.xmom = -this.punchspeed * -5.1
                             this.righthand.fired = 19
                         }
@@ -17376,7 +17405,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (this.lefthand.anchored == 0) {
                             this.leftshoulder.xmom = 0
                             this.leftshoulder.ymom = 0
-                            this.lefthand.ymom = this.punchspeed * 21 + (this.body.ymom*2)
+                            this.lefthand.ymom = this.punchspeed * 21 + (this.body.ymom * 2)
                             this.lefthand.xmom = this.punchspeed * -5.1
                             this.lefthand.fired = 19
                         }
@@ -17440,8 +17469,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
         }
         draw() {
             this.blasting--
-            if(this.grounded == 1){
-                if(this.screwtimer > 5){
+            if (this.grounded == 1) {
+                if (this.screwtimer > 5) {
                     this.screwangle = 0
                     this.screwtimer = 0
                     // this.body.fired = 5
@@ -17450,13 +17479,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.grounded = 0
             for (let t = 0; t < this.shots.length; t++) {
                 if (typeof this.shots[t].gravity == "number") {
-                    if(this.shots[t].ymom > -(vsmashlimit/1.4)){
-                        this.shots[t].ymom += this.shots[t].gravity/1.2
+                    if (this.shots[t].ymom > -(vsmashlimit / 1.4)) {
+                        this.shots[t].ymom += this.shots[t].gravity / 1.2
                         this.shots[t].radius -= .5
-                        if(this.shots[t].radius < 10){
+                        if (this.shots[t].radius < 10) {
                             this.shots[t].radius = 10
                         }
-                    }else{
+                    } else {
                         this.shots[t].marked = 1
                     }
                 }
@@ -17473,10 +17502,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             for (let j = 0; j < 10; j++) {
                 for (let t = 0; t < this.shots.length; t++) {
-                if (this.shots[t].marked == 1) {
-                    this.shots.splice(t, 1)
+                    if (this.shots[t].marked == 1) {
+                        this.shots.splice(t, 1)
+                    }
                 }
-            }
             }
             this.leftarm = new LineOP(this.leftshoulder, this.lefthand, invertColor(this.body.color), 8)
             this.rightarm = new LineOP(this.rightshoulder, this.righthand, invertColor(this.body.color), 8)
@@ -17487,15 +17516,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
             for (let t = 0; t < this.nodes.length; t++) {
                 this.nodes[t].draw()
-                if(this.nodes[t] == this.body){
-            let link = new Line(this.body.x, this.body.y, this.body.x + (((this.body.radius * .8) * this.face)), this.body.y + Math.sin(this.screwangle), invertColor(this.body.color), this.body.radius * .2)
-            canvas_context.lineWidth = this.strokeWidth
-            canvas_context.strokeStyle = invertColor(this.body.color)
-            canvas_context.beginPath();
-            canvas_context.arc(((link.x1 + link.x2 + this.body.x) * (1/3)) + Math.cos(this.screwangle), link.y1 - this.body.radius * .1, this.body.radius * .35, (this.screwangle*this.face)+(this.face/2), (Math.PI * 1) + (this.screwangle*this.face)+(this.face/2), true)
-            canvas_context.fillStyle = invertColor(this.body.color)
-            canvas_context.fill()
-            canvas_context.stroke();
+                if (this.nodes[t] == this.body) {
+                    let link = new Line(this.body.x, this.body.y, this.body.x + (((this.body.radius * .8) * this.face)), this.body.y + Math.sin(this.screwangle), invertColor(this.body.color), this.body.radius * .2)
+                    canvas_context.lineWidth = this.strokeWidth
+                    canvas_context.strokeStyle = invertColor(this.body.color)
+                    canvas_context.beginPath();
+                    canvas_context.arc(((link.x1 + link.x2 + this.body.x) * (1 / 3)) + Math.cos(this.screwangle), link.y1 - this.body.radius * .1, this.body.radius * .35, (this.screwangle * this.face) + (this.face / 2), (Math.PI * 1) + (this.screwangle * this.face) + (this.face / 2), true)
+                    canvas_context.fillStyle = invertColor(this.body.color)
+                    canvas_context.fill()
+                    canvas_context.stroke();
                 }
             }
 
@@ -17874,14 +17903,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         boys[t].go = 1
                         if (boys[t].body.y < 0) {
                             boom[t] = new ExplosionTop(boys[t].body.x)
-                        } else  if (boys[t].body.y > canvas.height*invscale) {
+                        } else if (boys[t].body.y > canvas.height * invscale) {
                             boom[t] = new Explosion(boys[t].body.x)
-                        }else if(boys[t].body.x < 0){
+                        } else if (boys[t].body.x < 0) {
                             boom[t] = new ExplosionRight(boys[t].body.y)
-                        }else if(boys[t].body.x > canvas.width*invscale) {
+                        } else if (boys[t].body.x > canvas.width * invscale) {
                             boom[t] = new ExplosionLeft(boys[t].body.y)
-                        }else{
-                            boom[t]  = new Circle(0,0,0,"transparent")
+                        } else {
+                            boom[t] = new Circle(0, 0, 0, "transparent")
                         }
                         // if (Math.random() < .5) {
                         //     boys[t] = new Mass(t)
@@ -18013,7 +18042,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             } else if (k == 5) {
                                 coreboy = new AsigMan(boys.length)
                                 coreboy.body.color = selectors[t].body.color
-                            }else if (k == 6) {
+                            } else if (k == 6) {
                                 coreboy = new Princess(boys.length)
                                 coreboy.body.color = selectors[t].body.color
                             }
