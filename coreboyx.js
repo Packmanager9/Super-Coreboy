@@ -9,6 +9,7 @@ let vsmashlimit = 42
 let jumplimit = 20
 let scale = .33
 let invscale = 1 / scale
+//qqqqq
 let humanPlayers = 0
 let stock = 0
 // let punchaud1 = new Audio()
@@ -2210,23 +2211,36 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     break
                 }
             }
-            // if (counter == 1) {
-            //     boys[0].righthand.anchored = 0
-            //     boys[0].lefthand.anchored = 0
-            //     boys[0].righthand.x += (TIP_engine.x * 1) - boys[0].righthand.x
-            //     boys[0].righthand.y += (TIP_engine.y * 1) - boys[0].righthand.y
-            //     boys[0].lefthand.x += (TIP_engine.x * 1) - boys[0].lefthand.x
-            //     boys[0].lefthand.y += (TIP_engine.y * 1) - boys[0].lefthand.y
-            //     boys[0].body.x = TIP_engine.x * 1
-            //     boys[0].body.y = TIP_engine.y * 1
-            //     boys[0].body.xmom = 0
-            //     boys[0].body.ymom = 0
-            // }
+            if (counter == 1) {
+                boys[0].righthand.anchored = 0
+                boys[0].lefthand.anchored = 0
+                boys[0].righthand.x += (TIP_engine.x * 1) - boys[0].righthand.x
+                boys[0].righthand.y += (TIP_engine.y * 1) - boys[0].righthand.y
+                boys[0].lefthand.x += (TIP_engine.x * 1) - boys[0].lefthand.x
+                boys[0].lefthand.y += (TIP_engine.y * 1) - boys[0].lefthand.y
+                boys[0].body.x = TIP_engine.x * 1
+                boys[0].body.y = TIP_engine.y * 1
+                boys[0].body.xmom = 0
+                boys[0].body.ymom = 0
+            }
             // example usage: if(object.isPointInside(TIP_engine)){ take action }
             window.addEventListener('pointermove', continued_stimuli);
         });
         window.addEventListener('pointermove', continued_stimuli);
         window.addEventListener('pointerup', e => {
+
+            // if (counter == 1) {
+            //     boys[1].righthand.anchored = 0
+            //     boys[1].lefthand.anchored = 0
+            //     boys[1].righthand.x += (TIP_engine.x * 1) - boys[1].righthand.x
+            //     boys[1].righthand.y += (TIP_engine.y * 1) - boys[1].righthand.y
+            //     boys[1].lefthand.x += (TIP_engine.x * 1) - boys[1].lefthand.x
+            //     boys[1].lefthand.y += (TIP_engine.y * 1) - boys[1].lefthand.y
+            //     boys[1].body.x = TIP_engine.x * 1
+            //     boys[1].body.y = TIP_engine.y * 1
+            //     boys[1].body.xmom = 0
+            //     boys[1].body.ymom = 0
+            // }
             for (let t = 0; t < selectors.length; t++) {
                 selectors[t].body.anchored = 0
             }
@@ -3056,6 +3070,54 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     this.links[t].width = 1
                 }
                 this.links[t].y1 += this.count
+            }
+        }
+    }
+
+    class ExplosionLeft {
+        constructor(x) {
+            this.count = -90
+            this.center = x
+            this.links = []
+            for (let t = 0; t < 12; t++) {
+                let curve = ((Math.random() - .5) * 150)
+                let link = new Line( 1180 + (Math.abs(curve) * 2), this.center + curve,10000 + ((Math.random() - .5) * 1000), this.center + curve, getRandomLightColor(), 10)
+                this.links.push(link)
+            }
+        }
+        draw() {
+            this.count += 5.5
+            for (let t = 0; t < this.links.length; t++) {
+                this.links[t].draw()
+                this.links[t].width -= .5
+                if (this.links[t].width < 1) {
+                    this.links[t].width = 1
+                }
+                this.links[t].x1 += this.count
+            }
+        }
+    }
+
+    class ExplosionRight {
+        constructor(x) {
+            this.count = -90
+            this.center = x
+            this.links = []
+            for (let t = 0; t < 12; t++) {
+                let curve = ((Math.random() - .5) * 150)
+                let link = new Line( 1180 + (Math.abs(curve) * 2), this.center + curve,-10000 + ((Math.random() - .5) * 1000), this.center + curve, getRandomLightColor(), 10)
+                this.links.push(link)
+            }
+        }
+        draw() {
+            this.count += 5.5
+            for (let t = 0; t < this.links.length; t++) {
+                this.links[t].draw()
+                this.links[t].width -= .5
+                if (this.links[t].width < 1) {
+                    this.links[t].width = 1
+                }
+                this.links[t].x1 -= this.count
             }
         }
     }
@@ -3937,7 +3999,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (boys[t].damage >= this.tarmax) {
                             if (boys[t].safe == 1 || boys[t].safesto == 2) {
                                 this.target = boys[t]
-
+                                let cancel = 0
+                                if(typeof this.target.body.x == "number"){
+                                    if(this.brick.edgeright.x > this.target.brick.edgeleft.x){
+                                        cancel = -1
+                                    }
+                                    if(this.brick.edgeleft.x < this.target.brick.edgeright.x){
+                                        cancel = 1
+                                    }
+                                }
                                 this.tarmax = boys[t].damage
                                 if (Math.random() < .1) {
                                     this.bricksto = this.brick
@@ -3950,8 +4020,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             this.dmove = 1
                                             this.amove = 0
                                             this.safe = 1
-                                            this.downspike = 1
-                                            this.wmove = 1
+                                            if(cancel == 0){
+                                                this.downspike = 1
+                                                this.wmove = 1
+                                            }
                                         } else {
                                             this.brick = this.bricksto
                                         }
@@ -3963,8 +4035,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             this.amove = 1
                                             this.dmove = 0
                                             this.safe = 1
-                                            this.downspike = 1
-                                            this.wmove = 1
+                                            if(cancel == 0){
+                                                this.downspike = 1
+                                                this.wmove = 1
+                                            }
                                         } else {
                                             this.brick = this.bricksto
                                         }
@@ -3973,7 +4047,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             }
                         }
                     }
-                } if (this.target.safe == 1 || this.target.safesto == 2) {
+                } 
+                let cancel = 0
+                if(typeof this.target.body.x == "number"){
+                    if(this.brick.edgeright.x > this.target.brick.edgeleft.x){
+                        cancel = -1
+                    }
+                    if(this.brick.edgeleft.x < this.target.brick.edgeright.x){
+                        cancel = 1
+                    }
+                }
+                if (this.target.safe == 1 || this.target.safesto == 2) {
                     if (this.target.body.x > this.body.x) {
                         let xdisR = Math.abs(this.brick.edgeright.x - (this.body.x - (this.body.radius * 1.1)))
                         let runtimeR = xdisR / this.speed
@@ -3982,8 +4066,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.dmove = 1
                             this.amove = 0
                             this.safe = 1
-                            this.downspike = 1
-                            this.wmove = 1
+                            if(cancel == 0){
+                                this.downspike = 1
+                                this.wmove = 1
+                            }
                         }
                     } else {
                         let xdisL = Math.abs(this.brick.edgeleft.x - (this.body.x + (this.body.radius * 1.1)))
@@ -3993,8 +4079,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.amove = 1
                             this.dmove = 0
                             this.safe = 1
-                            this.downspike = 1
-                            this.wmove = 1
+                            if(cancel == 0){
+                                this.downspike = 1
+                                this.wmove = 1
+                            }
                         }
                     }
 
@@ -5699,7 +5787,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (boys[t].damage >= this.tarmax) {
                             if (boys[t].safe == 1 || boys[t].safesto == 2) {
                                 this.target = boys[t]
-
+                                let cancel = 0
+                                if(typeof this.target.body.x == "number"){
+                                    if(this.brick.edgeright.x > this.target.brick.edgeleft.x){
+                                        cancel = -1
+                                    }
+                                    if(this.brick.edgeleft.x < this.target.brick.edgeright.x){
+                                        cancel = 1
+                                    }
+                                }
                                 this.tarmax = boys[t].damage
                                 if (Math.random() < .1) {
                                     this.bricksto = this.brick
@@ -5712,8 +5808,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             this.dmove = 1
                                             this.amove = 0
                                             this.safe = 1
-                                            this.screwshot = 1
-                                            this.wmove = 1
+                                            if(cancel == 0){
+                                                this.screwshot = 1
+                                                this.wmove = 1
+                                            }
                                         } else {
                                             this.brick = this.bricksto
                                         }
@@ -5725,8 +5823,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             this.amove = 1
                                             this.dmove = 0
                                             this.safe = 1
-                                            this.screwshot = 1
-                                            this.wmove = 1
+                                            if(cancel == 0){
+                                                this.screwshot = 1
+                                                this.wmove = 1
+                                            }
                                         } else {
                                             this.brick = this.bricksto
                                         }
@@ -5735,7 +5835,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             }
                         }
                     }
-                } if (this.target.safe == 1 || this.target.safesto == 2) {
+                } 
+                let cancel = 0
+                if(typeof this.target.body.x == "number"){
+                    if(this.brick.edgeright.x > this.target.brick.edgeleft.x){
+                        cancel = -1
+                    }
+                    if(this.brick.edgeleft.x < this.target.brick.edgeright.x){
+                        cancel = 1
+                    }
+                }
+                if (this.target.safe == 1 || this.target.safesto == 2) {
                     if (this.target.body.x > this.body.x) {
                         let xdisR = Math.abs(this.brick.edgeright.x - (this.body.x - (this.body.radius * 1.1)))
                         let runtimeR = xdisR / this.speed
@@ -5744,8 +5854,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.dmove = 1
                             this.amove = 0
                             this.safe = 1
-                            this.screwshot = 1
-                            this.wmove = 1
+                            if(cancel == 0){
+                                this.screwshot = 1
+                                this.wmove = 1
+                            }
                         }
                     } else {
                         let xdisL = Math.abs(this.brick.edgeleft.x - (this.body.x + (this.body.radius * 1.1)))
@@ -5755,8 +5867,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.amove = 1
                             this.dmove = 0
                             this.safe = 1
-                            this.screwshot = 1
-                            this.wmove = 1
+                            if(cancel == 0){
+                                this.screwshot = 1
+                                this.wmove = 1
+                            }
                         }
                     }
                 } else {
@@ -7637,7 +7751,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (boys[t].damage >= this.tarmax) {
                             if (boys[t].safe == 1 || boys[t].safesto == 2) {
                                 this.target = boys[t]
-
+                                let cancel = 0
+                                if(typeof this.target.body.x == "number"){
+                                    if(this.brick.edgeright.x > this.target.brick.edgeleft.x){
+                                        cancel = -1
+                                    }
+                                    if(this.brick.edgeleft.x < this.target.brick.edgeright.x){
+                                        cancel = 1
+                                    }
+                                }
                                 this.tarmax = boys[t].damage
                                 if (Math.random() < .1) {
                                     this.bricksto = this.brick
@@ -7650,8 +7772,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             this.dmove = 1
                                             this.amove = 0
                                             this.safe = 1
-                                            this.screwshot = 1
-                                            this.wmove = 1
+                                            if(cancel == 0){
+                                                this.screwshot = 1
+                                                this.wmove = 1
+                                            }
                                         } else {
                                             this.brick = this.bricksto
                                         }
@@ -7663,8 +7787,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             this.amove = 1
                                             this.dmove = 0
                                             this.safe = 1
-                                            this.screwshot = 1
-                                            this.wmove = 1
+                                            if(cancel == 0){
+                                                this.screwshot = 1
+                                                this.wmove = 1
+                                            }
                                         } else {
                                             this.brick = this.bricksto
                                         }
@@ -7672,6 +7798,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 }
                             }
                         }
+                    }
+                }
+                let cancel = 0
+                if(typeof this.target.body.x == "number"){
+                    if(this.brick.edgeright.x > this.target.brick.edgeleft.x){
+                        cancel = -1
+                    }
+                    if(this.brick.edgeleft.x < this.target.brick.edgeright.x){
+                        cancel = 1
                     }
                 }
                 if (this.target.safe == 1 || this.target.safesto == 2) {
@@ -7683,7 +7818,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.dmove = 1
                             this.amove = 0
                             this.safe = 1
-                            this.wmove = 1
+                            if(cancel == 0){
+                                this.screwshot = 1 // erooro?
+                                this.wmove = 1
+                            }
                         }
                     } else {
                         let xdisL = Math.abs(this.brick.edgeleft.x - (this.body.x + (this.body.radius * 1.1)))
@@ -7693,7 +7831,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.amove = 1
                             this.dmove = 0
                             this.safe = 1
-                            this.wmove = 1
+                            if(cancel == 0){
+                                this.screwshot = 1 // erooro?
+                                this.wmove = 1
+                            }
                         }
                     }
                 } else {
@@ -9599,6 +9740,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (boys[t].damage >= this.tarmax) {
                             if (boys[t].safe == 1 || boys[t].safesto == 2) {
                                 this.target = boys[t]
+                                let cancel = 0
+                                if(typeof this.target.body.x == "number"){
+                                    if(this.brick.edgeright.x > this.target.brick.edgeleft.x){
+                                        cancel = -1
+                                    }
+                                    if(this.brick.edgeleft.x < this.target.brick.edgeright.x){
+                                        cancel = 1
+                                    }
+                                }
                                 this.tarmax = boys[t].damage
                                 if (Math.random() < .1) {
                                     this.bricksto = this.brick
@@ -9611,8 +9761,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             this.dmove = 1
                                             this.amove = 0
                                             this.safe = 1
-                                            this.screwshot = 1
-                                            this.wmove = 1
+                                            if(cancel == 0){
+                                                this.screwshot = 1
+                                                this.wmove = 1
+                                            }
                                         } else {
                                             this.brick = this.bricksto
                                         }
@@ -9624,8 +9776,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             this.amove = 1
                                             this.dmove = 0
                                             this.safe = 1
-                                            this.screwshot = 1
-                                            this.wmove = 1
+                                            if(cancel == 0){
+                                                this.screwshot = 1
+                                                this.wmove = 1
+                                            }
                                         } else {
                                             this.brick = this.bricksto
                                         }
@@ -9633,6 +9787,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 }
                             }
                         }
+                    }
+                }
+                let cancel = 0
+                if(typeof this.target.body.x == "number"){
+                    if(this.brick.edgeright.x > this.target.brick.edgeleft.x){
+                        cancel = -1
+                    }
+                    if(this.brick.edgeleft.x < this.target.brick.edgeright.x){
+                        cancel = 1
                     }
                 }
                 if (this.target.safe == 1 || this.target.safesto == 2) {
@@ -9644,8 +9807,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.dmove = 1
                             this.amove = 0
                             this.safe = 1
-                            this.screwshot = 1
-                            this.wmove = 1
+                            if(cancel == 0){
+                                this.screwshot = 1
+                                this.wmove = 1
+                            }
                         }
                     } else {
                         let xdisL = Math.abs(this.brick.edgeleft.x - (this.body.x + (this.body.radius * 1.1)))
@@ -9655,8 +9820,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.amove = 1
                             this.dmove = 0
                             this.safe = 1
-                            this.screwshot = 1
-                            this.wmove = 1
+                            if(cancel == 0){
+                                this.screwshot = 1
+                                this.wmove = 1
+                            }
                         }
                     }
                 } else {
@@ -12179,7 +12346,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (boys[t].damage >= this.tarmax) {
                             if (boys[t].safe == 1 || boys[t].safesto == 2) {
                                 this.target = boys[t]
-
+                                let cancel = 0
+                                if(typeof this.target.body.x == "number"){
+                                    if(this.brick.edgeright.x > this.target.brick.edgeleft.x){
+                                        cancel = -1
+                                    }
+                                    if(this.brick.edgeleft.x < this.target.brick.edgeright.x){
+                                        cancel = 1
+                                    }
+                                }
                                 this.tarmax = boys[t].damage
                                 if (Math.random() < .1) {
                                     this.bricksto = this.brick
@@ -12192,8 +12367,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             this.dmove = 1
                                             this.amove = 0
                                             this.safe = 1
-                                            this.screwshot = 1
-                                            this.wmove = 1
+                                            if(cancel == 0){
+                                                this.screwshot = 1
+                                                this.wmove = 1
+                                            }
                                         } else {
                                             this.brick = this.bricksto
                                         }
@@ -12205,8 +12382,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             this.amove = 1
                                             this.dmove = 0
                                             this.safe = 1
-                                            this.screwshot = 1
-                                            this.wmove = 1
+                                            if(cancel == 0){
+                                                this.screwshot = 1
+                                                this.wmove = 1
+                                            }
                                         } else {
                                             this.brick = this.bricksto
                                         }
@@ -12215,7 +12394,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             }
                         }
                     }
-                } if (this.target.safe == 1 || this.target.safesto == 2) {
+                }
+                let cancel = 0
+                if(typeof this.target.body.x == "number"){
+                    if(this.brick.edgeright.x > this.target.brick.edgeleft.x){
+                        cancel = -1
+                    }
+                    if(this.brick.edgeleft.x < this.target.brick.edgeright.x){
+                        cancel = 1
+                    }
+                }
+                 if (this.target.safe == 1 || this.target.safesto == 2) {
                     if (this.target.body.x > this.body.x) {
                         let xdisR = Math.abs(this.brick.edgeright.x - (this.body.x - (this.body.radius * 1.1)))
                         let runtimeR = xdisR / this.speed
@@ -12224,8 +12413,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.dmove = 1
                             this.amove = 0
                             this.safe = 1
-                            this.screwshot = 1
-                            this.wmove = 1
+                            if(cancel == 0){
+                                this.screwshot = 1
+                                this.wmove = 1
+                            }
                         }
                     } else {
                         let xdisL = Math.abs(this.brick.edgeleft.x - (this.body.x + (this.body.radius * 1.1)))
@@ -12235,8 +12426,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.amove = 1
                             this.dmove = 0
                             this.safe = 1
-                            this.screwshot = 1
-                            this.wmove = 1
+                            if(cancel == 0){
+                                this.screwshot = 1
+                                this.wmove = 1
+                            }
                         }
                     }
                 } else {
@@ -13988,8 +14181,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             for (let t = 0; t < boys.length; t++) {
                 if (this != boys[t]) {
-                    if (Math.abs(this.body.x - boys[t].body.x) > 1 && this.body.y > (boys[t].body.y + 15)) {
+                    if (Math.abs(this.body.x - boys[t].body.x) > 1 && this.body.y > (boys[t].body.y + 35)) {
                         this.wmove = 1
+                        //console.log("caseA")
                     }
 
                     if (this.fleeing == 0) {
@@ -14010,6 +14204,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                         if (Math.random() < .2) {
                             this.wmove = 1
+                            //console.log("caseB")
                         }
                         if (Math.random() < .1) {
                             this.dmove = 1
@@ -14082,14 +14277,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                                 this.bricksto = stage.bricks[t]
                                                 break
                                             } else {
-                                                if (Math.random() < .01) {
+                                                if (Math.random() < .001) {
                                                     this.under = 2
                                                     this.bricksto = stage.bricks[t]
                                                     break
                                                 }
                                             }
                                         } else {
-                                            if (Math.random() < .01) {
+                                            if (Math.random() < .001) {
                                                 this.under = 2
                                                 this.bricksto = stage.bricks[t]
                                                 break
@@ -14101,14 +14296,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                                 this.bricksto = stage.bricks[t]
                                                 break
                                             } else {
-                                                if (Math.random() < .01) {
+                                                if (Math.random() < .001) {
                                                     this.under = 3
                                                     this.bricksto = stage.bricks[t]
                                                     break
                                                 }
                                             }
                                         } else {
-                                            if (Math.random() < .01) {
+                                            if (Math.random() < .001) {
                                                 this.under = 3
                                                 this.bricksto = stage.bricks[t]
                                                 break
@@ -14131,6 +14326,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     this.dmove = 1
                     this.downspike = 1
                     this.wmove = 1
+                    //console.log("caseC")
                 }
                 if (this.under == 2) {
                     this.amove = 1
@@ -14139,6 +14335,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     this.dmove = 0
                     this.wmove = 1
                     this.downspike = 1
+                    //console.log("caseD")
                 }
             }
             this.exgrip = 0
@@ -14148,11 +14345,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (boys[t].brick.center.y > this.brick.center.y) {
                             if (boys[t].body.x < this.body.x) {
                                 this.amomu = (Math.abs(this.brick.edgeleft.x - this.body.x)) / this.speed
-                                this.amomu += 15
+                                this.amomu += 22
                                 this.exgrip = 1
                             } else {
                                 this.dmomu = (Math.abs(this.brick.edgeright.x - this.body.x)) / this.speed
-                                this.dmomu += 15
+                                this.dmomu += 22
                                 this.exgrip = 1
                             }
                         }
@@ -14169,7 +14366,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (this.dmom > 0) {
                 this.screwshot = 1
                 this.dmove = 1
+                if (Math.random() < .5) {
                 this.wmove = 1
+                //console.log("caseE")
+                }
                 this.amove = 0
                 this.amom = 0
             } else {
@@ -14177,10 +14377,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 if (this.dmomu > 0) {
                     this.dmove = 1
                     this.amove = 0
-                    this.screwshot = 0
-                    if (Math.random() < .95) {
-                        this.wmove = 0
-                    }
+                    this.downspike = 0
+                    this.wmove = 0
                 }
             }
             if (this.amom > 0) {
@@ -14188,12 +14386,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 this.dmom = 0
                 this.amove = 1
                 this.wmove = 1
+                //console.log("caseF")
                 this.dmove = 0
             } else {
                 if (this.amomu > 0) {
                     this.amove = 1
                     this.dmove = 0
-                    this.screwshot = 0
+                    this.downspike = 0
                     if (Math.random() < .95) {
                         this.wmove = 0
                     }
@@ -14206,14 +14405,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     this.amove = 1
                     this.dmove = 0
                     this.wmove = 1
-                    //this.amomu = 0
-                    //this.dmomu = 0
+                    //console.log("caseG")
+                    this.amomu = 0
+                    this.dmomu = 0
                 } else {
                     this.amove = 0
                     this.dmove = 1
                     this.wmove = 1
-                    //this.amomu = 0
-                    //this.dmomu = 0
+                    //console.log("caseH")
+                    this.amomu = 0
+                    this.dmomu = 0
                 }
                 this.fleeing = 0
             } else {
@@ -14229,6 +14430,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             if (boys[t].safe == 1 || boys[t].safesto == 2) {
                                 this.target = boys[t]
 
+                                let cancel = 0
+                                if(typeof this.target.body.x == "number"){
+                                    if(this.brick.edgeright.x > this.target.brick.edgeleft.x){
+                                        cancel = -1
+                                    }
+                                    if(this.brick.edgeleft.x < this.target.brick.edgeright.x){
+                                        cancel = 1
+                                    }
+                                }
                                 this.tarmax = boys[t].damage
                                 if (Math.random() < .1) {
                                     this.bricksto = this.brick
@@ -14241,8 +14451,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             this.dmove = 1
                                             this.amove = 0
                                             this.safe = 1
-                                            this.downspike = 1
-                                            this.wmove = 1
+                                            if(cancel == 0){
+                                                this.downspike = 1
+                                                this.wmove = 1
+                                            }
+                                            //console.log("caseI", cancel)
                                         } else {
                                             this.brick = this.bricksto
                                         }
@@ -14254,8 +14467,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             this.amove = 1
                                             this.dmove = 0
                                             this.safe = 1
-                                            this.downspike = 1
-                                            this.wmove = 1
+                                            if(cancel == 0){
+                                                this.downspike = 1
+                                                this.wmove = 1
+                                            }
+                                            //console.log("caseJ", cancel)
                                         } else {
                                             this.brick = this.bricksto
                                         }
@@ -14264,7 +14480,19 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             }
                         }
                     }
-                } if (this.target.safe == 1 || this.target.safesto == 2) {
+                }
+                
+                let cancel = 0
+                if(typeof this.target.body.x == "number"){
+                    if(this.brick.edgeright.x > this.target.brick.edgeleft.x){
+                        cancel = -1
+                    }
+                    if(this.brick.edgeleft.x < this.target.brick.edgeright.x){
+                        cancel = 1
+                    }
+                }
+                
+                if (this.target.safe == 1 || this.target.safesto == 2) {
                     if (this.target.body.x > this.body.x) {
                         let xdisR = Math.abs(this.brick.edgeright.x - (this.body.x - (this.body.radius * 1.1)))
                         let runtimeR = xdisR / this.speed
@@ -14273,8 +14501,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.dmove = 1
                             this.amove = 0
                             this.safe = 1
-                            this.downspike = 1
-                            this.wmove = 1
+                            //problem1
+                            if(cancel == 0){
+                                this.downspike = 1
+                                this.wmove = 1
+                            }
+                            //console.log("caseK", cancel)
                         }
                     } else {
                         let xdisL = Math.abs(this.brick.edgeleft.x - (this.body.x + (this.body.radius * 1.1)))
@@ -14284,8 +14516,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.amove = 1
                             this.dmove = 0
                             this.safe = 1
-                            this.downspike = 1
-                            this.wmove = 1
+                            if(cancel == 0){
+                                this.downspike = 1
+                                this.wmove = 1
+                            }
+                            //problem2
+                            //console.log("caseL", cancel)
                         }
                     }
 
@@ -14303,14 +14539,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         this.amove = 1
                         this.dmove = 0
                         this.wmove = 1
-                        //this.amomu = 0
-                        //this.dmomu = 0
+                        //console.log("caseM")
+                        this.amomu = 0
+                        this.dmomu = 0
                     } else {
                         this.amove = 0
                         this.dmove = 1
                         this.wmove = 1
-                        //this.amomu = 0
-                        //this.dmomu = 0
+                        //console.log("caseN")
+                        this.amomu = 0
+                        this.dmomu = 0
                     }
                     this.fleeing = 0
                 } else {
@@ -14341,6 +14579,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         this.storeshield = 1
                                     } else {
                                         this.wmove = 1
+                                        //console.log("caseO")
                                     }
                                 } else {
                                     if (this.body.x < boys[t].shots[g].x) {
@@ -14398,6 +14637,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         }
                                         if (this.under == 0) {
                                             this.wmove = 1
+                                            //console.log("caseP")
                                             this.screwshot = 1
                                         }
                                     }
@@ -14412,14 +14652,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         this.amove = 1
                         this.dmove = 0
                         this.wmove = 1
-                        //this.amomu = 0
-                        //this.dmomu = 0
+                        //console.log("caseQ")
+                        this.amomu = 0
+                        this.dmomu = 0
                     } else {
                         this.amove = 0
                         this.dmove = 1
                         this.wmove = 1
-                        //this.amomu = 0
-                        //this.dmomu = 0
+                        //console.log("caseR")
+                        this.amomu = 0
+                        this.dmomu = 0
                     }
                     this.fleeing = 0
                 } else {
@@ -14438,6 +14680,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         this.storeshield = 1
                                     } else {
                                         this.wmove = 1
+                                        //console.log("caseS")
                                     }
                                 } else {
                                     if (this.body.x < boys[t].shots[g].x) {
@@ -14496,6 +14739,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         }
                                         if (this.under == 0) {
                                             this.wmove = 1
+                                            //console.log("caseT")
                                             this.screwshot = 1
                                         }
                                     }
@@ -14510,14 +14754,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         this.amove = 1
                         this.dmove = 0
                         this.wmove = 1
-                        //this.amomu = 0
-                        //this.dmomu = 0
+                        //console.log("caseU")
+                        this.amomu = 0
+                        this.dmomu = 0
                     } else {
                         this.amove = 0
                         this.dmove = 1
                         this.wmove = 1
-                        //this.amomu = 0
-                        //this.dmomu = 0
+                        //console.log("caseV")
+                        this.amomu = 0
+                        this.dmomu = 0
                     }
                     this.fleeing = 0
                 } else {
@@ -14555,6 +14801,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         object.x += speed
                         this.righthand.x += speed
                         this.lefthand.x += speed
+                        this.righthand2.x += speed
+                        this.lefthand2.x += speed
+                        this.righthand3.x += speed
+                        this.lefthand3.x += speed
                     }
                     if (this.righthand.anchored == 1) {
                         this.degripr()
@@ -14567,6 +14817,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         object.x -= speed
                         this.righthand.x -= speed
                         this.lefthand.x -= speed
+                        this.righthand2.x -= speed
+                        this.lefthand2.x -= speed
+                        this.righthand3.x -= speed
+                        this.lefthand3.x -= speed
                     }
                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                         this.degripl()
@@ -14627,19 +14881,50 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         }
                     }
 
+                    if (this.screwshot + this.hortsmash + this.downspike + this.storeshield == 0) {
+                        if (Math.abs(this.body.y - boys[t].body.y) < 60 && this.body.x > boys[t].body.x) {
+                            if (this.face == -1) {
+                                if (Math.abs(this.body.x - boys[t].body.x) < 300) {
+                                    this.leftshot = 1
+                                    if (Math.random() < .1) {
+                                        this.hortsmash = 1
+                                        this.leftshot = 0
+                                    }
+                                }
+                            }
+                        }
+                        if (Math.abs(this.body.y - boys[t].body.y) < 60 && this.body.x < boys[t].body.x) {
+                            if (this.face == 1) {
+                                if (Math.abs(this.body.x - boys[t].body.x) < 300) {
+                                    this.rightshot = 1
+                                    if (Math.random() < .1) {
+                                        this.hortsmash = 1
+                                        this.rightshot = 0
+                                    }
+                                }
+                            }
+                        }
+                    }
+
                     if (Math.abs(this.body.x - boys[t].body.x) < 145 && this.body.y > boys[t].body.y) {
                         this.screwshot = 1
                     }
                     if (Math.abs(this.body.x - boys[t].body.x) < 45 && this.body.y < boys[t].body.y) {
+                        if (this.amomu <= 0 && this.dmomu <= 0) {
                         this.downspike = 1
+                        }
                     } else if (Math.abs(this.body.x - boys[t].body.x) < 150 && this.body.y <= boys[t].body.y && (boys[t].righthand.anchored == 1 || boys[t].lefthand.anchored == 1)) {
                         this.hortsmash = 1
                     }
-                    if (Math.abs(this.body.x - boys[t].body.x) < 170 && this.body.y > boys[t].body.y) {
+                    if (Math.abs(this.body.x - boys[t].body.x) < 170 && this.body.y < boys[t].body.y) {
+                        if (this.amomu <= 0 && this.dmomu <= 0) {
                         this.downspike = 1
+                        }
                     } else if (this.body.y - boys[t].body.y > 100) {
                         if (Math.random() < .01) {
+                            if (this.amomu <= 0 && this.dmomu <= 0) {
                             this.downspike = 1
+                            }
                         }
                     }
 
@@ -14666,31 +14951,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             }
                         }
                     }
-                    if (this.screwshot + this.hortsmash + this.downspike + this.storeshield == 0) {
-                        if (Math.abs(this.body.y - boys[t].body.y) < 35 && this.body.x > boys[t].body.x) {
-                            if (this.face == -1) {
-                                if (Math.abs(this.body.x - boys[t].body.x) < 170) {
-                                    this.leftshot = 1
-                                    if (Math.random() < .1) {
-                                        this.hortsmash = 1
-                                        this.leftshot = 0
-                                    }
-                                }
-                            }
-                        }
-                        if (Math.abs(this.body.y - boys[t].body.y) < 35 && this.body.x < boys[t].body.x) {
-                            if (this.face == 1) {
-                                if (Math.abs(this.body.x - boys[t].body.x) < 170) {
-                                    this.rightshot = 1
-                                    if (Math.random() < .1) {
-                                        this.hortsmash = 1
-                                        this.rightshot = 0
-                                    }
-                                }
-                            }
-                        }
-                    }
-
 
                     if (Math.abs(this.body.y - boys[t].body.y) < 50 && Math.abs(this.body.x - boys[t].body.x) < 200) {
                         if (boys[t].lefthand.fired > 14 || boys[t].righthand.fired > 14) {
@@ -14781,6 +15041,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     this.storeshield = 1
                                 } else {
                                     this.wmove = 1
+                                    //console.log("caseW")
                                 }
                             } else {
                                 if (this.body.x < boys[t].shots[g].x) {
@@ -14838,6 +15099,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     }
                                     if (this.under == 0) {
                                         this.wmove = 1
+                                        //console.log("caseX")
                                         this.downspike = 1
                                     }
                                 }
@@ -15161,6 +15423,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, this.body.x - 20, this.body.y + 90)
             }
 
+        //  canvas_context.fillText(`Height:${Math.round(this.brick.edgeright.y)}`, this.body.x - 20, this.body.y - 250)
+        //         canvas_context.fillText(`M D${Math.round(this.dmove)},A${Math.round(this.amove)}`, this.body.x - 20, this.body.y - 110)
+        //         canvas_context.fillText(`U D${Math.round(this.dmomu)},A${Math.round(this.amomu)}`, this.body.x - 20, this.body.y - 150)
+        //         canvas_context.fillText(`Under:${Math.round(this.under)},Safe:${Math.round(this.safe)}`, this.body.x - 20, this.body.y - 200)
+        //         canvas_context.fillText(`_ D${Math.round(this.dmom)},A${Math.round(this.amom)}`, this.body.x - 20, this.body.y - 300)
+        //         if (this.fleeing == 1) {
+        //             canvas_context.fillText(`fleeing`, this.body.x - 20, this.body.y - 300)
+        //         }
+            
 
             // this.bodyx = this.body.x
         }
@@ -15204,12 +15475,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 if (this.breaktimer < 0) {
                     this.AImove(this.body, this.speed, this.controller)
 
-                    if (this.righthand.anchored == 0) {
+                    if (this.righthand.anchored <= 0) {
                         this.AImove(this.righthand, this.speed, this.controller)
                         this.AImove(this.righthand2, this.speed, this.controller)
                         this.AImove(this.righthand3, this.speed, this.controller)
                     }
-                    if (this.lefthand.anchored == 0) {
+                    if (this.lefthand.anchored <= 0) {
                         this.AImove(this.lefthand, this.speed, this.controller)
                         this.AImove(this.lefthand2, this.speed, this.controller)
                         this.AImove(this.lefthand3, this.speed, this.controller)
@@ -16227,7 +16498,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         if (boys[t].damage >= this.tarmax) {
                             if (boys[t].safe == 1 || boys[t].safesto == 2) {
                                 this.target = boys[t]
-
+                                let cancel = 0
+                                if(typeof this.target.body.x == "number"){
+                                    if(this.brick.edgeright.x > this.target.brick.edgeleft.x){
+                                        cancel = -1
+                                    }
+                                    if(this.brick.edgeleft.x < this.target.brick.edgeright.x){
+                                        cancel = 1
+                                    }
+                                }
                                 this.tarmax = boys[t].damage
                                 if (Math.random() < .1) {
                                     this.bricksto = this.brick
@@ -16240,8 +16519,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             this.dmove = 1
                                             this.amove = 0
                                             this.safe = 1
-                                            this.screwshot = 1
-                                            this.wmove = 1
+                                            if(cancel == 0){
+                                                this.screwshot = 1
+                                                this.wmove = 1
+                                            }
                                         } else {
                                             this.brick = this.bricksto
                                         }
@@ -16253,8 +16534,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             this.amove = 1
                                             this.dmove = 0
                                             this.safe = 1
-                                            this.screwshot = 1
-                                            this.wmove = 1
+                                            if(cancel == 0){
+                                                this.screwshot = 1
+                                                this.wmove = 1
+                                            }
                                         } else {
                                             this.brick = this.bricksto
                                         }
@@ -16262,6 +16545,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 }
                             }
                         }
+                    }
+                }
+                let cancel = 0
+                if(typeof this.target.body.x == "number"){
+                    if(this.brick.edgeright.x > this.target.brick.edgeleft.x){
+                        cancel = -1
+                    }
+                    if(this.brick.edgeleft.x < this.target.brick.edgeright.x){
+                        cancel = 1
                     }
                 }
                 if (this.target.safe == 1 || this.target.safesto == 2) {
@@ -16273,7 +16565,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.dmove = 1
                             this.amove = 0
                             this.safe = 1
-                            this.wmove = 1
+                            if(cancel == 0){
+                                this.screwshot = 1 //erroor
+                                this.wmove = 1
+                            }
                         }
                     } else {
                         let xdisL = Math.abs(this.brick.edgeleft.x - (this.body.x + (this.body.radius * 1.1)))
@@ -16283,7 +16578,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             this.amove = 1
                             this.dmove = 0
                             this.safe = 1
-                            this.wmove = 1
+                            if(cancel == 0){
+                                this.screwshot = 1//error
+                                this.wmove = 1
+                            }
                         }
                     }
                 } else {
@@ -17570,8 +17868,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         boys[t].go = 1
                         if (boys[t].body.y < 0) {
                             boom[t] = new ExplosionTop(boys[t].body.x)
-                        } else {
+                        } else  if (boys[t].body.y > canvas.height*invscale) {
                             boom[t] = new Explosion(boys[t].body.x)
+                        }else if(boys[t].body.x < 0){
+                            boom[t] = new ExplosionRight(boys[t].body.y)
+                        }else if(boys[t].body.x > canvas.width*invscale) {
+                            boom[t] = new ExplosionLeft(boys[t].body.y)
                         }
                         // if (Math.random() < .5) {
                         //     boys[t] = new Mass(t)
