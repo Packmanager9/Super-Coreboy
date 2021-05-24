@@ -2212,16 +2212,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }
             }
             if (counter == 1) {
-                boys[0].righthand.anchored = 0
-                boys[0].lefthand.anchored = 0
-                boys[0].righthand.x += (TIP_engine.x * 1) - boys[0].righthand.x
-                boys[0].righthand.y += (TIP_engine.y * 1) - boys[0].righthand.y
-                boys[0].lefthand.x += (TIP_engine.x * 1) - boys[0].lefthand.x
-                boys[0].lefthand.y += (TIP_engine.y * 1) - boys[0].lefthand.y
-                boys[0].body.x = TIP_engine.x * 1
-                boys[0].body.y = TIP_engine.y * 1
-                boys[0].body.xmom = 0
-                boys[0].body.ymom = 0
+                for(let t = 0;t<boys.length;t++){
+                    boys[t].righthand.anchored = 0
+                    boys[t].lefthand.anchored = 0
+                    boys[t].righthand.x += (TIP_engine.x * 1) - boys[t].righthand.x
+                    boys[t].righthand.y += (TIP_engine.y * 1) - boys[t].righthand.y
+                    boys[t].lefthand.x += (TIP_engine.x * 1) - boys[t].lefthand.x
+                    boys[t].lefthand.y += (TIP_engine.y * 1) - boys[t].lefthand.y
+                    boys[t].body.x = TIP_engine.x * 1
+                    boys[t].body.y = TIP_engine.y * 1
+                    boys[t].body.xmom = 0
+                    boys[t].body.ymom = 0
+                }
             }
             // example usage: if(object.isPointInside(TIP_engine)){ take action }
             window.addEventListener('pointermove', continued_stimuli);
@@ -17874,6 +17876,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             boom[t] = new ExplosionRight(boys[t].body.y)
                         }else if(boys[t].body.x > canvas.width*invscale) {
                             boom[t] = new ExplosionLeft(boys[t].body.y)
+                        }else{
+                            boom[t]  = new Circle(0,0,0,"transparent")
                         }
                         // if (Math.random() < .5) {
                         //     boys[t] = new Mass(t)
