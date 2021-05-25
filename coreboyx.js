@@ -3719,13 +3719,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
     let stage = new Stage()
 
     class Explosion {
-        constructor(x) {
+        constructor(x, color) {
             this.count = -90
             this.center = x
             this.links = []
             for (let t = 0; t < 12; t++) {
                 let curve = ((Math.random() - .5) * 150)
                 let link = new Line(this.center + curve, 720 + (Math.abs(curve) * 2), this.center + curve, 10000 + ((Math.random() - .5) * 1000), getRandomLightColor(), 10)
+                if(Math.random()<.5){
+                    link.color = color
+                }
                 this.links.push(link)
             }
         }
@@ -3743,13 +3746,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
     }
 
     class ExplosionLeft {
-        constructor(x) {
+        constructor(x, color) {
             this.count = -90
             this.center = x
             this.links = []
             for (let t = 0; t < 12; t++) {
                 let curve = ((Math.random() - .5) * 150)
                 let link = new Line(1180 + (Math.abs(curve) * 2), this.center + curve, 10000 + ((Math.random() - .5) * 1000), this.center + curve, getRandomLightColor(), 10)
+                if(Math.random()<.5){
+                    link.color = color
+                }
                 this.links.push(link)
             }
         }
@@ -3767,13 +3773,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
     }
 
     class ExplosionRight {
-        constructor(x) {
+        constructor(x, color) {
             this.count = -90
             this.center = x
             this.links = []
             for (let t = 0; t < 12; t++) {
                 let curve = ((Math.random() - .5) * 150)
                 let link = new Line(1180 + (Math.abs(curve) * 2), this.center + curve, -10000 + ((Math.random() - .5) * 1000), this.center + curve, getRandomLightColor(), 10)
+                if(Math.random()<.5){
+                    link.color = color
+                }
                 this.links.push(link)
             }
         }
@@ -3791,13 +3800,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
     }
 
     class ExplosionTop {
-        constructor(x) {
+        constructor(x, color) {
             this.count = -90
             this.center = x
             this.links = []
             for (let t = 0; t < 12; t++) {
                 let curve = ((Math.random() - .5) * 150)
                 let link = new Line(this.center + curve, 720 + (Math.abs(curve) * 2), this.center + curve, -10000 + ((Math.random() - .5) * 1000), getRandomLightColor(), 10)
+                if(Math.random()<.5){
+                    link.color = color
+                }
                 this.links.push(link)
             }
         }
@@ -18594,13 +18606,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     if (boys[t].go !== 1) {
                         boys[t].go = 1
                         if (boys[t].body.y < 0) {
-                            boom[t] = new ExplosionTop(boys[t].body.x)
+                            boom[t] = new ExplosionTop(boys[t].body.x, boys[t].body.color)
                         } else if (boys[t].body.y > canvas.height * invscale) {
-                            boom[t] = new Explosion(boys[t].body.x)
+                            boom[t] = new Explosion(boys[t].body.x, boys[t].body.color)
                         } else if (boys[t].body.x < 0) {
-                            boom[t] = new ExplosionRight(boys[t].body.y)
+                            boom[t] = new ExplosionRight(boys[t].body.y, boys[t].body.color)
                         } else if (boys[t].body.x > canvas.width * invscale) {
-                            boom[t] = new ExplosionLeft(boys[t].body.y)
+                            boom[t] = new ExplosionLeft(boys[t].body.y, boys[t].body.color)
                         } else {
                             boom[t] = new Circle(0, 0, 0, "transparent")
                         }
