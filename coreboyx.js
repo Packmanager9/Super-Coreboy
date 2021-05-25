@@ -4322,7 +4322,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
                 }
 
-                if (gamepadAPI[this.controller].buttonsStatus.includes('A') || (keysPressed['j'] || keysPressed['ArrowDown'])) {
+                if (gamepadAPI[this.controller].buttonsStatus.includes('A') || (keysPressed['k'] || keysPressed['ArrowDown'])) {
                     if (this.righthand.fired <= 0) {
                         if (this.righthand.anchored == 0) {
                             this.rightshoulder.xmom = 0
@@ -7271,7 +7271,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         }
                     }
                 }
-                if (gamepadAPI[this.controller].buttonsStatus.includes('A') || (keysPressed['j'] || keysPressed['ArrowDown'])) {
+                if (gamepadAPI[this.controller].buttonsStatus.includes('A') || (keysPressed['k'] || keysPressed['ArrowDown'])) {
                     if (this.righthand.fired <= 0) {
                         if (this.righthand.anchored == 0) {
                             this.rightshoulder.xmom = 0
@@ -9311,7 +9311,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         }
                     }
                 }
-                if (gamepadAPI[this.controller].buttonsStatus.includes('A') || (keysPressed['j'] || keysPressed['ArrowDown'])) {
+                if (gamepadAPI[this.controller].buttonsStatus.includes('A') || (keysPressed['k'] || keysPressed['ArrowDown'])) {
                     if (this.righthand.fired <= 0) {
                         if (this.righthand.anchored == 0) {
                             this.rightshoulder.xmom = 0
@@ -11217,7 +11217,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         }
                     }
                 }
-                if (gamepadAPI[this.controller].buttonsStatus.includes('A') || (keysPressed['j'] || keysPressed['ArrowDown'])) {
+                if (gamepadAPI[this.controller].buttonsStatus.includes('A') || (keysPressed['k'] || keysPressed['ArrowDown'])) {
                     if (this.righthand.fired <= 0) {
                         if (this.righthand.anchored == 0) {
                             this.rightshoulder.xmom = 0
@@ -13852,7 +13852,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         }
                     }
                 }
-                if (gamepadAPI[this.controller].buttonsStatus.includes('A') || (keysPressed['j'] || keysPressed['ArrowDown'])) {
+                if (gamepadAPI[this.controller].buttonsStatus.includes('A') || (keysPressed['k'] || keysPressed['ArrowDown'])) {
                     if (this.lefthand.fired <= 0) {
                         if (this.righthand.fired <= 0) {
                             this.shot = new ShotC(this.body.x, this.body.y, 24, "#FF0000", 0, (this.speed * 1.5))
@@ -14738,7 +14738,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
                 }
 
-                if (gamepadAPI[this.controller].buttonsStatus.includes('A') || (keysPressed['j'] || keysPressed['ArrowDown'])) {
+                if (gamepadAPI[this.controller].buttonsStatus.includes('A') || (keysPressed['k'] || keysPressed['ArrowDown'])) {
                     if (this.righthand.fired <= 0) {
                         if (this.righthand.anchored == 0) {
                             this.rightshoulder.xmom = 0
@@ -18070,7 +18070,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         }
                     }
                 }
-                if (gamepadAPI[this.controller].buttonsStatus.includes('A') || (keysPressed['j'] || keysPressed['ArrowDown'])) {
+                if (gamepadAPI[this.controller].buttonsStatus.includes('A') || (keysPressed['k'] || keysPressed['ArrowDown'])) {
 
                     if (this.screwangle == 0) {
 
