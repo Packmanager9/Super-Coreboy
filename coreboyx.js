@@ -6979,7 +6979,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     this.shieldpower = 100
                 }
             }
-
+            this.shotdraw = 0
             if (this.breaktimer <= 0 && this.shield == 0) {
 
                 if (this.body.y < 900) {
@@ -7058,7 +7058,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
                 }
 
-                this.shotdraw = 0
+
                 if (this.righthand.fired <= 0) {
                     if (this.righthand.anchored == 0) {
                         if (this.rightshot == 1) {
@@ -13573,6 +13573,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }
             }
 
+            this.shotdraw = 0
             if (this.breaktimer <= 0 && this.shield == 0) {
 
                 if (this.body.y < 900) {
@@ -13639,7 +13640,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
                 }
 
-                this.shotdraw = 0
                 if (this.righthand.fired <= 0) {
                     if (this.righthand.anchored == 0) {
                         if (this.rightshot == 1) {
