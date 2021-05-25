@@ -4271,7 +4271,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             if (this.breaktimer <= 0 && this.shield == 0) {
 
-                if (gamepadAPI[this.controller].buttonsStatus.includes('B') || keysPressed['l']) {
+                if (gamepadAPI[this.controller].buttonsStatus.includes('B') || (keysPressed['l'] || keysPressed['ArrowRight'])) {
                     if (this.face == 1) {
                         if (this.righthand.fired <= 0) {
                             if (this.righthand.anchored == 0) {
@@ -4293,7 +4293,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }
 
 
-                if (gamepadAPI[this.controller].buttonsStatus.includes('Y') || keysPressed['i']) {
+                if (gamepadAPI[this.controller].buttonsStatus.includes('Y') || (keysPressed['i'] || keysPressed['ArrowUp'])) {
                     if (this.righthand.fired <= 0) {
                         if (this.righthand.anchored == 0) {
                             this.righthand.ymom = -this.punchspeed * 14
@@ -4310,7 +4310,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
                 }
 
-                if (gamepadAPI[this.controller].buttonsStatus.includes('A') || keysPressed['k']) {
+                if (gamepadAPI[this.controller].buttonsStatus.includes('A') || (keysPressed['j'] || keysPressed['ArrowDown'])) {
                     if (this.righthand.fired <= 0) {
                         if (this.righthand.anchored == 0) {
                             this.rightshoulder.xmom = 0
@@ -4332,7 +4332,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }
 
 
-                if (gamepadAPI[this.controller].buttonsStatus.includes('X') || keysPressed['j']) {
+                if (gamepadAPI[this.controller].buttonsStatus.includes('X') || (keysPressed['j'] || keysPressed['ArrowLeft'])) {
                     if (this.lefthand.fired <= 0) {
                         if (this.righthand.fired <= 0) {
                             this.shot = new Shot(this.body.x, this.body.y, 20, "#bbbbbb", 0, (this.speed * 2.5))
@@ -7189,7 +7189,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (this.breaktimer <= 0 && this.shield == 0) {
 
                 if (this.righthand.fired <= 0) {
-                    if (gamepadAPI[this.controller].buttonsStatus.includes('B') || keysPressed['l']) {
+                    if (gamepadAPI[this.controller].buttonsStatus.includes('B') || (keysPressed['l'] || keysPressed['ArrowRight'])) {
 
                         if (this.face == 1) {
                             if (this.righthand.anchored == 0) {
@@ -7242,7 +7242,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
                 }
 
-                if (gamepadAPI[this.controller].buttonsStatus.includes('Y') || keysPressed['i']) {
+                if (gamepadAPI[this.controller].buttonsStatus.includes('Y') || (keysPressed['i'] || keysPressed['ArrowUp'])) {
                     if (this.body.fired <= 0) {
                         if (this.screwangle == 0) {
                             this.screwmomentum = Math.PI / 5
@@ -7259,7 +7259,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         }
                     }
                 }
-                if (gamepadAPI[this.controller].buttonsStatus.includes('A') || keysPressed['k']) {
+                if (gamepadAPI[this.controller].buttonsStatus.includes('A') || (keysPressed['j'] || keysPressed['ArrowDown'])) {
                     if (this.righthand.fired <= 0) {
                         if (this.righthand.anchored == 0) {
                             this.rightshoulder.xmom = 0
@@ -7280,7 +7280,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
                 }
 
-                if (gamepadAPI[this.controller].buttonsStatus.includes('X') || keysPressed['j']) {
+                if (gamepadAPI[this.controller].buttonsStatus.includes('X') || (keysPressed['j'] || keysPressed['ArrowLeft'])) {
                     if (this.righthand.fired <= 0) {
                         if (this.righthand.anchored == 0) {
                             this.rightshoulder.xmom = 0
@@ -9237,7 +9237,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 
                 if (this.righthand.fired <= 0) {
-                    if (gamepadAPI[this.controller].buttonsStatus.includes('B') || keysPressed['l']) {
+                    if (gamepadAPI[this.controller].buttonsStatus.includes('B') || (keysPressed['l'] || keysPressed['ArrowRight'])) {
                         if (this.face == 1) {
                             if (this.righthand.anchored == 0) {
                                 this.shot = new Shot(this.righthand.x, this.righthand.y, 40, "#FF0000", this.speed * (1.9), 0)
@@ -9279,7 +9279,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 if (this.body.fired > 0) {
                     this.body.ymom -= this.body.fired * .018
                 }
-                if (gamepadAPI[this.controller].buttonsStatus.includes('Y') || keysPressed['i']) {
+                if (gamepadAPI[this.controller].buttonsStatus.includes('Y') || (keysPressed['i'] || keysPressed['ArrowUp'])) {
                     if (this.screwangle == 0) {
 
                         if (this.body.fired <= 0) {
@@ -9299,7 +9299,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         }
                     }
                 }
-                if (gamepadAPI[this.controller].buttonsStatus.includes('A') || keysPressed['k']) {
+                if (gamepadAPI[this.controller].buttonsStatus.includes('A') || (keysPressed['j'] || keysPressed['ArrowDown'])) {
                     if (this.righthand.fired <= 0) {
                         if (this.righthand.anchored == 0) {
                             this.rightshoulder.xmom = 0
@@ -9320,7 +9320,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
                 }
 
-                if (gamepadAPI[this.controller].buttonsStatus.includes('X') || keysPressed['j']) {
+                if (gamepadAPI[this.controller].buttonsStatus.includes('X') || (keysPressed['j'] || keysPressed['ArrowLeft'])) {
                     if (this.righthand.fired <= 0) {
                         if (this.righthand.anchored == 0) {
                             this.shot = new Shot(this.rightshoulder.x, this.rightshoulder.y, 20, "#FFAA00", this.speed * 1.2, -this.speed * 1.4)
@@ -11145,7 +11145,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 
                 if (this.blasting <= -45) {
-                    if (gamepadAPI[this.controller].buttonsStatus.includes('B') || keysPressed['l']) {
+                    if (gamepadAPI[this.controller].buttonsStatus.includes('B') || (keysPressed['l'] || keysPressed['ArrowRight'])) {
                         if (this.face == 1) {
                             if (this.righthand.anchored == 0) {
                                 if (this.charge <= 0) {
@@ -11185,7 +11185,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
                 }
 
-                if (gamepadAPI[this.controller].buttonsStatus.includes('Y') || keysPressed['i']) {
+                if (gamepadAPI[this.controller].buttonsStatus.includes('Y') || (keysPressed['i'] || keysPressed['ArrowUp'])) {
 
                     if (this.screwangle == 0) {
                         if (this.body.fired <= 0) {
@@ -11205,7 +11205,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         }
                     }
                 }
-                if (gamepadAPI[this.controller].buttonsStatus.includes('A') || keysPressed['k']) {
+                if (gamepadAPI[this.controller].buttonsStatus.includes('A') || (keysPressed['j'] || keysPressed['ArrowDown'])) {
                     if (this.righthand.fired <= 0) {
                         if (this.righthand.anchored == 0) {
                             this.rightshoulder.xmom = 0
@@ -11226,7 +11226,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
                 }
 
-                if (gamepadAPI[this.controller].buttonsStatus.includes('X') || keysPressed['j']) {
+                if (gamepadAPI[this.controller].buttonsStatus.includes('X') || (keysPressed['j'] || keysPressed['ArrowLeft'])) {
                     if (this.reflecting <= -10) {
                         this.reflecting = 20
                         this.lefthand.xmom = this.punchspeed * -23.5
@@ -13770,7 +13770,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (this.breaktimer <= 0 && this.shield == 0) {
 
                 if (this.righthand.fired <= 0) {
-                    if (gamepadAPI[this.controller].buttonsStatus.includes('B') || keysPressed['l']) {
+                    if (gamepadAPI[this.controller].buttonsStatus.includes('B') || (keysPressed['l'] || keysPressed['ArrowRight'])) {
 
                         if (this.face == 1) {
                             if (this.righthand.anchored == 0) {
@@ -13823,7 +13823,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
                 }
 
-                if (gamepadAPI[this.controller].buttonsStatus.includes('Y') || keysPressed['i']) {
+                if (gamepadAPI[this.controller].buttonsStatus.includes('Y') || (keysPressed['i'] || keysPressed['ArrowUp'])) {
                     if (this.body.fired <= 0) {
                         if (this.screwangle == 0) {
                             this.screwmomentum = Math.PI / 5
@@ -13840,7 +13840,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         }
                     }
                 }
-                if (gamepadAPI[this.controller].buttonsStatus.includes('A') || keysPressed['k']) {
+                if (gamepadAPI[this.controller].buttonsStatus.includes('A') || (keysPressed['j'] || keysPressed['ArrowDown'])) {
                     if (this.lefthand.fired <= 0) {
                         if (this.righthand.fired <= 0) {
                             this.shot = new ShotC(this.body.x, this.body.y, 24, "#FF0000", 0, (this.speed * 1.5))
@@ -13861,7 +13861,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }
 
 
-                if (gamepadAPI[this.controller].buttonsStatus.includes('X') || keysPressed['j']) {
+                if (gamepadAPI[this.controller].buttonsStatus.includes('X') || (keysPressed['j'] || keysPressed['ArrowLeft'])) {
                     if (this.righthand.fired <= 0) {
                         if (this.righthand.anchored == 0) {
                             this.fleeing = 0
@@ -14653,7 +14653,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             if (this.breaktimer <= 0 && this.shield == 0) {
 
-                if (gamepadAPI[this.controller].buttonsStatus.includes('B') || keysPressed['l']) {
+                if (gamepadAPI[this.controller].buttonsStatus.includes('B') || (keysPressed['l'] || keysPressed['ArrowRight'])) {
                     if (this.face == 1) {
                         if (this.righthand.fired <= 0) {
                             if (this.righthand.anchored == 0) {
@@ -14691,7 +14691,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }
 
 
-                if (gamepadAPI[this.controller].buttonsStatus.includes('Y') || keysPressed['i']) {
+                if (gamepadAPI[this.controller].buttonsStatus.includes('Y') || (keysPressed['i'] || keysPressed['ArrowUp'])) {
                     if (this.righthand.fired <= 0) {
                         if (this.righthand.anchored == 0) {
                             this.righthand.ymom = -this.punchspeed * 14
@@ -14726,7 +14726,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
                 }
 
-                if (gamepadAPI[this.controller].buttonsStatus.includes('A') || keysPressed['k']) {
+                if (gamepadAPI[this.controller].buttonsStatus.includes('A') || (keysPressed['j'] || keysPressed['ArrowDown'])) {
                     if (this.righthand.fired <= 0) {
                         if (this.righthand.anchored == 0) {
                             this.rightshoulder.xmom = 0
@@ -14782,7 +14782,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }
 
 
-                if (gamepadAPI[this.controller].buttonsStatus.includes('X') || keysPressed['j']) {
+                if (gamepadAPI[this.controller].buttonsStatus.includes('X') || (keysPressed['j'] || keysPressed['ArrowLeft'])) {
                     if (this.lefthand.fired <= 0) {
                         if (this.righthand.fired <= 0) {
                             if (this.countering <= -30) {
@@ -15569,7 +15569,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
                     for (let g = 0; g < boys[t].shots.length; g++) {
                         let link = new LineOP(this.body, boys[t].shots[g])
-                        if (link.hypotenuse() + (this.body.radius + boys[t].shots[g].radius) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 40) {
+                        if (link.hypotenuse() + (this.body.radius + boys[t].shots[g].radius) / (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) < 4) { //40?
+                            this.hortsmash = 1
                             this.storeshield = 1
                         }
                     }
@@ -15579,11 +15580,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             if (this.face == -1) {
                                 if (Math.abs(this.body.x - boys[t].body.x) < 212) {
                                     // console.log(Math.abs(this.body.x - boys[t].body.x))
-                                    this.leftshot = 1
-                                    if (Math.random() < .1) {
-                                        this.hortsmash = 1
-                                        this.leftshot = 0
+                                    if (this.fleeing != 1) {
+                                        this.leftshot = 1
                                     }
+                                    // if (Math.random() < .1) {
+                                    //     this.hortsmash = 1
+                                    //     this.leftshot = 0
+                                    // }
                                 }
                             }
                         }
@@ -15591,11 +15594,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             if (this.face == 1) {
                                 if (Math.abs(this.body.x - boys[t].body.x) < 212) {
                                     // console.log(Math.abs(this.body.x - boys[t].body.x))
-                                    this.rightshot = 1
-                                    if (Math.random() < .1) {
-                                        this.hortsmash = 1
-                                        this.rightshot = 0
+                                    if (this.fleeing != 1) {
+                                        this.rightshot = 1
                                     }
+                                    // if (Math.random() < .1) {
+                                    //     this.hortsmash = 1
+                                    //     this.rightshot = 0
+                                    // }
                                 }
                             }
                         }
@@ -15604,21 +15609,23 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     if (Math.abs(this.body.x - boys[t].body.x) < 145 && this.body.y > boys[t].body.y) {
                         this.screwshot = 1
                     }
-                    if (Math.abs(this.body.x - boys[t].body.x) < 45 && this.body.y < boys[t].body.y) {
+                    if (Math.abs(this.body.x - boys[t].body.x) < 210 && (boys[t].body.y - this.body.y) < 120 && this.body.y < boys[t].body.y) {  //45
                         if (this.amomu <= 0 && this.dmomu <= 0) {
                             this.downspike = 1
                         }
                     } else if (Math.abs(this.body.x - boys[t].body.x) < 150 && this.body.y <= boys[t].body.y && (boys[t].righthand.anchored == 1 || boys[t].lefthand.anchored == 1)) {
-                        this.hortsmash = 1
-                    }
-                    if (Math.abs(this.body.x - boys[t].body.x) < 170 && this.body.y < boys[t].body.y) {
-                        if (this.amomu <= 0 && this.dmomu <= 0) {
-                            this.downspike = 1
+                        if (this.face == -1) {
+                            if (this.fleeing != 1) {
+                                if (Math.abs(this.body.y - boys[t].body.y) < this.body.radius) {
+                                    this.leftshot = 1
+                                }
+                            }
                         }
-                    } else if (this.body.y - boys[t].body.y > 100) {
-                        if (Math.random() < .01) {
-                            if (this.amomu <= 0 && this.dmomu <= 0) {
-                                this.downspike = 1
+                        if (this.face == 1) {
+                            if (this.fleeing != 1) {
+                                if (Math.abs(this.body.y - boys[t].body.y) < this.body.radius) {
+                                    this.rightshot = 1
+                                }
                             }
                         }
                     }
@@ -15629,20 +15636,39 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     if (Math.abs(this.body.x - boys[t].body.x) < 240) {
                         if (this.body.x > boys[t].body.x) {
                             if (this.face == 1) {
-                                this.hortsmash = 1
+                                if (this.fleeing != 1) {
+                                    if (Math.abs(this.body.y - boys[t].body.y) < this.body.radius) {
+                                        this.rightshot = 1
+                                    }
+                                }
                             }
                         }
                         if (this.body.x < boys[t].body.x) {
                             if (this.face == -1) {
-                                this.hortsmash = 1
+                                if (this.fleeing != 1) {
+                                    if (Math.abs(this.body.y - boys[t].body.y) < this.body.radius) {
+                                        this.leftshot = 1
+                                    }
+                                }
                             }
                         }
                     }
 
                     if (boys[t].righthand.fired > 14) {
                         if (this.body.x > boys[t].body.x) {
-                            if (Math.random() < .09) {
+                            let link =( (new LineOP(this.body, boys[t].righthand)).hypotenuse()+this.body.radius+boys[t].righthand.radius)/(Math.abs(boys[t].righthand.xmom)+Math.abs(boys[t].righthand.ymom))
+                            if (link <= 2) {
                                 this.storeshield = 1
+                                this.hortsmash = 1
+                            }
+                        }
+                    }
+                    if (boys[t].lefthand.fired > 14) {
+                        if (this.body.x < boys[t].body.x) {
+                            let link =( (new LineOP(this.body, boys[t].lefthand)).hypotenuse()+this.body.radius+boys[t].lefthand.radius)/(Math.abs(boys[t].lefthand.xmom)+Math.abs(boys[t].lefthand.ymom))
+                            if (link <= 2) {
+                                this.storeshield = 1
+                                this.hortsmash = 1
                             }
                         }
                     }
@@ -15652,6 +15678,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             if (this.body.x < boys[t].body.x) {
                                 if (Math.random() < .4) {
                                     this.storeshield = 1
+                                    this.hortsmash = 1
                                 }
                             }
                         }
@@ -17971,7 +17998,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (this.breaktimer <= 0 && this.shield == 0) {
 
 
-                if (gamepadAPI[this.controller].buttonsStatus.includes('B') || keysPressed['l']) {
+                if (gamepadAPI[this.controller].buttonsStatus.includes('B') || (keysPressed['l'] || keysPressed['ArrowRight'])) {
                     if (this.righthand.fired <= 0) {
                         if (this.face == 1) {
                             if (this.righthand.anchored == 0) {
@@ -18005,7 +18032,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         this.body.ymom = vsmashlimit
                     }
                 }
-                if (gamepadAPI[this.controller].buttonsStatus.includes('Y') || keysPressed['i']) {
+                if (gamepadAPI[this.controller].buttonsStatus.includes('Y') || (keysPressed['i'] || keysPressed['ArrowUp'])) {
                     if (this.righthand.fired <= 0) {
                         if (this.righthand.anchored == 0) {
                             this.shot = new Shot(this.rightshoulder.x, this.rightshoulder.y, 30, "#AA00FF", this.speed * -.2, -this.speed * .4)
@@ -18031,7 +18058,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         }
                     }
                 }
-                if (gamepadAPI[this.controller].buttonsStatus.includes('A') || keysPressed['k']) {
+                if (gamepadAPI[this.controller].buttonsStatus.includes('A') || (keysPressed['j'] || keysPressed['ArrowDown'])) {
 
                     if (this.screwangle == 0) {
 
@@ -18056,7 +18083,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
                 }
 
-                if (gamepadAPI[this.controller].buttonsStatus.includes('X') || keysPressed['j']) {
+                if (gamepadAPI[this.controller].buttonsStatus.includes('X') || (keysPressed['j'] || keysPressed['ArrowLeft'])) {
                     if (this.righthand.fired <= 0) {
                         if (this.righthand.anchored == 0) {
                             this.rightshoulder.xmom = 0
