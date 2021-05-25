@@ -1153,15 +1153,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 canvas_context.fillStyle = this.color
 
 
-                var gard = canvas_context.createRadialGradient(this.x, this.y, 0, this.x - (0), this.y - (0), Math.max(this.radius - canvas_context.lineWidth, 0))
+                var gard = canvas_context.createRadialGradient(this.x, this.y, 0, this.x - (0), this.y - (this.radius * 1.25), Math.max((this.radius * 2.5) - canvas_context.lineWidth, 0))
                 this.string = this.color
 
 
                 for (let t = 0; t < 13; t += 6) {
                     gard.addColorStop(t / 18.1, (this.string) + `ff`)
-                    gard.addColorStop((t + 1.5) / 18.1, invertColorx(this.string) + "ff")
+                    gard.addColorStop((t + 1.5) / 18.1, "#000000" + "ff")
                     gard.addColorStop((t + 3) / 18.1, (this.string) + "ff")
-                    gard.addColorStop((t + 4.5) / 18.1, invertColor(this.string) + "ff")
+                    gard.addColorStop((t + 4.5) / 18.1, "#000000" + "ff")
                 }
 
 
@@ -2611,10 +2611,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
 
             if (circle.doesPerimeterTouch(this.edgeleft)) {
-                if (circle == circle.self.righthand) {// || circle == circle.self.righthand2 || circle == circle.self.righthand3) {
+                if (circle == circle.self.righthand) {
                     if (circle.anchored >= -1) {
                         circle.anchored = 1
-                        // circle.self.brick = this
                         circle.anchor = this.edgeleft
                     }
                     if (circle.self.body.y > circle.y) {
@@ -2623,10 +2622,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }
             }
             if (circle.doesPerimeterTouch(this.edgeright)) {
-                if (circle == circle.self.lefthand) { // ||circle == circle.self.lefthand2 ||circle == circle.self.lefthand3) {
+                if (circle == circle.self.lefthand) {
                     if (circle.anchored >= -1) {
                         circle.anchored = 1
-                        // circle.self.brick = this
                         circle.anchor = this.edgeright
                     }
                     if (circle.self.body.y > circle.y) {
@@ -2720,6 +2718,28 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             if (circle == circle.self.lefthand || circle == circle.self.lefthand2 || circle == circle.self.lefthand3) {
                                                 if (circle.self.leftarm.hypotenuse() < this.height * 5.2) {
                                                     circle.y += .1
+                                                    if (circle.doesPerimeterTouch(this.edgeleft)) {
+                                                        if (circle == circle.self.righthand) {
+                                                            if (circle.anchored >= -1) {
+                                                                circle.anchored = 1
+                                                                circle.anchor = this.edgeleft
+                                                            }
+                                                            if (circle.self.body.y > circle.y) {
+                                                                circle.x--
+                                                            }
+                                                        }
+                                                    }
+                                                    if (circle.doesPerimeterTouch(this.edgeright)) {
+                                                        if (circle == circle.self.lefthand) {
+                                                            if (circle.anchored >= -1) {
+                                                                circle.anchored = 1
+                                                                circle.anchor = this.edgeright
+                                                            }
+                                                            if (circle.self.body.y > circle.y) {
+                                                                circle.x++
+                                                            }
+                                                        }
+                                                    }
                                                 } else {
                                                     // //////////////console.log("hit9")
                                                     break
@@ -2728,6 +2748,28 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             if (circle == circle.self.righthand || circle == circle.self.righthand2 || circle == circle.self.righthand3) {
                                                 if (circle.self.rightarm.hypotenuse() < this.height * 5.2) {
                                                     circle.y += .1
+                                                    if (circle.doesPerimeterTouch(this.edgeleft)) {
+                                                        if (circle == circle.self.righthand) {
+                                                            if (circle.anchored >= -1) {
+                                                                circle.anchored = 1
+                                                                circle.anchor = this.edgeleft
+                                                            }
+                                                            if (circle.self.body.y > circle.y) {
+                                                                circle.x--
+                                                            }
+                                                        }
+                                                    }
+                                                    if (circle.doesPerimeterTouch(this.edgeright)) {
+                                                        if (circle == circle.self.lefthand) {
+                                                            if (circle.anchored >= -1) {
+                                                                circle.anchored = 1
+                                                                circle.anchor = this.edgeright
+                                                            }
+                                                            if (circle.self.body.y > circle.y) {
+                                                                circle.x++
+                                                            }
+                                                        }
+                                                    }
                                                 } else {
                                                     // //////////////console.log("hit10")
                                                     break
@@ -2755,6 +2797,28 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     if (circle == circle.self.body) {
                                         if (circle.anchored != 1) {
                                             circle.y -= .1
+                                            if (circle.doesPerimeterTouch(this.edgeleft)) {
+                                                if (circle == circle.self.righthand) {
+                                                    if (circle.anchored >= -1) {
+                                                        circle.anchored = 1
+                                                        circle.anchor = this.edgeleft
+                                                    }
+                                                    if (circle.self.body.y > circle.y) {
+                                                        circle.x--
+                                                    }
+                                                }
+                                            }
+                                            if (circle.doesPerimeterTouch(this.edgeright)) {
+                                                if (circle == circle.self.lefthand) {
+                                                    if (circle.anchored >= -1) {
+                                                        circle.anchored = 1
+                                                        circle.anchor = this.edgeright
+                                                    }
+                                                    if (circle.self.body.y > circle.y) {
+                                                        circle.x++
+                                                    }
+                                                }
+                                            }
                                             circle.self.grounded = 1
                                         } else {
                                             break
@@ -2766,6 +2830,29 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                                     //// //////////////console.log("hit15")
                                                     if (circle.anchored != 1) {
                                                         circle.y -= .1
+
+                                                        if (circle.doesPerimeterTouch(this.edgeleft)) {
+                                                            if (circle == circle.self.righthand) {
+                                                                if (circle.anchored >= -1) {
+                                                                    circle.anchored = 1
+                                                                    circle.anchor = this.edgeleft
+                                                                }
+                                                                if (circle.self.body.y > circle.y) {
+                                                                    circle.x--
+                                                                }
+                                                            }
+                                                        }
+                                                        if (circle.doesPerimeterTouch(this.edgeright)) {
+                                                            if (circle == circle.self.lefthand) {
+                                                                if (circle.anchored >= -1) {
+                                                                    circle.anchored = 1
+                                                                    circle.anchor = this.edgeright
+                                                                }
+                                                                if (circle.self.body.y > circle.y) {
+                                                                    circle.x++
+                                                                }
+                                                            }
+                                                        }
                                                     } else {
                                                         break
                                                     }
@@ -2780,6 +2867,28 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                                             if (circle.x > circle.self.body.x) {
                                                                 if (circle.anchored != 1) {
                                                                     circle.x -= .15
+                                                                    if (circle.doesPerimeterTouch(this.edgeleft)) {
+                                                                        if (circle == circle.self.righthand) {
+                                                                            if (circle.anchored >= -1) {
+                                                                                circle.anchored = 1
+                                                                                circle.anchor = this.edgeleft
+                                                                            }
+                                                                            if (circle.self.body.y > circle.y) {
+                                                                                circle.x--
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    if (circle.doesPerimeterTouch(this.edgeright)) {
+                                                                        if (circle == circle.self.lefthand) {
+                                                                            if (circle.anchored >= -1) {
+                                                                                circle.anchored = 1
+                                                                                circle.anchor = this.edgeright
+                                                                            }
+                                                                            if (circle.self.body.y > circle.y) {
+                                                                                circle.x++
+                                                                            }
+                                                                        }
+                                                                    }
                                                                 }
                                                             }
                                                         }
@@ -2790,6 +2899,50 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                                             if (circle.x < circle.self.body.x) {
                                                                 if (circle.anchored != 1) {
                                                                     circle.x += .15
+                                                                    if (circle.doesPerimeterTouch(this.edgeleft)) {
+                                                                        if (circle == circle.self.righthand) {
+                                                                            if (circle.anchored >= -1) {
+                                                                                circle.anchored = 1
+                                                                                circle.anchor = this.edgeleft
+                                                                            }
+                                                                            if (circle.self.body.y > circle.y) {
+                                                                                circle.x--
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    if (circle.doesPerimeterTouch(this.edgeright)) {
+                                                                        if (circle == circle.self.lefthand) {
+                                                                            if (circle.anchored >= -1) {
+                                                                                circle.anchored = 1
+                                                                                circle.anchor = this.edgeright
+                                                                            }
+                                                                            if (circle.self.body.y > circle.y) {
+                                                                                circle.x++
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    if (circle.doesPerimeterTouch(this.edgeleft)) {
+                                                                        if (circle == circle.self.righthand) {
+                                                                            if (circle.anchored >= -1) {
+                                                                                circle.anchored = 1
+                                                                                circle.anchor = this.edgeleft
+                                                                            }
+                                                                            if (circle.self.body.y > circle.y) {
+                                                                                circle.x--
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    if (circle.doesPerimeterTouch(this.edgeright)) {
+                                                                        if (circle == circle.self.lefthand) {
+                                                                            if (circle.anchored >= -1) {
+                                                                                circle.anchored = 1
+                                                                                circle.anchor = this.edgeright
+                                                                            }
+                                                                            if (circle.self.body.y > circle.y) {
+                                                                                circle.x++
+                                                                            }
+                                                                        }
+                                                                    }
                                                                 }
                                                             }
                                                         }
@@ -2805,6 +2958,29 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                                 if (circle.self.body.y <= this.edgeleft.y) {
                                                     if (circle.anchored != 1) {
                                                         circle.y -= .1
+
+                                                        if (circle.doesPerimeterTouch(this.edgeleft)) {
+                                                            if (circle == circle.self.righthand) {
+                                                                if (circle.anchored >= -1) {
+                                                                    circle.anchored = 1
+                                                                    circle.anchor = this.edgeleft
+                                                                }
+                                                                if (circle.self.body.y > circle.y) {
+                                                                    circle.x--
+                                                                }
+                                                            }
+                                                        }
+                                                        if (circle.doesPerimeterTouch(this.edgeright)) {
+                                                            if (circle == circle.self.lefthand) {
+                                                                if (circle.anchored >= -1) {
+                                                                    circle.anchored = 1
+                                                                    circle.anchor = this.edgeright
+                                                                }
+                                                                if (circle.self.body.y > circle.y) {
+                                                                    circle.x++
+                                                                }
+                                                            }
+                                                        }
                                                     } else {
                                                         break
                                                     }
@@ -2818,6 +2994,28 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                                             if (circle.x > circle.self.body.x) {
                                                                 if (circle.anchored != 1) {
                                                                     circle.x -= .15
+                                                                    if (circle.doesPerimeterTouch(this.edgeleft)) {
+                                                                        if (circle == circle.self.righthand) {
+                                                                            if (circle.anchored >= -1) {
+                                                                                circle.anchored = 1
+                                                                                circle.anchor = this.edgeleft
+                                                                            }
+                                                                            if (circle.self.body.y > circle.y) {
+                                                                                circle.x--
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    if (circle.doesPerimeterTouch(this.edgeright)) {
+                                                                        if (circle == circle.self.lefthand) {
+                                                                            if (circle.anchored >= -1) {
+                                                                                circle.anchored = 1
+                                                                                circle.anchor = this.edgeright
+                                                                            }
+                                                                            if (circle.self.body.y > circle.y) {
+                                                                                circle.x++
+                                                                            }
+                                                                        }
+                                                                    }
                                                                 }
                                                             }
                                                         }
@@ -2828,6 +3026,28 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                                             if (circle.x < circle.self.body.x) {
                                                                 if (circle.anchored != 1) {
                                                                     circle.x += .15
+                                                                    if (circle.doesPerimeterTouch(this.edgeleft)) {
+                                                                        if (circle == circle.self.righthand) {
+                                                                            if (circle.anchored >= -1) {
+                                                                                circle.anchored = 1
+                                                                                circle.anchor = this.edgeleft
+                                                                            }
+                                                                            if (circle.self.body.y > circle.y) {
+                                                                                circle.x--
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    if (circle.doesPerimeterTouch(this.edgeright)) {
+                                                                        if (circle == circle.self.lefthand) {
+                                                                            if (circle.anchored >= -1) {
+                                                                                circle.anchored = 1
+                                                                                circle.anchor = this.edgeright
+                                                                            }
+                                                                            if (circle.self.body.y > circle.y) {
+                                                                                circle.x++
+                                                                            }
+                                                                        }
+                                                                    }
                                                                 }
                                                             }
                                                         }
@@ -2846,6 +3066,28 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                                 if (circle.x > circle.self.body.x) {
                                                     if (circle.anchored != 1) {
                                                         circle.x -= .15
+                                                        if (circle.doesPerimeterTouch(this.edgeleft)) {
+                                                            if (circle == circle.self.righthand) {
+                                                                if (circle.anchored >= -1) {
+                                                                    circle.anchored = 1
+                                                                    circle.anchor = this.edgeleft
+                                                                }
+                                                                if (circle.self.body.y > circle.y) {
+                                                                    circle.x--
+                                                                }
+                                                            }
+                                                        }
+                                                        if (circle.doesPerimeterTouch(this.edgeright)) {
+                                                            if (circle == circle.self.lefthand) {
+                                                                if (circle.anchored >= -1) {
+                                                                    circle.anchored = 1
+                                                                    circle.anchor = this.edgeright
+                                                                }
+                                                                if (circle.self.body.y > circle.y) {
+                                                                    circle.x++
+                                                                }
+                                                            }
+                                                        }
                                                     }
                                                 }
                                             }
@@ -2856,6 +3098,28 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                                 if (circle.x < circle.self.body.x) {
                                                     if (circle.anchored != 1) {
                                                         circle.x += .15
+                                                        if (circle.doesPerimeterTouch(this.edgeleft)) {
+                                                            if (circle == circle.self.righthand) {
+                                                                if (circle.anchored >= -1) {
+                                                                    circle.anchored = 1
+                                                                    circle.anchor = this.edgeleft
+                                                                }
+                                                                if (circle.self.body.y > circle.y) {
+                                                                    circle.x--
+                                                                }
+                                                            }
+                                                        }
+                                                        if (circle.doesPerimeterTouch(this.edgeright)) {
+                                                            if (circle == circle.self.lefthand) {
+                                                                if (circle.anchored >= -1) {
+                                                                    circle.anchored = 1
+                                                                    circle.anchor = this.edgeright
+                                                                }
+                                                                if (circle.self.body.y > circle.y) {
+                                                                    circle.x++
+                                                                }
+                                                            }
+                                                        }
                                                     }
                                                 }
                                             }
@@ -2864,6 +3128,28 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 }
                                 //// //////////////console.log("hit13")
                                 circle.y += .1
+                                if (circle.doesPerimeterTouch(this.edgeleft)) {
+                                    if (circle == circle.self.righthand) {
+                                        if (circle.anchored >= -1) {
+                                            circle.anchored = 1
+                                            circle.anchor = this.edgeleft
+                                        }
+                                        if (circle.self.body.y > circle.y) {
+                                            circle.x--
+                                        }
+                                    }
+                                }
+                                if (circle.doesPerimeterTouch(this.edgeright)) {
+                                    if (circle == circle.self.lefthand) {
+                                        if (circle.anchored >= -1) {
+                                            circle.anchored = 1
+                                            circle.anchor = this.edgeright
+                                        }
+                                        if (circle.self.body.y > circle.y) {
+                                            circle.x++
+                                        }
+                                    }
+                                }
                             }
                         } else {
                             if (circle == circle.self.body) {
@@ -2899,27 +3185,141 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             if (circle.self.body.y < this.edgeleft.y) {
                                 if (circle.anchored != 1) {
                                     circle.y -= .1
+
+                                    if (circle.doesPerimeterTouch(this.edgeleft)) {
+                                        if (circle == circle.self.righthand) {
+                                            if (circle.anchored >= -1) {
+                                                circle.anchored = 1
+                                                circle.anchor = this.edgeleft
+                                            }
+                                            if (circle.self.body.y > circle.y) {
+                                                circle.x--
+                                            }
+                                        }
+                                    }
+                                    if (circle.doesPerimeterTouch(this.edgeright)) {
+                                        if (circle == circle.self.lefthand) {
+                                            if (circle.anchored >= -1) {
+                                                circle.anchored = 1
+                                                circle.anchor = this.edgeright
+                                            }
+                                            if (circle.self.body.y > circle.y) {
+                                                circle.x++
+                                            }
+                                        }
+                                    }
                                 } else {
                                     break
                                 }
                             } else if (circle.self.body.y > this.edgeleft.y + (this.height * 2)) {
                                 if (circle.anchored != 1) {
                                     circle.y += .1
+
+                                    if (circle.doesPerimeterTouch(this.edgeleft)) {
+                                        if (circle == circle.self.righthand) {
+                                            if (circle.anchored >= -1) {
+                                                circle.anchored = 1
+                                                circle.anchor = this.edgeleft
+                                            }
+                                            if (circle.self.body.y > circle.y) {
+                                                circle.x--
+                                            }
+                                        }
+                                    }
+                                    if (circle.doesPerimeterTouch(this.edgeright)) {
+                                        if (circle == circle.self.lefthand) {
+                                            if (circle.anchored >= -1) {
+                                                circle.anchored = 1
+                                                circle.anchor = this.edgeright
+                                            }
+                                            if (circle.self.body.y > circle.y) {
+                                                circle.x++
+                                            }
+                                        }
+                                    }
                                 } else {
                                     break
                                 }
                             } else {
                                 if (circle.anchored != 1) {
                                     circle.y -= ((circle.y - this.center.y) / (this.height)) * .1
+
+                                    if (circle.doesPerimeterTouch(this.edgeleft)) {
+                                        if (circle == circle.self.righthand) {
+                                            if (circle.anchored >= -1) {
+                                                circle.anchored = 1
+                                                circle.anchor = this.edgeleft
+                                            }
+                                            if (circle.self.body.y > circle.y) {
+                                                circle.x--
+                                            }
+                                        }
+                                    }
+                                    if (circle.doesPerimeterTouch(this.edgeright)) {
+                                        if (circle == circle.self.lefthand) {
+                                            if (circle.anchored >= -1) {
+                                                circle.anchored = 1
+                                                circle.anchor = this.edgeright
+                                            }
+                                            if (circle.self.body.y > circle.y) {
+                                                circle.x++
+                                            }
+                                        }
+                                    }
                                     if (circle.x > this.center.x) {
                                         if (circle != circle.self.body) {
                                             circle.x += .1
+
+                                            if (circle.doesPerimeterTouch(this.edgeleft)) {
+                                                if (circle == circle.self.righthand) {
+                                                    if (circle.anchored >= -1) {
+                                                        circle.anchored = 1
+                                                        circle.anchor = this.edgeleft
+                                                    }
+                                                    if (circle.self.body.y > circle.y) {
+                                                        circle.x--
+                                                    }
+                                                }
+                                            }
+                                            if (circle.doesPerimeterTouch(this.edgeright)) {
+                                                if (circle == circle.self.lefthand) {
+                                                    if (circle.anchored >= -1) {
+                                                        circle.anchored = 1
+                                                        circle.anchor = this.edgeright
+                                                    }
+                                                    if (circle.self.body.y > circle.y) {
+                                                        circle.x++
+                                                    }
+                                                }
+                                            }
                                         } else {
                                             break
                                         }
                                     } else if (circle.x < this.center.x) {
                                         if (circle != circle.self.body) {
                                             circle.x -= .1
+                                            if (circle.doesPerimeterTouch(this.edgeleft)) {
+                                                if (circle == circle.self.righthand) {
+                                                    if (circle.anchored >= -1) {
+                                                        circle.anchored = 1
+                                                        circle.anchor = this.edgeleft
+                                                    }
+                                                    if (circle.self.body.y > circle.y) {
+                                                        circle.x--
+                                                    }
+                                                }
+                                            }
+                                            if (circle.doesPerimeterTouch(this.edgeright)) {
+                                                if (circle == circle.self.lefthand) {
+                                                    if (circle.anchored >= -1) {
+                                                        circle.anchored = 1
+                                                        circle.anchor = this.edgeright
+                                                    }
+                                                    if (circle.self.body.y > circle.y) {
+                                                        circle.x++
+                                                    }
+                                                }
+                                            }
                                         } else {
                                             break
                                         }
@@ -2933,15 +3333,82 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         } else {
                             if (circle.anchored != 1) {
                                 circle.y -= ((circle.y - this.center.y) / (this.height)) * .1
+
+                                if (circle.doesPerimeterTouch(this.edgeleft)) {
+                                    if (circle == circle.self.righthand) {
+                                        if (circle.anchored >= -1) {
+                                            circle.anchored = 1
+                                            circle.anchor = this.edgeleft
+                                        }
+                                        if (circle.self.body.y > circle.y) {
+                                            circle.x--
+                                        }
+                                    }
+                                }
+                                if (circle.doesPerimeterTouch(this.edgeright)) {
+                                    if (circle == circle.self.lefthand) {
+                                        if (circle.anchored >= -1) {
+                                            circle.anchored = 1
+                                            circle.anchor = this.edgeright
+                                        }
+                                        if (circle.self.body.y > circle.y) {
+                                            circle.x++
+                                        }
+                                    }
+                                }
                                 if (circle.x > this.center.x) {
                                     if (circle != circle.self.body) {
                                         circle.x += .1
+                                        if (circle.doesPerimeterTouch(this.edgeleft)) {
+                                            if (circle == circle.self.righthand) {
+                                                if (circle.anchored >= -1) {
+                                                    circle.anchored = 1
+                                                    circle.anchor = this.edgeleft
+                                                }
+                                                if (circle.self.body.y > circle.y) {
+                                                    circle.x--
+                                                }
+                                            }
+                                        }
+                                        if (circle.doesPerimeterTouch(this.edgeright)) {
+                                            if (circle == circle.self.lefthand) {
+                                                if (circle.anchored >= -1) {
+                                                    circle.anchored = 1
+                                                    circle.anchor = this.edgeright
+                                                }
+                                                if (circle.self.body.y > circle.y) {
+                                                    circle.x++
+                                                }
+                                            }
+                                        }
                                     } else {
                                         break
                                     }
                                 } else if (circle.x < this.center.x) {
                                     if (circle != circle.self.body) {
                                         circle.x -= .1
+                                        if (circle.doesPerimeterTouch(this.edgeleft)) {
+                                            if (circle == circle.self.righthand) {
+                                                if (circle.anchored >= -1) {
+                                                    circle.anchored = 1
+                                                    circle.anchor = this.edgeleft
+                                                }
+                                                if (circle.self.body.y > circle.y) {
+                                                    circle.x--
+                                                }
+                                            }
+                                        }
+                                        if (circle.doesPerimeterTouch(this.edgeright)) {
+                                            if (circle == circle.self.lefthand) {
+                                                if (circle.anchored >= -1) {
+                                                    circle.anchored = 1
+                                                    circle.anchor = this.edgeright
+                                                }
+                                                if (circle.self.body.y > circle.y) {
+                                                    circle.x++
+                                                }
+                                            }
+                                        }
                                     } else {
                                         break
                                     }
@@ -2958,12 +3425,56 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             if (circle.x > this.center.x) {
                                 if (circle != circle.self.body) {
                                     circle.x += .1
+                                    if (circle.doesPerimeterTouch(this.edgeleft)) {
+                                        if (circle == circle.self.righthand) {
+                                            if (circle.anchored >= -1) {
+                                                circle.anchored = 1
+                                                circle.anchor = this.edgeleft
+                                            }
+                                            if (circle.self.body.y > circle.y) {
+                                                circle.x--
+                                            }
+                                        }
+                                    }
+                                    if (circle.doesPerimeterTouch(this.edgeright)) {
+                                        if (circle == circle.self.lefthand) {
+                                            if (circle.anchored >= -1) {
+                                                circle.anchored = 1
+                                                circle.anchor = this.edgeright
+                                            }
+                                            if (circle.self.body.y > circle.y) {
+                                                circle.x++
+                                            }
+                                        }
+                                    }
                                 } else {
                                     break
                                 }
                             } else if (circle.x < this.center.x) {
                                 if (circle != circle.self.body) {
                                     circle.x -= .1
+                                    if (circle.doesPerimeterTouch(this.edgeleft)) {
+                                        if (circle == circle.self.righthand) {
+                                            if (circle.anchored >= -1) {
+                                                circle.anchored = 1
+                                                circle.anchor = this.edgeleft
+                                            }
+                                            if (circle.self.body.y > circle.y) {
+                                                circle.x--
+                                            }
+                                        }
+                                    }
+                                    if (circle.doesPerimeterTouch(this.edgeright)) {
+                                        if (circle == circle.self.lefthand) {
+                                            if (circle.anchored >= -1) {
+                                                circle.anchored = 1
+                                                circle.anchor = this.edgeright
+                                            }
+                                            if (circle.self.body.y > circle.y) {
+                                                circle.x++
+                                            }
+                                        }
+                                    }
                                 } else {
                                     break
                                 }
@@ -2980,12 +3491,79 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             if (circle.self.body.y < this.edgeleft.y) {
                                 if (circle.anchored != 1) {
                                     circle.y -= .1
+                                    if (circle.doesPerimeterTouch(this.edgeleft)) {
+                                        if (circle == circle.self.righthand) {
+                                            if (circle.anchored >= -1) {
+                                                circle.anchored = 1
+                                                circle.anchor = this.edgeleft
+                                            }
+                                            if (circle.self.body.y > circle.y) {
+                                                circle.x--
+                                            }
+                                        }
+                                    }
+                                    if (circle.doesPerimeterTouch(this.edgeright)) {
+                                        if (circle == circle.self.lefthand) {
+                                            if (circle.anchored >= -1) {
+                                                circle.anchored = 1
+                                                circle.anchor = this.edgeright
+                                            }
+                                            if (circle.self.body.y > circle.y) {
+                                                circle.x++
+                                            }
+                                        }
+                                    }
+
+                                    if (circle.doesPerimeterTouch(this.edgeleft)) {
+                                        if (circle == circle.self.righthand) {
+                                            if (circle.anchored >= -1) {
+                                                circle.anchored = 1
+                                                circle.anchor = this.edgeleft
+                                            }
+                                            if (circle.self.body.y > circle.y) {
+                                                circle.x--
+                                            }
+                                        }
+                                    }
+                                    if (circle.doesPerimeterTouch(this.edgeright)) {
+                                        if (circle == circle.self.lefthand) {
+                                            if (circle.anchored >= -1) {
+                                                circle.anchored = 1
+                                                circle.anchor = this.edgeright
+                                            }
+                                            if (circle.self.body.y > circle.y) {
+                                                circle.x++
+                                            }
+                                        }
+                                    }
                                 } else {
                                     break
                                 }
                             } else if (circle.self.body.y > this.edgeleft.y + (this.height * 2)) {
                                 if (circle.anchored != 1) {
                                     circle.y += .1
+                                    if (circle.doesPerimeterTouch(this.edgeleft)) {
+                                        if (circle == circle.self.righthand) {
+                                            if (circle.anchored >= -1) {
+                                                circle.anchored = 1
+                                                circle.anchor = this.edgeleft
+                                            }
+                                            if (circle.self.body.y > circle.y) {
+                                                circle.x--
+                                            }
+                                        }
+                                    }
+                                    if (circle.doesPerimeterTouch(this.edgeright)) {
+                                        if (circle == circle.self.lefthand) {
+                                            if (circle.anchored >= -1) {
+                                                circle.anchored = 1
+                                                circle.anchor = this.edgeright
+                                            }
+                                            if (circle.self.body.y > circle.y) {
+                                                circle.x++
+                                            }
+                                        }
+                                    }
                                 } else {
                                     break
                                 }
@@ -2995,12 +3573,56 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     if (circle.x > this.center.x) {
                                         if (circle != circle.self.body) {
                                             circle.x += .1
+                                            if (circle.doesPerimeterTouch(this.edgeleft)) {
+                                                if (circle == circle.self.righthand) {
+                                                    if (circle.anchored >= -1) {
+                                                        circle.anchored = 1
+                                                        circle.anchor = this.edgeleft
+                                                    }
+                                                    if (circle.self.body.y > circle.y) {
+                                                        circle.x--
+                                                    }
+                                                }
+                                            }
+                                            if (circle.doesPerimeterTouch(this.edgeright)) {
+                                                if (circle == circle.self.lefthand) {
+                                                    if (circle.anchored >= -1) {
+                                                        circle.anchored = 1
+                                                        circle.anchor = this.edgeright
+                                                    }
+                                                    if (circle.self.body.y > circle.y) {
+                                                        circle.x++
+                                                    }
+                                                }
+                                            }
                                         } else {
                                             break
                                         }
                                     } else if (circle.x < this.center.x) {
                                         if (circle != circle.self.body) {
                                             circle.x -= .1
+                                            if (circle.doesPerimeterTouch(this.edgeleft)) {
+                                                if (circle == circle.self.righthand) {
+                                                    if (circle.anchored >= -1) {
+                                                        circle.anchored = 1
+                                                        circle.anchor = this.edgeleft
+                                                    }
+                                                    if (circle.self.body.y > circle.y) {
+                                                        circle.x--
+                                                    }
+                                                }
+                                            }
+                                            if (circle.doesPerimeterTouch(this.edgeright)) {
+                                                if (circle == circle.self.lefthand) {
+                                                    if (circle.anchored >= -1) {
+                                                        circle.anchored = 1
+                                                        circle.anchor = this.edgeright
+                                                    }
+                                                    if (circle.self.body.y > circle.y) {
+                                                        circle.x++
+                                                    }
+                                                }
+                                            }
                                         } else {
                                             break
                                         }
@@ -3017,12 +3639,56 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 if (circle.x > this.center.x) {
                                     if (circle != circle.self.body) {
                                         circle.x += .1
+                                        if (circle.doesPerimeterTouch(this.edgeleft)) {
+                                            if (circle == circle.self.righthand) {
+                                                if (circle.anchored >= -1) {
+                                                    circle.anchored = 1
+                                                    circle.anchor = this.edgeleft
+                                                }
+                                                if (circle.self.body.y > circle.y) {
+                                                    circle.x--
+                                                }
+                                            }
+                                        }
+                                        if (circle.doesPerimeterTouch(this.edgeright)) {
+                                            if (circle == circle.self.lefthand) {
+                                                if (circle.anchored >= -1) {
+                                                    circle.anchored = 1
+                                                    circle.anchor = this.edgeright
+                                                }
+                                                if (circle.self.body.y > circle.y) {
+                                                    circle.x++
+                                                }
+                                            }
+                                        }
                                     } else {
                                         break
                                     }
                                 } else if (circle.x < this.center.x) {
                                     if (circle != circle.self.body) {
                                         circle.x -= .1
+                                        if (circle.doesPerimeterTouch(this.edgeleft)) {
+                                            if (circle == circle.self.righthand) {
+                                                if (circle.anchored >= -1) {
+                                                    circle.anchored = 1
+                                                    circle.anchor = this.edgeleft
+                                                }
+                                                if (circle.self.body.y > circle.y) {
+                                                    circle.x--
+                                                }
+                                            }
+                                        }
+                                        if (circle.doesPerimeterTouch(this.edgeright)) {
+                                            if (circle == circle.self.lefthand) {
+                                                if (circle.anchored >= -1) {
+                                                    circle.anchored = 1
+                                                    circle.anchor = this.edgeright
+                                                }
+                                                if (circle.self.body.y > circle.y) {
+                                                    circle.x++
+                                                }
+                                            }
+                                        }
                                     } else {
                                         break
                                     }
