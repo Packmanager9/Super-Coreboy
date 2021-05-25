@@ -5687,15 +5687,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     class Selector {
         constructor() {
-            this.body = new Circle(400 + (selectors.length * 100), 400, 25, getRandomLightColor())
+            this.body = new Circle(400 + (selectors.length * 200), 400, 45, getRandomLightColor())
             this.num = selectors.length + 1
         }
         draw() {
             this.body.track()
             this.body.draw()
-            canvas_context.font = "30px arial"
+            canvas_context.font = "40px arial"
             canvas_context.fillStyle = `Black`
-            canvas_context.fillText(this.num, this.body.x - (this.body.radius * .5), this.body.y + (this.body.radius * .5))
+            canvas_context.fillText(this.num, this.body.x - (this.body.radius * .3), this.body.y + (this.body.radius * .3))
         }
     }
 
