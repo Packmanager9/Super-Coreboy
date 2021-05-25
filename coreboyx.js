@@ -3326,16 +3326,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         if (this.shield == 1) {
                                             this.shieldpower -= (Math.abs(boys[t].righthand2.xmom) + Math.abs(boys[t].righthand2.ymom)) / 11
                                         } else {
-                                            this.body.xmom = .3 * ((boys[t].righthand2.xmom * (this.damage / 200)) + (boys[t].righthand2.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.body.ymom = .3 * (((boys[t].righthand2.ymom * (this.damage / 200)) + (boys[t].righthand2.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.damage += .3 * ((Math.abs(boys[t].righthand2.xmom) + Math.abs(boys[t].righthand2.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.xmom = .4567 * ((boys[t].righthand2.xmom * (this.damage / 200)) + (boys[t].righthand2.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.ymom = .4567 * (((boys[t].righthand2.ymom * (this.damage / 200)) + (boys[t].righthand2.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.damage += .4567 * ((Math.abs(boys[t].righthand2.xmom) + Math.abs(boys[t].righthand2.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                             this.breaktimer = 0
                                         }
                                         boys[t].righthand2.fired = 14
 
                                         if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                            this.lefthand.anchored = -40
-                                            this.righthand.anchored = -40
+                                            this.lefthand.anchored = -20
+                                            this.righthand.anchored = -20
                                         }
                                         if (this.body.ymom < -vsmashlimit) {
                                             this.body.ymom = -vsmashlimit
@@ -3352,17 +3352,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     this.striker = t
                                     if (boys[t].lefthand2.fired > 14) {
                                         if (this.shield == 1) {
-                                            this.shieldpower -= .3 * (Math.abs(boys[t].lefthand2.xmom) + Math.abs(boys[t].lefthand2.ymom)) / 11
+                                            this.shieldpower -= .4567 * (Math.abs(boys[t].lefthand2.xmom) + Math.abs(boys[t].lefthand2.ymom)) / 11
                                         } else {
-                                            this.body.xmom = .3 * ((boys[t].lefthand2.xmom * (this.damage / 200)) + (boys[t].lefthand2.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.body.ymom = .3 * (((boys[t].lefthand2.ymom * (this.damage / 200)) + (boys[t].lefthand2.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.damage += .3 * ((Math.abs(boys[t].lefthand2.xmom) + Math.abs(boys[t].lefthand2.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.xmom = .4567 * ((boys[t].lefthand2.xmom * (this.damage / 200)) + (boys[t].lefthand2.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.ymom = .4567 * (((boys[t].lefthand2.ymom * (this.damage / 200)) + (boys[t].lefthand2.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.damage += .4567 * ((Math.abs(boys[t].lefthand2.xmom) + Math.abs(boys[t].lefthand2.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                             this.breaktimer = 0
                                         }
                                         boys[t].lefthand2.fired = 14
                                         if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                            this.lefthand.anchored = -40
-                                            this.righthand.anchored = -40
+                                            this.lefthand.anchored = -20
+                                            this.righthand.anchored = -20
                                         }
                                         if (this.body.ymom < -vsmashlimit) {
                                             this.body.ymom = -vsmashlimit
@@ -3379,17 +3379,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     this.striker = t
                                     if (boys[t].righthand3.fired > 14) {
                                         if (this.shield == 1) {
-                                            this.shieldpower -= .3 * (Math.abs(boys[t].righthand3.xmom) + Math.abs(boys[t].righthand3.ymom)) / 11
+                                            this.shieldpower -= .4567 * (Math.abs(boys[t].righthand3.xmom) + Math.abs(boys[t].righthand3.ymom)) / 11
                                         } else {
-                                            this.body.xmom = .3 * ((boys[t].righthand3.xmom * (this.damage / 200)) + (boys[t].righthand3.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.body.ymom = .3 * (((boys[t].righthand3.ymom * (this.damage / 200)) + (boys[t].righthand3.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.damage += .3 * ((Math.abs(boys[t].righthand3.xmom) + Math.abs(boys[t].righthand3.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.xmom = .4567 * ((boys[t].righthand3.xmom * (this.damage / 200)) + (boys[t].righthand3.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.ymom = .4567 * (((boys[t].righthand3.ymom * (this.damage / 200)) + (boys[t].righthand3.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.damage += .4567 * ((Math.abs(boys[t].righthand3.xmom) + Math.abs(boys[t].righthand3.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                             this.breaktimer = 0
                                         }
                                         boys[t].righthand3.fired = 14
                                         if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                            this.lefthand.anchored = -40
-                                            this.righthand.anchored = -40
+                                            this.lefthand.anchored = -20
+                                            this.righthand.anchored = -20
                                         }
                                         if (this.body.ymom < -vsmashlimit) {
                                             this.body.ymom = -vsmashlimit
@@ -3405,18 +3405,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     this.striker = t
                                     if (boys[t].lefthand3.fired > 14) {
                                         if (this.shield == 1) {
-                                            this.shieldpower -= .3 * (Math.abs(boys[t].lefthand3.xmom) + Math.abs(boys[t].lefthand3.ymom)) / 11
+                                            this.shieldpower -= .4567 * (Math.abs(boys[t].lefthand3.xmom) + Math.abs(boys[t].lefthand3.ymom)) / 11
                                         } else {
-                                            this.body.xmom = .3 * ((boys[t].lefthand3.xmom * (this.damage / 200)) + (boys[t].lefthand3.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.body.ymom = .3 * (((boys[t].lefthand3.ymom * (this.damage / 200)) + (boys[t].lefthand3.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.damage += .3 * ((Math.abs(boys[t].lefthand3.xmom) + Math.abs(boys[t].lefthand3.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.xmom = .4567 * ((boys[t].lefthand3.xmom * (this.damage / 200)) + (boys[t].lefthand3.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.ymom = .4567 * (((boys[t].lefthand3.ymom * (this.damage / 200)) + (boys[t].lefthand3.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.damage += .4567 * ((Math.abs(boys[t].lefthand3.xmom) + Math.abs(boys[t].lefthand3.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                             this.breaktimer = 0
                                         }
                                         boys[t].lefthand3.fired = 14
 
                                         if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                            this.lefthand.anchored = -40
-                                            this.righthand.anchored = -40
+                                            this.lefthand.anchored = -20
+                                            this.righthand.anchored = -20
                                         }
                                         if (this.body.ymom < -vsmashlimit) {
                                             this.body.ymom = -vsmashlimit
@@ -3443,8 +3443,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     boys[t].righthand.fired = 14
 
                                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                        this.lefthand.anchored = -40
-                                        this.righthand.anchored = -40
+                                        this.lefthand.anchored = -20
+                                        this.righthand.anchored = -20
                                     }
                                     if (this.body.ymom < -vsmashlimit) {
                                         this.body.ymom = -vsmashlimit
@@ -3469,8 +3469,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     }
                                     boys[t].lefthand.fired = 14
                                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                        this.lefthand.anchored = -40
-                                        this.righthand.anchored = -40
+                                        this.lefthand.anchored = -20
+                                        this.righthand.anchored = -20
                                     }
                                     if (this.body.ymom < -vsmashlimit) {
                                         this.body.ymom = -vsmashlimit
@@ -3495,8 +3495,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     }
                                     boys[t].body.fired = 0
                                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                        this.lefthand.anchored = -40
-                                        this.righthand.anchored = -40
+                                        this.lefthand.anchored = -20
+                                        this.righthand.anchored = -20
                                     }
                                     if (this.body.ymom < -vsmashlimit) {
                                         this.body.ymom = -vsmashlimit
@@ -3762,7 +3762,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             for (let t = 0; t < boys.length; t++) {
                 if (this != boys[t]) {
-                    if (Math.abs(this.body.x - boys[t].body.x) > 1 && this.body.y > (boys[t].body.y + 15)) {
+                    if (Math.abs(this.body.x - boys[t].body.x) > 1 && this.body.y > (boys[t].body.y + Math.max(this.body.radius, boys[t].body.radius))) {
                         this.wmove = 1
                     }
 
@@ -5242,16 +5242,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         if (this.shield == 1) {
                                             this.shieldpower -= (Math.abs(boys[t].righthand2.xmom) + Math.abs(boys[t].righthand2.ymom)) / 11
                                         } else {
-                                            this.body.xmom = .3 * ((boys[t].righthand2.xmom * (this.damage / 200)) + (boys[t].righthand2.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.body.ymom = .3 * (((boys[t].righthand2.ymom * (this.damage / 200)) + (boys[t].righthand2.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.damage += .3 * ((Math.abs(boys[t].righthand2.xmom) + Math.abs(boys[t].righthand2.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.xmom = .4567 * ((boys[t].righthand2.xmom * (this.damage / 200)) + (boys[t].righthand2.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.ymom = .4567 * (((boys[t].righthand2.ymom * (this.damage / 200)) + (boys[t].righthand2.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.damage += .4567 * ((Math.abs(boys[t].righthand2.xmom) + Math.abs(boys[t].righthand2.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                             this.breaktimer = 0
                                         }
                                         boys[t].righthand2.fired = 14
 
                                         if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                            this.lefthand.anchored = -40
-                                            this.righthand.anchored = -40
+                                            this.lefthand.anchored = -20
+                                            this.righthand.anchored = -20
                                         }
                                         if (this.body.ymom < -vsmashlimit) {
                                             this.body.ymom = -vsmashlimit
@@ -5268,17 +5268,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     this.striker = t
                                     if (boys[t].lefthand2.fired > 14) {
                                         if (this.shield == 1) {
-                                            this.shieldpower -= .3 * (Math.abs(boys[t].lefthand2.xmom) + Math.abs(boys[t].lefthand2.ymom)) / 11
+                                            this.shieldpower -= .4567 * (Math.abs(boys[t].lefthand2.xmom) + Math.abs(boys[t].lefthand2.ymom)) / 11
                                         } else {
-                                            this.body.xmom = .3 * ((boys[t].lefthand2.xmom * (this.damage / 200)) + (boys[t].lefthand2.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.body.ymom = .3 * (((boys[t].lefthand2.ymom * (this.damage / 200)) + (boys[t].lefthand2.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.damage += .3 * ((Math.abs(boys[t].lefthand2.xmom) + Math.abs(boys[t].lefthand2.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.xmom = .4567 * ((boys[t].lefthand2.xmom * (this.damage / 200)) + (boys[t].lefthand2.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.ymom = .4567 * (((boys[t].lefthand2.ymom * (this.damage / 200)) + (boys[t].lefthand2.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.damage += .4567 * ((Math.abs(boys[t].lefthand2.xmom) + Math.abs(boys[t].lefthand2.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                             this.breaktimer = 0
                                         }
                                         boys[t].lefthand2.fired = 14
                                         if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                            this.lefthand.anchored = -40
-                                            this.righthand.anchored = -40
+                                            this.lefthand.anchored = -20
+                                            this.righthand.anchored = -20
                                         }
                                         if (this.body.ymom < -vsmashlimit) {
                                             this.body.ymom = -vsmashlimit
@@ -5295,17 +5295,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     this.striker = t
                                     if (boys[t].righthand3.fired > 14) {
                                         if (this.shield == 1) {
-                                            this.shieldpower -= .3 * (Math.abs(boys[t].righthand3.xmom) + Math.abs(boys[t].righthand3.ymom)) / 11
+                                            this.shieldpower -= .4567 * (Math.abs(boys[t].righthand3.xmom) + Math.abs(boys[t].righthand3.ymom)) / 11
                                         } else {
-                                            this.body.xmom = .3 * ((boys[t].righthand3.xmom * (this.damage / 200)) + (boys[t].righthand3.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.body.ymom = .3 * (((boys[t].righthand3.ymom * (this.damage / 200)) + (boys[t].righthand3.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.damage += .3 * ((Math.abs(boys[t].righthand3.xmom) + Math.abs(boys[t].righthand3.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.xmom = .4567 * ((boys[t].righthand3.xmom * (this.damage / 200)) + (boys[t].righthand3.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.ymom = .4567 * (((boys[t].righthand3.ymom * (this.damage / 200)) + (boys[t].righthand3.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.damage += .4567 * ((Math.abs(boys[t].righthand3.xmom) + Math.abs(boys[t].righthand3.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                             this.breaktimer = 0
                                         }
                                         boys[t].righthand3.fired = 14
                                         if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                            this.lefthand.anchored = -40
-                                            this.righthand.anchored = -40
+                                            this.lefthand.anchored = -20
+                                            this.righthand.anchored = -20
                                         }
                                         if (this.body.ymom < -vsmashlimit) {
                                             this.body.ymom = -vsmashlimit
@@ -5321,18 +5321,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     this.striker = t
                                     if (boys[t].lefthand3.fired > 14) {
                                         if (this.shield == 1) {
-                                            this.shieldpower -= .3 * (Math.abs(boys[t].lefthand3.xmom) + Math.abs(boys[t].lefthand3.ymom)) / 11
+                                            this.shieldpower -= .4567 * (Math.abs(boys[t].lefthand3.xmom) + Math.abs(boys[t].lefthand3.ymom)) / 11
                                         } else {
-                                            this.body.xmom = .3 * ((boys[t].lefthand3.xmom * (this.damage / 200)) + (boys[t].lefthand3.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.body.ymom = .3 * (((boys[t].lefthand3.ymom * (this.damage / 200)) + (boys[t].lefthand3.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.damage += .3 * ((Math.abs(boys[t].lefthand3.xmom) + Math.abs(boys[t].lefthand3.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.xmom = .4567 * ((boys[t].lefthand3.xmom * (this.damage / 200)) + (boys[t].lefthand3.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.ymom = .4567 * (((boys[t].lefthand3.ymom * (this.damage / 200)) + (boys[t].lefthand3.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.damage += .4567 * ((Math.abs(boys[t].lefthand3.xmom) + Math.abs(boys[t].lefthand3.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                             this.breaktimer = 0
                                         }
                                         boys[t].lefthand3.fired = 14
 
                                         if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                            this.lefthand.anchored = -40
-                                            this.righthand.anchored = -40
+                                            this.lefthand.anchored = -20
+                                            this.righthand.anchored = -20
                                         }
                                         if (this.body.ymom < -vsmashlimit) {
                                             this.body.ymom = -vsmashlimit
@@ -5359,8 +5359,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     boys[t].righthand.fired = 14
 
                                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                        this.lefthand.anchored = -40
-                                        this.righthand.anchored = -40
+                                        this.lefthand.anchored = -20
+                                        this.righthand.anchored = -20
                                     }
                                     if (this.body.ymom < -vsmashlimit) {
                                         this.body.ymom = -vsmashlimit
@@ -5385,8 +5385,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     }
                                     boys[t].lefthand.fired = 14
                                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                        this.lefthand.anchored = -40
-                                        this.righthand.anchored = -40
+                                        this.lefthand.anchored = -20
+                                        this.righthand.anchored = -20
                                     }
                                     if (this.body.ymom < -vsmashlimit) {
                                         this.body.ymom = -vsmashlimit
@@ -5411,8 +5411,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     }
                                     boys[t].body.fired = 0
                                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                        this.lefthand.anchored = -40
-                                        this.righthand.anchored = -40
+                                        this.lefthand.anchored = -20
+                                        this.righthand.anchored = -20
                                     }
                                     if (this.body.ymom < -vsmashlimit) {
                                         this.body.ymom = -vsmashlimit
@@ -5554,7 +5554,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             for (let t = 0; t < boys.length; t++) {
                 if (this != boys[t]) {
-                    if (Math.abs(this.body.x - boys[t].body.x) > 1 && this.body.y > (boys[t].body.y + 15)) {
+                    if (Math.abs(this.body.x - boys[t].body.x) > 1 && this.body.y > (boys[t].body.y + Math.max(this.body.radius, boys[t].body.radius))) {
                         this.wmove = 1
                     }
 
@@ -7157,16 +7157,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         if (this.shield == 1) {
                                             this.shieldpower -= (Math.abs(boys[t].righthand2.xmom) + Math.abs(boys[t].righthand2.ymom)) / 11
                                         } else {
-                                            this.body.xmom = .3 * ((boys[t].righthand2.xmom * (this.damage / 200)) + (boys[t].righthand2.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.body.ymom = .3 * (((boys[t].righthand2.ymom * (this.damage / 200)) + (boys[t].righthand2.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.damage += .3 * ((Math.abs(boys[t].righthand2.xmom) + Math.abs(boys[t].righthand2.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.xmom = .4567 * ((boys[t].righthand2.xmom * (this.damage / 200)) + (boys[t].righthand2.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.ymom = .4567 * (((boys[t].righthand2.ymom * (this.damage / 200)) + (boys[t].righthand2.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.damage += .4567 * ((Math.abs(boys[t].righthand2.xmom) + Math.abs(boys[t].righthand2.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                             this.breaktimer = 0
                                         }
                                         boys[t].righthand2.fired = 14
 
                                         if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                            this.lefthand.anchored = -40
-                                            this.righthand.anchored = -40
+                                            this.lefthand.anchored = -20
+                                            this.righthand.anchored = -20
                                         }
                                         if (this.body.ymom < -vsmashlimit) {
                                             this.body.ymom = -vsmashlimit
@@ -7183,17 +7183,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     this.striker = t
                                     if (boys[t].lefthand2.fired > 14) {
                                         if (this.shield == 1) {
-                                            this.shieldpower -= .3 * (Math.abs(boys[t].lefthand2.xmom) + Math.abs(boys[t].lefthand2.ymom)) / 11
+                                            this.shieldpower -= .4567 * (Math.abs(boys[t].lefthand2.xmom) + Math.abs(boys[t].lefthand2.ymom)) / 11
                                         } else {
-                                            this.body.xmom = .3 * ((boys[t].lefthand2.xmom * (this.damage / 200)) + (boys[t].lefthand2.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.body.ymom = .3 * (((boys[t].lefthand2.ymom * (this.damage / 200)) + (boys[t].lefthand2.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.damage += .3 * ((Math.abs(boys[t].lefthand2.xmom) + Math.abs(boys[t].lefthand2.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.xmom = .4567 * ((boys[t].lefthand2.xmom * (this.damage / 200)) + (boys[t].lefthand2.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.ymom = .4567 * (((boys[t].lefthand2.ymom * (this.damage / 200)) + (boys[t].lefthand2.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.damage += .4567 * ((Math.abs(boys[t].lefthand2.xmom) + Math.abs(boys[t].lefthand2.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                             this.breaktimer = 0
                                         }
                                         boys[t].lefthand2.fired = 14
                                         if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                            this.lefthand.anchored = -40
-                                            this.righthand.anchored = -40
+                                            this.lefthand.anchored = -20
+                                            this.righthand.anchored = -20
                                         }
                                         if (this.body.ymom < -vsmashlimit) {
                                             this.body.ymom = -vsmashlimit
@@ -7210,17 +7210,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     this.striker = t
                                     if (boys[t].righthand3.fired > 14) {
                                         if (this.shield == 1) {
-                                            this.shieldpower -= .3 * (Math.abs(boys[t].righthand3.xmom) + Math.abs(boys[t].righthand3.ymom)) / 11
+                                            this.shieldpower -= .4567 * (Math.abs(boys[t].righthand3.xmom) + Math.abs(boys[t].righthand3.ymom)) / 11
                                         } else {
-                                            this.body.xmom = .3 * ((boys[t].righthand3.xmom * (this.damage / 200)) + (boys[t].righthand3.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.body.ymom = .3 * (((boys[t].righthand3.ymom * (this.damage / 200)) + (boys[t].righthand3.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.damage += .3 * ((Math.abs(boys[t].righthand3.xmom) + Math.abs(boys[t].righthand3.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.xmom = .4567 * ((boys[t].righthand3.xmom * (this.damage / 200)) + (boys[t].righthand3.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.ymom = .4567 * (((boys[t].righthand3.ymom * (this.damage / 200)) + (boys[t].righthand3.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.damage += .4567 * ((Math.abs(boys[t].righthand3.xmom) + Math.abs(boys[t].righthand3.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                             this.breaktimer = 0
                                         }
                                         boys[t].righthand3.fired = 14
                                         if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                            this.lefthand.anchored = -40
-                                            this.righthand.anchored = -40
+                                            this.lefthand.anchored = -20
+                                            this.righthand.anchored = -20
                                         }
                                         if (this.body.ymom < -vsmashlimit) {
                                             this.body.ymom = -vsmashlimit
@@ -7236,18 +7236,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     this.striker = t
                                     if (boys[t].lefthand3.fired > 14) {
                                         if (this.shield == 1) {
-                                            this.shieldpower -= .3 * (Math.abs(boys[t].lefthand3.xmom) + Math.abs(boys[t].lefthand3.ymom)) / 11
+                                            this.shieldpower -= .4567 * (Math.abs(boys[t].lefthand3.xmom) + Math.abs(boys[t].lefthand3.ymom)) / 11
                                         } else {
-                                            this.body.xmom = .3 * ((boys[t].lefthand3.xmom * (this.damage / 200)) + (boys[t].lefthand3.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.body.ymom = .3 * (((boys[t].lefthand3.ymom * (this.damage / 200)) + (boys[t].lefthand3.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.damage += .3 * ((Math.abs(boys[t].lefthand3.xmom) + Math.abs(boys[t].lefthand3.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.xmom = .4567 * ((boys[t].lefthand3.xmom * (this.damage / 200)) + (boys[t].lefthand3.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.ymom = .4567 * (((boys[t].lefthand3.ymom * (this.damage / 200)) + (boys[t].lefthand3.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.damage += .4567 * ((Math.abs(boys[t].lefthand3.xmom) + Math.abs(boys[t].lefthand3.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                             this.breaktimer = 0
                                         }
                                         boys[t].lefthand3.fired = 14
 
                                         if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                            this.lefthand.anchored = -40
-                                            this.righthand.anchored = -40
+                                            this.lefthand.anchored = -20
+                                            this.righthand.anchored = -20
                                         }
                                         if (this.body.ymom < -vsmashlimit) {
                                             this.body.ymom = -vsmashlimit
@@ -7274,8 +7274,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     boys[t].righthand.fired = 14
 
                                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                        this.lefthand.anchored = -40
-                                        this.righthand.anchored = -40
+                                        this.lefthand.anchored = -20
+                                        this.righthand.anchored = -20
                                     }
                                     if (this.body.ymom < -vsmashlimit) {
                                         this.body.ymom = -vsmashlimit
@@ -7300,8 +7300,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     }
                                     boys[t].lefthand.fired = 14
                                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                        this.lefthand.anchored = -40
-                                        this.righthand.anchored = -40
+                                        this.lefthand.anchored = -20
+                                        this.righthand.anchored = -20
                                     }
                                     if (this.body.ymom < -vsmashlimit) {
                                         this.body.ymom = -vsmashlimit
@@ -7326,8 +7326,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     }
                                     boys[t].body.fired = 0
                                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                        this.lefthand.anchored = -40
-                                        this.righthand.anchored = -40
+                                        this.lefthand.anchored = -20
+                                        this.righthand.anchored = -20
                                     }
                                     if (this.body.ymom < -vsmashlimit) {
                                         this.body.ymom = -vsmashlimit
@@ -7522,7 +7522,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             }
                         }
                     }
-                    if (Math.abs(this.body.x - boys[t].body.x) > 1 && this.body.y > (boys[t].body.y + 15)) {
+                    if (Math.abs(this.body.x - boys[t].body.x) > 1 && this.body.y > (boys[t].body.y + Math.max(this.body.radius, boys[t].body.radius))) {
                         this.wmove = 1
                     }
 
@@ -9192,16 +9192,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         if (this.shield == 1) {
                                             this.shieldpower -= (Math.abs(boys[t].righthand2.xmom) + Math.abs(boys[t].righthand2.ymom)) / 11
                                         } else {
-                                            this.body.xmom = .3 * ((boys[t].righthand2.xmom * (this.damage / 200)) + (boys[t].righthand2.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.body.ymom = .3 * (((boys[t].righthand2.ymom * (this.damage / 200)) + (boys[t].righthand2.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.damage += .3 * ((Math.abs(boys[t].righthand2.xmom) + Math.abs(boys[t].righthand2.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.xmom = .4567 * ((boys[t].righthand2.xmom * (this.damage / 200)) + (boys[t].righthand2.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.ymom = .4567 * (((boys[t].righthand2.ymom * (this.damage / 200)) + (boys[t].righthand2.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.damage += .4567 * ((Math.abs(boys[t].righthand2.xmom) + Math.abs(boys[t].righthand2.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                             this.breaktimer = 0
                                         }
                                         boys[t].righthand2.fired = 14
 
                                         if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                            this.lefthand.anchored = -40
-                                            this.righthand.anchored = -40
+                                            this.lefthand.anchored = -20
+                                            this.righthand.anchored = -20
                                         }
                                         if (this.body.ymom < -vsmashlimit) {
                                             this.body.ymom = -vsmashlimit
@@ -9218,17 +9218,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     this.striker = t
                                     if (boys[t].lefthand2.fired > 14) {
                                         if (this.shield == 1) {
-                                            this.shieldpower -= .3 * (Math.abs(boys[t].lefthand2.xmom) + Math.abs(boys[t].lefthand2.ymom)) / 11
+                                            this.shieldpower -= .4567 * (Math.abs(boys[t].lefthand2.xmom) + Math.abs(boys[t].lefthand2.ymom)) / 11
                                         } else {
-                                            this.body.xmom = .3 * ((boys[t].lefthand2.xmom * (this.damage / 200)) + (boys[t].lefthand2.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.body.ymom = .3 * (((boys[t].lefthand2.ymom * (this.damage / 200)) + (boys[t].lefthand2.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.damage += .3 * ((Math.abs(boys[t].lefthand2.xmom) + Math.abs(boys[t].lefthand2.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.xmom = .4567 * ((boys[t].lefthand2.xmom * (this.damage / 200)) + (boys[t].lefthand2.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.ymom = .4567 * (((boys[t].lefthand2.ymom * (this.damage / 200)) + (boys[t].lefthand2.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.damage += .4567 * ((Math.abs(boys[t].lefthand2.xmom) + Math.abs(boys[t].lefthand2.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                             this.breaktimer = 0
                                         }
                                         boys[t].lefthand2.fired = 14
                                         if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                            this.lefthand.anchored = -40
-                                            this.righthand.anchored = -40
+                                            this.lefthand.anchored = -20
+                                            this.righthand.anchored = -20
                                         }
                                         if (this.body.ymom < -vsmashlimit) {
                                             this.body.ymom = -vsmashlimit
@@ -9245,17 +9245,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     this.striker = t
                                     if (boys[t].righthand3.fired > 14) {
                                         if (this.shield == 1) {
-                                            this.shieldpower -= .3 * (Math.abs(boys[t].righthand3.xmom) + Math.abs(boys[t].righthand3.ymom)) / 11
+                                            this.shieldpower -= .4567 * (Math.abs(boys[t].righthand3.xmom) + Math.abs(boys[t].righthand3.ymom)) / 11
                                         } else {
-                                            this.body.xmom = .3 * ((boys[t].righthand3.xmom * (this.damage / 200)) + (boys[t].righthand3.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.body.ymom = .3 * (((boys[t].righthand3.ymom * (this.damage / 200)) + (boys[t].righthand3.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.damage += .3 * ((Math.abs(boys[t].righthand3.xmom) + Math.abs(boys[t].righthand3.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.xmom = .4567 * ((boys[t].righthand3.xmom * (this.damage / 200)) + (boys[t].righthand3.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.ymom = .4567 * (((boys[t].righthand3.ymom * (this.damage / 200)) + (boys[t].righthand3.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.damage += .4567 * ((Math.abs(boys[t].righthand3.xmom) + Math.abs(boys[t].righthand3.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                             this.breaktimer = 0
                                         }
                                         boys[t].righthand3.fired = 14
                                         if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                            this.lefthand.anchored = -40
-                                            this.righthand.anchored = -40
+                                            this.lefthand.anchored = -20
+                                            this.righthand.anchored = -20
                                         }
                                         if (this.body.ymom < -vsmashlimit) {
                                             this.body.ymom = -vsmashlimit
@@ -9271,18 +9271,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     this.striker = t
                                     if (boys[t].lefthand3.fired > 14) {
                                         if (this.shield == 1) {
-                                            this.shieldpower -= .3 * (Math.abs(boys[t].lefthand3.xmom) + Math.abs(boys[t].lefthand3.ymom)) / 11
+                                            this.shieldpower -= .4567 * (Math.abs(boys[t].lefthand3.xmom) + Math.abs(boys[t].lefthand3.ymom)) / 11
                                         } else {
-                                            this.body.xmom = .3 * ((boys[t].lefthand3.xmom * (this.damage / 200)) + (boys[t].lefthand3.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.body.ymom = .3 * (((boys[t].lefthand3.ymom * (this.damage / 200)) + (boys[t].lefthand3.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.damage += .3 * ((Math.abs(boys[t].lefthand3.xmom) + Math.abs(boys[t].lefthand3.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.xmom = .4567 * ((boys[t].lefthand3.xmom * (this.damage / 200)) + (boys[t].lefthand3.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.ymom = .4567 * (((boys[t].lefthand3.ymom * (this.damage / 200)) + (boys[t].lefthand3.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.damage += .4567 * ((Math.abs(boys[t].lefthand3.xmom) + Math.abs(boys[t].lefthand3.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                             this.breaktimer = 0
                                         }
                                         boys[t].lefthand3.fired = 14
 
                                         if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                            this.lefthand.anchored = -40
-                                            this.righthand.anchored = -40
+                                            this.lefthand.anchored = -20
+                                            this.righthand.anchored = -20
                                         }
                                         if (this.body.ymom < -vsmashlimit) {
                                             this.body.ymom = -vsmashlimit
@@ -9309,8 +9309,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     boys[t].righthand.fired = 14
 
                                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                        this.lefthand.anchored = -40
-                                        this.righthand.anchored = -40
+                                        this.lefthand.anchored = -20
+                                        this.righthand.anchored = -20
                                     }
                                     if (this.body.ymom < -vsmashlimit) {
                                         this.body.ymom = -vsmashlimit
@@ -9335,8 +9335,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     }
                                     boys[t].lefthand.fired = 14
                                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                        this.lefthand.anchored = -40
-                                        this.righthand.anchored = -40
+                                        this.lefthand.anchored = -20
+                                        this.righthand.anchored = -20
                                     }
                                     if (this.body.ymom < -vsmashlimit) {
                                         this.body.ymom = -vsmashlimit
@@ -9361,8 +9361,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     }
                                     boys[t].body.fired = 0
                                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                        this.lefthand.anchored = -40
-                                        this.righthand.anchored = -40
+                                        this.lefthand.anchored = -20
+                                        this.righthand.anchored = -20
                                     }
                                     if (this.body.ymom < -vsmashlimit) {
                                         this.body.ymom = -vsmashlimit
@@ -9503,7 +9503,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             for (let t = 0; t < boys.length; t++) {
                 if (this != boys[t]) {
-                    if (Math.abs(this.body.x - boys[t].body.x) > 1 && this.body.y > (boys[t].body.y + 15)) {
+                    if (Math.abs(this.body.x - boys[t].body.x) > 1 && this.body.y > (boys[t].body.y + Math.max(this.body.radius, boys[t].body.radius))) {
                         this.wmove = 1
                     }
 
@@ -11052,16 +11052,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         } else {
                                             //punchaud1.playbackrate = 2
                                             //punchaud1.play()
-                                            this.body.xmom = .3 * ((boys[t].righthand2.xmom * (this.damage / 200)) + (boys[t].righthand2.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.body.ymom = .3 * (((boys[t].righthand2.ymom * (this.damage / 200)) + (boys[t].righthand2.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.damage += .3 * ((Math.abs(boys[t].righthand2.xmom) + Math.abs(boys[t].righthand2.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.xmom = .4567 * ((boys[t].righthand2.xmom * (this.damage / 200)) + (boys[t].righthand2.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.ymom = .4567 * (((boys[t].righthand2.ymom * (this.damage / 200)) + (boys[t].righthand2.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.damage += .4567 * ((Math.abs(boys[t].righthand2.xmom) + Math.abs(boys[t].righthand2.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                             this.breaktimer = 0
                                         }
                                         boys[t].righthand2.fired = 14
 
                                         if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                            this.lefthand.anchored = -40
-                                            this.righthand.anchored = -40
+                                            this.lefthand.anchored = -20
+                                            this.righthand.anchored = -20
                                         }
                                         if (this.body.ymom < -vsmashlimit) {
                                             this.body.ymom = -vsmashlimit
@@ -11079,19 +11079,19 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     if (boys[t].lefthand2.fired > 14) {
                                         if (this.shield == 1) {
                                             //shieldaud1.play()
-                                            this.shieldpower -= .3 * (Math.abs(boys[t].lefthand2.xmom) + Math.abs(boys[t].lefthand2.ymom)) / 11
+                                            this.shieldpower -= .4567 * (Math.abs(boys[t].lefthand2.xmom) + Math.abs(boys[t].lefthand2.ymom)) / 11
                                         } else {
                                             //punchaud1.playbackrate = 2
                                             //punchaud1.play()
-                                            this.body.xmom = .3 * ((boys[t].lefthand2.xmom * (this.damage / 200)) + (boys[t].lefthand2.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.body.ymom = .3 * (((boys[t].lefthand2.ymom * (this.damage / 200)) + (boys[t].lefthand2.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.damage += .3 * ((Math.abs(boys[t].lefthand2.xmom) + Math.abs(boys[t].lefthand2.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.xmom = .4567 * ((boys[t].lefthand2.xmom * (this.damage / 200)) + (boys[t].lefthand2.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.ymom = .4567 * (((boys[t].lefthand2.ymom * (this.damage / 200)) + (boys[t].lefthand2.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.damage += .4567 * ((Math.abs(boys[t].lefthand2.xmom) + Math.abs(boys[t].lefthand2.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                             this.breaktimer = 0
                                         }
                                         boys[t].lefthand2.fired = 14
                                         if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                            this.lefthand.anchored = -40
-                                            this.righthand.anchored = -40
+                                            this.lefthand.anchored = -20
+                                            this.righthand.anchored = -20
                                         }
                                         if (this.body.ymom < -vsmashlimit) {
                                             this.body.ymom = -vsmashlimit
@@ -11109,19 +11109,19 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     if (boys[t].righthand3.fired > 14) {
                                         if (this.shield == 1) {
                                             //shieldaud1.play()
-                                            this.shieldpower -= .3 * (Math.abs(boys[t].righthand3.xmom) + Math.abs(boys[t].righthand3.ymom)) / 11
+                                            this.shieldpower -= .4567 * (Math.abs(boys[t].righthand3.xmom) + Math.abs(boys[t].righthand3.ymom)) / 11
                                         } else {
                                             //punchaud1.playbackrate = 2
                                             //punchaud1.play()
-                                            this.body.xmom = .3 * ((boys[t].righthand3.xmom * (this.damage / 200)) + (boys[t].righthand3.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.body.ymom = .3 * (((boys[t].righthand3.ymom * (this.damage / 200)) + (boys[t].righthand3.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.damage += .3 * ((Math.abs(boys[t].righthand3.xmom) + Math.abs(boys[t].righthand3.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.xmom = .4567 * ((boys[t].righthand3.xmom * (this.damage / 200)) + (boys[t].righthand3.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.ymom = .4567 * (((boys[t].righthand3.ymom * (this.damage / 200)) + (boys[t].righthand3.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.damage += .4567 * ((Math.abs(boys[t].righthand3.xmom) + Math.abs(boys[t].righthand3.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                             this.breaktimer = 0
                                         }
                                         boys[t].righthand3.fired = 14
                                         if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                            this.lefthand.anchored = -40
-                                            this.righthand.anchored = -40
+                                            this.lefthand.anchored = -20
+                                            this.righthand.anchored = -20
                                         }
                                         if (this.body.ymom < -vsmashlimit) {
                                             this.body.ymom = -vsmashlimit
@@ -11138,20 +11138,20 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     if (boys[t].lefthand3.fired > 14) {
                                         if (this.shield == 1) {
                                             //shieldaud1.play()
-                                            this.shieldpower -= .3 * (Math.abs(boys[t].lefthand3.xmom) + Math.abs(boys[t].lefthand3.ymom)) / 11
+                                            this.shieldpower -= .4567 * (Math.abs(boys[t].lefthand3.xmom) + Math.abs(boys[t].lefthand3.ymom)) / 11
                                         } else {
                                             //punchaud1.playbackrate = 2
                                             //punchaud1.play()
-                                            this.body.xmom = .3 * ((boys[t].lefthand3.xmom * (this.damage / 200)) + (boys[t].lefthand3.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.body.ymom = .3 * (((boys[t].lefthand3.ymom * (this.damage / 200)) + (boys[t].lefthand3.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.damage += .3 * ((Math.abs(boys[t].lefthand3.xmom) + Math.abs(boys[t].lefthand3.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.xmom = .4567 * ((boys[t].lefthand3.xmom * (this.damage / 200)) + (boys[t].lefthand3.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.ymom = .4567 * (((boys[t].lefthand3.ymom * (this.damage / 200)) + (boys[t].lefthand3.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.damage += .4567 * ((Math.abs(boys[t].lefthand3.xmom) + Math.abs(boys[t].lefthand3.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                             this.breaktimer = 0
                                         }
                                         boys[t].lefthand3.fired = 14
 
                                         if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                            this.lefthand.anchored = -40
-                                            this.righthand.anchored = -40
+                                            this.lefthand.anchored = -20
+                                            this.righthand.anchored = -20
                                         }
                                         if (this.body.ymom < -vsmashlimit) {
                                             this.body.ymom = -vsmashlimit
@@ -11181,8 +11181,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     boys[t].righthand.fired = 14
 
                                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                        this.lefthand.anchored = -40
-                                        this.righthand.anchored = -40
+                                        this.lefthand.anchored = -20
+                                        this.righthand.anchored = -20
                                     }
                                     if (this.body.ymom < -vsmashlimit) {
                                         this.body.ymom = -vsmashlimit
@@ -11210,8 +11210,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     }
                                     boys[t].lefthand.fired = 14
                                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                        this.lefthand.anchored = -40
-                                        this.righthand.anchored = -40
+                                        this.lefthand.anchored = -20
+                                        this.righthand.anchored = -20
                                     }
                                     if (this.body.ymom < -vsmashlimit) {
                                         this.body.ymom = -vsmashlimit
@@ -11239,8 +11239,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     }
                                     boys[t].body.fired = 0
                                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                        this.lefthand.anchored = -40
-                                        this.righthand.anchored = -40
+                                        this.lefthand.anchored = -20
+                                        this.righthand.anchored = -20
                                     }
                                     if (this.body.ymom < -vsmashlimit) {
                                         this.body.ymom = -vsmashlimit
@@ -11807,16 +11807,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                             //shieldaud1.play()
                                             this.shieldpower -= (Math.abs(boys[t].righthand2.xmom) + Math.abs(boys[t].righthand2.ymom)) / 11
                                         } else {
-                                            this.body.xmom = .3 * ((boys[t].righthand2.xmom * (this.damage / 200)) + (boys[t].righthand2.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.body.ymom = .3 * (((boys[t].righthand2.ymom * (this.damage / 200)) + (boys[t].righthand2.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.damage += .3 * ((Math.abs(boys[t].righthand2.xmom) + Math.abs(boys[t].righthand2.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.xmom = .4567 * ((boys[t].righthand2.xmom * (this.damage / 200)) + (boys[t].righthand2.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.ymom = .4567 * (((boys[t].righthand2.ymom * (this.damage / 200)) + (boys[t].righthand2.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.damage += .4567 * ((Math.abs(boys[t].righthand2.xmom) + Math.abs(boys[t].righthand2.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                             this.breaktimer = 0
                                         }
                                         boys[t].righthand2.fired = 14
 
                                         if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                            this.lefthand.anchored = -40
-                                            this.righthand.anchored = -40
+                                            this.lefthand.anchored = -20
+                                            this.righthand.anchored = -20
                                         }
                                         if (this.body.ymom < -vsmashlimit) {
                                             this.body.ymom = -vsmashlimit
@@ -11834,17 +11834,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     if (boys[t].lefthand2.fired > 14) {
                                         if (this.shield == 1) {
                                             //shieldaud1.play()
-                                            this.shieldpower -= .3 * (Math.abs(boys[t].lefthand2.xmom) + Math.abs(boys[t].lefthand2.ymom)) / 11
+                                            this.shieldpower -= .4567 * (Math.abs(boys[t].lefthand2.xmom) + Math.abs(boys[t].lefthand2.ymom)) / 11
                                         } else {
-                                            this.body.xmom = .3 * ((boys[t].lefthand2.xmom * (this.damage / 200)) + (boys[t].lefthand2.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.body.ymom = .3 * (((boys[t].lefthand2.ymom * (this.damage / 200)) + (boys[t].lefthand2.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.damage += .3 * ((Math.abs(boys[t].lefthand2.xmom) + Math.abs(boys[t].lefthand2.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.xmom = .4567 * ((boys[t].lefthand2.xmom * (this.damage / 200)) + (boys[t].lefthand2.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.ymom = .4567 * (((boys[t].lefthand2.ymom * (this.damage / 200)) + (boys[t].lefthand2.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.damage += .4567 * ((Math.abs(boys[t].lefthand2.xmom) + Math.abs(boys[t].lefthand2.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                             this.breaktimer = 0
                                         }
                                         boys[t].lefthand2.fired = 14
                                         if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                            this.lefthand.anchored = -40
-                                            this.righthand.anchored = -40
+                                            this.lefthand.anchored = -20
+                                            this.righthand.anchored = -20
                                         }
                                         if (this.body.ymom < -vsmashlimit) {
                                             this.body.ymom = -vsmashlimit
@@ -11862,18 +11862,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     if (boys[t].righthand3.fired > 14) {
                                         if (this.shield == 1) {
                                             //shieldaud1.play()
-                                            this.shieldpower -= .3 * (Math.abs(boys[t].righthand3.xmom) + Math.abs(boys[t].righthand3.ymom)) / 11
+                                            this.shieldpower -= .4567 * (Math.abs(boys[t].righthand3.xmom) + Math.abs(boys[t].righthand3.ymom)) / 11
                                         } else {
                                             //shieldaud1.play()
-                                            this.body.xmom = .3 * ((boys[t].righthand3.xmom * (this.damage / 200)) + (boys[t].righthand3.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.body.ymom = .3 * (((boys[t].righthand3.ymom * (this.damage / 200)) + (boys[t].righthand3.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.damage += .3 * ((Math.abs(boys[t].righthand3.xmom) + Math.abs(boys[t].righthand3.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.xmom = .4567 * ((boys[t].righthand3.xmom * (this.damage / 200)) + (boys[t].righthand3.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.ymom = .4567 * (((boys[t].righthand3.ymom * (this.damage / 200)) + (boys[t].righthand3.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.damage += .4567 * ((Math.abs(boys[t].righthand3.xmom) + Math.abs(boys[t].righthand3.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                             this.breaktimer = 0
                                         }
                                         boys[t].righthand3.fired = 14
                                         if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                            this.lefthand.anchored = -40
-                                            this.righthand.anchored = -40
+                                            this.lefthand.anchored = -20
+                                            this.righthand.anchored = -20
                                         }
                                         if (this.body.ymom < -vsmashlimit) {
                                             this.body.ymom = -vsmashlimit
@@ -11890,18 +11890,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     if (boys[t].lefthand3.fired > 14) {
                                         if (this.shield == 1) {
                                             //shieldaud1.play()
-                                            this.shieldpower -= .3 * (Math.abs(boys[t].lefthand3.xmom) + Math.abs(boys[t].lefthand3.ymom)) / 11
+                                            this.shieldpower -= .4567 * (Math.abs(boys[t].lefthand3.xmom) + Math.abs(boys[t].lefthand3.ymom)) / 11
                                         } else {
-                                            this.body.xmom = .3 * ((boys[t].lefthand3.xmom * (this.damage / 200)) + (boys[t].lefthand3.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.body.ymom = .3 * (((boys[t].lefthand3.ymom * (this.damage / 200)) + (boys[t].lefthand3.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.damage += .3 * ((Math.abs(boys[t].lefthand3.xmom) + Math.abs(boys[t].lefthand3.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.xmom = .4567 * ((boys[t].lefthand3.xmom * (this.damage / 200)) + (boys[t].lefthand3.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.ymom = .4567 * (((boys[t].lefthand3.ymom * (this.damage / 200)) + (boys[t].lefthand3.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.damage += .4567 * ((Math.abs(boys[t].lefthand3.xmom) + Math.abs(boys[t].lefthand3.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                             this.breaktimer = 0
                                         }
                                         boys[t].lefthand3.fired = 14
 
                                         if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                            this.lefthand.anchored = -40
-                                            this.righthand.anchored = -40
+                                            this.lefthand.anchored = -20
+                                            this.righthand.anchored = -20
                                         }
                                         if (this.body.ymom < -vsmashlimit) {
                                             this.body.ymom = -vsmashlimit
@@ -11929,8 +11929,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     boys[t].righthand.fired = 14
 
                                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                        this.lefthand.anchored = -40
-                                        this.righthand.anchored = -40
+                                        this.lefthand.anchored = -20
+                                        this.righthand.anchored = -20
                                     }
                                     if (this.body.ymom < -vsmashlimit) {
                                         this.body.ymom = -vsmashlimit
@@ -11956,8 +11956,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     }
                                     boys[t].lefthand.fired = 14
                                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                        this.lefthand.anchored = -40
-                                        this.righthand.anchored = -40
+                                        this.lefthand.anchored = -20
+                                        this.righthand.anchored = -20
                                     }
                                     if (this.body.ymom < -vsmashlimit) {
                                         this.body.ymom = -vsmashlimit
@@ -11983,8 +11983,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     }
                                     boys[t].body.fired = 0
                                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                        this.lefthand.anchored = -40
-                                        this.righthand.anchored = -40
+                                        this.lefthand.anchored = -20
+                                        this.righthand.anchored = -20
                                     }
                                     if (this.body.ymom < -vsmashlimit) {
                                         this.body.ymom = -vsmashlimit
@@ -12126,7 +12126,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             for (let t = 0; t < boys.length; t++) {
                 if (this != boys[t]) {
-                    if (Math.abs(this.body.x - boys[t].body.x) > 1 && this.body.y > (boys[t].body.y + 15)) {
+                    if (Math.abs(this.body.x - boys[t].body.x) > 1 && this.body.y > (boys[t].body.y + Math.max(this.body.radius, boys[t].body.radius))) {
                         this.wmove = 1
                     }
 
@@ -12776,7 +12776,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     } else if (Math.abs(this.body.x - boys[t].body.x) < 150 && this.body.y <= boys[t].body.y && (boys[t].righthand.anchored == 1 || boys[t].lefthand.anchored == 1)) {
                         this.hortsmash = 1
                     }
-                    if (Math.abs(this.body.x - boys[t].body.x) < 70 && this.body.y > boys[t].body.y) {
+                    if (Math.abs(this.body.x - boys[t].body.x) < 90 && this.body.y > boys[t].body.y) {
                         this.screwshot = 1
                     }
 
@@ -12872,7 +12872,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }
             }
             if (this.safe == 0) {
-                this.screwshot = 1
+                this.downspike = 1
             }
 
             for (let t = 0; t < boys.length; t++) {
@@ -13799,8 +13799,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             boys[t].righthand.fired = 14
 
                             if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                this.lefthand.anchored = -40
-                                this.righthand.anchored = -40
+                                this.lefthand.anchored = -20
+                                this.righthand.anchored = -20
                             }
 
 
@@ -13828,8 +13828,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             }
                             boys[t].lefthand.fired = 14
                             if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                this.lefthand.anchored = -40
-                                this.righthand.anchored = -40
+                                this.lefthand.anchored = -20
+                                this.righthand.anchored = -20
                             }
                             if (this.body.ymom < -vsmashlimit) {
                                 this.body.ymom = -vsmashlimit
@@ -13853,8 +13853,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             }
                             boys[t].body.fired = 0
                             if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                this.lefthand.anchored = -40
-                                this.righthand.anchored = -40
+                                this.lefthand.anchored = -20
+                                this.righthand.anchored = -20
                             }
                             if (this.body.ymom < -vsmashlimit) {
                                 this.body.ymom = -vsmashlimit
@@ -14388,7 +14388,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 
             if (this.dmom > 0) {
-                this.screwshot = 1
+                // this.screwshot = 1
                 this.dmove = 1
                 if (Math.random() < .5) {
                     this.wmove = 1
@@ -14406,7 +14406,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }
             }
             if (this.amom > 0) {
-                this.screwshot = 1
+                // this.screwshot = 1
                 this.dmom = 0
                 this.amove = 1
                 this.wmove = 1
@@ -14561,7 +14561,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }
             } else {
                 if (this.safe == 0) {
-                    this.screwshot = 1
+                    this.downspike = 1
                     if (this.body.x > (this.brick.center.x)) {
                         this.amove = 1
                         this.dmove = 0
@@ -14665,7 +14665,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         if (this.under == 0) {
                                             this.wmove = 1
                                             //console.log("caseP")
-                                            this.screwshot = 1
+                                            this.downspike = 1
                                         }
                                     }
                                 }
@@ -14674,7 +14674,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
                 }
                 if (this.safe == 0) {
-                    this.screwshot = 1
+                    this.downspike = 1
                     if (this.body.x > (this.brick.center.x)) {
                         this.amove = 1
                         this.dmove = 0
@@ -14767,7 +14767,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         if (this.under == 0) {
                                             this.wmove = 1
                                             //console.log("caseT")
-                                            this.screwshot = 1
+                                            this.downspike = 1
                                         }
                                     }
                                 }
@@ -14776,7 +14776,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
                 }
                 if (this.safe == 0) {
-                    this.screwshot = 1
+                    this.downspike = 1
                     if (this.body.x > (this.brick.center.x)) {
                         this.amove = 1
                         this.dmove = 0
@@ -14909,9 +14909,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
 
                     if (this.screwshot + this.hortsmash + this.downspike + this.storeshield == 0) {
-                        if (Math.abs(this.body.y - boys[t].body.y) < 60 && this.body.x > boys[t].body.x) {
+                        if (Math.abs(this.body.y - boys[t].body.y) < boys[t].body.radius && this.body.x > boys[t].body.x) {
                             if (this.face == -1) {
-                                if (Math.abs(this.body.x - boys[t].body.x) < 300) {
+                                if (Math.abs(this.body.x - boys[t].body.x) < 212) {
+                                    // console.log(Math.abs(this.body.x - boys[t].body.x))
                                     this.leftshot = 1
                                     if (Math.random() < .1) {
                                         this.hortsmash = 1
@@ -14920,9 +14921,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 }
                             }
                         }
-                        if (Math.abs(this.body.y - boys[t].body.y) < 60 && this.body.x < boys[t].body.x) {
+                        if (Math.abs(this.body.y - boys[t].body.y) < boys[t].body.radius && this.body.x < boys[t].body.x) {
                             if (this.face == 1) {
-                                if (Math.abs(this.body.x - boys[t].body.x) < 300) {
+                                if (Math.abs(this.body.x - boys[t].body.x) < 212) {
+                                    // console.log(Math.abs(this.body.x - boys[t].body.x))
                                     this.rightshot = 1
                                     if (Math.random() < .1) {
                                         this.hortsmash = 1
@@ -15927,16 +15929,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         if (this.shield == 1) {
                                             this.shieldpower -= (Math.abs(boys[t].righthand2.xmom) + Math.abs(boys[t].righthand2.ymom)) / 11
                                         } else {
-                                            this.body.xmom = .3 * ((boys[t].righthand2.xmom * (this.damage / 200)) + (boys[t].righthand2.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.body.ymom = .3 * (((boys[t].righthand2.ymom * (this.damage / 200)) + (boys[t].righthand2.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.damage += .3 * ((Math.abs(boys[t].righthand2.xmom) + Math.abs(boys[t].righthand2.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.xmom = .4567 * ((boys[t].righthand2.xmom * (this.damage / 200)) + (boys[t].righthand2.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.ymom = .4567 * (((boys[t].righthand2.ymom * (this.damage / 200)) + (boys[t].righthand2.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.damage += .4567 * ((Math.abs(boys[t].righthand2.xmom) + Math.abs(boys[t].righthand2.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                             this.breaktimer = 0
                                         }
                                         boys[t].righthand2.fired = 14
 
                                         if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                            this.lefthand.anchored = -40
-                                            this.righthand.anchored = -40
+                                            this.lefthand.anchored = -20
+                                            this.righthand.anchored = -20
                                         }
                                         if (this.body.ymom < -vsmashlimit) {
                                             this.body.ymom = -vsmashlimit
@@ -15953,17 +15955,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     this.striker = t
                                     if (boys[t].lefthand2.fired > 14) {
                                         if (this.shield == 1) {
-                                            this.shieldpower -= .3 * (Math.abs(boys[t].lefthand2.xmom) + Math.abs(boys[t].lefthand2.ymom)) / 11
+                                            this.shieldpower -= .4567 * (Math.abs(boys[t].lefthand2.xmom) + Math.abs(boys[t].lefthand2.ymom)) / 11
                                         } else {
-                                            this.body.xmom = .3 * ((boys[t].lefthand2.xmom * (this.damage / 200)) + (boys[t].lefthand2.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.body.ymom = .3 * (((boys[t].lefthand2.ymom * (this.damage / 200)) + (boys[t].lefthand2.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.damage += .3 * ((Math.abs(boys[t].lefthand2.xmom) + Math.abs(boys[t].lefthand2.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.xmom = .4567 * ((boys[t].lefthand2.xmom * (this.damage / 200)) + (boys[t].lefthand2.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.ymom = .4567 * (((boys[t].lefthand2.ymom * (this.damage / 200)) + (boys[t].lefthand2.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.damage += .4567 * ((Math.abs(boys[t].lefthand2.xmom) + Math.abs(boys[t].lefthand2.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                             this.breaktimer = 0
                                         }
                                         boys[t].lefthand2.fired = 14
                                         if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                            this.lefthand.anchored = -40
-                                            this.righthand.anchored = -40
+                                            this.lefthand.anchored = -20
+                                            this.righthand.anchored = -20
                                         }
                                         if (this.body.ymom < -vsmashlimit) {
                                             this.body.ymom = -vsmashlimit
@@ -15980,17 +15982,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     this.striker = t
                                     if (boys[t].righthand3.fired > 14) {
                                         if (this.shield == 1) {
-                                            this.shieldpower -= .3 * (Math.abs(boys[t].righthand3.xmom) + Math.abs(boys[t].righthand3.ymom)) / 11
+                                            this.shieldpower -= .4567 * (Math.abs(boys[t].righthand3.xmom) + Math.abs(boys[t].righthand3.ymom)) / 11
                                         } else {
-                                            this.body.xmom = .3 * ((boys[t].righthand3.xmom * (this.damage / 200)) + (boys[t].righthand3.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.body.ymom = .3 * (((boys[t].righthand3.ymom * (this.damage / 200)) + (boys[t].righthand3.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.damage += .3 * ((Math.abs(boys[t].righthand3.xmom) + Math.abs(boys[t].righthand3.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.xmom = .4567 * ((boys[t].righthand3.xmom * (this.damage / 200)) + (boys[t].righthand3.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.ymom = .4567 * (((boys[t].righthand3.ymom * (this.damage / 200)) + (boys[t].righthand3.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.damage += .4567 * ((Math.abs(boys[t].righthand3.xmom) + Math.abs(boys[t].righthand3.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                             this.breaktimer = 0
                                         }
                                         boys[t].righthand3.fired = 14
                                         if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                            this.lefthand.anchored = -40
-                                            this.righthand.anchored = -40
+                                            this.lefthand.anchored = -20
+                                            this.righthand.anchored = -20
                                         }
                                         if (this.body.ymom < -vsmashlimit) {
                                             this.body.ymom = -vsmashlimit
@@ -16006,18 +16008,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     this.striker = t
                                     if (boys[t].lefthand3.fired > 14) {
                                         if (this.shield == 1) {
-                                            this.shieldpower -= .3 * (Math.abs(boys[t].lefthand3.xmom) + Math.abs(boys[t].lefthand3.ymom)) / 11
+                                            this.shieldpower -= .4567 * (Math.abs(boys[t].lefthand3.xmom) + Math.abs(boys[t].lefthand3.ymom)) / 11
                                         } else {
-                                            this.body.xmom = .3 * ((boys[t].lefthand3.xmom * (this.damage / 200)) + (boys[t].lefthand3.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.body.ymom = .3 * (((boys[t].lefthand3.ymom * (this.damage / 200)) + (boys[t].lefthand3.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                            this.damage += .3 * ((Math.abs(boys[t].lefthand3.xmom) + Math.abs(boys[t].lefthand3.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.xmom = .4567 * ((boys[t].lefthand3.xmom * (this.damage / 200)) + (boys[t].lefthand3.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.body.ymom = .4567 * (((boys[t].lefthand3.ymom * (this.damage / 200)) + (boys[t].lefthand3.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                            this.damage += .4567 * ((Math.abs(boys[t].lefthand3.xmom) + Math.abs(boys[t].lefthand3.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                             this.breaktimer = 0
                                         }
                                         boys[t].lefthand3.fired = 14
 
                                         if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                            this.lefthand.anchored = -40
-                                            this.righthand.anchored = -40
+                                            this.lefthand.anchored = -20
+                                            this.righthand.anchored = -20
                                         }
                                         if (this.body.ymom < -vsmashlimit) {
                                             this.body.ymom = -vsmashlimit
@@ -16044,8 +16046,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     boys[t].righthand.fired = 14
 
                                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                        this.lefthand.anchored = -40
-                                        this.righthand.anchored = -40
+                                        this.lefthand.anchored = -20
+                                        this.righthand.anchored = -20
                                     }
                                     if (this.body.ymom < -vsmashlimit) {
                                         this.body.ymom = -vsmashlimit
@@ -16070,8 +16072,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     }
                                     boys[t].lefthand.fired = 14
                                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                        this.lefthand.anchored = -40
-                                        this.righthand.anchored = -40
+                                        this.lefthand.anchored = -20
+                                        this.righthand.anchored = -20
                                     }
                                     if (this.body.ymom < -vsmashlimit) {
                                         this.body.ymom = -vsmashlimit
@@ -16096,8 +16098,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     }
                                     boys[t].body.fired = 0
                                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                        this.lefthand.anchored = -40
-                                        this.righthand.anchored = -40
+                                        this.lefthand.anchored = -20
+                                        this.righthand.anchored = -20
                                     }
                                     if (this.body.ymom < -vsmashlimit) {
                                         this.body.ymom = -vsmashlimit
@@ -16286,7 +16288,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             }
                         }
                     }
-                    if (Math.abs(this.body.x - boys[t].body.x) > 1 && this.body.y > (boys[t].body.y + 15)) {
+                    if (Math.abs(this.body.x - boys[t].body.x) > 1 && this.body.y > (boys[t].body.y + Math.max(this.body.radius, boys[t].body.radius))) {
                         this.wmove = 1
                     }
 
@@ -17126,9 +17128,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
             if (this.breaktimer <= 0 && this.shield == 0) {
 
-                if (this.body.fired > 0) {
-                    this.body.ymom -= this.body.fired * .018
-                }
                 if (this.body.y < 900) {
                     this.wmove = 0
                     this.screwshot = 0
